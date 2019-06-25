@@ -1,0 +1,12 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <form method="post" action="loginVerify">
+        login<br>
+        <input type="text" name="login"><br>
+        password<br>
+        <input type="password" name="password"><br>
+        <button type="submit">ok</button>
+    </form>
+    <a href="{{ path_for('home') }}">home</a>
+{% endblock %}
