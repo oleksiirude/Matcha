@@ -1,7 +1,5 @@
 CREATE DATABASE IF NOT EXISTS matcha;
 
-USE matcha;
-
 CREATE TABLE IF NOT EXISTS `users` (
 						    `id` INT NOT NULL AUTO_INCREMENT,
 						    `login` VARCHAR(20) NOT NULL,

@@ -3,7 +3,12 @@
 {% block title %}Matcha: find your couple!{% endblock %}
 
 {% block content %}
-    <p>{{ logged_in }}</p>
-    <a href="{{ path_for('login') }}">login</a><br>
-    <a href="{{ path_for('registration') }}">register</a>
+
+    {% if not logged_in %}
+        <a href="{{ path_for('login') }}">login</a><br>
+        <a href="{{ path_for('registration') }}">register</a>
+    {% else %}
+        <p>user is logged in</p>
+    {% endif %}
+
 {% endblock %}
