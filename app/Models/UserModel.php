@@ -1,6 +1,5 @@
 <?php
 
-
 	namespace App\Models;
 	use PDO;
 	use App\Components\ComponentModel;
@@ -17,7 +16,72 @@
 		//inserts valid registration data into database
 		public function insertValidRegistrationDataInDb($token, $post) {
 			$password = password_hash($post['password'], PASSWORD_BCRYPT);
-			$this->pdo->query("INSERT INTO users(`login`, `email`, `password`, `name`, `surname`, `token`) 
-										VALUES ('$post[login]', '$post[email]', '$password', '$post[name]', '$post[surname]','$token')");
+			$this->pdo->query("INSERT INTO users(`login`, `email`, `password`, `name`, `surname`, `avatar`, `token`) 
+										VALUES ('$post[login]', '$post[email]', '$password', '$post[name]', '$post[surname]', 
+										'images/service/defaultAvatar.png', '$token')");
+		}
+
+		//checks if token is valid, if true confirms account
+		public function confirmRegistrationRequest($token) {
+			$sth = $this->pdo->prepare("SELECT `id`, `token` FROM `users` WHERE `token` = '$token'");
+			$sth->execute();
+			$result = $sth->fetch(PDO::FETCH_ASSOC);
+			if (!$result)
+				return false;
+			$this->pdo->query("UPDATE `users` SET `token` = '', `confirmed` = '1' 
+											WHERE `id` = '$result[id]'");
+			return true;
+		}
+
+		public function checkLoginDataInDb($post) {
+			$sth = $this->pdo->prepare("SELECT `id`, `login`, `email`, `password`, `confirmed`, `avatar` 
+											FROM `users` WHERE `login` = :login");
+			$sth->execute([':login' => $post['login']]);
+			$result = $sth->fetch(PDO::FETCH_ASSOC);
+			if (!$result || !password_verify($post['password'], $result['password'])
+				|| $result['confirmed'] !== '1' || $post['login'] !== $result['login'])
+				return ['id' => 'menu', 'warning' => 'incorrect login or/and password'];
+			$_SESSION['user_id'] = $result['id'];
+			$_SESSION['user_logged_in'] = $post['login'];
+			$_SESSION['email'] = $result['email'];
+			$_SESSION['avatar'] = $result['avatar'];
+			return true;
+		}
+
+		public function checkRecoverDataInDb($post) {
+			$pseudo = [':login' => $post['login'], ':email' => $post['email']];
+
+			$sth = $this->pdo->prepare('SELECT `confirmed` FROM `users` 
+												WHERE `login` = :login AND `email` = :email');
+			$sth->execute($pseudo);
+			$result = $sth->fetch(PDO::FETCH_ASSOC);
+			if ($result['confirmed'] === '1')
+				return true;
+			return ['id' => 'menu', 'warning' => 'nonexistent login or email'];
+		}
+
+		public function insertRecoveryTokenInDb($token, $login) {
+			$this->pdo->query("UPDATE `users` SET `token` = '$token' WHERE `login` = '$login'");
+		}
+
+		public function confirmRecoveryRequest($token) {
+			$sth = $this->pdo->prepare("SELECT `id`, `token` FROM `users` WHERE `token` = '$token'");
+			$sth->execute();
+			$result = $sth->fetch(PDO::FETCH_ASSOC);
+			if (!$result)
+				return false;
+			$this->pdo->query("UPDATE `users` SET `token` = '' WHERE `id` = '$result[id]'");
+			$_SESSION['recovery'] = $result['id'];
+			return true;
+		}
+
+		public function setNewPasswordAfterRecovery($password) {
+			if (!isset($_SESSION['recovery']))
+				return false;
+			$password = password_hash($password, PASSWORD_BCRYPT);
+			$this->pdo->query("UPDATE users SET token = '', password = '$password'
+										WHERE users.id = '$_SESSION[recovery]'");
+			unset($_SESSION['recovery']);
+			return true;
 		}
 	}

@@ -120,4 +120,38 @@
 				return $result;
 			return true;
 		}
+
+		// LOGIN
+		public function validateLoginData($post) {
+			$request = ['login' => true, 'password' => true];
+
+			if (($result = self::validateIsFullFields($request, $post)) !== true)
+				return $result;
+			if (($result = $this->model->checkLoginDataInDb($post)) !== true)
+				return $result;
+			return true;
+		}
+
+		// PASSWORD RECOVERY
+		public function validateRecoverData($post) {
+			$request = ['login' => true, 'email' => true];
+
+			if (($result = self::validateIsFullFields($request, $post)) !== true)
+				return $result;
+			if (($result = $this->model->checkRecoverDataInDb($post)) !== true)
+				return $result;
+			return true;
+		}
+
+		public function validateSetNewPasswordRecovery($post) {
+			$request = ['password' => true, 'confirm' => true];
+
+			if (($result = self::validateIsFullFields($request, $post)) !== true)
+				return $result;
+			elseif (($result = self::validateInputData($request, $post)) !== true)
+				return $result;
+			if (!$this->model->setNewPasswordAfterRecovery($post['password']))
+				return false;
+			return true;
+		}
 	}

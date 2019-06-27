@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 						    `preferences` VARCHAR(12) DEFAULT 'bisexual',
 						    `bio` TEXT,
 						    `tags` TEXT,
+						    `avatar` VARCHAR(255) DEFAULT NULL,
 						    `confirmed` TINYINT(1) DEFAULT 0 NOT NULL,
 						    `token` VARCHAR(32) DEFAULT '',
 						    PRIMARY KEY (id)) ENGINE=InnoDB

@@ -1,10 +1,7 @@
 <?php
 
 	namespace Slim;
-	use PDO;
 	use PHPMailer\PHPMailer\PHPMailer;
-
-//	use Slim\Http\Environment;
 
 	require_once __DIR__ . '/../vendor/autoload.php';
 	require_once __DIR__ . '/../config/dbconfig.php';
@@ -22,13 +19,6 @@
 
 	$container = $app->getContainer();
 
-//	Activating routes in sub folder
-//	$container['environment'] = function () {
-//		$scriptName = $_SERVER['SCRIPT_NAME'];
-//		$_SERVER['SCRIPT_NAME'] = dirname(dirname($scriptName)).'/'.basename($scriptName);
-//		return new Environment($_SERVER);
-//	};
-
 	// Adding Twig template engine
 	$container['view'] = function ($container) {
 		$view = new Views\Twig(__DIR__ . '/../templates/', [
@@ -43,7 +33,6 @@
 
 	$container['mail'] = function () {
 		$mail = new PHPMailer;
-
 		$mail->SMTPDebug = 0;
 		$mail->isSMTP();
 		$mail->Host = "smtp.gmail.com";
@@ -52,8 +41,8 @@
 		$mail->Password = "Matcha-2019";
 		$mail->SMTPSecure = "tls";
 		$mail->Port = 587;
-
 		$mail->From = "matcha42project@gmail.com";
 		$mail->FromName = "Matcha: no-reply";
+		$mail->isHTML(true);
 		return $mail;
 	};

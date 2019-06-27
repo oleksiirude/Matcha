@@ -1,14 +1,32 @@
 {% extends 'base.twig' %}
 
-{% block title %}Matcha: password recover{% endblock %}
+{% block title %}
+    {% if not confirmed %}
+        Matcha: password recover
+    {% else %}
+        Matcha: set new password
+    {% endif %}
+{% endblock %}
 
 {% block content %}
-    <form method="post" action="/recover/validate">
-        login<br>
-        <input type="text" name="login"><br>
-        email<br>
-        <input type="email" name="email"><br>
-        <button type="submit">ok</button>
-    </form>
+
+    {% if not confirmed %}
+        <form method="post" action="/recover/validate">
+            login<br>
+            <input type="text" name="login"><br>
+            email<br>
+            <input type="email" name="email"><br>
+            <button type="submit">ok</button>
+        </form>
+    {% else %}
+        <form method="post" action="/recover/set">
+            new password<br>
+            <input type="password" name="password"><br>
+            confirm<br>
+            <input type="password" name="confirm"><br>
+            <button type="submit">ok</button>
+        </form>
+    {% endif %}
     <a href="{{ path_for('login') }}">back</a>
+
 {% endblock %}
