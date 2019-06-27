@@ -1,15 +1,13 @@
 <?php
 
-
 	namespace App\Controllers;
-	use PDO;
 
 	class ValidatorController {
 
-		protected $pdo;
+		protected $model;
 
-		public function __construct($pdo) {
-			$this->pdo = $pdo;
+		public function __construct($model) {
+			$this->model = $model;
 		}
 
 		//REGULAR INPUT DATA CHECKS (registration, login, recover password, change data in profile)
@@ -80,26 +78,24 @@
 			return true;
 		}
 
-		//checks for login and/or email exists in database
-		private function validateIfExistsInDb($request, $post) {
+		//checks if login and/or email are already exist in database
+		public function validateIfExistsInDb($request, $post) {
 			if ($request === 'check_login') {
 				$pseudo = [':login' => $post['login']];
-				$query = 'SELECT login FROM users WHERE login = :login';
+				$query = 'SELECT `login` FROM `users` WHERE `login` = :login';
 				$error = ['id' => 'login', 'warning' => 'this login is already taken'];
 			}
 			elseif ($request === 'check_email') {
 				$pseudo = [':email' => $post['email']];
-				$query = 'SELECT email FROM users WHERE email = :email';
+				$query = 'SELECT `email` FROM `users` WHERE `email` = :email';
 				$error = ['id' => 'email', 'warning' => 'this email is already taken'];
 			}
 			elseif ($request === 'check_both') {
 				$pseudo = [':login' => $post['login'], ':email' => $post['email']];
-				$query = 'SELECT login FROM users WHERE login = :login OR email = :email';
+				$query = 'SELECT `login` FROM `users` WHERE `login` = :login OR `email` = :email';
 				$error = ['id' => 'menu', 'warning' => 'login or/and email are already taken'];
 			}
-			$sth = $this->pdo->prepare($query);
-			$sth->execute($pseudo);
-			$result = $sth->fetchAll(PDO::FETCH_ASSOC);
+			$result = $this->model->checkIfExistsInDb($query, $pseudo);
 			if (!$result)
 				return true;
 			return $error;

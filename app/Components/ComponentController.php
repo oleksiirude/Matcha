@@ -15,7 +15,7 @@
 
 		public function __construct(ContainerInterface $c) {
 			$this->c = $c;
-			$this->validator = new ValidatorController($c['db']);
-			$this->model = new UserModel($c);
+			$this->model = new UserModel();
+			$this->validator = new ValidatorController($this->model);
 		}
 	}

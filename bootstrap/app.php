@@ -29,12 +29,6 @@
 //		return new Environment($_SERVER);
 //	};
 
-	// Adding database connection
-	$container['db'] = function () {
-		return new PDO(DSN, USERNAME, PASSWORD,
-			[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-	};
-
 	// Adding Twig template engine
 	$container['view'] = function ($container) {
 		$view = new Views\Twig(__DIR__ . '/../templates/', [

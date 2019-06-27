@@ -21,7 +21,7 @@
 
 		// Registration
 		public function renderRegistration($request, $response) {
-			return $this->c->view->render($response, 'registration.twig');
+			return $this->c->view->render($response, 'enter/registration.twig');
 		}
 
 		public function validateRegistrationData($request, $response) {
@@ -29,18 +29,28 @@
 			if (($result = $this->validator->validateRegistrationData($post)) !== true) {
 				return $response->withJson($result);
 			}
-			$this->model->addRegistrationDataToDB($post);
-			$link = 'http://' . $_SERVER['HTTP_HOST'] . '/registration/confirm/' . md5($post['login'] . time().$post['email']);
+			$post['name'] = ucfirst(strtolower($post['name']));
+			$post['surname'] = ucfirst(strtolower($post['surname']));
+
+			$token = md5($post['login'] . time() . $post['email']);
+			$this->model->insertValidRegistrationDataInDb($token, $post);
+
 			$this->c->mail->addAddress($post['email'], $post['name']);
 			$this->c->mail->isHTML(true);
-
 			$this->c->mail->Subject = "Registration";
-			$this->c->mail->Body = "<p>Hi, dear $post[name]</p>
-									<p>Please, follow this link to activate your account $link</p>
-									<p>With regards, Matcha team</p>";
+
+			$link = 'http://' . $_SERVER['HTTP_HOST'] . '/registration/confirm/' . $token;
+			$this->c->mail->Body = $this->getBodyHtmlRegistrationConfirm($post['name'], $link);
+
 			if(!$this->c->mail->send())
 				return $this->c->view->render($response->withStatus(503), 'errors/503.twig');
 			return $response->withJson(true);
+		}
+
+		private function getBodyHtmlRegistrationConfirm($name, $link) {
+			return "<p>Hi, dear $name</p>
+					<p>Please, follow this <a style='text-decoration: none' href='$link'>link</a> to activate your account</p>
+					<p>With regards, Matcha team</p>";
 		}
 
 		public function validateRegistrationToken($request, $response, $args) {
@@ -49,7 +59,7 @@
 
 		// Login
 		public function renderLogin($request, $response) {
-			return $this->c->view->render($response, 'login.twig');
+			return $this->c->view->render($response, 'enter/login.twig');
 		}
 
 		public function validateLoginData($request, $response) {
@@ -58,7 +68,7 @@
 
 		// Password recover
 		public function renderRecover($request, $response) {
-			return $this->c->view->render($response, 'recover.twig');
+			return $this->c->view->render($response, 'enter/recover.twig');
 		}
 
 		public function validateRecoverData($request, $response) {

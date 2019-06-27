@@ -18,22 +18,3 @@
 	// Password recover
 	$app->get('/recover', UserController::class . ':renderRecover')->setName('recover');
 	$app->post('/recover/validate', UserController::class . ':validateRecoverData');
-
-
-
-
-
-
-
-
-
-
-
-//	$app->get('/users', function ($request, $response) {
-//		$list = $this->db->query("SELECT login FROM users")->fetchAll(PDO::FETCH_ASSOC);
-//
-//		//	    var_dump(['list' => $list]); exit;
-//		return $this->view->render($response, 'users.twig', [
-//			'list' => $list
-//		]);
-//	})->setName('users');
