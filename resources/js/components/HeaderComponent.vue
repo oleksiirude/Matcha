@@ -1,10 +1,16 @@
 <template>
-    
+    <header>
+        test
+    </header>
 </template>
 
 <script>
+    // console.log('HeaderComponent);
     export default {
-        name: "HeaderComponent.vue"
+        // name: "HeaderComponent.vue"
+        mounted() {
+            console.log('HeaderComponent')
+        }
     }
 </script>
 
