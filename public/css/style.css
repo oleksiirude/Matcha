@@ -1,0 +1,200 @@
+:root {
+    /*--main-color: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);*/
+    --main-color-ob: rgb(74, 50, 60);
+    --main-color-ob1: -webkit-linear-gradient(to right, #FFAF7B, #D76D77, rgb(74, 50, 60));
+    --main-color: linear-gradient(to right, #FFAF7B, #D76D77, rgb(74, 50, 60));
+    /*background: #3A1C71;  !* fallback for old browsers *!*/
+    /*background: -webkit-linear-gradient(to right, #FFAF7B, #D76D77, #3A1C71);  !* Chrome 10-25, Safari 5.1-6 *!*/
+    /*background: linear-gradient(to right, #FFAF7B, #D76D77, #3A1C71); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
+
+}
+
+
+body {
+    color: rgba(68, 79, 87, 0.8);
+    background-color: #f8fafc;
+}
+
+
+input {
+    color: rgba(68, 79, 87, 0.8);
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+/*header*/
+
+.logo_img {
+    width: 80px;
+}
+.navbar-light .navbar-brand {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar-light .navbar-brand:hover,
+.navbar-light .navbar-brand:focus {
+    color: rgba(255, 255, 255, 1.0);
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link:focus {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.navbar-light .navbar-nav .nav-link.disabled {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.navbar-light .navbar-nav .show > .nav-link,
+.navbar-light .navbar-nav .active > .nav-link,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .nav-link.active {
+    color: rgba(255, 255, 255, 0.9);
+}
+.navbar-brand {
+    font-size: 1.8rem;
+}
+#mainPageHeader {
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    z-index: 99;
+}
+
+/*main*/
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+#main_container {
+    min-height: calc(100vh - 180px);
+    text-align: center;
+}
+#main_container_formain {
+    min-height: 100vh;
+}
+
+.mainTitle {
+    color: white;
+    opacity: 0.5;
+}
+.result_msg {
+    font-size: 1.5rem;
+}
+
+/*footer*/
+
+.footerMainpage {
+    bottom: 0px;
+    position: fixed;
+    width: 100%;
+    color: #fff;
+    opacity: 0.6;
+    height: auto;
+    background: none;
+    text-align: right;
+}
+
+footer {
+    width: 100%;
+    height: 80px;
+    color: #fff;
+    background: var(--main-color-ob);
+    background: var(--main-color-ob1);
+    background: var(--main-color);
+    text-align: right;
+}
+.copyright {
+    padding-right: 20px;
+    padding-top: 10px;
+}
+
+
+.navbar-light{
+    height: 100px;
+    background: var(--main-color-ob);
+    background: var(--main-color-ob1);
+    background: var(--main-color);
+}
+
+.card-header {
+    color: rgba(255, 255, 255, 1.0);
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    /*background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%);*/
+    background: var(--main-color-ob);
+    background: var(--main-color-ob1);
+    background: var(--main-color);
+    /*background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);*/
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    /*border: 1px solid transparent;*/
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    border-radius: 80px;
+    -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-primary {
+    color: #fff;
+    background: var(--main-color-ob);
+    background: var(--main-color-ob1);
+    background: var(--main-color);
+    border: none;
+}
+.btn-link {
+    font-weight: 400;
+    color: rgba(68, 79, 87, 0.8);
+    text-decoration: none;
+}
+
+.btn-link:hover {
+    color: rgba(68, 79, 87, 0.9);
+    text-decoration: underline;
+}
+
+
+a {
+    color: rgba(68, 79, 87, 0.8);
+    text-decoration: none;
+    background-color: transparent;
+}
+
+a:hover {
+    color: rgba(68, 79, 87, 0.9);
+    text-decoration: underline;
+}
+
+
+
+
+
+
+
+
+
+

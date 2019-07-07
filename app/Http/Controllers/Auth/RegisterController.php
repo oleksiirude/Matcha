@@ -82,8 +82,13 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
         
         event(new Registered($user = $this->create($request->all())));
-    
-        return response()->json(['result' => true]);
+
+       // return Redirect::to('register/success')->with('message', 'An e-mail with a link has been sent to your e-mail to confirm the registration');
+//       return response()->json(['result' => true]);
+        //return redirect()->route('success', ['message' => 'An e-mail with a link has been sent to your e-mail to confirm the registration']);
+        return redirect('result')->with('message', 'An e-mail with a link has been sent to your e-mail to confirm the registration');
+
+        //return View::make('auth/successlink', array('message' => 'An e-mail with a link has been sent to your e-mail to confirm the registration'));
     }
     
     /**

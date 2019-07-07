@@ -17,10 +17,15 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
         <!-- Styles -->
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
+                background: url(images/couples2.png) no-repeat;
+                /*-moz-background-size: auto 100%; !* Firefox 3.6+ *!*/
+                /*-webkit-background-size: auto 100%; !* Safari 3.1+ и Chrome 4.0+ *!*/
+                /*-o-background-size: auto 100%; !* Opera 9.6+ *!*/
+                background-size: cover; /* Современные браузеры */
+                background-position: center;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
@@ -56,13 +61,17 @@
             }
 
             .links > a {
-                color: #636b6f;
+                color: white;
+                opacity: 0.7;
                 padding: 0 25px;
                 font-size: 13px;
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
+            }
+            .links > a:hover {
+                opacity: 1;
             }
 
             .m-b-md {
@@ -71,7 +80,8 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height" id="app">
+    <div id="app">
+        <header id="mainPageHeader">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -85,12 +95,19 @@
                     @endauth
                 </div>
             @endif
-
+        </header>
+        <div class="flex-center position-ref" id="main_container_formain">
             <div class="content">
-                <div class="title m-b-md">
-                    Matcha: some info about our service
+                <div class="title m-b-md mainTitle">
+                    <span>Match. Chat. Date.</span>
                 </div>
             </div>
         </div>
+        <footer class="footerMainpage">
+            <p class="copyright">
+                &copy; created by Oleksii Rudenko & Dariia Piven, 2019 =)
+            </p>
+        </footer>
+    </div>
     </body>
 </html>

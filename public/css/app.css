@@ -36,10 +36,6 @@
   --breakpoint-xl: 1200px;
   --font-family-sans-serif: "Nunito", sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  /*--main-color: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);*/
-  --main-color-ob: #757F9A;
-  --main-color-ob1: -webkit-linear-gradient(to right, #D7DDE8, #757F9A);
-  --main-color: linear-gradient(to right, #D7DDE8, #757F9A);
 }
 
 *,
@@ -74,7 +70,7 @@ body {
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
-  color: rgba(68, 79, 87, 0.8);
+  color: #212529;
   text-align: left;
   background-color: #f8fafc;
 }
@@ -97,10 +93,6 @@ h5,
 h6 {
   margin-top: 0;
   margin-bottom: 0.5rem;
-}
-
-input {
-  color: rgba(68, 79, 87, 0.8);
 }
 
 p {
@@ -2701,7 +2693,7 @@ textarea.form-control.is-invalid {
       -ms-user-select: none;
           user-select: none;
   background-color: transparent;
-  /*border: 1px solid transparent;*/
+  border: 1px solid transparent;
   padding: 0.375rem 0.75rem;
   font-size: 0.9rem;
   line-height: 1.6;
@@ -2740,14 +2732,14 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background: var(--main-color-ob);
-  background: var(--main-color-ob1);
-  background: var(--main-color);
+  background-color: #3490dc;
+  border-color: #3490dc;
 }
 
 .btn-primary:hover {
   color: #fff;
   background-color: #227dc7;
+  border-color: #2176bd;
 }
 
 .btn-primary:focus,
@@ -3332,12 +3324,12 @@ fieldset:disabled a.btn {
 
 .btn-link {
   font-weight: 400;
-  color: rgba(68, 79, 87, 0.8);
+  color: #3490dc;
   text-decoration: none;
 }
 
 .btn-link:hover {
-  color: rgba(68, 79, 87, 0.9);
+  color: #1d68a7;
   text-decoration: underline;
 }
 
@@ -4891,39 +4883,34 @@ input[type=button].btn-block {
 .navbar-expand .navbar-toggler {
   display: none;
 }
-.navbar-light{
-  background: var(--main-color-ob);
-  background: var(--main-color-ob1);
-  background: var(--main-color);
-}
 
 .navbar-light .navbar-brand {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(0, 0, 0, 0.9);
 }
 
 .navbar-light .navbar-brand:hover,
 .navbar-light .navbar-brand:focus {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(0, 0, 0, 0.9);
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .navbar-light .navbar-nav .nav-link:hover,
 .navbar-light .navbar-nav .nav-link:focus {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .navbar-light .navbar-nav .nav-link.disabled {
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(0, 0, 0, 0.3);
 }
 
 .navbar-light .navbar-nav .show > .nav-link,
 .navbar-light .navbar-nav .active > .nav-link,
 .navbar-light .navbar-nav .nav-link.show,
 .navbar-light .navbar-nav .nav-link.active {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(0, 0, 0, 0.9);
 }
 
 .navbar-light .navbar-toggler {
@@ -5056,19 +5043,10 @@ input[type=button].btn-block {
   margin-left: 1.25rem;
 }
 
-.logo_img {
-  width: 40px;
-}
-
 .card-header {
-  color: rgba(255, 255, 255, 1.0);
   padding: 0.75rem 1.25rem;
   margin-bottom: 0;
-  /*background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%);*/
-  background: var(--main-color-ob);
-  background: var(--main-color-ob1);
-  background: var(--main-color);
-  /*background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);*/
+  background-color: rgba(0, 0, 0, 0.03);
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
