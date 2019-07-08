@@ -8,8 +8,7 @@
     use Illuminate\Contracts\Auth\MustVerifyEmail;
     use Illuminate\Foundation\Auth\User as Authenticatable;
     
-    class User extends Authenticatable implements MustVerifyEmail
-    {
+    class User extends Authenticatable implements MustVerifyEmail {
         use Notifiable;
     
         /**
@@ -18,7 +17,7 @@
          * @var array
          */
         protected $fillable = [
-            'login', 'email', 'name', 'surname', 'password',
+            'login', 'email', 'password'
         ];
     
         /**
@@ -40,14 +39,14 @@
         ];
     
         /**
-         * Override default method sendEmailVerificationNotification
+         * Override default method sendEmailVerificationNotification Illuminate/Auth/Listeners/SendEmailVerificationNotification
          */
         public function sendEmailVerificationNotification() {
             $this->notify(new SendRegisterConfirmEmail());
         }
     
         /**
-         * Override default method sendPasswordResetNotification
+         * Override default method sendPasswordResetNotification Illuminate/Auth/Passwords/CanResetPassword
          *
          * @param  string  $token
          */

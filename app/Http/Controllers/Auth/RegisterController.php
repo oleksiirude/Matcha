@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Jobs\SendRegisterConfrimJob;
-use App\Mail\SendRegisterConfirm;
+use App\Profile;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
@@ -11,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Mail;
 
 class RegisterController extends Controller
 {
@@ -81,14 +79,20 @@ class RegisterController extends Controller
     {
         $this->validator($request->all())->validate();
         
-        event(new Registered($user = $this->create($request->all())));
-
-       // return Redirect::to('register/success')->with('message', 'An e-mail with a link has been sent to your e-mail to confirm the registration');
-//       return response()->json(['result' => true]);
-        //return redirect()->route('success', ['message' => 'An e-mail with a link has been sent to your e-mail to confirm the registration']);
+        $data = $request->all();
+        
+        event(new Registered($user = $this->create($data)));
+        
+        $id = User::where('login', $data['login'])->first();
+        
+        Profile::create([
+            'user_id' => $id->id,
+            'name' => ucfirst(strtolower($data['name'])),
+            'surname' => ucfirst(strtolower($data['surname'])),
+        ]);
+        //return response()->json(['result' => true]);
         return redirect('result')->with('message', 'An e-mail with a link has been sent to your e-mail to confirm the registration');
-
-        //return View::make('auth/successlink', array('message' => 'An e-mail with a link has been sent to your e-mail to confirm the registration'));
+        
     }
     
     /**
@@ -101,8 +105,6 @@ class RegisterController extends Controller
     {
         return User::create([
             'login' => $data['login'],
-            'name' => ucfirst(strtolower($data['name'])),
-            'surname' => ucfirst(strtolower($data['surname'])),
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
