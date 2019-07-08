@@ -72,6 +72,7 @@
             }
             .links > a:hover {
                 opacity: 1;
+
             }
 
             .m-b-md {

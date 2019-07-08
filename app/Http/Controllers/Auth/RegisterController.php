@@ -80,15 +80,18 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
-        
+//        if ($validator->fails()) {
+//            return response()->json(['errors' => $validator->errors()->all()]);
+//        }
+
         event(new Registered($user = $this->create($request->all())));
 
-       // return Redirect::to('register/success')->with('message', 'An e-mail with a link has been sent to your e-mail to confirm the registration');
 //       return response()->json(['result' => true]);
-        //return redirect()->route('success', ['message' => 'An e-mail with a link has been sent to your e-mail to confirm the registration']);
+
+
         return redirect('result')->with('message', 'An e-mail with a link has been sent to your e-mail to confirm the registration');
 
-        //return View::make('auth/successlink', array('message' => 'An e-mail with a link has been sent to your e-mail to confirm the registration'));
+
     }
     
     /**
@@ -106,5 +109,11 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function index()
+    {
+        $json_data = array(['result' => true]);
+        return $json_data;
     }
 }

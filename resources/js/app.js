@@ -22,6 +22,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('header-component', require('./components/HeaderComponent').default);
 Vue.component('footer-component', require('./components/FooterComponent').default);
+// Vue.component('register-component', require('./components/RegisterComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -31,4 +32,18 @@ Vue.component('footer-component', require('./components/FooterComponent').defaul
 
 const app = new Vue({
     el: '#app',
+    // methods: {
+    //     registerajax: function () {
+    //         console.log('ajax');
+    //     }
+    // }
 });
+
+// const registerajax = new Vue({
+//     el: '#registerajax',
+//     methods: {
+//         registerajax: function () {
+//             console.log('ajax');
+//         }
+//     }
+// });

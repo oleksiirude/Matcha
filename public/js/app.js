@@ -49312,7 +49312,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('header-component', __webpack_require__(/*! ./components/HeaderComponent */ "./resources/js/components/HeaderComponent.vue")["default"]);
-Vue.component('footer-component', __webpack_require__(/*! ./components/FooterComponent */ "./resources/js/components/FooterComponent.vue")["default"]);
+Vue.component('footer-component', __webpack_require__(/*! ./components/FooterComponent */ "./resources/js/components/FooterComponent.vue")["default"]); // Vue.component('register-component', require('./components/RegisterComponent').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -49320,8 +49321,20 @@ Vue.component('footer-component', __webpack_require__(/*! ./components/FooterCom
  */
 
 var app = new Vue({
-  el: '#app'
-});
+  el: '#app' // methods: {
+  //     registerajax: function () {
+  //         console.log('ajax');
+  //     }
+  // }
+
+}); // const registerajax = new Vue({
+//     el: '#registerajax',
+//     methods: {
+//         registerajax: function () {
+//             console.log('ajax');
+//         }
+//     }
+// });
 
 /***/ }),
 
@@ -49608,8 +49621,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/matcha_start/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/matcha_start/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/dpiven/http/MyWebSite/Matcha/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/dpiven/http/MyWebSite/Matcha/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
