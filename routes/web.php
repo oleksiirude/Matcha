@@ -10,11 +10,16 @@
     |
     */
     
+    use App\Profile;
+    
     Route::get('/', function () {
         return view('welcome');
     })->middleware('guest');
     
     Auth::routes(['verify' => true]);
     
-    Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
-    
+    Route::get('/profile', 'HomeController@show')->name('profile')->middleware('verified');
+
+    Route::get('/result', function (){
+        return view('auth/successlink');
+    });
