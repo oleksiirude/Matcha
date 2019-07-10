@@ -20,10 +20,12 @@
             'preferences',
             'bio',
             'avatar',
-            'pic1', 'pic2', 'pic3', 'pic4',
+            'photo1', 'photo2', 'photo3', 'photo4',
             'rating',
             'active'
         ];
+    
+        protected $primaryKey = 'user_id';
         
         public $timestamps = false;
     }

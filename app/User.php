@@ -37,7 +37,7 @@
         protected $casts = [
             'email_verified_at' => 'datetime',
         ];
-    
+        
         /**
          * Override default method sendEmailVerificationNotification Illuminate/Auth/Listeners/SendEmailVerificationNotification
          */
