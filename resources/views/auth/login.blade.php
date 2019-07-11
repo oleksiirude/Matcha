@@ -22,7 +22,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
-
+                                </div>
 
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
