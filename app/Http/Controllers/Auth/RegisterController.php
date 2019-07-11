@@ -110,12 +110,19 @@ class RegisterController extends Controller
         ]);
     }
     
-    protected function createDirectory($login) {
+    protected function createDirectory($login)
+    {
 
         if (!file_exists(public_path() . '/images/profiles'))
             mkdir(public_path() . '/images/profiles');
-        
+
         if (!file_exists(public_path() . '/images/profiles/' . $login))
             mkdir(public_path() . '/images/profiles/' . $login);
+    }
+
+    public function index()
+    {
+        $json_data = array(['result' => true]);
+        return $json_data;
     }
 }
