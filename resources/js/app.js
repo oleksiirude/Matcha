@@ -19,10 +19,10 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('header-component', require('./components/HeaderComponent').default);
+Vue.component('avatar-component', require('./components/AvatarComponent').default);
 Vue.component('footer-component', require('./components/FooterComponent').default);
-// Vue.component('register-component', require('./components/RegisterComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -39,11 +39,3 @@ const app = new Vue({
     // }
 });
 
-// const registerajax = new Vue({
-//     el: '#registerajax',
-//     methods: {
-//         registerajax: function () {
-//             console.log('ajax');
-//         }
-//     }
-// });
