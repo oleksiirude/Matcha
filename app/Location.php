@@ -4,8 +4,7 @@
     
     use Illuminate\Database\Eloquent\Model;
     
-    class Profile extends Model {
-    
+    class Location extends Model {
         /**
          * The attributes that are mass assignable.
          *
@@ -13,17 +12,15 @@
          */
         protected $fillable = [
             'user_id',
-            'name',
-            'surname',
-            'age',
-            'gender',
-            'preferences',
-            'bio',
-            'avatar',
-            'photo1', 'photo2', 'photo3', 'photo4',
-            'rating',
+            'country',
+            'region',
+            'city',
+            'gps_code',
+            'latitude',
+            'longitude',
+            'allow_location'
         ];
-    
+        
         protected $primaryKey = 'user_id';
         
         public $timestamps = false;

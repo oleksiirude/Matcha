@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Location;
 use App\Profile;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -81,6 +82,7 @@ class RegisterController extends Controller
         event(new Registered($user = $this->createUser($data)));
         
         $this->createProfile($data);
+        $this->createLocation($data);
         $this->createDirectory($data['login']);
 //      return response()->json(['result' => true]);
         return redirect('result')->with('message', 'An e-mail with a link has been sent to your e-mail to confirm the registration');
@@ -107,6 +109,21 @@ class RegisterController extends Controller
             'user_id' => $id->id,
             'name' => ucfirst(strtolower($data['name'])),
             'surname' => ucfirst(strtolower($data['surname'])),
+        ]);
+    }
+    
+    protected function createLocation (array $data) {
+        $id = User::where('login', $data['login'])->first();
+        
+        Location::create([
+            'user_id' => $id->id,
+            'country' => $data['gps_country'],
+            'region' => $data['gps_region'],
+            'city' => $data['gps_city'],
+            'gps_code' => $data['gps_code'],
+            'latitude' => $data['gps_latitude'],
+            'longitude' => $data['gps_longitude'],
+            'allow_location' => $data['gps_allowlocation']
         ]);
     }
     

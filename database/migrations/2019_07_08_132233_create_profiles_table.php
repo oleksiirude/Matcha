@@ -21,10 +21,6 @@ class CreateProfilesTable extends Migration
             $table->string('gender', 6)->nullable();
             $table->string('preferences', 12)->nullable();
             $table->string('bio', 500)->nullable();
-            $table->string('country')->nullable();
-            $table->string('city')->nullable();
-            $table->decimal('latitude', 10, 8)->nullable();
-            $table->decimal('longitude', 10, 8)->nullable();
             $table->string('avatar')->default('images/service/default_avatar.png');
             $table->string('photo1')->nullable();
             $table->string('photo2')->nullable();
