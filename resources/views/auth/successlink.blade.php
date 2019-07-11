@@ -8,6 +8,6 @@
         </div>
     @endsection
 @else
-    <script>window.location = "/register";</script>
+    <script>window.location = "{{ asset('/register') }}";</script>
 @endif
 

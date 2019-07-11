@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@push('scripts')
+    <script src="{{ asset('js/register/confirm_password.js')}}" defer></script>
+    <script src="{{ asset('js/register/location.js')}}" defer></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+@endpush
+
 @section('content')
 <div class="container" id="main_container">
     <div class="row justify-content-center">
@@ -67,14 +73,12 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="gps" class="col-md-4 col-form-label text-md-right">{{ __('GPS') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="gps" type="text" class="" name="gps" value="{{ old('gps') }}" required autocomplete="gps" onkeyup='gps_pos();'>
-
-                            </div>
-                        </div>
+                        <input id="gps_latitude" type="text" class="" name="gps_latitude"  autocomplete="gps">
+                        <input id="gps_longitude" type="text" class="" name="gps_longitude"  autocomplete="gps">
+                        <input id="gps_city" type="text" class="" name="gps_city"  autocomplete="gps">
+                        <input id="gps_country" type="text" class="" name="gps_country"  autocomplete="gps">
+                        <input id="gps_allowlocation" type="text" class="" name="gps_allowlocation"  autocomplete="gps">
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>

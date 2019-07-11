@@ -14,9 +14,3 @@ let check = function() {
         register_button.type="button";
     }
 }
-
-let gps_pos = function () {
-    navigator.geolocation.getCurrentPosition(function(position) {
-        console.log(position.coords.latitude, position.coords.longitude);
-    });
-}
