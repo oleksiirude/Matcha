@@ -10,7 +10,7 @@
     |
     */
     
-    use App\Profile;
+    use Illuminate\Http\Request;
     
     Route::get('/', function () {
         return view('welcome');
@@ -19,7 +19,24 @@
     Auth::routes(['verify' => true]);
     
     Route::get('/profile', 'HomeController@show')->name('profile')->middleware('verified');
-
+    
+    Route::post('/upload/avatar', 'ImageController@uploadAvatar');
+    Route::post('/upload/photo', 'ImageController@uploadPhoto');
+    Route::delete('/delete/avatar', 'ImageController@deleteAvatar');
+    Route::delete('/delete/photo/{number}', 'ImageController@deletePhoto');
+    
+    Route::put('/set/name', 'HomeController@setName');
+    Route::put('/set/surname', 'HomeController@setSurname');
+    Route::put('/set/gender', 'HomeController@setGender');
+    Route::put('/set/preferences', 'HomeController@setPreferences');
+    Route::put('/set/bio', 'HomeController@setBio');
+    Route::put('/set/age', 'HomeController@setAge');
+    
+    Route::post('/change/login', 'HomeController@changeLogin');
+    Route::post('/change/email', 'HomeController@changeEmail');
+    Route::post('/change/password', 'HomeController@changePassword');
+    
+    
     Route::get('/result', function (){
         return view('auth/successlink');
     });

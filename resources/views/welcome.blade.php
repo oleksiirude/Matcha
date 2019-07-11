@@ -15,12 +15,12 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ asset('images/service/favicon.ico') }}">
         <!-- Styles -->
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         <style>
             html, body {
-                background: url(images/couples2.png) no-repeat;
+                background: url(images/service/couples2.png) no-repeat;
                 /*-moz-background-size: auto 100%; !* Firefox 3.6+ *!*/
                 /*-webkit-background-size: auto 100%; !* Safari 3.1+ и Chrome 4.0+ *!*/
                 /*-o-background-size: auto 100%; !* Opera 9.6+ *!*/
@@ -105,7 +105,7 @@
         </div>
         <footer class="footerMainpage">
             <p class="copyright">
-                &copy; created by Oleksii Rudenko & Dariia Piven, 2019 =)
+                &copy; created by olrudenk & dpiven, 2019
             </p>
         </footer>
     </div>

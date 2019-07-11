@@ -38,8 +38,7 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('guest');
     }
 
@@ -49,8 +48,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
+    protected function validator(array $data) {
         return Validator::make($data, [
             'login' => ['required', 'string', 'unique:users', 'regex:/^[a-zA-Z]{3,20}$/'],
             // only lowercase letters, from 3 to 20
@@ -75,24 +73,17 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function register(Request $request)
-    {
+    public function register(Request $request) {
         $this->validator($request->all())->validate();
         
         $data = $request->all();
         
-        event(new Registered($user = $this->create($data)));
+        event(new Registered($user = $this->createUser($data)));
         
-        $id = User::where('login', $data['login'])->first();
-        
-        Profile::create([
-            'user_id' => $id->id,
-            'name' => ucfirst(strtolower($data['name'])),
-            'surname' => ucfirst(strtolower($data['surname'])),
-        ]);
-        //return response()->json(['result' => true]);
+        $this->createProfile($data);
+        $this->createDirectory($data['login']);
+//      return response()->json(['result' => true]);
         return redirect('result')->with('message', 'An e-mail with a link has been sent to your e-mail to confirm the registration');
-        
     }
     
     /**
@@ -101,12 +92,30 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
-    {
+    protected function createUser(array $data) {
         return User::create([
             'login' => $data['login'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+    
+    protected function createProfile (array $data) {
+        $id = User::where('login', $data['login'])->first();
+    
+        Profile::create([
+            'user_id' => $id->id,
+            'name' => ucfirst(strtolower($data['name'])),
+            'surname' => ucfirst(strtolower($data['surname'])),
+        ]);
+    }
+    
+    protected function createDirectory($login) {
+
+        if (!file_exists(public_path() . '/images/profiles'))
+            mkdir(public_path() . '/images/profiles');
+        
+        if (!file_exists(public_path() . '/images/profiles/' . $login))
+            mkdir(public_path() . '/images/profiles/' . $login);
     }
 }

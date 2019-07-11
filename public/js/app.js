@@ -37119,7 +37119,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("footer", [
       _c("p", { staticClass: "copyright" }, [
-        _vm._v("\n    © created by Oleksii Rudenko & Dariia Piven, 2019 =)\n")
+        _vm._v("\n    © created by olrudenk & dpiven, 2020\n")
       ])
     ])
   }
