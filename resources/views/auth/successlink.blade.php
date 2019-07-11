@@ -1,11 +1,13 @@
-@extends('layouts.app')
-
-@section('content')
-    <div class="container" id="main_container">
-        <span class="result_msg">
-           @if (session('message'))
+@if (session('message'))
+    @extends('layouts.app')
+    @section('content')
+        <div class="container" id="main_container">
+            <span class="result_msg">
                 {{ session('message') }}
-            @endif
-        </span>
-    </div>
-@endsection
+            </span>
+        </div>
+    @endsection
+@else
+    <script>window.location = "{{ asset('/register') }}";</script>
+@endif
+
