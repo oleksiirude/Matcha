@@ -74,11 +74,13 @@
                         </div>
 
 
-                        <input id="gps_latitude" type="text" class="" name="gps_latitude"  autocomplete="gps">
-                        <input id="gps_longitude" type="text" class="" name="gps_longitude"  autocomplete="gps">
-                        <input id="gps_city" type="text" class="" name="gps_city"  autocomplete="gps">
-                        <input id="gps_country" type="text" class="" name="gps_country"  autocomplete="gps">
-                        <input id="gps_allowlocation" type="text" class="" name="gps_allowlocation"  autocomplete="gps">
+                        <input id="gps_latitude" type="hidden" class="" name="gps_latitude"  autocomplete="gps">
+                        <input id="gps_longitude" type="hidden" class="" name="gps_longitude"  autocomplete="gps">
+                        <input id="gps_city" type="hidden" class="" name="gps_city"  autocomplete="gps">
+                        <input id="gps_region" type="hidden" class="" name="gps_region"  autocomplete="gps">
+                        <input id="gps_country" type="hidden" class="" name="gps_country"  autocomplete="gps">
+                        <input id="gps_code" type="hidden" class="" name="gps_code"  autocomplete="gps">
+                        <input id="gps_allowlocation" type="hidden" class="" name="gps_allowlocation"  autocomplete="gps">
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
