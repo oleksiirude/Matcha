@@ -7,8 +7,10 @@
     use Illuminate\Notifications\Notifiable;
     use Illuminate\Contracts\Auth\MustVerifyEmail;
     use Illuminate\Foundation\Auth\User as Authenticatable;
+    use Cache;
     
     class User extends Authenticatable implements MustVerifyEmail {
+        
         use Notifiable;
     
         /**
@@ -17,7 +19,7 @@
          * @var array
          */
         protected $fillable = [
-            'login', 'email', 'password'
+            'login', 'email', 'password', 'last_activity'
         ];
     
         /**
@@ -37,6 +39,8 @@
         protected $casts = [
             'email_verified_at' => 'datetime',
         ];
+    
+        protected $primaryKey = 'id';
         
         /**
          * Override default method sendEmailVerificationNotification Illuminate/Auth/Listeners/SendEmailVerificationNotification
@@ -54,4 +58,7 @@
             $this->notify(new SendRecoverPasswordEmail($token));
         }
         
+        public function isOnline() {
+            return Cache::has('user-is-online-' . $this->id);
+        }
     }

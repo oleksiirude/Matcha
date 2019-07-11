@@ -1,7 +1,7 @@
 <template>
     <footer>
     <p class="copyright">
-        &copy; created by olrudenk & dpiven, 2020
+        &copy; created by olrudenk & dpiven, 2019
     </p>
     </footer>
 </template>

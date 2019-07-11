@@ -36,6 +36,7 @@
     Route::post('/change/email', 'HomeController@changeEmail');
     Route::post('/change/password', 'HomeController@changePassword');
     
+    Route::get('/users', 'UsersController@show')->name('users')->middleware('verified');
     
     Route::get('/result', function (){
         return view('auth/successlink');
