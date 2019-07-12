@@ -26,8 +26,12 @@ class UsersController extends Controller
     public function getFineActivityView($diff, $last) {
         
         switch ($diff) {
+            case $diff === 1:
+                return 'a few seconds ago';
+            case $diff === 2:
+                return 'one minute ago';
             case $diff < 6:
-                return 'recently';
+                return 'a few minutes ago';
             case $diff > 6 && $diff < 60:
                 return $diff . ' minutes ago';
             case $diff > 60 && $diff < 120:

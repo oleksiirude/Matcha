@@ -4,7 +4,7 @@
     
     use Illuminate\Database\Eloquent\Model;
     
-    class Location extends Model {
+    class Interest extends Model {
         /**
          * The attributes that are mass assignable.
          *
@@ -12,13 +12,7 @@
          */
         protected $fillable = [
             'user_id',
-            'country',
-            'region',
-            'city',
-            'gps_code',
-            'latitude',
-            'longitude',
-            'allow'
+            'tag'
         ];
         
         protected $primaryKey = 'user_id';

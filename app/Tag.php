@@ -4,24 +4,17 @@
     
     use Illuminate\Database\Eloquent\Model;
     
-    class Location extends Model {
+    class Tag extends Model {
         /**
          * The attributes that are mass assignable.
          *
          * @var array
          */
         protected $fillable = [
-            'user_id',
-            'country',
-            'region',
-            'city',
-            'gps_code',
-            'latitude',
-            'longitude',
-            'allow'
+            'tags'
         ];
         
-        protected $primaryKey = 'user_id';
+        protected $primaryKey = 'tags';
         
         public $timestamps = false;
     }

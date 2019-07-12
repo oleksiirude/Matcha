@@ -9,6 +9,7 @@
 
                     <div class="card-body">
 
+                        <p><a href="/users">list of users</a></p>
                         <b>new avatar</b>
                         <form enctype="multipart/form-data" method="POST" action="/upload/avatar">
                             @csrf
@@ -145,9 +146,9 @@
 
                             <select name="preferences">
                                 <option disabled>choose sexual preferences</option>
+                                <option value="heterosexual">heterosexual</option>
                                 <option value="homosexual">homosexual</option>
                                 <option value="bisexual">bisexual</option>
-                                <option value="heterosexual">heterosexual</option>
                             </select>
                             <button type="submit">change preferences</button>
                         </form>
@@ -170,10 +171,32 @@
                             <button type="submit">change bio</button>
                         </form>
                         _____________________________________________________________________________
+
+                        <p><b>Interests:</b></p>
+                            @foreach($profile->interests as $interest)
+                                {{ $interest->tag }}
+                                    <form action="/delete/tag/{{ $interest->tag }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit">delete</button>
+                                    </form>
+                            @endforeach
+                        <br>
+                        <form action="/set/tag" method="POST">
+                            @csrf
+                            @method('PUT')
+
+                            <input type="text" name="tag">
+                            <button type="submit">add interest</button>
+                        </form>
+                        _____________________________________________________________________________
                         <p><b>Country:</b> {{ $profile->country }}</p>
                         <p><b>City:</b> {{ $profile->city }}</p>
                         <p><b>Email:</b> {{ $profile->email }}</p>
                         <p><b>Rating:</b> {{ $profile->rating }}</p>
+                        <p><b>Allow location:</b> {{ $profile->allow }}</p>
+                        <p><b>Location:</b> {{ $profile->country }}, {{ $profile->city }}</p>
                         _____________________________________________________________________________
                         <p><b>Change login</b></p>
                         <form action="/change/login" method="POST">

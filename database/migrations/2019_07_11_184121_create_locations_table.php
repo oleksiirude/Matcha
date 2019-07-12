@@ -21,7 +21,7 @@ class CreateLocationsTable extends Migration
             $table->string('gps_code');
             $table->decimal('latitude', 10, 7);
             $table->decimal('longitude', 18, 15);
-            $table->tinyInteger('allow_location');
+            $table->boolean('allow');
         });
     }
 

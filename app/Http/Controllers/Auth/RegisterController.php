@@ -78,14 +78,15 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
         
         $data = $request->all();
-        
+       
         event(new Registered($user = $this->createUser($data)));
         
         $this->createProfile($data);
         $this->createLocation($data);
         $this->createDirectory($data['login']);
-//      return response()->json(['result' => true]);
-        return redirect('result')->with('message', 'An e-mail with a link has been sent to your e-mail to confirm the registration');
+        
+        return redirect('result')
+            ->with('message', 'Please, check your email to confirm registration');
     }
     
     /**
@@ -115,6 +116,14 @@ class RegisterController extends Controller
     protected function createLocation (array $data) {
         $id = User::where('login', $data['login'])->first();
         
+        if ($data['gps_allowlocation'] === '1') {
+            $allow = true;
+            $profile = Profile::find($id->id);
+            $profile->increment('rating', 0.5);
+        }
+        else
+            $allow = true;
+        
         Location::create([
             'user_id' => $id->id,
             'country' => $data['gps_country'],
@@ -123,7 +132,7 @@ class RegisterController extends Controller
             'gps_code' => $data['gps_code'],
             'latitude' => $data['gps_latitude'],
             'longitude' => $data['gps_longitude'],
-            'allow_location' => $data['gps_allowlocation']
+            'allow' => $allow
         ]);
     }
     
