@@ -1,3 +1,5 @@
+
+// const axios = require('axios');
 let latitude;
 let longitude;
 let country;
@@ -14,26 +16,37 @@ let tofillinputs = function(){
     document.getElementById('gps_region').setAttribute('value', state);
     document.getElementById('gps_code').setAttribute('value', code);
     document.getElementById('gps_allowlocation').setAttribute('value', allow);
+    return true;
 };
+
+
 let geocode = function(ltt, lng) {
     latitude = ltt;
     longitude = lng;
-    let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCpslLLMvrUUPGWepKF3r-8g87FCEF2Qek&latlng='+latitude+','+longitude+'&language=en';
+//     const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCpslLLMvrUUPGWepKF3r-8g87FCEF2Qek&latlng='+latitude+','+longitude+'&language=en');
+console.log('response', latitude, longitude);
 
-    $.getJSON(GEOCODING).done(function(location) {
-        console.log(location['plus_code']['compound_code']);
-        let add= location['plus_code']['compound_code'];
-        let  value=add.split(",");
-        let count=value.length;
-        country=value[count-1];
-        state=value[count-2];
-        let city_code=value[count-3].split(" ");
-        code = city_code.shift();
-        city = city_code.join(' ');
-        console.log('country', country);
-        console.log('state', state);
-        console.log('city', city);
-        console.log('code', code);
+    let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCpslLLMvrUUPGWepKF3r-8g87FCEF2Qek&latlng='+latitude+','+longitude+'&language=en';
+    // $.ajaxSetup({async: false});
+    $.ajax({
+        url: GEOCODING,
+        dataType: 'json',
+        async: false,
+        success: function(location) {
+            console.log(location['plus_code']['compound_code']);
+            let add= location['plus_code']['compound_code'];
+            let  value=add.split(",");
+            let count=value.length;
+            country=value[count-1];
+            state=value[count-2];
+            let city_code=value[count-3].split(" ");
+            code = city_code.shift();
+            city = city_code.join(' ');
+            console.log('country', country);
+            console.log('state', state);
+            console.log('city', city);
+            console.log('code', code);
+        }
     });
 };
 
@@ -41,6 +54,7 @@ let ip_pos = function () {
     allow = '0';
     $.ajax({
         type: "GET",
+        // async: false,
         dataType: "json",
         url: 'https://api.ipdata.co?api-key=ef86a8cdcf9c1d049387de03d36272d52fdefccbb4460c0326757254',
         success: function (data) {
@@ -68,49 +82,36 @@ let gps_pos = function () {
         }
         );
 };
-function fill_input () {
+    function fill_input () {
     console.log('promise', allow);
         if (allow == undefined) {
             ip_pos();
+            tofillinputs();
             // console.log('uuuuu', latitude, longitude);
         }
-        tofillinputs();
+        else
+            tofillinputs();
+
+        return true;
 
         // return await document.getElementById('register_form').submit();
 
 };
 
-// let fill_input = new Promise((resolve, reject) => {
-//
-//     if (allow == undefined) {
-//         console.log('promisffffe', allow);
-//         ip_pos();
-//     }
-//     resolve("result");
-//     // setTimeout(() => {
-//     //     // переведёт промис в состояние fulfilled с результатом "result"
-//     //     resolve("result");
-//     // }, 1000);
-//
-// })
-//     .then(
-//         result => {
-//             // первая функция-обработчик - запустится при вызове resolve
-//             alert("Fulfilled: " + result); // result - аргумент resolve
-//         },
-//         error => {
-//             // вторая функция - запустится при вызове reject
-//             alert("Rejected: " + error); // error - аргумент reject
-//         }
-//     );
 
 document.addEventListener('DOMContentLoaded', function(){
     console.log('test');
     gps_pos();
 });
-document.getElementById('register_button').addEventListener('click', function(event){
+document.getElementById('register_button').addEventListener('click', async function(event){
     event.preventDefault();
     fill_input();
+    // console.log('1latitude', latitude);
+    // console.log('1longitude', longitude);
+    // console.log('1country', country);
+    // console.log('1state', state);
+    // console.log('1city', city);
+    // console.log('1code', code);
     return document.getElementById('register_form').submit()
     // console.log('promisffffe', allow);
 });

@@ -78,7 +78,7 @@ class RegisterController extends Controller
         
         $data = $request->all();
 
-        dd($data);
+//        dd($data);
 
         event(new Registered($user = $this->createUser($data)));
         

@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @push('scripts')
     <script src="{{ asset('js/register/confirm_password.js')}}" defer></script>
     <script src="{{ asset('js/register/location.js')}}" defer></script>
