@@ -7,12 +7,18 @@
     use Illuminate\Http\Request;
     use Intervention\Image\ImageManager;
     
-    class ImageController extends Controller
-    {
-        private $manager;
-        
-        public function __construct() {
-            $this->manager = new ImageManager();
+    class ImageController extends Controller {
+        protected $manager;
+        protected $model_profile;
+    
+        public function __construct()
+        {
+            $this->middleware(function ($request, $next) {
+                $this->model_profile = Profile::find(Auth::id());
+                $this->manager = new ImageManager();
+                
+                return $next($request);
+            });
         }
         
         public function uploadAvatar(Request $request) {
@@ -22,8 +28,7 @@
             $avatar = $request->file('avatar');
             $extension = $avatar->getClientOriginalExtension();
             $savePath = public_path() . '/images/profiles/' .
-                auth()->user()->login . '/' . 'avatar_' .
-                auth()->user()->login . '.' . $extension;
+                auth()->user()->login . '/' . 'avatar' . '.' . $extension;
             
             $this->manager->make($avatar)
                 ->heighten(640)
@@ -87,36 +92,30 @@
         }
         
         private function insertAvatarToDB($path) {
-            $model = Profile::find(Auth::id());
-            
-            $model->increment('rating', 0.5);
-        
-            $model->update([
+            $this->model_profile->increment('rating', 0.5);
+    
+            $this->model_profile->update([
                'avatar' => $path
             ]);
         }
         
         private function insertPhotoToDB($path, $number) {
-            $model = Profile::find(Auth::id());
-            
-            $model->increment('rating', 0.5);
-            
-            $model->update([
+            $this->model_profile->increment('rating', 0.5);
+    
+            $this->model_profile->update([
                 'photo' . $number => $path
             ]);
         }
     
         public function deleteAvatar() {
-            $model = Profile::find(Auth::id());
-            
-            if (preg_match('/default/', $model->avatar))
+            if (preg_match('/default/', $this->model_profile->avatar))
                 return response()->json(['result' => false]);
         
-            unlink(public_path() . '/' . $model->avatar);
-        
-            $model->decrement('rating', 0.5);
-        
-            $model->update([
+            unlink(public_path() . '/' . $this->model_profile->avatar);
+    
+            $this->model_profile->decrement('rating', 0.5);
+    
+            $this->model_profile->update([
                 'avatar' => 'images/service/default_avatar.png'
             ]);
         
@@ -127,18 +126,16 @@
             if (!preg_match('/^[1-4]$/', $number))
                 return redirect()->back();
             
-            $model = Profile::find(Auth::id());
-            
             $photo = 'photo' . $number;
     
-            if ($model->$photo === null)
+            if ($this->model_profile->$photo === null)
                 return response()->json(['result' => false]);
 
-            unlink(public_path() . '/' . $model->$photo);
-
-            $model->decrement('rating', 0.5);
-
-            $model->update([
+            unlink(public_path() . '/' . $this->model_profile->$photo);
+    
+            $this->model_profile->decrement('rating', 0.5);
+    
+            $this->model_profile->update([
                 $photo => null
             ]);
 

@@ -10,38 +10,45 @@
     |
     */
     
-    use Illuminate\Http\Request;
-    
     Route::get('/', function () {
         return view('welcome');
     })->middleware('guest');
     
     Auth::routes(['verify' => true]);
     
-    Route::get('/profile', 'HomeController@show')->name('profile')->middleware('verified');
+    Route::group(['prefix' => '/profile', 'middleware' => 'verified'], function () {
+        Route::get('/', 'HomeController@show')->name('profile');
+    });
     
-    Route::post('/upload/avatar', 'ImageController@uploadAvatar');
-    Route::post('/upload/photo', 'ImageController@uploadPhoto');
-    Route::delete('/delete/avatar', 'ImageController@deleteAvatar');
-    Route::delete('/delete/photo/{number}', 'ImageController@deletePhoto');
+    Route::group(['prefix' => '/upload', 'middleware' => 'verified'], function () {
+        Route::post('/avatar', 'ImageController@uploadAvatar');
+        Route::post('/photo', 'ImageController@uploadPhoto');
+    });
     
-    Route::put('/set/name', 'HomeController@setName');
-    Route::put('/set/surname', 'HomeController@setSurname');
-    Route::put('/set/gender', 'HomeController@setGender');
-    Route::put('/set/preferences', 'HomeController@setPreferences');
-    Route::put('/set/bio', 'HomeController@setBio');
-    Route::delete('/delete/bio', 'HomeController@deleteBio');
-    Route::put('/set/age', 'HomeController@setAge');
+    Route::group(['prefix' => '/delete', 'middleware' => 'verified'], function () {
+        Route::delete('/avatar', 'ImageController@deleteAvatar');
+        Route::delete('/photo/{number}', 'ImageController@deletePhoto');
+        Route::delete('/bio', 'HomeController@deleteBio');
+        Route::delete('/tag/{tag}', 'TagController@deleteTag');
+    });
     
-    Route::post('/change/login', 'HomeController@changeLogin');
-    Route::post('/change/email', 'HomeController@changeEmail');
-    Route::post('/change/password', 'HomeController@changePassword');
+    Route::group(['prefix' => '/set', 'middleware' => 'verified'], function () {
+        Route::put('/name', 'HomeController@setName');
+        Route::put('/surname', 'HomeController@setSurname');
+        Route::put('/gender', 'HomeController@setGender');
+        Route::put('/preferences', 'HomeController@setPreferences');
+        Route::put('/bio', 'HomeController@setBio');
+        Route::put('/age', 'HomeController@setAge');
+        Route::put('/tag', 'TagController@setTag');
+    });
     
-    Route::put('/set/tag', 'TagController@setTag');
-    Route::delete('/delete/tag/{tag}', 'TagController@deleteTag');
+    Route::group(['prefix' => '/change', 'middleware' => 'verified'], function () {
+        Route::post('/login', 'HomeController@changeLogin');
+        Route::post('/email', 'HomeController@changeEmail');
+        Route::post('/password', 'HomeController@changePassword');
+    });
     
     Route::get('/users', 'UsersController@show')->name('users');
-    
     Route::get('/result', function (){
         return view('auth/successlink');
     });

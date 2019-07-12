@@ -10,7 +10,6 @@
     use Illuminate\Support\Facades\Auth;
     
     class TagController extends Controller {
-        
         protected $model_user;
         protected $model_profile;
         protected $model_interest;

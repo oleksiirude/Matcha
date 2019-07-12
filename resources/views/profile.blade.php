@@ -10,6 +10,7 @@
                     <div class="card-body">
 
                         <p><a href="/users">list of users</a></p>
+                        <p><b>Rating:</b> {{ $profile->rating }}</p>
                         <b>new avatar</b>
                         <form enctype="multipart/form-data" method="POST" action="/upload/avatar">
                             @csrf
@@ -197,8 +198,8 @@
                             <button type="submit">add interest</button>
                         </form>
                         _____________________________________________________________________________
+                        _____________________________________________________________________________
                         <p><b>Email:</b> {{ $profile->email }}</p>
-                        <p><b>Rating:</b> {{ $profile->rating }}</p>
                         <p><b>Allow location:</b> {{ $profile->allow }}</p>
                         <p><b>Location:</b> {{ $profile->country }}, {{ $profile->city }}</p>
                         _____________________________________________________________________________

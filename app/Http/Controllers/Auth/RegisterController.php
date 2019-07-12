@@ -122,7 +122,7 @@ class RegisterController extends Controller
             $profile->increment('rating', 0.5);
         }
         else
-            $allow = true;
+            $allow = false;
         
         Location::create([
             'user_id' => $id->id,
@@ -136,9 +136,7 @@ class RegisterController extends Controller
         ]);
     }
     
-    protected function createDirectory($login)
-    {
-
+    protected function createDirectory($login) {
         if (!file_exists(public_path() . '/images/profiles'))
             mkdir(public_path() . '/images/profiles');
 
@@ -146,8 +144,7 @@ class RegisterController extends Controller
             mkdir(public_path() . '/images/profiles/' . $login);
     }
 
-    public function index()
-    {
+    public function index() {
         $json_data = array(['result' => true]);
         return $json_data;
     }

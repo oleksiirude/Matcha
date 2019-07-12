@@ -10,7 +10,6 @@
     use Illuminate\Http\Request;
     
     class HomeController extends Controller {
-    
         protected $model_profile;
         protected $model_user;
     
@@ -174,23 +173,42 @@
         }
         
         public function changeLogin(Request $request) {
-            $login = $request->get('login');
+            $new_login = $request->get('login');
         
-            if (!preg_match('/^[a-zA-Z]{3,20}$/', $login))
+            if (!preg_match('/^[a-zA-Z]{3,20}$/', $new_login))
                 return response()->json([
                     'result' => false,
                     'error' => 'Invalid input']);
             
-            if ($this->model_user->where('login', $login)->first())
+            if ($this->model_user->where('login', $new_login)->first())
                 return response()->json([
                     'result' => false,
                     'error' => 'This login is already taken']);
-    
+            
+            $this->renameAllStuff($new_login);
+            
             $this->model_user->update([
-                'login' => $login
+                'login' => $new_login
             ]);
             
             return response()->json(['result' => true]);
+        }
+        
+        protected function renameAllStuff($new_login) {
+            $old_dir_name = public_path() . '/images/profiles/' . $this->model_user->login;
+            $new_dir_name = public_path() . '/images/profiles/' . $new_login;
+            rename($old_dir_name, $new_dir_name);
+    
+            for ($i = 1; $i < 5; $i++) {
+                $photo = 'photo' . $i;
+                $this->model_profile->$photo = str_replace($this->model_user->login,
+                                                            $new_login,
+                                                            $this->model_profile->$photo);
+            }
+            $this->model_profile->avatar = str_replace($this->model_user->login,
+                                                        $new_login,
+                                                        $this->model_profile->avatar);
+            $this->model_profile->save();
         }
         
         public function changeEmail(Request $request) {
