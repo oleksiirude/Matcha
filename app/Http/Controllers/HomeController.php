@@ -11,22 +11,35 @@
     
     class HomeController extends Controller {
     
+        protected $model_profile;
+        protected $model_user;
+    
+        public function __construct()
+        {
+            $this->middleware(function ($request, $next) {
+                $this->model_profile = Profile::find(Auth::id());
+                $this->model_user = User::find(Auth::id());
+                
+                return $next($request);
+            });
+        }
+        
         /**
          * Show user's profile.
          *
          * @return \Illuminate\Contracts\Support\Renderable
          */
         public function show() {
-            $profile = Profile::where('user_id', Auth::id())->first();
+            $profile = $this->model_profile->where('user_id', $this->model_user->id)->first();
             $profile['login'] = auth()->user()->login;
             $profile['email'] = auth()->user()->email;
         
-            $location = Location::where('user_id', Auth::id())->first();
+            $location = Location::where('user_id',$this->model_user->id)->first();
             $profile['country'] = $location->country;
             $profile['city'] = $location->city;
             $profile['allow'] = $location->allow;
             
-            $interests = Interest::select('tag')->where('user_id', Auth::id())->get();
+            $interests = Interest::select('tag')->where('user_id', $this->model_user->id)->get();
             $profile['interests'] = $interests;
             
             return view('profile', ['profile' => $profile]);
@@ -42,8 +55,7 @@
             
             $name = ucfirst(strtolower($name));
             
-            $model = Profile::find(Auth::id());
-            $model->update([
+            $this->model_profile->update([
                 'name' => $name
             ]);
             
@@ -60,8 +72,7 @@
             
             $surname = ucfirst(strtolower($surname));
             
-            $model = Profile::find(Auth::id());
-            $model->update([
+            $this->model_profile->update([
                 'surname' => $surname
             ]);
             
@@ -70,20 +81,34 @@
         
         public function setBio(Request $request) {
             $bio = htmlentities($request->get('bio'));
-        
-            $model = Profile::find(Auth::id());
             
-            $rating = $model->bio ? false : true;
+            if (!$bio)
+                return response()->json([
+                    'result' => false,
+                    'error' => 'Invalid input']);
             
-            $model->update([
+            $rating = $this->model_profile->bio ? false : true;
+    
+            $this->model_profile->update([
                 'bio' => $bio
             ]);
             
-            if ($rating === true && $bio) {
-                $model->increment('rating', 0.5);
-            } elseif ($rating === false && !$bio)
-                $model->decrement('rating', 0.5);
+            if ($rating === true && $bio)
+                $this->model_profile->increment('rating', 0.5);
         
+            return response()->json(['result' => true]);
+        }
+        
+        public function deleteBio(){
+            if (!$this->model_profile->bio)
+                return response()->json([
+                    'result' => false,
+                    'error' => 'You do not have any bio to delete']);
+    
+            $this->model_profile->bio = "";
+            $this->model_profile->save();
+            $this->model_profile->decrement('rating', 0.5);
+    
             return response()->json(['result' => true]);
         }
         
@@ -93,16 +118,14 @@
             if (!preg_match('/^male|female$/', $gender))
                 return redirect()->back();
         
-            $model = Profile::find(Auth::id());
-        
-            $rating = $model->gender ? false : true;
-        
-            $model->update([
+            $rating = $this->model_profile->gender ? false : true;
+    
+            $this->model_profile->update([
                 'gender' => $gender
             ]);
         
             if ($rating === true)
-                $model->increment('rating', 0.5);
+                $this->model_profile->increment('rating', 0.5);
             
             return response()->json(['result' => true]);
         }
@@ -119,17 +142,15 @@
                 return response()->json([
                     'result' => false,
                     'error' => 'Please, choose between 18 and 120']);
-            
-            $model = Profile::find(Auth::id());
         
-            $rating = $model->age ? false : true;
-        
-            $model->update([
+            $rating = $this->model_profile->age ? false : true;
+    
+            $this->model_profile->update([
                 'age' => $age
             ]);
         
             if ($rating === true)
-                $model->increment('rating', 0.5);
+                $this->model_profile->increment('rating', 0.5);
             
             return response()->json(['result' => true]);
         }
@@ -139,17 +160,15 @@
         
             if (!preg_match('/^homosexual|bisexual|heterosexual$/', $preferences))
                 return redirect()->back();
-            
-            $model = Profile::find(Auth::id());
         
-            $rating = $model->preferences ? false : true;
-        
-            $model->update([
+            $rating = $this->model_profile->preferences ? false : true;
+    
+            $this->model_profile->update([
                 'preferences' => $preferences
             ]);
         
             if ($rating === true)
-                $model->increment('rating', 0.5);
+                $this->model_profile->increment('rating', 0.5);
         
             return response()->json(['result' => true]);
         }
@@ -162,14 +181,12 @@
                     'result' => false,
                     'error' => 'Invalid input']);
             
-            if (User::where('login', $login)->first())
+            if ($this->model_user->where('login', $login)->first())
                 return response()->json([
                     'result' => false,
                     'error' => 'This login is already taken']);
-        
-            $model = User::find(Auth::id());
-            
-            $model->update([
+    
+            $this->model_user->update([
                 'login' => $login
             ]);
             
@@ -185,18 +202,17 @@
                     'result' => false,
                     'error' => 'Invalid email']);
         
-            if (User::where('email', $email)->first())
+            if ($this->model_user->where('email', $email)->first())
                 return response()->json([
                     'result' => false,
                     'error' => 'This email is already taken']);
-        
-            $model = User::find(Auth::id());
-            if (!password_verify($password, $model->password))
+            
+            if (!password_verify($password, $this->model_user->password))
                 return response()->json([
                     'result' => false,
                     'error' => 'Invalid password']);
-            
-            $model->update([
+    
+            $this->model_user->update([
                 'email' => $email
             ]);
             
@@ -217,14 +233,13 @@
                 return response()->json([
                     'result' => false,
                     'error' => 'Passwords do not match']);
-        
-            $model = User::find(Auth::id());
-            if (!password_verify($current_password, $model->password))
+            
+            if (!password_verify($current_password, $this->model_user->password))
                 return response()->json([
                     'result' => false,
                     'error' => 'Invalid password']);
-            
-            $model->update([
+    
+            $this->model_user->update([
                 'password' => password_hash($new_password, PASSWORD_BCRYPT)
             ]);
             

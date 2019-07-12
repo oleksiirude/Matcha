@@ -30,6 +30,7 @@
     Route::put('/set/gender', 'HomeController@setGender');
     Route::put('/set/preferences', 'HomeController@setPreferences');
     Route::put('/set/bio', 'HomeController@setBio');
+    Route::delete('/delete/bio', 'HomeController@deleteBio');
     Route::put('/set/age', 'HomeController@setAge');
     
     Route::post('/change/login', 'HomeController@changeLogin');

@@ -170,6 +170,12 @@
                             <textarea name="bio" placeholder="up to 500 symbols"></textarea>
                             <button type="submit">change bio</button>
                         </form>
+                        <form action="/delete/bio" method="POST">
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit">delete bio</button>
+                        </form>
                         _____________________________________________________________________________
 
                         <p><b>Interests:</b></p>
@@ -191,8 +197,6 @@
                             <button type="submit">add interest</button>
                         </form>
                         _____________________________________________________________________________
-                        <p><b>Country:</b> {{ $profile->country }}</p>
-                        <p><b>City:</b> {{ $profile->city }}</p>
                         <p><b>Email:</b> {{ $profile->email }}</p>
                         <p><b>Rating:</b> {{ $profile->rating }}</p>
                         <p><b>Allow location:</b> {{ $profile->allow }}</p>
