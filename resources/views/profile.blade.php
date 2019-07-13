@@ -12,7 +12,7 @@
                         <p><a href="/users">list of users</a></p>
                         <p><b>Rating:</b> {{ $profile->rating }}</p>
                         <b>new avatar</b>
-                        <form enctype="multipart/form-data" method="POST" action="/upload/avatar">
+                        <form enctype="multipart/form-data" method="POST" action="{{ route('upload.avatar') }}">
                             @csrf
 
                             <input type="file" accept=".jpg, .jpeg" name="avatar"><br>
@@ -21,7 +21,7 @@
 
                         <br>
                         <b>new photo 1</b>
-                        <form enctype="multipart/form-data" method="POST" action="/upload/photo">
+                        <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}">
                             @csrf
 
                             <input type="hidden" name="photo" value="1">
@@ -31,7 +31,7 @@
 
                         <br>
                         <b>new photo 2</b>
-                        <form enctype="multipart/form-data" method="POST" action="/upload/photo">
+                        <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}">
                             @csrf
 
                             <input type="hidden" name="photo" value="2">
@@ -41,7 +41,7 @@
 
                         <br>
                         <b>new photo 3</b>
-                        <form enctype="multipart/form-data" method="POST" action="/upload/photo">
+                        <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}">
                             @csrf
 
                             <input type="hidden" name="photo" value="3">
@@ -51,7 +51,7 @@
 
                         <br>
                         <b>new photo 4</b>
-                        <form enctype="multipart/form-data" method="POST" action="/upload/photo">
+                        <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}">
                             @csrf
 
                             <input type="hidden" name="photo" value="4">
@@ -62,7 +62,7 @@
                         <br>
                         <p>Avatar: {{ $profile->avatar }}</p>
                         <img src="{{ $profile->avatar }}" alt="avatar" style="width: 200px">
-                        <form action="/delete/avatar" method="POST">
+                        <form action="{{ route('delete.avatar') }}" method="POST">
                             @csrf
                             @method('DELETE')
 
@@ -72,7 +72,7 @@
 
                         <p>Photo 1: {{ $profile->photo1 }}</p>
                         <img src="{{ $profile->photo1 }}" alt="photo1 -> null" style="width: 200px">
-                        <form action="/delete/photo/1" method="POST">
+                        <form action="{{ route('delete.photo', '1') }}" method="POST">
                             @csrf
                             @method('DELETE')
 
@@ -81,7 +81,7 @@
 
                         <p>Photo 2: {{ $profile->photo2 }}</p>
                         <img src="{{ $profile->photo2 }}" alt="photo2 -> null" style="width: 200px">
-                        <form action="/delete/photo/2" method="POST">
+                        <form action="{{ route('delete.photo', '2') }}" method="POST">
                             @csrf
                             @method('DELETE')
 
@@ -90,7 +90,7 @@
 
                         <p>Photo 3: {{ $profile->photo3 }}</p>
                         <img src="{{ $profile->photo3 }}" alt="photo3 -> null" style="width: 200px">
-                        <form action="/delete/photo/3" method="POST">
+                        <form action="{{ route('delete.photo', '3') }}" method="POST">
                             @csrf
                             @method('DELETE')
 
@@ -99,7 +99,7 @@
 
                         <p>Photo 4: {{ $profile->photo4 }}</p>
                         <img src="{{ $profile->photo4 }}" alt="photo4 -> null" style="width: 200px">
-                        <form action="/delete/photo/4" method="POST">
+                        <form action="{{ route('delete.photo', '4') }}" method="POST">
                             @csrf
                             @method('DELETE')
 
@@ -107,7 +107,7 @@
                         </form>
                         _____________________________________________________________________________
                         <p><b>Name:</b> {{ $profile->name }}</p>
-                        <form action="/set/name" method="POST">
+                        <form action="{{ route('set.name') }}" method="POST">
                             @csrf
                             @method('PUT')
 
@@ -117,7 +117,7 @@
 
                         _____________________________________________________________________________
                         <p><b>Surname:</b> {{ $profile->surname }}</p>
-                        <form action="/set/surname" method="POST">
+                        <form action="{{ route('set.surname') }}" method="POST">
                             @csrf
                             @method('PUT')
 
@@ -127,7 +127,7 @@
 
                         _____________________________________________________________________________
                         <p><b>Gender:</b> {{ $profile->gender }}</p>
-                        <form action="/set/gender" method="POST">
+                        <form action="{{ route('set.gender') }}" method="POST">
                             @csrf
                             @method('PUT')
 
@@ -141,7 +141,7 @@
 
                         _____________________________________________________________________________
                         <p><b>Sexual preferences:</b> {{ $profile->preferences }}</p>
-                        <form action="/set/preferences" method="POST">
+                        <form action="{{ route('set.preferences') }}" method="POST">
                             @csrf
                             @method('PUT')
 
@@ -155,7 +155,7 @@
                         </form>
                         __________________________________________________________________________
                         <p><b>Age:</b> {{ $profile->age }}</p>
-                        <form action="/set/age" method="POST">
+                        <form action="{{ route('set.age') }}" method="POST">
                             @csrf
                             @method('PUT')
 
@@ -164,14 +164,14 @@
                         </form>
                         _____________________________________________________________________________
                         <p><b>Bio:</b> {{ $profile->bio }}</p>
-                        <form action="/set/bio" method="POST">
+                        <form action="/{{ route('set.bio') }}" method="POST">
                             @csrf
                             @method('PUT')
 
                             <textarea name="bio" placeholder="up to 500 symbols"></textarea>
                             <button type="submit">change bio</button>
                         </form>
-                        <form action="/delete/bio" method="POST">
+                        <form action="{{ route('delete.bio') }}" method="POST">
                             @csrf
                             @method('DELETE')
 
@@ -182,7 +182,7 @@
                         <p><b>Interests:</b></p>
                             @foreach($profile->interests as $interest)
                                 {{ $interest->tag }}
-                                    <form action="/delete/tag/{{ $interest->tag }}" method="POST">
+                                    <form action="{{ route('delete.tag', $interest->tag) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
 
@@ -190,21 +190,26 @@
                                     </form>
                             @endforeach
                         <br>
-                        <form action="/set/tag" method="POST">
+                        <form action="{{ route('set.tag') }}" method="POST">
                             @csrf
                             @method('PUT')
 
                             <input type="text" name="tag">
                             <button type="submit">add interest</button>
                         </form>
-                        _____________________________________________________________________________
+                        <form action="{{ route('find.tag.matches') }}" method="POST">
+                            @csrf
+
+                            <input type="text" name="piece">
+                            <button type="submit">find matches</button>
+                        </form>
                         _____________________________________________________________________________
                         <p><b>Email:</b> {{ $profile->email }}</p>
                         <p><b>Allow location:</b> {{ $profile->allow }}</p>
                         <p><b>Location:</b> {{ $profile->country }}, {{ $profile->city }}</p>
                         _____________________________________________________________________________
                         <p><b>Change login</b></p>
-                        <form action="/change/login" method="POST">
+                        <form action="{{ route('change.login') }}" method="POST">
                             @csrf
 
                             New login:
@@ -213,7 +218,7 @@
                         </form>
                         _____________________________________________________________________________
                         <p><b>Change email</b></p>
-                        <form action="/change/email" method="POST">
+                        <form action="{{ route('change.email') }}" method="POST">
                             @csrf
 
                             New email:
@@ -224,7 +229,7 @@
                         </form>
                         _____________________________________________________________________________
                         <p><b>Change password</b></p>
-                        <form action="/change/password" method="POST">
+                        <form action="{{ route('change.password') }}" method="POST">
                             @csrf
 
                             Current password:

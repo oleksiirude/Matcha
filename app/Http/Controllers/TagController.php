@@ -34,7 +34,7 @@
             if (!preg_match('/^[a-z0-9]{2,20}$/', $tag))
                 return response()->json([
                     'result' => false,
-                    'error' => 'Invalid tag'
+                    'error' => 'Invalid input'
                 ]);
             
             $this->saveInTagsTable($tag);
@@ -53,8 +53,8 @@
         }
         
         protected function saveInTagsTable($tag) {
-            if (!$this->model_tag->where('tags', $tag)->first()) {
-                $this->model_tag->tags = $tag;
+            if (!$this->model_tag->where('tag', $tag)->first()) {
+                $this->model_tag->tag = $tag;
                 $this->model_tag->save();
             }
         }
@@ -89,7 +89,7 @@
             
             if ($result) {
                 if (!$this->model_interest->where('tag', $tag)->first()) {
-                    $this->model_tag->where('tags', $tag)->delete();
+                    $this->model_tag->where('tag', $tag)->delete();
                 }
                 
                 $this->decreaseRating();
@@ -108,5 +108,33 @@
                     ->get()) < 20) {
                 $this->model_profile->decrement('rating', 0.1);
             }
+        }
+        
+        // FINDING MATCHING TAGS
+        
+        public function findTagMatches(Request $request) {
+            $piece = strtolower($request->get('piece'));
+    
+            if (!preg_match('/^[a-z0-9]{2,20}$/', $piece))
+                return response()->json([
+                    'result' => false,
+                    'error' => 'Invalid input'
+                ]);
+            
+            $result = $this->model_tag->where('tag', 'LIKE', '%'.$piece.'%')->get();
+            
+            if ($result) {
+                foreach ($result as $item)
+                    $data[] = $item->tag;
+                
+                return response()->json([
+                    'result' => true,
+                    'matches' => $data
+                ]);
+            }
+    
+            return response()->json([
+                'result' => false
+            ]);
         }
     }

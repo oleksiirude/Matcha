@@ -313,40 +313,40 @@
 	define('LOCATIONS', $locations);
 
 	$tags = array(
-		'tags' => "
-				INSERT INTO tags(tags) VALUES ('football');
-				INSERT INTO tags(tags) VALUES ('sport');
-				INSERT INTO tags(tags) VALUES ('crossfit');
-				INSERT INTO tags(tags) VALUES ('photo');
-				INSERT INTO tags(tags) VALUES ('nature');
-				INSERT INTO tags(tags) VALUES ('backpacking');
-				INSERT INTO tags(tags) VALUES ('singing');
-				INSERT INTO tags(tags) VALUES ('politics');
-				INSERT INTO tags(tags) VALUES ('beer');
-				INSERT INTO tags(tags) VALUES ('pub');
-				INSERT INTO tags(tags) VALUES ('vodka');
-				INSERT INTO tags(tags) VALUES ('fun');
-				INSERT INTO tags(tags) VALUES ('painting');
-				INSERT INTO tags(tags) VALUES ('architecture');
-				INSERT INTO tags(tags) VALUES ('literature');
-				INSERT INTO tags(tags) VALUES ('poems');
-				INSERT INTO tags(tags) VALUES ('theatre');
-				INSERT INTO tags(tags) VALUES ('parties');
-				INSERT INTO tags(tags) VALUES ('techno');
-				INSERT INTO tags(tags) VALUES ('drugs');
-				INSERT INTO tags(tags) VALUES ('rave');
-				INSERT INTO tags(tags) VALUES ('music');
-				INSERT INTO tags(tags) VALUES ('love');
-				INSERT INTO tags(tags) VALUES ('basketball');
-				INSERT INTO tags(tags) VALUES ('fitness');
-				INSERT INTO tags(tags) VALUES ('gym');
-				INSERT INTO tags(tags) VALUES ('finance');
-				INSERT INTO tags(tags) VALUES ('sex');
-				INSERT INTO tags(tags) VALUES ('pizza');
-				INSERT INTO tags(tags) VALUES ('ufc');
-				INSERT INTO tags(tags) VALUES ('muscles');
-				INSERT INTO tags(tags) VALUES ('food');
-				INSERT INTO tags(tags) VALUES ('children');"
+		'tag' => "
+				INSERT INTO tags(tag) VALUES ('football');
+				INSERT INTO tags(tag) VALUES ('sport');
+				INSERT INTO tags(tag) VALUES ('crossfit');
+				INSERT INTO tags(tag) VALUES ('photo');
+				INSERT INTO tags(tag) VALUES ('nature');
+				INSERT INTO tags(tag) VALUES ('backpacking');
+				INSERT INTO tags(tag) VALUES ('singing');
+				INSERT INTO tags(tag) VALUES ('politics');
+				INSERT INTO tags(tag) VALUES ('beer');
+				INSERT INTO tags(tag) VALUES ('pub');
+				INSERT INTO tags(tag) VALUES ('vodka');
+				INSERT INTO tags(tag) VALUES ('fun');
+				INSERT INTO tags(tag) VALUES ('painting');
+				INSERT INTO tags(tag) VALUES ('architecture');
+				INSERT INTO tags(tag) VALUES ('literature');
+				INSERT INTO tags(tag) VALUES ('poems');
+				INSERT INTO tags(tag) VALUES ('theatre');
+				INSERT INTO tags(tag) VALUES ('parties');
+				INSERT INTO tags(tag) VALUES ('techno');
+				INSERT INTO tags(tag) VALUES ('drugs');
+				INSERT INTO tags(tag) VALUES ('rave');
+				INSERT INTO tags(tag) VALUES ('music');
+				INSERT INTO tags(tag) VALUES ('love');
+				INSERT INTO tags(tag) VALUES ('basketball');
+				INSERT INTO tags(tag) VALUES ('fitness');
+				INSERT INTO tags(tag) VALUES ('gym');
+				INSERT INTO tags(tag) VALUES ('finance');
+				INSERT INTO tags(tag) VALUES ('sex');
+				INSERT INTO tags(tag) VALUES ('pizza');
+				INSERT INTO tags(tag) VALUES ('ufc');
+				INSERT INTO tags(tag) VALUES ('muscles');
+				INSERT INTO tags(tag) VALUES ('food');
+				INSERT INTO tags(tag) VALUES ('children');"
 	);
 
 	define('TAGS', $tags);
