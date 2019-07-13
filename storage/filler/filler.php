@@ -9,11 +9,11 @@
 	$connection = new PDO(DSN, USERNAME, PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 	
 	$connection->query("
-		DELETE FROM users; 
-		DELETE FROM profiles; 
-		DELETE FROM tags; 
-		DELETE FROM interests; 
-		DELETE FROM locations;
+		TRUNCATE TABLE users; 
+		TRUNCATE TABLE profiles; 
+		TRUNCATE TABLE tags; 
+		TRUNCATE TABLE interests; 
+		TRUNCATE TABLE locations;
 	");
 
 	foreach (USERS as $title => $table)
