@@ -7,7 +7,8 @@
                 <div class="card">
                     <p>List of all users</p>
                     @foreach($users as $user)
-                        <p>{{ $user->login }} | {{ $user->email }} |
+                        <p><a style="color: cornflowerblue" href="{{ route('show.certain.user', $user->login) }}">
+                                {{ $user->login }}</a> >
                         @if($user->isOnline())
                                 <b style="color: #1c7430">online</b>
                         @else

@@ -111,7 +111,6 @@
         }
         
         // FINDING MATCHING TAGS
-        
         public function findTagMatches(Request $request) {
             $piece = strtolower($request->get('piece'));
     
@@ -123,7 +122,7 @@
             
             $result = $this->model_tag->where('tag', 'LIKE', '%'.$piece.'%')->get();
             
-            if ($result) {
+            if (count($result)) {
                 foreach ($result as $item)
                     $data[] = $item->tag;
                 

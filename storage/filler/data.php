@@ -231,7 +231,7 @@
 		'locations' => "
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
         		VALUES ('1', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-                		'50.4659968', '30.417715200000004', '1');
+                		'50.4659968', '30.417715200000004', '0');
 
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('2', 'Canada', 'MB', 'Winnipeg', 'VW29+4C',

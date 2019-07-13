@@ -5,11 +5,12 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ $profile->login . "'s" }} profile</div>
+                    <div class="card-header">My profile</div>
 
                     <div class="card-body">
 
-                        <p><a href="/users">list of users</a></p>
+                        <p><a href="{{ route('show.all.users') }}">list of all users</a></p>
+
                         <p><b>Rating:</b> {{ $profile->rating }}</p>
                         <b>new avatar</b>
                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.avatar') }}">
@@ -61,7 +62,7 @@
 
                         <br>
                         <p>Avatar: {{ $profile->avatar }}</p>
-                        <img src="{{ $profile->avatar }}" alt="avatar" style="width: 200px">
+                        <img src="{{ URL::asset($profile->avatar) }}" alt="avatar" style="width: 200px">
                         <form action="{{ route('delete.avatar') }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -71,7 +72,7 @@
 
 
                         <p>Photo 1: {{ $profile->photo1 }}</p>
-                        <img src="{{ $profile->photo1 }}" alt="photo1 -> null" style="width: 200px">
+                        <img src="{{ URL::asset($profile->photo1) }}" alt="photo1 -> null" style="width: 200px">
                         <form action="{{ route('delete.photo', '1') }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -80,7 +81,7 @@
                         </form>
 
                         <p>Photo 2: {{ $profile->photo2 }}</p>
-                        <img src="{{ $profile->photo2 }}" alt="photo2 -> null" style="width: 200px">
+                        <img src="{{ URL::asset($profile->photo2) }}" alt="photo2 -> null" style="width: 200px">
                         <form action="{{ route('delete.photo', '2') }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -89,7 +90,7 @@
                         </form>
 
                         <p>Photo 3: {{ $profile->photo3 }}</p>
-                        <img src="{{ $profile->photo3 }}" alt="photo3 -> null" style="width: 200px">
+                        <img src="{{ URL::asset($profile->photo3) }}" alt="photo3 -> null" style="width: 200px">
                         <form action="{{ route('delete.photo', '3') }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -98,7 +99,7 @@
                         </form>
 
                         <p>Photo 4: {{ $profile->photo4 }}</p>
-                        <img src="{{ $profile->photo4 }}" alt="photo4 -> null" style="width: 200px">
+                        <img src="{{ URL::asset($profile->photo4) }}" alt="photo4 -> null" style="width: 200px">
                         <form action="{{ route('delete.photo', '4') }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -205,8 +206,10 @@
                         </form>
                         _____________________________________________________________________________
                         <p><b>Email:</b> {{ $profile->email }}</p>
-                        <p><b>Allow location:</b> {{ $profile->allow }}</p>
-                        <p><b>Location:</b> {{ $profile->country }}, {{ $profile->city }}</p>
+
+                        @if ($profile->allow)
+                            <p><b>Location:</b> {{ $profile->country }}, {{ $profile->city }}</p>
+                        @endif
                         _____________________________________________________________________________
                         <p><b>Change login</b></p>
                         <form action="{{ route('change.login') }}" method="POST">

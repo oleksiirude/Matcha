@@ -52,7 +52,10 @@
         Route::post('/tag/matches', 'TagController@findTagMatches')->name('find.tag.matches');
     });
     
-    Route::get('/users', 'UsersController@show')->name('users');
+    Route::group(['prefix' => '/users', 'middleware' => 'verified'], function () {
+        Route::get('/', 'UsersController@show')->name('show.all.users');
+        Route::get('/{login}', 'UsersController@showUser')->name('show.certain.user');
+    });
     
     Route::get('/result', function () {
         return view('auth/successlink');
