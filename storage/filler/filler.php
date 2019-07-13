@@ -1,0 +1,36 @@
+<?php
+	
+	require_once('data.php');
+
+	define('DSN', 'mysql:host=127.0.0.1;dbname=matcha;port=3306;charset=utf8mb4');
+	define('USERNAME', 'root');
+	define('PASSWORD', 'password');
+
+	$connection = new PDO(DSN, USERNAME, PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+	
+	$connection->query("
+		DELETE FROM users; 
+		DELETE FROM profiles; 
+		DELETE FROM tags; 
+		DELETE FROM interests; 
+		DELETE FROM locations;
+	");
+
+	foreach (USERS as $title => $table)
+		$connection->query($table);
+	foreach (PROFILES as $table => $query)
+		$connection->query($query);
+	foreach (INTERESTS as $table => $query)
+		$connection->query($query);
+	foreach (TAGS as $table => $query)
+		$connection->query($query);
+	foreach (LOCATIONS as $table => $query)
+		$connection->query($query);
+
+
+	$path = str_replace('storage/filler', 'public/images', dirname(__FILE__));
+
+	exec('rm -R ' . $path . '/profiles');
+
+	exec("cp -R profiles $path");
+

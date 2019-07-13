@@ -29,7 +29,7 @@
         
         // TAG CREATING
         public function setTag(Request $request) {
-            $tag = $request->get('tag');
+            $tag = strtolower($request->get('tag'));
     
             if (!preg_match('/^[a-z0-9]{2,20}$/', $tag))
                 return response()->json([
@@ -42,7 +42,7 @@
             if ($this->saveInInterestsTable($tag) === false)
                 return response()->json([
                     'result' => false,
-                    'error' => 'You already have this tag'
+                    'error' => 'You already have this interest'
                 ]);
             
             $this->increaseRating();

@@ -201,9 +201,11 @@
     
             for ($i = 1; $i < 5; $i++) {
                 $photo = 'photo' . $i;
-                $this->model_profile->$photo = str_replace($this->model_user->login,
-                                                            $new_login,
-                                                            $this->model_profile->$photo);
+                if ($this->model_profile->$photo) {
+                    $this->model_profile->$photo = str_replace($this->model_user->login,
+                                                                $new_login,
+                                                                $this->model_profile->$photo);
+                }
             }
             $this->model_profile->avatar = str_replace($this->model_user->login,
                                                         $new_login,
