@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
+@push('scripts')
+    <script src="{{ asset('js/profile/profile.js')}}" defer></script>
+{{--    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>--}}
+@endpush
+
 @section('content')
-    <div class="container" id="main_container">
+    <div class="profile_container" id="main_container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -11,12 +16,28 @@
                         <b>new avatar</b>
                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.avatar') }}">
                             @csrf
-
-                            <input type="file" accept=".jpg, .jpeg" name="avatar"><br>
-                            <button type="submit">upload</button>
                         </form>
 
-                        <br>
+                        <div class="card_profile">
+                            <h1>My profile</h1>
+
+                            <div class="card-body">
+                                <div id="div_useravatar">
+                                    <img src="{{ URL::asset($profile->avatar) }}" alt="avatar" style="width: 200px" id="avatar" title='download avatar' onclick="choose_file()">
+                                    <form enctype="multipart/form-data" method="POST" action="/upload/avatar" id="useravatar_form">
+                                        @csrf
+                                        <avatar-component></avatar-component>
+                                    </form>
+                                    <form action="/delete/avatar" method="POST" class="profile_delete_form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" id="delete_btn"><img src="{{ asset('images/service/delete.png') }}" title="delete avatar"></button>
+                                    </form>
+                                    <span id="avatar_errormsg"></span>
+                                </div>
+                            </div>
+                        </div>
+
                         <b>new photo 1</b>
                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}">
                             @csrf
@@ -26,7 +47,6 @@
                             <button type="submit">upload</button>
                         </form>
 
-                        <br>
                         <b>new photo 2</b>
                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}">
                             @csrf
@@ -36,7 +56,6 @@
                             <button type="submit">upload</button>
                         </form>
 
-                        <br>
                         <b>new photo 3</b>
                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}">
                             @csrf
@@ -46,7 +65,6 @@
                             <button type="submit">upload</button>
                         </form>
 
-                        <br>
                         <b>new photo 4</b>
                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}">
                             @csrf
@@ -55,17 +73,12 @@
                             <input type="file" accept=".jpg, .jpeg" name="photo"><br>
                             <button type="submit">upload</button>
                         </form>
-
-                        <br>
+                        ________________________________________________________________________________
                         <p>Avatar: {{ $profile->avatar }}</p>
                         <img src="{{ URL::asset($profile->avatar) }}" alt="avatar" style="width: 200px">
                         <form action="{{ route('delete.avatar') }}" method="POST">
                             @csrf
                             @method('DELETE')
-
-                            <button type="submit">delete avatar</button>
-                        </form>
-
 
                         <p>Photo 1: {{ $profile->photo1 }}</p>
                         <img src="{{ URL::asset($profile->photo1) }}" alt="photo1 -> null" style="width: 200px">
@@ -241,7 +254,6 @@
                         </form>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 @endsection

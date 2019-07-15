@@ -17,6 +17,11 @@ class CreateVisitsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('watcher');
             $table->bigInteger('viewed');
+<<<<<<< HEAD
+=======
+            $table->boolean('deleted_by_watcher')->default(false);
+            $table->boolean('deleted_by_viewed')->default(false);
+>>>>>>> master
             $table->timestamp('date');
         });
     }

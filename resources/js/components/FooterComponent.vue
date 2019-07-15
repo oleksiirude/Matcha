@@ -1,8 +1,8 @@
 <template>
     <footer>
-    <p class="copyright">
-        &copy; created by olrudenk & dpiven, 2019
-    </p>
+        <p class="copyright">
+            &copy; created by olrudenk & dpiven, 2019
+        </p>
     </footer>
 </template>
 

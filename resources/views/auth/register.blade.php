@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @push('scripts')
     <script src="{{ asset('js/register/confirm_password.js')}}" defer></script>
     <script src="{{ asset('js/register/location.js')}}" defer></script>
@@ -14,7 +13,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" id="register_form">
                         @csrf
 
                         <div class="form-group row">

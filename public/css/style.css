@@ -12,7 +12,7 @@
 
 body {
     color: rgba(68, 79, 87, 0.8);
-    background-color: #f8fafc;
+    background-color: white;
 }
 
 
@@ -69,6 +69,12 @@ p {
 }
 
 /*main*/
+.py-4 {
+
+}
+.card {
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
 .container {
     width: 100%;
     padding-right: 15px;
@@ -165,6 +171,7 @@ footer {
     background: var(--main-color-ob1);
     background: var(--main-color);
     border: none;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 
 .btn-primary.disabled {
@@ -198,8 +205,60 @@ a:hover {
     color: #D76D77;
 }
 
+ /*profile*/
+.card_profile {
+    margin: 20px;
+    width: 100%;
+    background-color: white;
+}
 
+#div_useravatar {
+    display: inline-block;
+    max-width: 50%;
+    float: left;
+}
+#delete_btn {
+    border: none;
+    background-color: transparent;
+    z-index: 99;
+    position: relative;
+}
+#delete_btn img {
+    opacity: 0.7;
+}
+#delete_btn img:hover {
+    opacity: 1;
+}
 
+.profile_delete_form {
+    text-align: right;
+    position: relative;
+    width: 100%;
+    top:-30px;
+}
+
+#download_avatar_png {
+    z-index: 99;
+}
+#div_useravatar input[type=file] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    position: absolute;
+    z-index: -10;
+}
+#avatar_label {
+    display: none;
+}
+#avatar {
+    cursor: pointer;
+}
+#avatar:hover {
+    box-shadow: 0 0 5px rgb(74, 50, 60);
+}
+#avatar_errormsg {
+    color: darkred;
+}
 
 
 
