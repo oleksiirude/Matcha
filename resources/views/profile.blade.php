@@ -6,9 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">My profile</div>
-
                     <div class="card-body">
-
                         <p><b>Rating:</b> {{ $profile->rating }}</p>
                         <b>new avatar</b>
                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.avatar') }}">
@@ -163,7 +161,7 @@
                         </form>
                         _____________________________________________________________________________
                         <p><b>Bio:</b> {{ $profile->bio }}</p>
-                        <form action="/{{ route('set.bio') }}" method="POST">
+                        <form action="{{ route('set.bio') }}" method="POST">
                             @csrf
                             @method('PUT')
 

@@ -18,6 +18,7 @@
     
     Route::group(['prefix' => '/profile', 'middleware' => 'verified'], function () {
         Route::get('/', 'HomeController@show')->name('profile');
+        Route::get('/viewed/profiles', 'HomeController@showViewedProfiles')->name('viewed.profiles');
     });
     
     Route::group(['prefix' => '/upload', 'middleware' => 'verified'], function () {

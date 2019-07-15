@@ -15,6 +15,7 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->bigInteger('user_id');
+            $table->string('login');
             $table->string('name');
             $table->string('surname');
             $table->string('age', 3)->nullable();
@@ -26,7 +27,7 @@ class CreateProfilesTable extends Migration
             $table->string('photo2')->nullable();
             $table->string('photo3')->nullable();
             $table->string('photo4')->nullable();
-            $table->double('rating', 100, 1)->default(0.4);
+            $table->double('rating', 110, 1)->default(0.4);
         });
     }
     
