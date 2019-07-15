@@ -6,12 +6,12 @@
     use App\Profile;
     use App\User;
     use App\Location;
+    use App\Visit;
     use Carbon\Carbon;
 
     class UsersController extends Controller {
     
         public function show() {
-        
             $users = User::select()->get();
         
             foreach ($users as $user) {
@@ -35,11 +35,13 @@
             
             if ($login === auth()->user()->login)
                 return redirect('profile');
-        
+
+            $this->addDataToVisitsTable($user->id, auth()->user()->id);
+
             $profile = Profile::find($user->id);
             $location = Location::find($user->id);
             $interests = Interest::where('user_id', $user->id)->get();
-        
+
             $profile['login'] = $user->login;
             $profile['country'] = $location->country;
             $profile['allow'] = $location->allow;
@@ -49,7 +51,16 @@
         
             return view('user', ['profile' => $profile]);
         }
-        
+
+        protected function increaseRating($id) {
+            $profile = Profile::find($id);
+            if ($profile->rating < 100) {
+                $profile->increment('rating', 0.1);
+                if ($profile->rating >= 100)
+                    $profile->rating = 100;
+            }
+        }
+
         protected function checkLastActivity(User $user) {
             if (!$user->isOnline()) {
                 $now = Carbon::now();
@@ -61,8 +72,7 @@
             return 'online';
         }
     
-        public function getFineActivityView($diff, $last, $time) {
-        
+        public static function getFineActivityView($diff, $last, $time) {
             switch ($diff) {
                 case $diff === 1:
                     return 'a few seconds ago';
@@ -78,5 +88,25 @@
                     return (int)($diff / 60) . ' hours ago';
             }
             return $last->toFormattedDateString() . ' at ' . $time;
+        }
+
+        protected function addDataToVisitsTable($viewed, $watcher) {
+            $visits = Visit::where([
+                'viewed' => $viewed,
+                'watcher' => $watcher
+            ])->first();
+
+            if (!$visits) {
+                $this->increaseRating($viewed);
+
+                $visits = new Visit();
+                $visits->viewed = $viewed;
+                $visits->watcher = $watcher;
+                $visits->date = Carbon::now();
+                $visits->save();
+            } else {
+                $visits->date = Carbon::now();
+                $visits->save();
+            }
         }
     }

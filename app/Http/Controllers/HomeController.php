@@ -6,7 +6,9 @@
     use App\Profile;
     use App\User;
     use App\Location;
+    use App\Visit;
     use Auth;
+    use Carbon\Carbon;
     use Illuminate\Http\Request;
     
     class HomeController extends Controller {
@@ -18,7 +20,6 @@
             $this->middleware(function ($request, $next) {
                 $this->model_profile = Profile::find(Auth::id());
                 $this->model_user = User::find(Auth::id());
-                
                 return $next($request);
             });
         }
@@ -81,7 +82,7 @@
         public function setBio(Request $request) {
             $bio = htmlentities($request->get('bio'));
             
-            if (!$bio)
+            if (!$bio || strlen($bio) > 500)
                 return response()->json([
                     'result' => false,
                     'error' => 'Invalid input']);
@@ -93,9 +94,12 @@
             ]);
             
             if ($rating === true && $bio)
-                $this->model_profile->increment('rating', 0.5);
+                $this->increaseRating();
         
-            return response()->json(['result' => true]);
+            return response()->json([
+                'result' => true,
+                'rating' => round($this->model_profile->rating, 1)
+            ]);
         }
         
         public function deleteBio(){
@@ -107,8 +111,11 @@
             $this->model_profile->bio = "";
             $this->model_profile->save();
             $this->model_profile->decrement('rating', 0.5);
-    
-            return response()->json(['result' => true]);
+
+            return response()->json([
+                'result' => true,
+                'rating' => round($this->model_profile->rating, 1)
+            ]);
         }
         
         public function setGender(Request $request) {
@@ -124,9 +131,12 @@
             ]);
         
             if ($rating === true)
-                $this->model_profile->increment('rating', 0.5);
-            
-            return response()->json(['result' => true]);
+                $this->increaseRating();
+
+            return response()->json([
+                'result' => true,
+                'rating' => round($this->model_profile->rating, 1)
+            ]);
         }
         
         public function setAge(Request $request) {
@@ -149,9 +159,12 @@
             ]);
         
             if ($rating === true)
-                $this->model_profile->increment('rating', 0.5);
-            
-            return response()->json(['result' => true]);
+                $this->increaseRating();
+
+            return response()->json([
+                'result' => true,
+                'rating' => round($this->model_profile->rating, 1)
+            ]);
         }
         
         public function setPreferences(Request $request) {
@@ -167,9 +180,12 @@
             ]);
         
             if ($rating === true)
-                $this->model_profile->increment('rating', 0.5);
-        
-            return response()->json(['result' => true]);
+                $this->increaseRating();
+
+            return response()->json([
+                'result' => true,
+                'rating' => round($this->model_profile->rating, 1)
+            ]);
         }
         
         public function changeLogin(Request $request) {
@@ -186,10 +202,8 @@
                     'error' => 'This login is already taken']);
             
             $this->renameAllStuff($new_login);
-            
-            $this->model_user->update([
-                'login' => $new_login
-            ]);
+            $this->model_user->update(['login' => $new_login]);
+            $this->model_profile->update(['login' => $new_login]);
             
             return response()->json(['result' => true]);
         }
@@ -264,5 +278,46 @@
             ]);
             
             return response()->json(['result' => true]);
+        }
+
+        protected function increaseRating() {
+            if ($this->model_profile->rating < 100) {
+                $this->model_profile->increment('rating', 0.5);
+                if ($this->model_profile->rating >= 100)
+                    $this->model_profile->rating = 100;
+            }
+        }
+
+        public function showViewedProfiles() {
+            $profiles = Visit::where('watcher', Auth::id())
+                                ->orderBy('date', 'desc')
+                                ->get();
+
+            $now = Carbon::now();
+            foreach ($profiles as $profile) {
+                $profile->user = Profile::find($profile->viewed);
+
+                $visited = Carbon::parse($profile->date);
+                $diff = $now->diffInMinutes($visited, true);
+                $time = substr(explode(' ', $profile->date)[1], 0, 5);
+                $profile->date = UsersController::getFineActivityView($diff, $visited, $time);
+
+                $status = User::find($profile->viewed);
+                $profile->user->status = $this->checkLastActivity($status, $now);
+
+                $profile->location = Location::find($profile->viewed);
+            }
+
+            return view('viewed-profiles', ['profiles' => $profiles]);
+        }
+
+        protected function checkLastActivity(User $user, $now) {
+            if (!$user->isOnline()) {
+                $last = Carbon::parse($user->last_activity);
+                $diff = $now->diffInMinutes($last, true);
+                $time = substr(explode(' ', $user->last_activity)[1], 0, 5);
+                return 'last seen ' . UsersController::getFineActivityView($diff, $last, $time);
+            }
+            return 'online';
         }
     }

@@ -13,6 +13,7 @@
          */
         protected $fillable = [
             'user_id',
+            'login',
             'name',
             'surname',
             'age',

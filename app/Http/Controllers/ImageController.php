@@ -41,7 +41,8 @@
             
             return response()->json([
                 'result' => true,
-                'path' => $path
+                'path' => $path,
+                'rating' => round($this->model_profile->rating, 1)
             ]);
         }
         
@@ -71,11 +72,12 @@
             
             return response()->json([
                 'result' => true,
-                'path' => str_replace(public_path() . '/','', $savePath)
+                'path' => str_replace(public_path() . '/','', $savePath),
+                'rating' => round($this->model_profile->rating, 1)
             ]);
         }
         
-        private function validator(Request $request, $name) {
+        protected function validator(Request $request, $name) {
             $pic = $request->file($name);
             
             if (!$pic)
@@ -91,16 +93,16 @@
             return true;
         }
         
-        private function insertAvatarToDB($path) {
-            $this->model_profile->increment('rating', 0.5);
+        protected function insertAvatarToDB($path) {
+            $this->increaseRating();
     
             $this->model_profile->update([
                'avatar' => $path
             ]);
         }
         
-        private function insertPhotoToDB($path, $number) {
-            $this->model_profile->increment('rating', 0.5);
+        protected function insertPhotoToDB($path, $number) {
+            $this->increaseRating();
     
             $this->model_profile->update([
                 'photo' . $number => $path
@@ -119,7 +121,10 @@
                 'avatar' => 'images/service/default_avatar.png'
             ]);
         
-            return response()->json(['result' => true]);
+            return response()->json([
+                'result' => true,
+                'rating' => round($this->model_profile->rating, 1)
+            ]);
         }
     
         public function deletePhoto($number) {
@@ -139,6 +144,17 @@
                 $photo => null
             ]);
 
-            return response()->json(['result' => true]);
+            return response()->json([
+                'result' => true,
+                'rating' => round($this->model_profile->rating, 1)
+            ]);
+        }
+
+        protected function increaseRating() {
+            if ($this->model_profile->rating < 100) {
+                $this->model_profile->increment('rating', 0.5);
+                if ($this->model_profile->rating >= 100)
+                    $this->model_profile->rating = 100;
+            }
         }
     }

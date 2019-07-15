@@ -61,6 +61,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    {{--My profile--}}
                                     <a class="dropdown-item" href="{{ route('profile') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('profile-form').submit();">
@@ -70,6 +71,30 @@
                                     <form id="profile-form" action="{{ route('profile') }}" method="GET" style="display: none;">
                                         @csrf
                                     </form>
+
+                                    {{--Show all users--}}
+                                    <a class="dropdown-item" href="{{ route('show.all.users') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('show-all-users-form').submit();">
+                                        {{ __('Show all users') }}
+                                    </a>
+
+                                    <form id="show-all-users-form" action="{{ route('show.all.users') }}" method="GET" style="display: none;">
+                                        @csrf
+                                    </form>
+
+                                    {{--Viewed profiles--}}
+                                    <a class="dropdown-item" href="{{ route('viewed.profiles') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('viewed-profiles-form').submit();">
+                                        {{ __('Viewed profiles') }}
+                                    </a>
+
+                                    <form id="viewed-profiles-form" action="{{ route('viewed.profiles') }}" method="GET" style="display: none;">
+                                        @csrf
+                                    </form>
+
+                                    {{--Logout--}}
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

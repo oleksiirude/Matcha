@@ -90,139 +90,139 @@
 
 	$profiles = array(
 		'profiles' => "
-		INSERT INTO profiles(user_id, name, surname, age, gender, preferences, bio,
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
                     avatar, photo1, photo2, photo3, rating)
-		        VALUES ('1', 'Max', 'Chumko', '24', 'male', 'heterosexual', 'My name is Max',
+		        VALUES ('1', 'maximus', 'Max', 'Chumko', '24', 'male', 'heterosexual', 'My name is Max',
 		                'images/profiles/maximus/avatar.jpg',
 		                'images/profiles/maximus/photo1.jpg',
 		                'images/profiles/maximus/photo2.jpg',
 		                'images/profiles/maximus/photo3.jpg', '5.4');
 
-		INSERT INTO profiles(user_id, name, surname, age, gender, preferences, bio,
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, photo1, photo2, photo3, photo4, rating)
-		        VALUES ('2', 'Crag', 'Filler', '34', 'male', 'heterosexual', 'My name is Greg',
+		        VALUES ('2', 'dobby', 'Crag', 'Filler', '34', 'male', 'heterosexual', 'My name is Greg',
 		                'images/profiles/dobby/avatar.jpg',
 		                'images/profiles/dobby/photo1.jpg',
 		                'images/profiles/dobby/photo2.jpg',
 		                'images/profiles/dobby/photo3.jpg',
 		                'images/profiles/dobby/photo4.jpg', '5.9');
 
-		INSERT INTO profiles(user_id, name, surname, age, gender, preferences, bio,
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, photo1, rating)
-		        VALUES ('3', 'Bobby', 'Fellan', '51', 'male', 'heterosexual', 'My name is Bobby-BIGBOY',
+		        VALUES ('3', 'bigboy', 'Bobby', 'Fellan', '51', 'male', 'heterosexual', 'My name is Bobby-BIGBOY',
 		                'images/profiles/bigboy/avatar.jpg',
 		                'images/profiles/bigboy/photo1.jpg', '4.4');
 
-		INSERT INTO profiles(user_id, name, surname, age, gender, preferences, bio,
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, photo1, photo2, rating)
-		        VALUES ('4', 'Danny', 'Milko', '43', 'male', 'heterosexual', 'My name is Danny',
+		        VALUES ('4', 'captain', 'Danny', 'Milko', '43', 'male', 'heterosexual', 'My name is Danny',
 		                'images/profiles/captain/avatar.jpg',
 		                'images/profiles/captain/photo1.jpg',
 		                'images/profiles/captain/photo2.jpg', '4.9');
 
-		INSERT INTO profiles(user_id, name, surname, age, gender, preferences, bio,
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, rating)
-		        VALUES ('5', 'John', 'Alvadaroz', '19', 'male', 'homosexual', 'My name is John and I am gay',
+		        VALUES ('5', 'serious', 'John', 'Alvadaroz', '19', 'male', 'homosexual', 'My name is John and I am gay',
 		                'images/profiles/serious/avatar.jpg', '3.9');
 
-		INSERT INTO profiles(user_id, name, surname, age, gender, preferences, bio,
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, photo1, photo2, rating)
-		        VALUES ('6', 'Rob', 'Staniel', '29', 'male', 'bisexual', 'I love any person, if you know what I mean',
+		        VALUES ('6', 'massive', 'Rob', 'Staniel', '29', 'male', 'bisexual', 'I love any person, if you know what I mean',
 		                'images/profiles/massive/avatar.jpg',
 		                'images/profiles/massive/photo1.jpg',
 		                'images/profiles/massive/photo2.jpg', '4.9');
 
-		INSERT INTO profiles(user_id, name, surname, age, gender, preferences, bio,
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, photo1, photo2, photo3, rating)
-		        VALUES ('7', 'Daniel', 'Pitter', '31', 'male', 'heterosexual', 'My name is Daniel',
+		        VALUES ('7', 'johnny', 'Daniel', 'Pitter', '31', 'male', 'heterosexual', 'My name is Daniel',
 		                'images/profiles/johnny/avatar.jpg',
 		                'images/profiles/johnny/photo1.jpg',
 		                'images/profiles/johnny/photo2.jpg',
 		                'images/profiles/johnny/photo3.jpg', '5.4');
 
-		INSERT INTO profiles(user_id, name, surname, age, gender, preferences, bio,
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, photo1, photo2, photo3, photo4, rating)
-		        VALUES ('8', 'Pippo', 'Enzaghi', '37', 'male', 'heterosexual', 'My name is Pippo, I am from Italy',
+		        VALUES ('8', 'womanizer', 'Pippo', 'Enzaghi', '37', 'male', 'heterosexual', 'My name is Pippo, I am from Italy',
 		                'images/profiles/womanizer/avatar.jpg',
 		                'images/profiles/womanizer/photo1.jpg',
 		                'images/profiles/womanizer/photo2.jpg',
 		                'images/profiles/womanizer/photo3.jpg',
 		                'images/profiles/womanizer/photo4.jpg', '5.9');
 
-		INSERT INTO profiles(user_id, name, surname, age, gender, preferences, bio,
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, photo1, photo2, rating)
-		        VALUES ('9', 'Fedor', 'Emalnyanenko', '42', 'male', 'heterosexual', 'I am a sexy beast!',
+		        VALUES ('9', 'beast', 'Fedor', 'Emalnyanenko', '42', 'male', 'heterosexual', 'I am a sexy beast!',
 		                'images/profiles/beast/avatar.jpg',
 		                'images/profiles/beast/photo1.jpg',
 		                'images/profiles/beast/photo2.jpg', '4.9');
 
-		INSERT INTO profiles(user_id, name, surname, age, gender, preferences, bio,
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, rating)
-		        VALUES ('10', 'Sancho', 'Gonzalez', '27', 'male', 'heterosexual', 'Hello, like me!',
+		        VALUES ('10', 'cooler', 'Sancho', 'Gonzalez', '27', 'male', 'heterosexual', 'Hello, like me!',
 		                'images/profiles/cooler/avatar.jpg', '3.9');
 
-		INSERT INTO profiles(user_id, name, surname, age, gender, preferences, bio,
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, photo1, photo2, rating)
-		        VALUES ('11', 'Alexandra', 'Cherry', '25', 'female', 'heterosexual', 'My name is Cherry',
+		        VALUES ('11', 'cherry', 'Alexandra', 'Cherry', '25', 'female', 'heterosexual', 'My name is Cherry',
 		                'images/profiles/cherry/avatar.jpg',
 		                'images/profiles/cherry/photo1.jpg',
 		                'images/profiles/cherry/photo2.jpg', '4.9');
 
-		INSERT INTO profiles(user_id, name, surname, age, gender, preferences, bio,
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, photo1, rating)
-		        VALUES ('12', 'Caroline', 'Santiago', '24', 'female', 'heterosexual', 'My name is Caroline',
+		        VALUES ('12', 'caroline', 'Caroline', 'Santiago', '24', 'female', 'heterosexual', 'My name is Caroline',
 		                'images/profiles/caroline/avatar.jpg',
 		                'images/profiles/caroline/photo1.jpg', '4.4');
 
-		INSERT INTO profiles(user_id, name, surname, age, gender, preferences, bio,
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, photo1, rating)
-		        VALUES ('13', 'Lilly', 'Ambrusko', '30', 'female', 'heterosexual', 'My name is Lilly',
+		        VALUES ('13', 'kichi', 'Lilly', 'Ambrusko', '30', 'female', 'heterosexual', 'My name is Lilly',
 		                'images/profiles/kichi/avatar.jpg',
 		                'images/profiles/kichi/photo1.jpg', '4.4');
 
-		INSERT INTO profiles(user_id, name, surname, age, gender, preferences, bio,
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, photo1, photo2, photo3, photo4, rating)
-		        VALUES ('14', 'Annet', 'Silvio', '41', 'female', 'heterosexual', 'My name is Annet',
+		        VALUES ('14', 'pretty', 'Annet', 'Silvio', '41', 'female', 'heterosexual', 'My name is Annet',
 		                'images/profiles/pretty/avatar.jpg',
 		                'images/profiles/pretty/photo1.jpg',
 		                'images/profiles/pretty/photo2.jpg',
 		                'images/profiles/pretty/photo3.jpg',
 		                'images/profiles/pretty/photo4.jpg', '5.9');
 
-		INSERT INTO profiles(user_id, name, surname, age, gender, preferences, bio,
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, photo1, photo2, rating)
-		        VALUES ('15', 'Ella', 'Johnson', '37', 'female', 'heterosexual', 'My name is Ella',
+		        VALUES ('15', 'tiny', 'Ella', 'Johnson', '37', 'female', 'heterosexual', 'My name is Ella',
 		                'images/profiles/tiny/avatar.jpg',
 		                'images/profiles/tiny/photo1.jpg',
 		                'images/profiles/tiny/photo2.jpg', '4.9');
 
-		INSERT INTO profiles(user_id, name, surname, age, gender, preferences, bio,
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, rating)
-		        VALUES ('16', 'Kate', 'Johnson', '35', 'female', 'heterosexual', 'My name is Kate',
+		        VALUES ('16', 'sunny', 'Kate', 'Johnson', '35', 'female', 'heterosexual', 'My name is Kate',
 		                'images/profiles/sunny/avatar.jpg', '3.9');
 
-		INSERT INTO profiles(user_id, name, surname, age, gender, preferences, bio,
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, photo1, photo2, rating)
-		        VALUES ('17', 'Leona', 'Adamson', '44', 'female', 'bisexual', 'My name is Leonnnnnna )))',
+		        VALUES ('17', 'leonna', 'Leona', 'Adamson', '44', 'female', 'bisexual', 'My name is Leonnnnnna )))',
 		                'images/profiles/leonna/avatar.jpg',
 		                'images/profiles/leonna/photo1.jpg',
 		                'images/profiles/leonna/photo2.jpg', '4.9');
 
-		INSERT INTO profiles(user_id, name, surname, age, gender, preferences, bio,
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, photo1, photo2, rating)
-		        VALUES ('18', 'Chiko', 'Illy', '22', 'female', 'homosexual', 'My name is LOVE',
+		        VALUES ('18', 'chika', 'Chiko', 'Illy', '22', 'female', 'homosexual', 'My name is LOVE',
 		                'images/profiles/chika/avatar.jpg',
 		                'images/profiles/chika/photo1.jpg',
 		                'images/profiles/chika/photo2.jpg', '4.9');
 
-		INSERT INTO profiles(user_id, name, surname, age, gender, preferences, bio,
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, photo1, rating)
-		        VALUES ('19', 'Kseniya', 'Adamenko', '30', 'female', 'heterosexual', 'My name is Ksyu',
+		        VALUES ('19', 'love', 'Kseniya', 'Adamenko', '30', 'female', 'heterosexual', 'My name is Ksyu',
 		                'images/profiles/love/avatar.jpg',
 		                'images/profiles/love/photo1.jpg', '4.4');
 
-		INSERT INTO profiles(user_id, name, surname, age, gender, preferences, bio, rating)
-		        VALUES ('20', 'Tanita', 'Kum', '56', 'female', 'heterosexual', 'My name is Tanita', '3.4');"
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio, rating)
+		        VALUES ('20', 'cloudy', 'Tanita', 'Kum', '56', 'female', 'heterosexual', 'My name is Tanita', '3.4');"
 			);
 
 	define('PROFILES', $profiles);

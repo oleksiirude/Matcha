@@ -29,9 +29,9 @@
 
 
 	$path = str_replace('storage/filler', 'public/images', dirname(__FILE__));
-
+	
 	exec('rm -R ' . $path . '/profiles');
-
+	
 	exec("cp -R profiles $path");
 
 	echo "filler: done\n";

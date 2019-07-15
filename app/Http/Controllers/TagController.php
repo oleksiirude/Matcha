@@ -48,7 +48,8 @@
             $this->increaseRating();
             
             return response()->json([
-                'result' => true
+                'result' => true,
+                'rating' => round($this->model_profile->rating, 1)
             ]);
         }
         
@@ -76,7 +77,11 @@
             if (count($this->model_interest->select('tag')
                 ->where('user_id', Auth::id())
                 ->get()) < 21) {
-                $this->model_profile->increment('rating', 0.1);
+                if ($this->model_profile->rating < 100) {
+                    $this->model_profile->increment('rating', 0.1);
+                    if ($this->model_profile->rating >= 100)
+                        $this->model_profile->rating = 100;
+                }
             }
         }
     
@@ -95,7 +100,8 @@
                 $this->decreaseRating();
                 
                 return response()->json([
-                    'result' => true
+                    'result' => true,
+                    'rating' => round($this->model_profile->rating, 1)
                 ]);
             }
             
