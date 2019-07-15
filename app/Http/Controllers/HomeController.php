@@ -6,9 +6,7 @@
     use App\Profile;
     use App\User;
     use App\Location;
-    use App\Visit;
     use Auth;
-    use Carbon\Carbon;
     use Illuminate\Http\Request;
     
     class HomeController extends Controller {
@@ -288,36 +286,5 @@
             }
         }
 
-        public function showViewedProfiles() {
-            $profiles = Visit::where('watcher', Auth::id())
-                                ->orderBy('date', 'desc')
-                                ->get();
 
-            $now = Carbon::now();
-            foreach ($profiles as $profile) {
-                $profile->user = Profile::find($profile->viewed);
-
-                $visited = Carbon::parse($profile->date);
-                $diff = $now->diffInMinutes($visited, true);
-                $time = substr(explode(' ', $profile->date)[1], 0, 5);
-                $profile->date = UsersController::getFineActivityView($diff, $visited, $time);
-
-                $status = User::find($profile->viewed);
-                $profile->user->status = $this->checkLastActivity($status, $now);
-
-                $profile->location = Location::find($profile->viewed);
-            }
-
-            return view('viewed-profiles', ['profiles' => $profiles]);
-        }
-
-        protected function checkLastActivity(User $user, $now) {
-            if (!$user->isOnline()) {
-                $last = Carbon::parse($user->last_activity);
-                $diff = $now->diffInMinutes($last, true);
-                $time = substr(explode(' ', $user->last_activity)[1], 0, 5);
-                return 'last seen ' . UsersController::getFineActivityView($diff, $last, $time);
-            }
-            return 'online';
-        }
     }

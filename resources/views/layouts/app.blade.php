@@ -94,6 +94,17 @@
                                         @csrf
                                     </form>
 
+                                    {{--Viewed my profile--}}
+                                    <a class="dropdown-item" href="{{ route('viewed.my.profile') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('viewed-my-profile-form').submit();">
+                                        {{ __('Viewed my profile') }}
+                                    </a>
+
+                                    <form id="viewed-my-profile-form" action="{{ route('viewed.my.profile') }}" method="GET" style="display: none;">
+                                        @csrf
+                                    </form>
+
                                     {{--Logout--}}
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

@@ -23,7 +23,7 @@
 
                             <div class="card-body">
                                 <div id="div_useravatar">
-                                    <img src="{{ $profile->avatar }}" alt="avatar" style="width: 200px" id="avatar" title='download avatar' onclick="choose_file()">
+                                    <img src="{{ URL::asset($profile->avatar) }}" alt="avatar" style="width: 200px" id="avatar" title='download avatar' onclick="choose_file()">
                                     <form enctype="multipart/form-data" method="POST" action="/upload/avatar" id="useravatar_form">
                                         @csrf
                                         <avatar-component></avatar-component>

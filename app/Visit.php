@@ -12,7 +12,11 @@
          * @var array
          */
         protected $fillable = [
-            'watcher_id', 'viewed_id', 'date'
+            'watcher_id',
+            'viewed_id',
+            'deleted_by_watcher',
+            'deleted_by_viewed',
+            'date'
         ];
 
         protected $primaryKey = 'id';

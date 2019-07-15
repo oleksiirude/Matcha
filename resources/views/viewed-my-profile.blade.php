@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">My viewed profiles</div>
+                    <div class="card-header">Users who viewed my profile</div>
                     <div class="card-body">
                         @if (count($profiles))
                             @foreach($profiles as $profile)
@@ -30,21 +30,19 @@
                                             <span>{{ $profile->user->status }}</span>
                                         @endif
 
-                                        | Visited by you: {{ $profile->date }}
+                                        | Visited your profile: {{ $profile->date }}
 
-                                        <form action="{{ route('delete.viewed.profile', $profile->user->user_id) }}" method="POST">
+                                        <form action="{{ route('delete.viewed.me.profile', $profile->user->user_id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
 
                                             <button type="submit">delete from history</button>
                                         </form>
-
                                     <p></p>
-
                                 </div>
                             @endforeach
                         @else
-                            <p>You haven't viewed any profiles yet</p>
+                            <p>Anyone hasn't viewed your profile yet</p>
                         @endif
                     </div>
                 </div>
