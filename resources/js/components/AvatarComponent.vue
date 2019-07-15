@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input type="file" accept=".jpg, .jpeg" name="avatar" @change='downloadphoto' id="avatar_input"/>
+        <input type="file" accept=".jpg, .jpeg" name="avatar" @change='downloadphoto' id="avatar_input" class="photo_input"/>
         <label for="avatar_input" id="avatar_label">Выберите файл</label>
     </div>
 </template>
@@ -28,6 +28,7 @@
                     let xhr = new XHR();
                     xhr.responseType = 'json';
                     xhr.open('POST', '/upload/avatar', true);
+                    console.log('res', xhr, formData);
                     xhr.onreadystatechange = () => {
                         if (xhr.readyState !== 4) {
                             return;
@@ -37,6 +38,7 @@
                             if (string.result == true) {
                                 document.getElementById('avatar').src = string.path;
                                 document.getElementById('avatar_errormsg').innerHTML = '';
+                                document.getElementById('delete_btn').hidden = false;
                                 console.log('ajax', string.path);
                             } else if (string.result == false) {
                                 document.getElementById('avatar_errormsg').innerHTML = '&#9755; ERROR: ' + string.error;
@@ -48,7 +50,8 @@
                     };
                     xhr.send(formData);
                 }
-            }
+            },
+
         }
     }
 </script>

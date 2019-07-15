@@ -21,8 +21,8 @@ let tofillinputs = function(){
 
 
 let geocode = function(ltt, lng) {
-    latitude = ltt;
-    longitude = lng;
+    latitude = 50.428266;
+    longitude = 30.525979;
 //     const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCpslLLMvrUUPGWepKF3r-8g87FCEF2Qek&latlng='+latitude+','+longitude+'&language=en');
 console.log('response', latitude, longitude);
 
@@ -38,10 +38,19 @@ console.log('response', latitude, longitude);
             let  value=add.split(",");
             let count=value.length;
             country=value[count-1];
-            state=value[count-2];
-            let city_code=value[count-3].split(" ");
-            code = city_code.shift();
-            city = city_code.join(' ');
+            if (count == 2)
+            {
+                let city_code=value[count-2].split(" ");
+                code = city_code.shift();
+                city = city_code.join(' ');
+                state=city;
+            }
+            else {
+                state=value[count-2];
+                let city_code=value[count-3].split(" ");
+                code = city_code.shift();
+                city = city_code.join(' ');
+            }
             console.log('country', country);
             console.log('state', state);
             console.log('city', city);
@@ -106,12 +115,12 @@ document.addEventListener('DOMContentLoaded', function(){
 document.getElementById('register_button').addEventListener('click', async function(event){
     event.preventDefault();
     fill_input();
-    // console.log('1latitude', latitude);
-    // console.log('1longitude', longitude);
-    // console.log('1country', country);
-    // console.log('1state', state);
-    // console.log('1city', city);
-    // console.log('1code', code);
-    return document.getElementById('register_form').submit()
+    console.log('1latitude', latitude);
+    console.log('1longitude', longitude);
+    console.log('1country', country);
+    console.log('1state', state);
+    console.log('1city', city);
+    console.log('1code', code);
+    // return document.getElementById('register_form').submit()
     // console.log('promisffffe', allow);
 });

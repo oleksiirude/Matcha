@@ -22,6 +22,9 @@ window.Vue = require('vue');
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('header-component', require('./components/HeaderComponent').default);
 Vue.component('avatar-component', require('./components/AvatarComponent').default);
+Vue.component('photo-component', require('./components/PhotoComponent').default);
+Vue.component('deletebtn-component', require('./components/DeletebtnComponent').default);
+Vue.component('deletephotobtn-component', require('./components/DeletephotobtnComponent').default);
 Vue.component('footer-component', require('./components/FooterComponent').default);
 
 /**

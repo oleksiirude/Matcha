@@ -1720,6 +1720,7 @@ __webpack_require__.r(__webpack_exports__);
         var xhr = new XHR();
         xhr.responseType = 'json';
         xhr.open('POST', '/upload/avatar', true);
+        console.log('res', xhr, formData);
 
         xhr.onreadystatechange = function () {
           if (xhr.readyState !== 4) {
@@ -1732,6 +1733,7 @@ __webpack_require__.r(__webpack_exports__);
             if (string.result == true) {
               document.getElementById('avatar').src = string.path;
               document.getElementById('avatar_errormsg').innerHTML = '';
+              document.getElementById('delete_btn').hidden = false;
               console.log('ajax', string.path);
             } else if (string.result == false) {
               document.getElementById('avatar_errormsg').innerHTML = '&#9755; ERROR: ' + string.error;
@@ -1744,6 +1746,134 @@ __webpack_require__.r(__webpack_exports__);
 
         xhr.send(formData);
       }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeletebtnComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DeletebtnComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['srcavatar', 'idbtn'],
+  mounted: function mounted() {
+    this.update();
+  },
+  methods: {
+    update: function update() {
+      console.log('path', this.srcavatar);
+    },
+    deletephoto: function deletephoto(e) {
+      console.log('e', this.parentElement);
+      e.preventDefault();
+      var formdel = new FormData(document.forms.deleteavatar_form); // console.log('formData', formData);
+
+      var XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
+      var xhr = new XHR();
+      xhr.responseType = 'json';
+      xhr.open('POST', '/delete/avatar', true);
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState !== 4) {
+          return;
+        }
+
+        if (xhr.status === 200) {
+          var string = xhr.response;
+          console.log('res', string);
+
+          if (string.result == true) {
+            document.getElementById('avatar').src = 'images/service/default_avatar.png';
+            document.getElementById('delete_btn').hidden = true;
+          } else if (string.result == false) {
+            console.log('default avatar');
+          }
+
+          console.log('res', string);
+        }
+      };
+
+      xhr.send(formdel);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeletephotobtnComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DeletephotobtnComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['srcavatar', 'idbtn', 'idform', 'photo'],
+  mounted: function mounted() {
+    this.update();
+  },
+  methods: {
+    update: function update() {
+      console.log('path', this.srcavatar);
+    },
+    deleteusrphoto: function deleteusrphoto(e) {
+      var _this = this;
+
+      //     console.log('e',this.parentElement);
+      e.preventDefault();
+      var idform = this.idform;
+      var imgid = 'img' + this.photo;
+      var formdel = new FormData(document.getElementById(idform)); // console.log('formData', formData);
+
+      var XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
+      var xhr = new XHR();
+      xhr.responseType = 'json';
+      var url = '/delete/photo/' + this.photo;
+      xhr.open('POST', url, true);
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState !== 4) {
+          return;
+        }
+
+        if (xhr.status === 200) {
+          var string = xhr.response;
+          console.log('res', string);
+
+          if (string.result == true) {
+            document.getElementById(imgid).src = '';
+            document.getElementById(imgid).hidden = true;
+            document.getElementById(_this.idform).hidden = true;
+          } else if (string.result == false) {
+            console.log('error');
+          }
+
+          console.log('res', string);
+        }
+      };
+
+      xhr.send(formdel);
     }
   }
 });
@@ -1793,6 +1923,77 @@ __webpack_require__.r(__webpack_exports__);
   // name: "HeaderComponent.vue"
   mounted: function mounted() {
     console.log('HeaderComponent');
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PhotoComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PhotoComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['photovalue', 'inputid', 'labelid'],
+  methods: {
+    downloadusrphoto: function downloadusrphoto() {
+      var _this = this;
+
+      var file = document.getElementById(this.inputid).files[0];
+      console.log('file', file);
+
+      if (file.size > 5000000) {
+        document.getElementById(this.inputid + '_errormsg').innerHTML = '&#9755; ERROR: Too big image';
+      } else {
+        var id_form = this.inputid + '_form';
+        var formData = new FormData(document.getElementById(id_form));
+        console.log('formData', formData);
+        var XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
+        var xhr = new XHR();
+        xhr.responseType = 'json';
+        xhr.open('POST', '/upload/photo', true);
+        console.log('res', xhr, formData);
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState !== 4) {
+            return;
+          }
+
+          if (xhr.status === 200) {
+            var string = xhr.response;
+
+            if (string.result == true) {
+              var id_img = 'img' + _this.photovalue; // console.log('id_img', document.getElementById(id_img));
+
+              document.getElementById(id_img).src = string.path;
+              document.getElementById(_this.inputid + '_errormsg').innerHTML = '';
+              document.getElementById(id_img).hidden = false;
+              document.getElementById('deletephoto_form' + _this.photovalue).hidden = false;
+              console.log('ajax', string.path);
+            } else if (string.result == false) {
+              document.getElementById(_this.inputid + '_errormsg').innerHTML = '&#9755; ERROR: ' + string.error;
+              console.log('error', string.error);
+            }
+
+            console.log('res', string);
+          }
+        };
+
+        xhr.send(formData);
+      }
+    }
   }
 });
 
@@ -37089,6 +37290,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("input", {
+      staticClass: "photo_input",
       attrs: {
         type: "file",
         accept: ".jpg, .jpeg",
@@ -37102,6 +37304,70 @@ var render = function() {
       _vm._v("Выберите файл")
     ])
   ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeletebtnComponent.vue?vue&type=template&id=ed961252&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DeletebtnComponent.vue?vue&type=template&id=ed961252&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "button",
+    {
+      staticClass: "delete_btn",
+      attrs: { type: "submit", id: _vm.idbtn },
+      on: { click: _vm.deletephoto }
+    },
+    [_c("img", { attrs: { src: _vm.srcavatar, title: "delete" } })]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeletephotobtnComponent.vue?vue&type=template&id=69ac0a4d&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DeletephotobtnComponent.vue?vue&type=template&id=69ac0a4d&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "button",
+    {
+      staticClass: "delete_btn",
+      attrs: { type: "submit", id: _vm.idbtn },
+      on: { click: _vm.deleteusrphoto }
+    },
+    [_c("img", { attrs: { src: _vm.srcavatar, title: "delete" } })]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -37161,6 +37427,55 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("header")
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PhotoComponent.vue?vue&type=template&id=14be56d4&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PhotoComponent.vue?vue&type=template&id=14be56d4&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("input", {
+      attrs: { type: "hidden", name: "photo" },
+      domProps: { value: _vm.photovalue }
+    }),
+    _vm._v(" "),
+    _c("input", {
+      staticClass: "photo_input",
+      attrs: {
+        type: "file",
+        accept: ".jpg, .jpeg",
+        name: "photo",
+        id: _vm.inputid
+      },
+      on: { change: _vm.downloadusrphoto }
+    }),
+    _vm._v(" "),
+    _c(
+      "label",
+      {
+        staticClass: "photo_label",
+        attrs: { for: _vm.inputid, id: _vm.labelid }
+      },
+      [_vm._v("Выберите файл")]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -49333,6 +49648,9 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.component('header-component', __webpack_require__(/*! ./components/HeaderComponent */ "./resources/js/components/HeaderComponent.vue")["default"]);
 Vue.component('avatar-component', __webpack_require__(/*! ./components/AvatarComponent */ "./resources/js/components/AvatarComponent.vue")["default"]);
+Vue.component('photo-component', __webpack_require__(/*! ./components/PhotoComponent */ "./resources/js/components/PhotoComponent.vue")["default"]);
+Vue.component('deletebtn-component', __webpack_require__(/*! ./components/DeletebtnComponent */ "./resources/js/components/DeletebtnComponent.vue")["default"]);
+Vue.component('deletephotobtn-component', __webpack_require__(/*! ./components/DeletephotobtnComponent */ "./resources/js/components/DeletephotobtnComponent.vue")["default"]);
 Vue.component('footer-component', __webpack_require__(/*! ./components/FooterComponent */ "./resources/js/components/FooterComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -49478,6 +49796,144 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/DeletebtnComponent.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/DeletebtnComponent.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DeletebtnComponent_vue_vue_type_template_id_ed961252_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeletebtnComponent.vue?vue&type=template&id=ed961252&scoped=true& */ "./resources/js/components/DeletebtnComponent.vue?vue&type=template&id=ed961252&scoped=true&");
+/* harmony import */ var _DeletebtnComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DeletebtnComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/DeletebtnComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DeletebtnComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DeletebtnComponent_vue_vue_type_template_id_ed961252_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DeletebtnComponent_vue_vue_type_template_id_ed961252_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "ed961252",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/DeletebtnComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/DeletebtnComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/DeletebtnComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeletebtnComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./DeletebtnComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeletebtnComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeletebtnComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/DeletebtnComponent.vue?vue&type=template&id=ed961252&scoped=true&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/DeletebtnComponent.vue?vue&type=template&id=ed961252&scoped=true& ***!
+  \***************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeletebtnComponent_vue_vue_type_template_id_ed961252_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./DeletebtnComponent.vue?vue&type=template&id=ed961252&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeletebtnComponent.vue?vue&type=template&id=ed961252&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeletebtnComponent_vue_vue_type_template_id_ed961252_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeletebtnComponent_vue_vue_type_template_id_ed961252_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/DeletephotobtnComponent.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/DeletephotobtnComponent.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DeletephotobtnComponent_vue_vue_type_template_id_69ac0a4d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeletephotobtnComponent.vue?vue&type=template&id=69ac0a4d&scoped=true& */ "./resources/js/components/DeletephotobtnComponent.vue?vue&type=template&id=69ac0a4d&scoped=true&");
+/* harmony import */ var _DeletephotobtnComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DeletephotobtnComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/DeletephotobtnComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DeletephotobtnComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DeletephotobtnComponent_vue_vue_type_template_id_69ac0a4d_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DeletephotobtnComponent_vue_vue_type_template_id_69ac0a4d_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "69ac0a4d",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/DeletephotobtnComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/DeletephotobtnComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/DeletephotobtnComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeletephotobtnComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./DeletephotobtnComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeletephotobtnComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeletephotobtnComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/DeletephotobtnComponent.vue?vue&type=template&id=69ac0a4d&scoped=true&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/DeletephotobtnComponent.vue?vue&type=template&id=69ac0a4d&scoped=true& ***!
+  \********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeletephotobtnComponent_vue_vue_type_template_id_69ac0a4d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./DeletephotobtnComponent.vue?vue&type=template&id=69ac0a4d&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeletephotobtnComponent.vue?vue&type=template&id=69ac0a4d&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeletephotobtnComponent_vue_vue_type_template_id_69ac0a4d_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeletephotobtnComponent_vue_vue_type_template_id_69ac0a4d_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/FooterComponent.vue":
 /*!*****************************************************!*\
   !*** ./resources/js/components/FooterComponent.vue ***!
@@ -49611,6 +50067,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HeaderComponent_vue_vue_type_template_id_153bfd55_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HeaderComponent_vue_vue_type_template_id_153bfd55_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/PhotoComponent.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/PhotoComponent.vue ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PhotoComponent_vue_vue_type_template_id_14be56d4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PhotoComponent.vue?vue&type=template&id=14be56d4&scoped=true& */ "./resources/js/components/PhotoComponent.vue?vue&type=template&id=14be56d4&scoped=true&");
+/* harmony import */ var _PhotoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PhotoComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/PhotoComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PhotoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PhotoComponent_vue_vue_type_template_id_14be56d4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PhotoComponent_vue_vue_type_template_id_14be56d4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "14be56d4",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/PhotoComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/PhotoComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/PhotoComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PhotoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PhotoComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PhotoComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PhotoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/PhotoComponent.vue?vue&type=template&id=14be56d4&scoped=true&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/PhotoComponent.vue?vue&type=template&id=14be56d4&scoped=true& ***!
+  \***********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PhotoComponent_vue_vue_type_template_id_14be56d4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PhotoComponent.vue?vue&type=template&id=14be56d4&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PhotoComponent.vue?vue&type=template&id=14be56d4&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PhotoComponent_vue_vue_type_template_id_14be56d4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PhotoComponent_vue_vue_type_template_id_14be56d4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
