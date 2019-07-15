@@ -9,8 +9,6 @@
 
                     <div class="card-body">
 
-                        <p><a href="{{ route('show.all.users') }}">list of all users</a></p>
-
                         <p><b>Rating:</b> {{ $profile->rating }}</p>
                         <b>new avatar</b>
                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.avatar') }}">

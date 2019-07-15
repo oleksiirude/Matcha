@@ -70,6 +70,17 @@
                                     <form id="profile-form" action="{{ route('profile') }}" method="GET" style="display: none;">
                                         @csrf
                                     </form>
+
+                                    <a class="dropdown-item" href="{{ route('show.all.users') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('show-all-users-form').submit();">
+                                        {{ __('Show all users') }}
+                                    </a>
+
+                                    <form id="show-all-users-form" action="{{ route('show.all.users') }}" method="GET" style="display: none;">
+                                        @csrf
+                                    </form>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
