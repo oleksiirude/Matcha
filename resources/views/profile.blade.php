@@ -13,31 +13,85 @@
 {{--                    <div class="color_div">--}}
                         <div class="white_div">
                             <div class="card-body">
-                                <div id="div_useravatar">
-                                    <img src="{{ $profile->avatar }}" alt="avatar" id="avatar" title='download avatar' onclick="choose_file('avatar_label')">
-                                    <form enctype="multipart/form-data" method="POST" action="/upload/avatar" id="useravatar_form">
-                                        @csrf
-                                        <avatar-component></avatar-component>
-                                    </form>
-                                    <form action="/delete/avatar" method="POST" class="profile_delete_form" id="deleteavatar_form">
-                                        @csrf
-                                        @method('DELETE')
-                                        <deletebtn-component srcavatar="{{ asset('images/service/del.png') }}" idbtn="delete_btn"></deletebtn-component>
-                                    </form>
-                                    <span id="avatar_errormsg"></span>
+                                <div id="left_card">
+                                    <div id="div_useravatar">
+                                        <img src="{{ $profile->avatar }}" alt="avatar" id="avatar" title='download avatar' onclick="choose_file('avatar_label')">
+                                        <form enctype="multipart/form-data" method="POST" action="/upload/avatar" id="useravatar_form">
+                                            @csrf
+                                            <avatar-component></avatar-component>
+                                        </form>
+                                        <form action="/delete/avatar" method="POST" class="profile_delete_form" id="deleteavatar_form">
+                                            @csrf
+                                            @method('DELETE')
+                                            <deletebtn-component srcavatar="{{ asset('images/service/del.png') }}" idbtn="delete_btn"></deletebtn-component>
+                                        </form>
+                                        <span id="avatar_errormsg"></span>
+                                    </div>
+                                    <p><b>Rating:</b> {{ $profile->rating }}</p>
                                 </div>
-                                <div id="user_bio">
-                                    <p>
-                                        <h2>About</h2>
-                                        {{ $profile->bio }}
-                                    </p>
-                                    <form action="/set/bio" method="POST">
+                                <div id="usr_name_div">
+                                    <form action="/set/name" method="POST" id="name_form">
                                         @csrf
                                         @method('PUT')
-
-                                        <textarea name="bio" placeholder="up to 500 symbols"></textarea>
-                                        <button type="submit">change bio</button>
+                                        <editinput-component value="{{ $profile->name }}" name="name" id_btn="name_btn"></editinput-component>
+    {{--                                    <button type="submit" class="btn edit_submit">Save</button>--}}
                                     </form>
+                                    <form action="/set/surname" method="POST" id="surname_form">
+                                        @csrf
+                                        @method('PUT')
+                                        <div>
+                                            <editinput-component value="{{ $profile->surname }}"  name="surname" id_btn="surname_btn"></editinput-component>
+{{--                                            <img src="/images/service/edit.png" class="edit" @click="editInput()" id="">--}}
+                                        </div>
+                                    </form>
+                                    <span id="name_error_msg" class="error_msg"></span>
+                                </div>
+                                <div id="right_card">
+                                    <div>
+{{--                                        <p><b>Change login</b></p>--}}
+                                        <form action="/change/login" method="POST" id="login_form">
+                                            @csrf
+                                            <ed_in_lbl-component name="login" value="{{ $profile->login }}" label="Login:" id_btn="login_btn" url="/change/login"></ed_in_lbl-component>
+{{--                                            New login:--}}
+{{--                                            <input type="text" name="login">--}}
+{{--                                            <button type="submit">change login</button>--}}
+                                        </form>
+                                        <span id="login_error_msg" class="error_msg" hidden></span>
+                                    </div>
+                                    <div>
+                                        <form action="/set/gender" method="POST" id="gender_form">
+                                            @csrf
+                                            @method('PUT')
+                                            <gender-component value="{{ $profile->gender }}" name="gender"></gender-component>
+                                        </form>
+                                    </div>
+                                    <div>
+                                        <form action="/set/age" method="POST" id="age_form">
+                                            @csrf
+                                            @method('PUT')
+                                            <ed_in_lbl-component name="age" value="{{ $profile->age }}" label="Age:" id_btn="age_btn" url="/set/age"></ed_in_lbl-component>
+                                        </form>
+                                        <span id="age_error_msg" class="error_msg" hidden></span>
+                                    </div>
+                                    <div>
+{{--                                        <p><b>Sexual preferences:</b> {{ $profile->preferences }}</p>--}}
+                                        <form action="/set/preferences" method="POST" id="preferences_form">
+                                            @csrf
+                                            @method('PUT')
+                                            <preferences-component value="{{ $profile->preferences }}" name="preferences"></preferences-component>
+                                        </form>
+                                        <span id="preferences_error_msg" class="error_msg" hidden></span>
+                                    </div>
+                                    <div id="user_bio">
+                                        <p>
+                                            <h2>About</h2>
+                                        </p>
+                                        <form action="/set/bio" method="POST" id="bio_form">
+                                            @csrf
+                                            @method('PUT')
+                                            <editdata-component name="bio" bio="{{ $profile->bio }}"></editdata-component>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -107,77 +161,14 @@
                             </div>
                         </div>
 
-                        <p><b>Name:</b> {{ $profile->name }}</p>
-                        <form action="/set/name" method="POST">
-                            @csrf
-                            @method('PUT')
-
-                            <input type="text" name="name">
-                            <button type="submit">change name</button>
-                        </form>
 
 
-                        <p><b>Surname:</b> {{ $profile->surname }}</p>
-                        <form action="/set/surname" method="POST">
-                            @csrf
-                            @method('PUT')
-
-                            <input type="text" name="surname">
-                            <button type="submit">change surname</button>
-                        </form>
 
 
-                        <p><b>Gender:</b> {{ $profile->gender }}</p>
-                        <form action="/set/gender" method="POST">
-                            @csrf
-                            @method('PUT')
-
-                            <select name="gender">
-                                <option disabled>choose gender</option>
-                                <option value="male">male</option>
-                                <option value="female">female</option>
-                            </select>
-                            <button type="submit">change gender</button>
-                        </form>
-
-
-                        <p><b>Sexual preferences:</b> {{ $profile->preferences }}</p>
-                        <form action="/set/preferences" method="POST">
-                            @csrf
-                            @method('PUT')
-
-                            <select name="preferences">
-                                <option disabled>choose sexual preferences</option>
-                                <option value="homosexual">homosexual</option>
-                                <option value="bisexual">bisexual</option>
-                                <option value="heterosexual">heterosexual</option>
-                            </select>
-                            <button type="submit">change preferences</button>
-                        </form>
-
-                        <p><b>Age:</b> {{ $profile->age }}</p>
-                        <form action="/set/age" method="POST">
-                            @csrf
-                            @method('PUT')
-
-                            <input type="text" name="age">
-                            <button type="submit">change age</button>
-                        </form>
 
                         <p><b>Country:</b> {{ $profile->country }}</p>
                         <p><b>City:</b> {{ $profile->city }}</p>
                         <p><b>Email:</b> {{ $profile->email }}</p>
-                        <p><b>Rating:</b> {{ $profile->rating }}</p>
-
-                        <p><b>Change login</b></p>
-                        <form action="/change/login" method="POST">
-                            @csrf
-
-                            New login:
-                            <input type="text" name="login">
-                            <button type="submit">change login</button>
-                        </form>
-
                         <p><b>Change email</b></p>
                         <form action="/change/email" method="POST">
                             @csrf

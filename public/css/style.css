@@ -17,7 +17,7 @@ body {
 }
 
 
-input {
+input, textarea {
     color: rgba(68, 79, 87, 0.8);
 }
 
@@ -27,8 +27,15 @@ p {
 }
 
 h2 {
-    color: var(--main_one_color);
+    /*color: var(--main_one_color);*/
 }
+:focus {
+    outline: #e6e6e6 auto 2px;
+}
+
+textarea:-moz-placeholder { color: rgba(68, 79, 87, 0.4); }
+
+textarea::-webkit-input-placeholder { color: rgba(68, 79, 87, 0.4); }
 
 /*header*/
 
@@ -169,8 +176,11 @@ footer {
     -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+.btn:hover {
+    cursor: pointer;
+}
 
-.btn-primary {
+.btn-primary, .edit_submit {
     color: #fff;
     background: var(--main-color-ob);
     background: var(--main-color-ob1);
@@ -232,18 +242,30 @@ a:hover {
     margin-left: 20px;
     background-color: white;
     box-shadow: 5px 5px 8px rgba(74, 50, 60, 0.3);
-    height: 300px;
+    min-height: 400px;
 }
 .white_div .card-body {
     margin-top: 40px;
     text-align: left;
     display: flex;
 }
-#user_bio {
+#right_card {
     display: inline-block;
     margin-left: 40px;
+    margin-right: 60px;
+    margin-top: 60px;
+    width: calc(100% - 100px);
 }
-
+#user_bio {
+    display: inline-block;
+    width: 100%;
+}
+#user_bio textarea {
+    word-wrap: break-word;
+    width: calc(100% - 30px);
+    max-height: 100%;
+    min-height: 180px;
+}
 #div_useravatar {
     top: -90px;
     display: inline-block;
@@ -301,6 +323,7 @@ a:hover {
     max-width: 24%;
     display: inline-block;
     vertical-align: middle;
+    margin-left: 20px;
 }
 .usr_photo_div:hover{
     cursor: pointer;
@@ -308,6 +331,7 @@ a:hover {
 .camera {
     position: absolute;
     opacity: 0.5;
+    margin-top: 85px;
 }
 .camera:hover {
     opacity: 1;
@@ -318,9 +342,77 @@ a:hover {
     max-width: 100%;
     max-height: 250px;
     z-index: 99;
+    box-shadow: 5px 5px 8px rgba(74, 50, 60, 0.3);
+}
+.edit{
+    width: 20px;
+    opacity: 0.6;
+    /*vertical-align: top;*/
+    height: 20px;
+}
+.edit:hover{
+    opacity: 1;
 }
 
-
-
-
-
+.profiledata {
+    border: none;
+}
+.name {
+    /*color: var(--main_one_color);*/
+    width: calc(100% - 30px);
+}
+#usr_name_div {
+    top: 120px;
+    width: 350px;
+    left: 350px;
+    /*position: relative;*/
+    position: absolute;
+    max-height: 140px;
+}
+#name_form {
+    position: relative;
+    z-index: 999;
+    background-color: transparent;
+    font-size: 50px;
+    font-weight: bold;
+    /*left: -5%;*/
+    /*top: -100px;*/
+    width: 100%;
+    height: 70px;
+}
+#surname_form {
+    position: relative;
+    z-index: 999;
+    background-color: transparent;
+    font-size: 50px;
+    font-weight: bold;
+    /*top: -50px;*/
+    /*left: -15%;*/
+    width: 100%;
+    height: 70px;
+}
+#name_form input, #surname_form input {
+    width: calc(100% - 100px);
+    background-color: transparent;
+    letter-spacing: 5px;
+    font-weight: bold;
+    /*text-shadow: #e6e6e6 1px 1px 0, #e6e6e6 1px 1px 0,*/
+    /*#e6e6e6 1px 1px 1px, #e6e6e6 2px 2px 1px,*/
+    /*#e6e6e6 3px 3px 1px;*/
+}
+#name_error_msg, .error_msg {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    color: darkred;
+}
+label {
+    color: rgba(68, 79, 87, 0.4);
+}
+#gender, #preferences {
+    background-color: transparent;
+    color: rgba(68, 79, 87, 0.8);
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}

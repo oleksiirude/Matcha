@@ -63,7 +63,7 @@ let ip_pos = function () {
     allow = '0';
     $.ajax({
         type: "GET",
-        // async: false,
+        async: false,
         dataType: "json",
         url: 'https://api.ipdata.co?api-key=ef86a8cdcf9c1d049387de03d36272d52fdefccbb4460c0326757254',
         success: function (data) {
@@ -121,6 +121,6 @@ document.getElementById('register_button').addEventListener('click', async funct
     console.log('1state', state);
     console.log('1city', city);
     console.log('1code', code);
-    // return document.getElementById('register_form').submit()
+    return document.getElementById('register_form').submit()
     // console.log('promisffffe', allow);
 });
