@@ -1767,6 +1767,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "FooterComponent.vue"
 });
@@ -37133,13 +37139,15 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("footer", [
+      _vm._v("\n<<<<<<< HEAD\n    "),
       _c("p", { staticClass: "copyright" }, [
-<<<<<<< HEAD
-        _vm._v("\n    © created by olrudenk & dpiven, 2019\n")
-=======
         _vm._v("\n        © created by olrudenk & dpiven, 2019\n    ")
->>>>>>> 4be7056ab1e0a047f6012bf8131ebf4cde299745
-      ])
+      ]),
+      _vm._v("\n=======\n        "),
+      _c("p", { staticClass: "copyright" }, [
+        _vm._v("\n            © created by olrudenk & dpiven, 2019\n        ")
+      ]),
+      _vm._v("\n>>>>>>> 4be7056ab1e0a047f6012bf8131ebf4cde299745\n    ")
     ])
   }
 ]
@@ -49638,8 +49646,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/matcha_start/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/matcha_start/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/olrudenk/mamp/apache2/htdocs/Matcha/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/olrudenk/mamp/apache2/htdocs/Matcha/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
