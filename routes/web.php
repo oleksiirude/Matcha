@@ -34,7 +34,7 @@
     // DELETING
     Route::group(['prefix' => '/delete', 'middleware' => 'verified'], function () {
         Route::delete('/avatar', 'ImageController@deleteAvatar')->name('delete.avatar');
-        Route::delete('/photo/{number}', 'ImageController@deletePhoto')->name('delete.photo');;
+        Route::delete('/photo/{number}', 'ImageController@deletePhoto')->name('delete.photo');
         Route::delete('/bio', 'HomeController@deleteBio')->name('delete.bio');
         Route::delete('/tag/{tag}', 'TagController@deleteTag')->name('delete.tag');
         Route::delete('/viewed/profile/{id}', 'VisitController@deleteViewedProfile')->name('delete.viewed.profile');
@@ -67,7 +67,7 @@
     // USERS
     Route::group(['prefix' => '/users', 'middleware' => 'verified'], function () {
         Route::get('/', 'UsersController@show')->name('show.all.users');
-        Route::get('/{login}', 'UsersController@showUser')->name('show.certain.user');
+        Route::get('/{login}', 'UsersController@showUser')->name('show.certain.user')->middleware('blocked');
         Route::post('/block/{id}/{login}', 'BlockingController@blockUser')->name('block.user');
         Route::post('/unblock/{id}/{login}', 'BlockingController@unblockUser')->name('unblock.user');
     });

@@ -101,11 +101,11 @@
 
                                     <form id="viewed-my-profile-form" action="{{ route('viewed.my.profile') }}" method="GET" style="display: none;"></form>
 
-                                    {{--Blocked users--}}
+                                    {{--Blocked profiles--}}
                                     <a class="dropdown-item" href="{{ route('blocked.users') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('blocked-users-form').submit();">
-                                        {{ __('Blocked users') }}
+                                        {{ __('Blocked profiles') }}
                                     </a>
 
                                     <form id="blocked-users-form" action="{{ route('blocked.users') }}" method="GET" style="display: none;"></form>

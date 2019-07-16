@@ -4,17 +4,17 @@
     use Illuminate\Database\Schema\Blueprint;
     use Illuminate\Database\Migrations\Migration;
     
-    class CreateBansTable extends Migration {
+    class CreateLikesTable extends Migration {
         /**
          * Run the migrations.
          *
          * @return void
          */
         public function up() {
-            Schema::create('bans', function (Blueprint $table) {
+            Schema::create('likes', function (Blueprint $table) {
                 $table->bigInteger('user');
-                $table->bigInteger('banned');
-                $table->timestamp('date');
+                $table->bigInteger('liked');
+                $table->timestamp('date');;
             });
         }
     
@@ -24,6 +24,6 @@
          * @return void
          */
         public function down() {
-            Schema::dropIfExists('bans');
+            Schema::dropIfExists('likes');
         }
     }
