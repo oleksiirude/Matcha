@@ -287,8 +287,7 @@
                     $this->model_profile->rating = 100;
             }
         }
-
-<<<<<<< HEAD
+        
         public function showViewedProfiles() {
             $profiles = Visit::where('watcher', Auth::id())
                                 ->orderBy('date', 'desc')
@@ -321,7 +320,4 @@
             }
             return 'online';
         }
-=======
-
->>>>>>> master
     }

@@ -51,7 +51,7 @@
             $number = $request->request->get('photo');
             
             if (!preg_match('/^[1-4]$/', $number))
-                return redirect()->back();
+                abort(419);
             
             if (($result = $this->validator($request, 'photo')) !== true)
                 return response()->json($result);
@@ -129,7 +129,7 @@
     
         public function deletePhoto($number) {
             if (!preg_match('/^[1-4]$/', $number))
-                return redirect()->back();
+                abort(419);
             
             $photo = 'photo' . $number;
     

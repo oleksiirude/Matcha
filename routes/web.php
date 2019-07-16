@@ -19,12 +19,10 @@
     // PROFILE
     Route::group(['prefix' => '/profile', 'middleware' => 'verified'], function () {
         Route::get('/', 'HomeController@show')->name('profile');
-<<<<<<< HEAD
         Route::get('/viewed/profiles', 'HomeController@showViewedProfiles')->name('viewed.profiles');
-=======
         Route::get('/viewed/profiles', 'VisitController@showViewedProfiles')->name('viewed.profiles');
         Route::get('/viewed/my-profile', 'VisitController@showUsersViewedMyProfile')->name('viewed.my.profile');
->>>>>>> master
+        Route::get('/blocked/users', 'BlockingController@showBlockedProfiles')->name('blocked.users');
     });
 
     // UPLOADING
@@ -57,8 +55,8 @@
     // CHANGE
     Route::group(['prefix' => '/change', 'middleware' => 'verified'], function () {
         Route::post('/login', 'HomeController@changeLogin')->name('change.login');
-        Route::post('/email', 'HomeController@changeEmail')->name('change.email');;
-        Route::post('/password', 'HomeController@changePassword')->name('change.password');;
+        Route::post('/email', 'HomeController@changeEmail')->name('change.email');
+        Route::post('/password', 'HomeController@changePassword')->name('change.password');
     });
 
     // FINDING
@@ -70,6 +68,8 @@
     Route::group(['prefix' => '/users', 'middleware' => 'verified'], function () {
         Route::get('/', 'UsersController@show')->name('show.all.users');
         Route::get('/{login}', 'UsersController@showUser')->name('show.certain.user');
+        Route::post('/block/{id}/{login}', 'BlockingController@blockUser')->name('block.user');
+        Route::post('/unblock/{id}/{login}', 'BlockingController@unblockUser')->name('unblock.user');
     });
 
     Route::get('/result', function () {

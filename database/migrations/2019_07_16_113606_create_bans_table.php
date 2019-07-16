@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVisitsTable extends Migration
+class CreateBansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateVisitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('visits', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('watcher');
-            $table->bigInteger('viewed');
-            $table->boolean('deleted_by_watcher')->default(false);
-            $table->boolean('deleted_by_viewed')->default(false);
+        Schema::create('bans', function (Blueprint $table) {
+            $table->bigInteger('user');
+            $table->bigInteger('banned');
             $table->timestamp('date');
         });
     }
@@ -30,6 +27,6 @@ class CreateVisitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('visits');
+        Schema::dropIfExists('bans');
     }
 }

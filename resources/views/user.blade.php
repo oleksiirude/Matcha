@@ -8,6 +8,26 @@
                     <div class="card-header">{{ $profile->login . "'s" }} profile</div>
 
                     <div class="card-body">
+                            @if($profile->blocked)
+                                <form action="{{ route('unblock.user', [
+                                                'id' => $profile->user_id,
+                                                'login' => $profile->login
+                                                ]) }}" method="POST">
+                                    @csrf
+
+                                    <button type="submit">unblock {{ $profile->login }}</button>
+                                </form>
+                            @else
+                                <form action="{{ route('block.user', [
+                                                 'id' => $profile->user_id,
+                                                 'login' => $profile->login
+                                                 ]) }}" method="POST">
+                                    @csrf
+
+                                    <button type="submit">block {{ $profile->login }}</button>
+                                </form>
+                            @endif
+
                             <p><b>Name Surname:</b> {{ $profile->name }}, {{ $profile->surname }}</p>
 
                             <p><b>Rating:</b> {{ $profile->rating }}</p>

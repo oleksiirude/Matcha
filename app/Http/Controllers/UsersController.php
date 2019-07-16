@@ -7,6 +7,7 @@
     use App\User;
     use App\Location;
     use App\Visit;
+    use App\Ban;
     use Carbon\Carbon;
 
     class UsersController extends Controller {
@@ -42,6 +43,7 @@
             $location = Location::find($user->id);
             $interests = Interest::where('user_id', $user->id)->get();
 
+            $profile['blocked'] = $this->checkIfBlocked($user->id, auth()->user()->id);
             $profile['login'] = $user->login;
             $profile['country'] = $location->country;
             $profile['allow'] = $location->allow;
@@ -105,8 +107,19 @@
                 $visits->date = Carbon::now();
                 $visits->save();
             } else {
+                $visits->deleted_by_watcher = false;
+                $visits->deleted_by_viewed = false;
                 $visits->date = Carbon::now();
                 $visits->save();
             }
+        }
+        
+        public static function checkIfBlocked($banned, $user) {
+            if (Ban::where([
+                'user' => $user,
+                'banned' => $banned
+            ])->first())
+                return true;
+            return false;
         }
     }

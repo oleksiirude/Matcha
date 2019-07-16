@@ -54,7 +54,7 @@
                 $time = substr(explode(' ', $profile->date)[1], 0, 5);
                 $profile->date = UsersController::getFineActivityView($diff, $visited, $time);
 
-                $status = User::find($profile->viewed);
+                $status = User::find($profile->watcher);
                 $profile->user->status = $this->checkLastActivity($status);
 
                 $profile->location = Location::find($profile->watcher);
@@ -78,6 +78,9 @@
                 'viewed' => $id,
                 'watcher' => Auth::id()
             ])->first();
+            
+            if (!$visit)
+                abort(419);
 
             $visit->update([
                 'deleted_by_watcher' => true
@@ -87,18 +90,18 @@
         }
 
         public function deleteViewedMeProfile($id) {
-//            $visit = Visit::where([
-//                'viewed' => $id,
-//                'watcher' => Auth::id()
-//            ])->first();
-//
-//            if (!count($visit))
-//                abort(419);
-//
-//            $visit->update([
-//                'deleted_by_watcher' => true
-//            ]);
-//
-//            return response()->json(['result' => true]);
+            $visit = Visit::where([
+                'viewed' => Auth::id(),
+                'watcher' => $id
+            ])->first();
+    
+            if (!$visit)
+                abort(419);
+
+            $visit->update([
+                'deleted_by_viewed' => true
+            ]);
+
+            return response()->json(['result' => true]);
         }
     }

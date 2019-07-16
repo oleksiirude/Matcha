@@ -90,12 +90,8 @@
                                         {{ __('Viewed profiles') }}
                                     </a>
 
-                                    <form id="viewed-profiles-form" action="{{ route('viewed.profiles') }}" method="GET" style="display: none;">
-                                        @csrf
-                                    </form>
+                                    <form id="viewed-profiles-form" action="{{ route('viewed.profiles') }}" method="GET" style="display: none;"></form>
 
-<<<<<<< HEAD
-=======
                                     {{--Viewed my profile--}}
                                     <a class="dropdown-item" href="{{ route('viewed.my.profile') }}"
                                        onclick="event.preventDefault();
@@ -103,11 +99,17 @@
                                         {{ __('Viewed my profile') }}
                                     </a>
 
-                                    <form id="viewed-my-profile-form" action="{{ route('viewed.my.profile') }}" method="GET" style="display: none;">
-                                        @csrf
-                                    </form>
+                                    <form id="viewed-my-profile-form" action="{{ route('viewed.my.profile') }}" method="GET" style="display: none;"></form>
 
->>>>>>> master
+                                    {{--Blocked users--}}
+                                    <a class="dropdown-item" href="{{ route('blocked.users') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('blocked-users-form').submit();">
+                                        {{ __('Blocked users') }}
+                                    </a>
+
+                                    <form id="blocked-users-form" action="{{ route('blocked.users') }}" method="GET" style="display: none;"></form>
+
                                     {{--Logout--}}
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

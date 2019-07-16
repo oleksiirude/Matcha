@@ -10,10 +10,7 @@
                         @if (count($profiles))
                             @foreach($profiles as $profile)
                                 <div style="background-color: darkgrey">
-<<<<<<< HEAD
                                     <p>
-=======
->>>>>>> master
                                         <a href="{{ route('show.certain.user', $profile->user->login) }}">
                                             <img src="{{ URL::asset($profile->user->avatar) }}"
                                                  alt="{{ $profile->user->login }}'s avatar" style="width: 60px"
@@ -23,17 +20,11 @@
                                         {{ $profile->user->name }} {{ $profile->user->surname }}
 
                                         @if($profile->location->allow)
-<<<<<<< HEAD
                                             from {{ $profile->location->country }}, {{ $profile->location->city }}</p>
-                                        @endif
-
-=======
-                                            from {{ $profile->location->country }}, {{ $profile->location->city }}
                                         @endif
 
                                         <br>
 
->>>>>>> master
                                         @if ($profile->user->status === 'online')
                                             <span style="color: #1e7e34">{{ $profile->user->status }}</span>
                                         @else
@@ -41,9 +32,6 @@
                                         @endif
 
                                         | Visited by you: {{ $profile->date }}
-<<<<<<< HEAD
-                                    </p>
-=======
 
                                         <form action="{{ route('delete.viewed.profile', $profile->user->user_id) }}" method="POST">
                                             @csrf
@@ -53,9 +41,8 @@
                                         </form>
 
                                     <p></p>
-
->>>>>>> master
                                 </div>
+
                             @endforeach
                         @else
                             <p>You haven't viewed any profiles yet</p>
