@@ -79,6 +79,7 @@
                         <form action="{{ route('delete.avatar') }}" method="POST">
                             @csrf
                             @method('DELETE')
+                        </form>
 
                         <p>Photo 1: {{ $profile->photo1 }}</p>
                         <img src="{{ URL::asset($profile->photo1) }}" alt="photo1 -> null" style="width: 200px">

@@ -8,11 +8,24 @@
                     <div class="card-header">{{ $profile->login . "'s" }} profile</div>
 
                     <div class="card-body">
+                            @if($profile->connected && !$profile->blocked)
+                                <span style="color: #1d643b; font-weight: bold">You are connected with {{ $profile->login }}</span>
+
+                                <form action="{{ route('show.chat', $profile->login) }}" method="GET">
+
+                                    <button type="submit">go chatting with {{ $profile->login }}</button>
+                                </form>
+
+                            @endif
+
+                            <p>
+                            {{--Blocking block--}}
                             @if($profile->blocked)
                                 <form action="{{ route('unblock.user', [
                                                 'id' => $profile->user_id,
                                                 'login' => $profile->login
                                                 ]) }}" method="POST">
+                                    @method('DELETE')
                                     @csrf
 
                                     <button type="submit">unblock {{ $profile->login }}</button>
@@ -22,13 +35,37 @@
                                                  'id' => $profile->user_id,
                                                  'login' => $profile->login
                                                  ]) }}" method="POST">
+                                    @method('PUT')
                                     @csrf
 
                                     <button type="submit">block {{ $profile->login }}</button>
                                 </form>
                             @endif
+                            <p>
+                            {{--Like block--}}
+                            @if($profile->liked)
+                                <form action="{{ route('unlike.user', [
+                                                    'id' => $profile->user_id,
+                                                    'login' => $profile->login
+                                                    ]) }}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
 
-                            <p><b>Name Surname:</b> {{ $profile->name }}, {{ $profile->surname }}</p>
+                                    <button type="submit">unlike {{ $profile->login }}</button>
+                                </form>
+                            @else
+                                <form action="{{ route('like.user', [
+                                                     'id' => $profile->user_id,
+                                                     'login' => $profile->login
+                                                     ]) }}" method="POST">
+                                    @method('PUT')
+                                    @csrf
+
+                                    <button type="submit">like {{ $profile->login }}</button>
+                                </form>
+                            @endif
+
+                            <p><b>Name Surname:</b> {{ $profile->name }} {{ $profile->surname }}</p>
 
                             <p><b>Rating:</b> {{ $profile->rating }}</p>
 
@@ -94,5 +131,4 @@
                 </div>
             </div>
         </div>
-    </div>
 @endsection

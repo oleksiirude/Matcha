@@ -29,7 +29,7 @@
                 $visited = Carbon::parse($profile->date);
                 $diff = $this->now->diffInMinutes($visited, true);
                 $time = substr(explode(' ', $profile->date)[1], 0, 5);
-                $profile->date = UsersController::getFineActivityView($diff, $visited, $time);
+                $profile->date = $this->getFineActivityView($diff, $visited, $time);
 
                 $status = User::find($profile->viewed);
                 $profile->user->status = $this->checkLastActivity($status);
@@ -37,7 +37,7 @@
                 $profile->location = Location::find($profile->viewed);
             }
 
-            return view('viewed-profiles', ['profiles' => $profiles]);
+            return view('viewed-history.viewed-profiles', ['profiles' => $profiles]);
         }
 
         public function showUsersViewedMyProfile() {
@@ -52,7 +52,7 @@
                 $visited = Carbon::parse($profile->date);
                 $diff = $this->now->diffInMinutes($visited, true);
                 $time = substr(explode(' ', $profile->date)[1], 0, 5);
-                $profile->date = UsersController::getFineActivityView($diff, $visited, $time);
+                $profile->date = $this->getFineActivityView($diff, $visited, $time);
 
                 $status = User::find($profile->watcher);
                 $profile->user->status = $this->checkLastActivity($status);
@@ -60,7 +60,7 @@
                 $profile->location = Location::find($profile->watcher);
             }
 
-            return view('viewed-my-profile', ['profiles' => $profiles]);
+            return view('viewed-history.viewed-my-profile', ['profiles' => $profiles]);
         }
 
         protected function checkLastActivity(User $user) {
@@ -68,7 +68,7 @@
                 $last = Carbon::parse($user->last_activity);
                 $diff = $this->now->diffInMinutes($last, true);
                 $time = substr(explode(' ', $user->last_activity)[1], 0, 5);
-                return 'last seen ' . UsersController::getFineActivityView($diff, $last, $time);
+                return 'last seen ' . $this->getFineActivityView($diff, $last, $time);
             }
             return 'online';
         }

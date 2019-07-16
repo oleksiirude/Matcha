@@ -23,6 +23,9 @@
         Route::get('/viewed/profiles', 'VisitController@showViewedProfiles')->name('viewed.profiles');
         Route::get('/viewed/my-profile', 'VisitController@showUsersViewedMyProfile')->name('viewed.my.profile');
         Route::get('/blocked/users', 'BlockingController@showBlockedProfiles')->name('blocked.users');
+        Route::get('/liked-by-me', 'LikeController@showLikedByMeProfiles')->name('liked.by.me');
+        Route::get('/liked-me', 'LikeController@showLikedMeProfiles')->name('liked.me');
+        Route::get('/connections', 'ConnectionsController@showConnections')->name('connections');
     });
 
     // UPLOADING
@@ -68,8 +71,15 @@
     Route::group(['prefix' => '/users', 'middleware' => 'verified'], function () {
         Route::get('/', 'UsersController@show')->name('show.all.users');
         Route::get('/{login}', 'UsersController@showUser')->name('show.certain.user')->middleware('blocked');
-        Route::post('/block/{id}/{login}', 'BlockingController@blockUser')->name('block.user');
-        Route::post('/unblock/{id}/{login}', 'BlockingController@unblockUser')->name('unblock.user');
+        Route::put('/block/{id}/{login}', 'BlockingController@blockUser')->name('block.user');
+        Route::delete('/unblock/{id}/{login}', 'BlockingController@unblockUser')->name('unblock.user');
+        Route::put('/like/{id}/{login}', 'LikeController@likeUser')->name('like.user');
+        Route::delete('/unlike/{id}/{login}', 'LikeController@unlikeUser')->name('unlike.user');
+    });
+    
+    // CHAT ROOM
+    Route::group(['prefix' => '/chat/with', 'middleware' => 'verified'], function () {
+        Route::get('/{login}', 'ChatController@showChat')->name('show.chat');
     });
 
     Route::get('/result', function () {

@@ -94,7 +94,7 @@
             ]);
             
             if ($rating === true && $bio)
-                $this->increaseRating();
+                $this->increaseRating($this->model_profile);
         
             return response()->json([
                 'result' => true,
@@ -131,7 +131,7 @@
             ]);
         
             if ($rating === true)
-                $this->increaseRating();
+                $this->increaseRating($this->model_profile);
 
             return response()->json([
                 'result' => true,
@@ -159,7 +159,7 @@
             ]);
         
             if ($rating === true)
-                $this->increaseRating();
+                $this->increaseRating($this->model_profile);
 
             return response()->json([
                 'result' => true,
@@ -180,7 +180,7 @@
             ]);
         
             if ($rating === true)
-                $this->increaseRating();
+                $this->increaseRating($this->model_profile);
 
             return response()->json([
                 'result' => true,
@@ -202,8 +202,6 @@
                     'error' => 'This login is already taken']);
             
             $this->renameAllStuff($new_login);
-            $this->model_user->update(['login' => $new_login]);
-            $this->model_profile->update(['login' => $new_login]);
             
             return response()->json(['result' => true]);
         }
@@ -225,6 +223,9 @@
                                                         $new_login,
                                                         $this->model_profile->avatar);
             $this->model_profile->save();
+    
+            $this->model_user->update(['login' => $new_login]);
+            $this->model_profile->update(['login' => $new_login]);
         }
         
         public function changeEmail(Request $request) {
@@ -279,14 +280,6 @@
             
             return response()->json(['result' => true]);
         }
-
-        protected function increaseRating() {
-            if ($this->model_profile->rating < 100) {
-                $this->model_profile->increment('rating', 0.5);
-                if ($this->model_profile->rating >= 100)
-                    $this->model_profile->rating = 100;
-            }
-        }
         
         public function showViewedProfiles() {
             $profiles = Visit::where('watcher', Auth::id())
@@ -300,7 +293,7 @@
                 $visited = Carbon::parse($profile->date);
                 $diff = $now->diffInMinutes($visited, true);
                 $time = substr(explode(' ', $profile->date)[1], 0, 5);
-                $profile->date = UsersController::getFineActivityView($diff, $visited, $time);
+                $profile->date = $this->getFineActivityView($diff, $visited, $time);
 
                 $status = User::find($profile->viewed);
                 $profile->user->status = $this->checkLastActivity($status, $now);
@@ -316,7 +309,7 @@
                 $last = Carbon::parse($user->last_activity);
                 $diff = $now->diffInMinutes($last, true);
                 $time = substr(explode(' ', $user->last_activity)[1], 0, 5);
-                return 'last seen ' . UsersController::getFineActivityView($diff, $last, $time);
+                return 'last seen ' . $this->getFineActivityView($diff, $last, $time);
             }
             return 'online';
         }

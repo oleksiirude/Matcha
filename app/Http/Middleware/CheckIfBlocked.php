@@ -26,10 +26,7 @@
                 'user' => $user->id,
                 'banned' => Auth::id()
             ])->first())
-                return response()->json([
-                    'result' => false,
-                    'error' => 'You cannot view this profile, user ' . auth()->user()->login . ' blocked you'
-                ]);
+                return response(view('messages.user-blocked-you', ['user' => $request->login]));
             
             return $next($request);
         }

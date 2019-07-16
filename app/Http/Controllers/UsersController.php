@@ -7,7 +7,6 @@
     use App\User;
     use App\Location;
     use App\Visit;
-    use App\Ban;
     use Carbon\Carbon;
 
     class UsersController extends Controller {
@@ -42,14 +41,17 @@
             $profile = Profile::find($user->id);
             $location = Location::find($user->id);
             $interests = Interest::where('user_id', $user->id)->get();
-
-            $profile['blocked'] = $this->checkIfBlocked($user->id, auth()->user()->id);
+            
             $profile['login'] = $user->login;
             $profile['country'] = $location->country;
             $profile['allow'] = $location->allow;
             $profile['city'] = $location->city;
             $profile['interests'] = $interests;
             $profile['last_activity'] = $this->checkLastActivity($user);
+            $profile['liked'] = $this->checkIfLiked($user->id, auth()->user()->id);
+            $profile['blocked'] = $this->checkIfBlocked($user->id, auth()->user()->id);
+            $profile['connected'] = $this->checkIfConnected($user->id, auth()->user()->id);
+            
         
             return view('user', ['profile' => $profile]);
         }
@@ -73,24 +75,6 @@
             }
             return 'online';
         }
-    
-        public static function getFineActivityView($diff, $last, $time) {
-            switch ($diff) {
-                case $diff === 1:
-                    return 'a few seconds ago';
-                case $diff === 2:
-                    return 'one minute ago';
-                case $diff < 6:
-                    return 'a few minutes ago';
-                case $diff > 6 && $diff < 60:
-                    return $diff . ' minutes ago';
-                case $diff > 60 && $diff < 120:
-                    return 'one hour ago';
-                case $diff > 120 && $diff < 1440:
-                    return (int)($diff / 60) . ' hours ago';
-            }
-            return $last->toFormattedDateString() . ' at ' . $time;
-        }
 
         protected function addDataToVisitsTable($viewed, $watcher) {
             $visits = Visit::where([
@@ -112,14 +96,5 @@
                 $visits->date = Carbon::now();
                 $visits->save();
             }
-        }
-        
-        public static function checkIfBlocked($banned, $user) {
-            if (Ban::where([
-                'user' => $user,
-                'banned' => $banned
-            ])->first())
-                return true;
-            return false;
         }
     }

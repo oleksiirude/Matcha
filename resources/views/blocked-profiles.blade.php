@@ -32,7 +32,7 @@
 
                             @endforeach
                         @else
-                            <p>You haven't any blocked profiles yet</p>
+                            <p>You don't have any blocked profiles yet</p>
                         @endif
                     </div>
                 </div>

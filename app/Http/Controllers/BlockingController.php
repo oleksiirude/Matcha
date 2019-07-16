@@ -2,7 +2,6 @@
 
     namespace App\Http\Controllers;
     
-    use App\User;
     use App\Ban;
     use App\Profile;
     use Auth;
@@ -21,7 +20,7 @@
         }
         
         public function blockUser($id, $login) {
-            $this->validateUser($id, $login);
+            Controller::validateUser($id, $login);
             
             Ban::create([
                 'user' => Auth::id(),
@@ -32,7 +31,7 @@
         }
     
         public function unblockUser($id, $login) {
-            $this->validateUser($id, $login);
+            Controller::validateUser($id, $login);
             
             Ban::where([
                 'user' => Auth::id(),
@@ -40,15 +39,5 @@
             ])->delete();
     
             return response()->json(['result' => true]);
-        }
-        
-        protected function validateUser($id, $login) {
-            $result = User::where([
-                'id' => $id,
-                'login' => $login
-            ])->get();
-            
-            if (!count($result))
-                abort(419);
         }
     }

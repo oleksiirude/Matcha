@@ -101,6 +101,33 @@
 
                                     <form id="viewed-my-profile-form" action="{{ route('viewed.my.profile') }}" method="GET" style="display: none;"></form>
 
+                                    {{--Liked by me--}}
+                                    <a class="dropdown-item" href="{{ route('liked.by.me') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('liked-by-me-form').submit();">
+                                        {{ __('Liked by me') }}
+                                    </a>
+
+                                    <form id="liked-by-me-form" action="{{ route('liked.by.me') }}" method="GET" style="display: none;"></form>
+
+                                    {{--Liked me--}}
+                                    <a class="dropdown-item" href="{{ route('liked.me') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('liked-me-form').submit();">
+                                        {{ __('Liked me') }}
+                                    </a>
+
+                                    <form id="liked-me-form" action="{{ route('liked.me') }}" method="GET" style="display: none;"></form>
+
+                                    {{--Connections--}}
+                                    <a class="dropdown-item" href="{{ route('connections') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('connections-form').submit();">
+                                        {{ __('Connections') }}
+                                    </a>
+
+                                    <form id="connections-form" action="{{ route('connections') }}" method="GET" style="display: none;"></form>
+
                                     {{--Blocked profiles--}}
                                     <a class="dropdown-item" href="{{ route('blocked.users') }}"
                                        onclick="event.preventDefault();
