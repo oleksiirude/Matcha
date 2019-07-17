@@ -27,7 +27,11 @@
                                         </form>
                                         <span id="avatar_errormsg"></span>
                                     </div>
-                                    <p><b>Rating:</b> {{ $profile->rating }}</p>
+                                    <div>
+                                        <p><b>Rating:</b><span id="rating"> {{ $profile->rating }} </span></p>
+                                        <progress id = "rating_progress" value="{{ $profile->rating }}" max="100">
+                                        </progress>
+                                    </div>
                                 </div>
                                 <div id="usr_name_div">
                                     <form action="/set/name" method="POST" id="name_form">

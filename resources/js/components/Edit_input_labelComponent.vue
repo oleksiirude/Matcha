@@ -50,6 +50,7 @@
                             document.getElementById(this.name + '_btn').hidden = true;
                             document.getElementById(this.name + '_error_msg').innerHTML = '';
                             document.getElementById(this.name + '_error_msg').hidden = true;
+                            update_raiting(string.rating);
                             if (this.name == 'login') {
                                 let i = document.getElementById('navbarDropdown').firstChild;
                                 document.getElementById('navbarDropdown').firstChild.nodeValue = this.mutableValue;

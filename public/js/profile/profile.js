@@ -9,6 +9,11 @@ if (avatar.indexOf('images/service/default_avatar.png') !== -1) {
     document.getElementById('delete_btn').hidden = true;
 };
 
+let update_raiting = function (raiting) {
+  document.getElementById('rating').innerHTML =  raiting;
+    document.getElementById('rating_progress').value =  raiting;
+};
+
 // let textarea = document.querySelector('textarea');
 //
 // textarea.addEventListener('keyup', function(){

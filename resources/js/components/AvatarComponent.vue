@@ -40,6 +40,7 @@
                                 document.getElementById('avatar').src = string.path;
                                 document.getElementById('avatar_errormsg').innerHTML = '';
                                 document.getElementById('delete_btn').hidden = false;
+                                update_raiting(string.rating);
                                 console.log('ajax', string.path);
                             } else if (string.result == false) {
                                 document.getElementById('avatar_errormsg').innerHTML = '&#9755; ERROR: ' + string.error;

@@ -419,3 +419,22 @@ label {
     -moz-appearance: none;
     appearance: none;
 }
+
+#gender:hover, #preferences:hover {
+    /*-webkit-appearance:  button-bevel;*/
+    /*-moz-appearance:  button-bevel;*/
+    /*appearance: auto;*/
+}
+progress {
+    color: #FFAF7B;
+    font-size: .6em;
+    line-height: 1.5em;
+    text-indent: .5em;
+    width: 15em;
+    height: 1.8em;
+    border: 1px solid #e6e6e6;
+    background: white;
+}
+progress::-webkit-progress-bar { background: white; }
+progress::-webkit-progress-value { background: #FFAF7B; }
+/*-moz-progress-bar { background: var(--main_one_color); }*/

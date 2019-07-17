@@ -41,7 +41,7 @@
                                         let string = xhr.response;
                                         console.log('res', string);
                                         if (string.result == true) {
-                                                // document.getElementById(name).innerHTML = '';
+                                                update_raiting(string.rating);
                                                 document.getElementById(this.name + '_btn').hidden = true;
                                         } else if (string.result == false) {
                                                 console.log('error');

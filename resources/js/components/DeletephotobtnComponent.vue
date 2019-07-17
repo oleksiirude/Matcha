@@ -42,6 +42,7 @@
                             document.getElementById(imgid).src = '';
                             document.getElementById(imgid).hidden = true;
                             document.getElementById(this.idform).hidden = true;
+                            update_raiting(string.rating);
                         } else if (string.result == false) {
                             console.log('error');
                         }

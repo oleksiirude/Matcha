@@ -1734,6 +1734,7 @@ __webpack_require__.r(__webpack_exports__);
               document.getElementById('avatar').src = string.path;
               document.getElementById('avatar_errormsg').innerHTML = '';
               document.getElementById('delete_btn').hidden = false;
+              update_raiting(string.rating);
               console.log('ajax', string.path);
             } else if (string.result == false) {
               document.getElementById('avatar_errormsg').innerHTML = '&#9755; ERROR: ' + string.error;
@@ -1798,6 +1799,7 @@ __webpack_require__.r(__webpack_exports__);
           if (string.result == true) {
             document.getElementById('avatar').src = 'images/service/default_avatar.png';
             document.getElementById('delete_btn').hidden = true;
+            update_raiting(string.rating);
           } else if (string.result == false) {
             console.log('default avatar');
           }
@@ -1865,6 +1867,7 @@ __webpack_require__.r(__webpack_exports__);
             document.getElementById(imgid).src = '';
             document.getElementById(imgid).hidden = true;
             document.getElementById(_this.idform).hidden = true;
+            update_raiting(string.rating);
           } else if (string.result == false) {
             console.log('error');
           }
@@ -1938,6 +1941,7 @@ __webpack_require__.r(__webpack_exports__);
             document.getElementById(_this.name + '_btn').hidden = true;
             document.getElementById(_this.name + '_error_msg').innerHTML = '';
             document.getElementById(_this.name + '_error_msg').hidden = true;
+            update_raiting(string.rating);
 
             if (_this.name == 'login') {
               var i = document.getElementById('navbarDropdown').firstChild;
@@ -2018,7 +2022,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log('res', string);
 
           if (string.result == true) {
-            // document.getElementById(name).innerHTML = '';
+            update_raiting(string.rating);
             document.getElementById(_this.name + '_btn').hidden = true;
           } else if (string.result == false) {
             console.log('error');
@@ -2086,6 +2090,7 @@ __webpack_require__.r(__webpack_exports__);
             _this.value = document.getElementById(_this.name).value;
             document.getElementById(_this.name + '_btn').hidden = true;
             document.getElementById('name_error_msg').innerHTML = '';
+            update_raiting(string.rating);
           } else if (string.result == false) {
             document.getElementById(_this.name).value = _this.value;
             document.getElementById('name_error_msg').innerHTML = string.error;
@@ -2177,7 +2182,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log('res', string);
 
           if (string.result == true) {
-            // document.getElementById(name).innerHTML = '';
+            update_raiting(string.rating);
             document.getElementById(_this.name + '_btn').hidden = true;
           } else if (string.result == false) {
             console.log('error');
@@ -2275,6 +2280,7 @@ __webpack_require__.r(__webpack_exports__);
               document.getElementById(_this.inputid + '_errormsg').innerHTML = '';
               document.getElementById(id_img).hidden = false;
               document.getElementById('deletephoto_form' + _this.photovalue).hidden = false;
+              update_raiting(string.rating);
               console.log('ajax', string.path);
             } else if (string.result == false) {
               document.getElementById(_this.inputid + '_errormsg').innerHTML = '&#9755; ERROR: ' + string.error;
@@ -2344,7 +2350,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log('res', string);
 
           if (string.result == true) {
-            // document.getElementById(name).innerHTML = '';
+            update_raiting(string.rating);
             document.getElementById(_this.name + '_btn').hidden = true;
           } else if (string.result == false) {
             console.log('error');
