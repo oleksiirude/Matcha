@@ -44,6 +44,15 @@
                 return true;
             return false;
         }
+
+        public function checkIfLikedMe($liked, $user) {
+            if (Like::where([
+                'user' => $liked,
+                'liked' => $user
+            ])->first())
+                return true;
+            return false;
+        }
         
         public function checkIfConnected($liked, $user) {
             if (Like::where([

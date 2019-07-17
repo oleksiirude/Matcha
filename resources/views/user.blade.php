@@ -78,6 +78,11 @@
                                     </form>
                                 @endif
                             @endif
+
+                            @if ($profile->liked_me && !$profile->connected)
+                                <p style="color: darkgreen;">{{ $profile->login }} liked you</p>
+                            @endif
+
                             <p><b>Name Surname:</b> {{ $profile->name }} {{ $profile->surname }}</p>
 
                             <p><b>Rating:</b> {{ $profile->rating }}</p>

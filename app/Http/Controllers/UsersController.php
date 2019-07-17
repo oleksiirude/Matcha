@@ -37,10 +37,17 @@
                 return redirect('profile');
 
             $this->addDataToVisitsTable($user->id, auth()->user()->id);
+        
+            return view('user', ['profile' => $this->fillDataInBox($user)]);
+        }
 
+        protected function fillDataInBox(User $user) {
             $profile = Profile::find($user->id);
             $location = Location::find($user->id);
             $interests = Interest::where('user_id', $user->id)->get();
+
+            $aim = $user->id;
+            $auth = auth()->user()->id;
 
             $profile['auth_user_avatar_uploaded'] = $this->ifAvatarUploaded();
             $profile['login'] = $user->login;
@@ -48,14 +55,13 @@
             $profile['allow'] = $location->allow;
             $profile['city'] = $location->city;
             $profile['interests'] = $interests;
-            $profile['reported'] = $this->checkIfReported(auth()->user()->id, $user->id);
+            $profile['reported'] = $this->checkIfReported($auth, $aim);
             $profile['last_activity'] = $this->checkLastActivity($user);
-            $profile['liked'] = $this->checkIfLiked($user->id, auth()->user()->id);
-            $profile['blocked'] = $this->checkIfBlocked($user->id, auth()->user()->id);
-            $profile['connected'] = $this->checkIfConnected($user->id, auth()->user()->id);
-            
-        
-            return view('user', ['profile' => $profile]);
+            $profile['liked'] = $this->checkIfLiked($aim, $auth);
+            $profile['liked_me'] = $this->checkIfLikedMe($aim, $auth);
+            $profile['blocked'] = $this->checkIfBlocked($aim, $auth);
+            $profile['connected'] = $this->checkIfConnected($aim, $auth);
+            return $profile;
         }
 
         public function increaseRating($id) {
