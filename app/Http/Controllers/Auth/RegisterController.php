@@ -78,13 +78,6 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
         
         $data = $request->all();
-<<<<<<< HEAD
-       
-=======
-
-//        dd($data);
-
->>>>>>> 4be7056ab1e0a047f6012bf8131ebf4cde299745
         event(new Registered($user = $this->createUser($data)));
         
         $this->createProfile($data);

@@ -128,6 +128,7 @@
         }
     
         public function deletePhoto($number) {
+//            dd ($number);
             if (!preg_match('/^[1-4]$/', $number))
                 return redirect()->back();
             

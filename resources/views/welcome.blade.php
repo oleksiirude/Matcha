@@ -15,7 +15,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <link rel="shortcut icon" href="{{ asset('images/service/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
         <!-- Styles -->
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         <style>
