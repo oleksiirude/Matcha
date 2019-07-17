@@ -26,6 +26,8 @@
                                             <deletebtn-component srcavatar="{{ asset('images/service/del.png') }}" idbtn="delete_btn"></deletebtn-component>
                                         </form>
                                         <span id="avatar_errormsg"></span>
+                                        <crop-component></crop-component>
+{{--                                        <canvas id="canvas" width="900" height="600"></canvas>--}}
                                     </div>
                                     <div>
                                         <p><b>Rating:</b><span id="rating"> {{ $profile->rating }} </span></p>

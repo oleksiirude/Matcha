@@ -31,6 +31,8 @@
                         if (string.result == true) {
                             document.getElementById('bio').value = '';
                             document.getElementById(this.name + '_btn').hidden = true;
+                            document.getElementById('bio_error_msg').innerHTML = '';
+                            document.getElementById('bio_error_msg').hidden = true;
                             update_raiting(string.rating);
                         } else if (string.result == false) {
                             console.log('error');

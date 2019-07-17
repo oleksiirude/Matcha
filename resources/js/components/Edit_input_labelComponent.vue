@@ -50,7 +50,6 @@
                             document.getElementById(this.name + '_btn').hidden = true;
                             document.getElementById(this.name + '_error_msg').innerHTML = '';
                             document.getElementById(this.name + '_error_msg').hidden = true;
-                            update_raiting(string.rating);
                             if (this.name == 'login') {
                                 let i = document.getElementById('navbarDropdown').firstChild;
                                 document.getElementById('navbarDropdown').firstChild.nodeValue = this.mutableValue;
@@ -59,7 +58,8 @@
                                 // document.getElementById('navbarDropdown').firstChild = this.mutableValue;
                                 console.log('ok1', document.getElementById('navbarDropdown').firstChild);
                             }
-
+                            if (this.name != 'login')
+                                update_raiting(string.rating);
                         } else if (string.result == false) {
                             document.getElementById(this.name).value = this.mutableValue;
                             document.getElementById(this.name + '_error_msg').hidden = false;
