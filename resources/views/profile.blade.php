@@ -90,17 +90,17 @@
                                         <p>
                                             <h2>About</h2>
                                         </p>
+                                        <form action="{{ route('delete.bio') }}" method="POST" id="deletebio_form">
+                                            @csrf
+                                            @method('DELETE')
+                                            <deletedefault-component name="deletebio" url="/delete/bio"></deletedefault-component>
+                                        </form>
                                         <form action="/set/bio" method="POST" id="bio_form">
                                             @csrf
                                             @method('PUT')
                                             <editdata-component name="bio" bio="{{ $profile->bio }}"></editdata-component>
                                         </form>
-                                        <form action="{{ route('delete.bio') }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-
-                                            <button type="submit">delete bio</button>
-                                        </form>
+                                        <span id="bio_error_msg" class="error_msg" hidden></span>
                                     </div>
                                 </div>
                             </div>

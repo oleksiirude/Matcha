@@ -1,6 +1,6 @@
 <template>
         <div style="height: 250px;">
-                <textarea type="text" name="bio" placeholder="Tell about yourself, up to 500 symbols" class="profiledata" id="bio" @keyup="show_btn(name)"  @click="editInput(name)" maxlength="500">{{bio}}</textarea>
+                <textarea type="text" :name="name" placeholder="Tell about yourself, up to 500 symbols" class="profiledata" id="bio" @keyup="show_btn(name)"  @click="editInput(name)" maxlength="500">{{bio}}</textarea>
                 <img src="/images/service/edit.png" class="edit" @click="editInput(name)" id="bio_edit">
                 <br>
                 <button type="submit" hidden id="bio_btn" class="btn edit_submit" @click="save">Save</button>
@@ -13,6 +13,11 @@
                 'name',
                 'bio',
         ],
+            data: function () {
+                    return {
+                            mutableValue: this.bio
+                    }
+            },
         methods: {
                 editInput: function (name) {
                         // console.log('editInput', this);
@@ -43,7 +48,16 @@
                                         if (string.result == true) {
                                                 update_raiting(string.rating);
                                                 document.getElementById(this.name + '_btn').hidden = true;
+                                                document.getElementById('deletebio_btn').hidden = false;
+                                                this.mutableValue = document.getElementById(this.name).value;
+                                                document.getElementById(this.name + '_error_msg').innerHTML = '';
+                                                document.getElementById(this.name + '_error_msg').hidden = true;
+                                                console.log('this.mutableValue', this.mutableValue);
                                         } else if (string.result == false) {
+                                                document.getElementById(this.name).value = this.mutableValue;
+                                                document.getElementById(this.name + '_error_msg').hidden = false;
+                                                document.getElementById(this.name + '_error_msg').innerHTML = string.error;
+                                                console.log('this.mutableValue', this.mutableValue);
                                                 console.log('error');
                                         }
                                         console.log('res', string);

@@ -13,6 +13,9 @@ let update_raiting = function (raiting) {
   document.getElementById('rating').innerHTML =  raiting;
     document.getElementById('rating_progress').value =  raiting;
 };
+let deletebio = function() {
+
+}
 
 // let textarea = document.querySelector('textarea');
 //
@@ -29,10 +32,12 @@ let update_raiting = function (raiting) {
 // }
 
 document.addEventListener('DOMContentLoaded', function() {
-
-
-
     let gallery = document.getElementsByClassName('usr_photo');
     console.log('gallery', gallery);
+    console.log('bio', document.getElementById('bio').innerHTML);
+    if (document.getElementById('bio').innerHTML != '')
+    {
+        document.getElementById('deletebio_btn').hidden = false;
+    }
     let count = 1;
 });

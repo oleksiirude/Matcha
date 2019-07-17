@@ -348,6 +348,7 @@ a:hover {
     width: 20px;
     opacity: 0.6;
     /*vertical-align: top;*/
+    float: right;
     height: 20px;
 }
 .edit:hover{
@@ -425,6 +426,12 @@ label {
     /*-moz-appearance:  button-bevel;*/
     /*appearance: auto;*/
 }
+#deletebio_btn {
+    position: relative;
+    float: right;
+    background: white;
+    color: rgba(68, 79, 87, 0.8);
+}
 progress {
     color: #FFAF7B;
     font-size: .6em;
@@ -433,7 +440,6 @@ progress {
     width: 15em;
     height: 1.8em;
     border: 1px solid #e6e6e6;
-    background: white;
 }
 progress::-webkit-progress-bar { background: white; }
 progress::-webkit-progress-value { background: #FFAF7B; }

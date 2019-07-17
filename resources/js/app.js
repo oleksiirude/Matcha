@@ -24,6 +24,7 @@ Vue.component('header-component', require('./components/HeaderComponent').defaul
 Vue.component('avatar-component', require('./components/AvatarComponent').default);
 Vue.component('photo-component', require('./components/PhotoComponent').default);
 Vue.component('deletebtn-component', require('./components/DeletebtnComponent').default);
+Vue.component('deletedefault-component', require('./components/DeletedefaultComponent').default);
 Vue.component('deletephotobtn-component', require('./components/DeletephotobtnComponent').default);
 Vue.component('editdata-component', require('./components/EditdataComponent').default);
 Vue.component('editinput-component', require('./components/EditinputComponent').default);
