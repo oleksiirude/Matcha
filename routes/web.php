@@ -75,6 +75,7 @@
         Route::delete('/unblock/{id}/{login}', 'BlockingController@unblockUser')->name('unblock.user');
         Route::put('/like/{id}/{login}', 'LikeController@likeUser')->name('like.user');
         Route::delete('/unlike/{id}/{login}', 'LikeController@unlikeUser')->name('unlike.user');
+        Route::post('/report/{id}/{login}', 'ReportController@makeReport')->name('report');
     });
     
     // CHAT ROOM

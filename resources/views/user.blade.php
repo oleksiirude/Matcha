@@ -42,29 +42,42 @@
                                 </form>
                             @endif
                             <p>
-                            {{--Like block--}}
-                            @if($profile->liked)
-                                <form action="{{ route('unlike.user', [
-                                                    'id' => $profile->user_id,
-                                                    'login' => $profile->login
-                                                    ]) }}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
+                            {{--Blocking block--}}
+                            @if(!$profile->reported)
+                                <form action="{{ route('report', [
+                                                'id' => $profile->user_id,
+                                                'login' => $profile->login
+                                                ]) }}" method="POST">
+                                @csrf
 
-                                    <button type="submit">unlike {{ $profile->login }}</button>
-                                </form>
-                            @else
-                                <form action="{{ route('like.user', [
-                                                     'id' => $profile->user_id,
-                                                     'login' => $profile->login
-                                                     ]) }}" method="POST">
-                                    @method('PUT')
-                                    @csrf
-
-                                    <button type="submit">like {{ $profile->login }}</button>
+                                    <button type="submit">report {{ $profile->login }} as fake account</button>
                                 </form>
                             @endif
+                            <p>
+                            {{--Like block--}}
+                            @if($profile->auth_user_avatar_uploaded)
+                                @if($profile->liked)
+                                    <form action="{{ route('unlike.user', [
+                                                        'id' => $profile->user_id,
+                                                        'login' => $profile->login
+                                                        ]) }}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
 
+                                        <button type="submit">unlike {{ $profile->login }}</button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('like.user', [
+                                                         'id' => $profile->user_id,
+                                                         'login' => $profile->login
+                                                         ]) }}" method="POST">
+                                        @method('PUT')
+                                        @csrf
+
+                                        <button type="submit">like {{ $profile->login }}</button>
+                                    </form>
+                                @endif
+                            @endif
                             <p><b>Name Surname:</b> {{ $profile->name }} {{ $profile->surname }}</p>
 
                             <p><b>Rating:</b> {{ $profile->rating }}</p>

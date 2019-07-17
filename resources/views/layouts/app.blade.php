@@ -114,7 +114,7 @@
                                     <a class="dropdown-item" href="{{ route('liked.me') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('liked-me-form').submit();">
-                                        {{ __('Liked me') }}
+                                        {{ __('Liked my profile') }}
                                     </a>
 
                                     <form id="liked-me-form" action="{{ route('liked.me') }}" method="GET" style="display: none;"></form>

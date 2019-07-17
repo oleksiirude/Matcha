@@ -1,10 +1,11 @@
 <?php
 
     namespace App\Http\Controllers;
-    
+
+    use Auth;
     use App\Ban;
     use App\Profile;
-    use Auth;
+    use Carbon\Carbon;
 
     class BlockingController extends Controller {
         
@@ -24,7 +25,8 @@
             
             Ban::create([
                 'user' => Auth::id(),
-                'banned' => $id
+                'banned' => $id,
+                'date' => Carbon::now()
             ]);
     
             return response()->json(['result' => true]);

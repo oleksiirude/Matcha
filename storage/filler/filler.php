@@ -4,7 +4,7 @@
 
 	define('DSN', 'mysql:host=127.0.0.1;dbname=matcha;port=3306;charset=utf8mb4');
 	define('USERNAME', 'root');
-	define('PASSWORD', 'root');
+	define('PASSWORD', 'password');
 
 	$connection = new PDO(DSN, USERNAME, PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 	

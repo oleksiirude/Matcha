@@ -12,7 +12,7 @@
     class UsersController extends Controller {
     
         public function show() {
-            $users = User::select()->get();
+            $users = User::select()->whereNotNull('email_verified_at')->get();
         
             foreach ($users as $user) {
                 if (!$user->isOnline()) {
@@ -29,8 +29,8 @@
         
         public function showUser($login) {
             $user = User::where('login', $login)->first();
-        
-            if (!$user)
+
+            if (!$user || !$user->email_verified_at)
                 return abort(404);
             
             if ($login === auth()->user()->login)
@@ -41,12 +41,14 @@
             $profile = Profile::find($user->id);
             $location = Location::find($user->id);
             $interests = Interest::where('user_id', $user->id)->get();
-            
+
+            $profile['auth_user_avatar_uploaded'] = $this->ifAvatarUploaded();
             $profile['login'] = $user->login;
             $profile['country'] = $location->country;
             $profile['allow'] = $location->allow;
             $profile['city'] = $location->city;
             $profile['interests'] = $interests;
+            $profile['reported'] = $this->checkIfReported(auth()->user()->id, $user->id);
             $profile['last_activity'] = $this->checkLastActivity($user);
             $profile['liked'] = $this->checkIfLiked($user->id, auth()->user()->id);
             $profile['blocked'] = $this->checkIfBlocked($user->id, auth()->user()->id);

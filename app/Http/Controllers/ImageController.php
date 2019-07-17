@@ -97,7 +97,8 @@
             $this->increaseRating($this->model_profile);
     
             $this->model_profile->update([
-               'avatar' => $path
+               'avatar' => $path,
+                'avatar_uploaded' => true
             ]);
         }
         
@@ -105,7 +106,7 @@
             $this->increaseRating($this->model_profile);
     
             $this->model_profile->update([
-                'photo' . $number => $path
+                'photo' . $number => $path,
             ]);
         }
     
@@ -118,7 +119,8 @@
             $this->model_profile->decrement('rating', 0.5);
     
             $this->model_profile->update([
-                'avatar' => 'images/service/default_avatar.png'
+                'avatar' => 'images/service/default_avatar.png',
+                'avatar_uploaded' => false
             ]);
         
             return response()->json([

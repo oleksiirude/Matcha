@@ -1,10 +1,12 @@
 <?php
 
     namespace App\Http\Controllers;
-    
+
+    use Auth;
     use App\Ban;
     use App\Like;
     use App\Profile;
+    use App\Report;
     use App\User;
     use Carbon\Carbon;
     use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -14,7 +16,7 @@
     
     class Controller extends BaseController {
         use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-        
+
         public function validateUser($id, $login) {
             $result = User::where([
                 'id' => $id,
@@ -52,6 +54,15 @@
                         'user' => $liked,
                         'liked' => $user
                     ])->first())
+                return true;
+            return false;
+        }
+
+        public function checkIfReported($user, $reported) {
+            if (Report::where([
+                'user' => $user,
+                'reported' => $reported
+            ])->first())
                 return true;
             return false;
         }
@@ -103,9 +114,16 @@
                 $profiles[$i]['blocked'] = $this->checkIfBlocked($user->id, auth()->user()->id);
                 $profiles[$i]['connected'] = $this->checkIfConnected($user->id, auth()->user()->id);
                 $profiles[$i]['last_activity'] = $this->checkLastActivity($user);
+                $profiles[$i]['auth_user_avatar_uploaded'] = $this->ifAvatarUploaded();
+                $profiles[$i]['liked'] = $this->checkIfLiked($user->id, auth()->user()->id);
                 $i++;
             }
         
             return $profiles;
+        }
+
+        public function ifAvatarUploaded() {
+            $uploaded = Profile::find(Auth::id());
+            return ($uploaded->avatar_uploaded);
         }
     }

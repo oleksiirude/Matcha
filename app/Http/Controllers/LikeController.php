@@ -1,11 +1,12 @@
 <?php
 
     namespace App\Http\Controllers;
-    
+
+    use Auth;
     use App\Profile;
     use App\User;
-    use Auth;
     use App\Like;
+    use Carbon\Carbon;
 
     class LikeController extends Controller {
         
@@ -14,7 +15,8 @@
     
             Like::create([
                 'user' => Auth::id(),
-                'liked' => $id
+                'liked' => $id,
+                'date' => Carbon::now()
             ]);
             
             $profile = Profile::where('user_id', $id)->first();

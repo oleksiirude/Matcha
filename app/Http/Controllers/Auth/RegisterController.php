@@ -78,6 +78,9 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
         
         $data = $request->all();
+
+        if (!$this->validateLocation($data))
+            return view('messages.smth-went-wrong');
         
         event(new Registered($user = $this->createUser($data)));
         
@@ -143,6 +146,17 @@ class RegisterController extends Controller
 
         if (!file_exists(public_path() . '/images/profiles/' . $login))
             mkdir(public_path() . '/images/profiles/' . $login);
+    }
+
+    protected function validateLocation($data) {
+        if (!isset($data['gps_country'])
+            || !isset($data['gps_region'])
+            || !isset($data['gps_city'])
+            || !isset($data['gps_code'])
+            || !isset($data['gps_latitude'])
+            || !isset($data['gps_longitude']))
+            return false;
+        return true;
     }
 
     public function index() {
