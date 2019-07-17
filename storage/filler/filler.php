@@ -6,6 +6,7 @@
 	define('USERNAME', 'root');
 	define('PASSWORD', 'Trofimov2015');
 
+
 	$connection = new PDO(DSN, USERNAME, PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 	
 	$connection->query("

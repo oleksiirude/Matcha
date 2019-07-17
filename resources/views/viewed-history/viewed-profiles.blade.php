@@ -5,11 +5,12 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Users who viewed my profile</div>
+                    <div class="card-header">My viewed profiles</div>
                     <div class="card-body">
                         @if (count($profiles))
                             @foreach($profiles as $profile)
                                 <div style="background-color: darkgrey">
+                                    <p>
                                         <a href="{{ route('show.certain.user', $profile->user->login) }}">
                                             <img src="{{ URL::asset($profile->user->avatar) }}"
                                                  alt="{{ $profile->user->login }}'s avatar" style="width: 60px"
@@ -19,7 +20,7 @@
                                         {{ $profile->user->name }} {{ $profile->user->surname }}
 
                                         @if($profile->location->allow)
-                                            from {{ $profile->location->country }}, {{ $profile->location->city }}
+                                            from {{ $profile->location->country }}, {{ $profile->location->city }}</p>
                                         @endif
 
                                         <br>
@@ -30,19 +31,21 @@
                                             <span>{{ $profile->user->status }}</span>
                                         @endif
 
-                                        | Visited your profile: {{ $profile->date }}
+                                        | Visited by you: {{ $profile->visited }}
 
-                                        <form action="{{ route('delete.viewed.me.profile', $profile->user->user_id) }}" method="POST">
+                                        <form action="{{ route('delete.viewed.profile', $profile->user->user_id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
 
                                             <button type="submit">delete from history</button>
                                         </form>
+
                                     <p></p>
                                 </div>
+
                             @endforeach
                         @else
-                            <p>Anyone hasn't viewed your profile yet</p>
+                            <p>You haven't viewed any profiles yet</p>
                         @endif
                     </div>
                 </div>

@@ -19,8 +19,13 @@
     // PROFILE
     Route::group(['prefix' => '/profile', 'middleware' => 'verified'], function () {
         Route::get('/', 'HomeController@show')->name('profile');
+        Route::get('/viewed/profiles', 'HomeController@showViewedProfiles')->name('viewed.profiles');
         Route::get('/viewed/profiles', 'VisitController@showViewedProfiles')->name('viewed.profiles');
         Route::get('/viewed/my-profile', 'VisitController@showUsersViewedMyProfile')->name('viewed.my.profile');
+        Route::get('/blocked/users', 'BlockingController@showBlockedProfiles')->name('blocked.users');
+        Route::get('/liked-by-me', 'LikeController@showLikedByMeProfiles')->name('liked.by.me');
+        Route::get('/liked-me', 'LikeController@showLikedMeProfiles')->name('liked.me');
+        Route::get('/connections', 'ConnectionsController@showConnections')->name('connections');
     });
 
     // UPLOADING
@@ -32,7 +37,7 @@
     // DELETING
     Route::group(['prefix' => '/delete', 'middleware' => 'verified'], function () {
         Route::delete('/avatar', 'ImageController@deleteAvatar')->name('delete.avatar');
-        Route::delete('/photo/{number}', 'ImageController@deletePhoto')->name('delete.photo');;
+        Route::delete('/photo/{number}', 'ImageController@deletePhoto')->name('delete.photo');
         Route::delete('/bio', 'HomeController@deleteBio')->name('delete.bio');
         Route::delete('/tag/{tag}', 'TagController@deleteTag')->name('delete.tag');
         Route::delete('/viewed/profile/{id}', 'VisitController@deleteViewedProfile')->name('delete.viewed.profile');
@@ -53,8 +58,8 @@
     // CHANGE
     Route::group(['prefix' => '/change', 'middleware' => 'verified'], function () {
         Route::post('/login', 'HomeController@changeLogin')->name('change.login');
-        Route::post('/email', 'HomeController@changeEmail')->name('change.email');;
-        Route::post('/password', 'HomeController@changePassword')->name('change.password');;
+        Route::post('/email', 'HomeController@changeEmail')->name('change.email');
+        Route::post('/password', 'HomeController@changePassword')->name('change.password');
     });
 
     // FINDING
@@ -65,7 +70,16 @@
     // USERS
     Route::group(['prefix' => '/users', 'middleware' => 'verified'], function () {
         Route::get('/', 'UsersController@show')->name('show.all.users');
-        Route::get('/{login}', 'UsersController@showUser')->name('show.certain.user');
+        Route::get('/{login}', 'UsersController@showUser')->name('show.certain.user')->middleware('blocked');
+        Route::put('/block/{id}/{login}', 'BlockingController@blockUser')->name('block.user');
+        Route::delete('/unblock/{id}/{login}', 'BlockingController@unblockUser')->name('unblock.user');
+        Route::put('/like/{id}/{login}', 'LikeController@likeUser')->name('like.user');
+        Route::delete('/unlike/{id}/{login}', 'LikeController@unlikeUser')->name('unlike.user');
+    });
+    
+    // CHAT ROOM
+    Route::group(['prefix' => '/chat/with', 'middleware' => 'verified'], function () {
+        Route::get('/{login}', 'ChatController@showChat')->name('show.chat');
     });
 
     Route::get('/result', function () {

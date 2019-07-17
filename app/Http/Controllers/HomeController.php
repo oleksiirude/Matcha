@@ -92,7 +92,7 @@
             ]);
             
             if ($rating === true && $bio)
-                $this->increaseRating();
+                $this->increaseRating($this->model_profile);
         
             return response()->json([
                 'result' => true,
@@ -129,7 +129,7 @@
             ]);
         
             if ($rating === true)
-                $this->increaseRating();
+                $this->increaseRating($this->model_profile);
 
             return response()->json([
                 'result' => true,
@@ -157,7 +157,7 @@
             ]);
         
             if ($rating === true)
-                $this->increaseRating();
+                $this->increaseRating($this->model_profile);
 
             return response()->json([
                 'result' => true,
@@ -178,7 +178,7 @@
             ]);
         
             if ($rating === true)
-                $this->increaseRating();
+                $this->increaseRating($this->model_profile);
 
             return response()->json([
                 'result' => true,
@@ -200,8 +200,6 @@
                     'error' => 'This login is already taken']);
             
             $this->renameAllStuff($new_login);
-            $this->model_user->update(['login' => $new_login]);
-            $this->model_profile->update(['login' => $new_login]);
             
             return response()->json(['result' => true]);
         }
@@ -223,6 +221,9 @@
                                                         $new_login,
                                                         $this->model_profile->avatar);
             $this->model_profile->save();
+    
+            $this->model_user->update(['login' => $new_login]);
+            $this->model_profile->update(['login' => $new_login]);
         }
         
         public function changeEmail(Request $request) {
@@ -277,14 +278,4 @@
             
             return response()->json(['result' => true]);
         }
-
-        protected function increaseRating() {
-            if ($this->model_profile->rating < 100) {
-                $this->model_profile->increment('rating', 0.5);
-                if ($this->model_profile->rating >= 100)
-                    $this->model_profile->rating = 100;
-            }
-        }
-
-
     }

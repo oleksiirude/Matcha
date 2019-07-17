@@ -99,7 +99,6 @@
 
                     <div>
 
-
                         <h2>My photos</h2>
 
                         <div class="usr_gallery">
@@ -162,9 +161,6 @@
                         </div>
 
 
-
-
-
                         <p><b>Country:</b> {{ $profile->country }}</p>
                         <p><b>City:</b> {{ $profile->city }}</p>
                         <p><b>Email:</b> {{ $profile->email }}</p>
@@ -216,7 +212,6 @@
                             <input type="text" name="piece">
                             <button type="submit">find matches</button>
                         </form>
-                        _____________
 
                     </div>
                 </div>

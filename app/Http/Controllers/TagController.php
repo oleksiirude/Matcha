@@ -45,7 +45,7 @@
                     'error' => 'You already have this interest'
                 ]);
             
-            $this->increaseRating();
+            $this->increaseRatingTag();
             
             return response()->json([
                 'result' => true,
@@ -73,7 +73,7 @@
             return false;
         }
         
-        protected function increaseRating() {
+        protected function increaseRatingTag() {
             if (count($this->model_interest->select('tag')
                 ->where('user_id', Auth::id())
                 ->get()) < 21) {

@@ -51,7 +51,7 @@
             $number = $request->request->get('photo');
             
             if (!preg_match('/^[1-4]$/', $number))
-                return redirect()->back();
+                abort(419);
             
             if (($result = $this->validator($request, 'photo')) !== true)
                 return response()->json($result);
@@ -94,7 +94,7 @@
         }
         
         protected function insertAvatarToDB($path) {
-            $this->increaseRating();
+            $this->increaseRating($this->model_profile);
     
             $this->model_profile->update([
                'avatar' => $path
@@ -102,7 +102,7 @@
         }
         
         protected function insertPhotoToDB($path, $number) {
-            $this->increaseRating();
+            $this->increaseRating($this->model_profile);
     
             $this->model_profile->update([
                 'photo' . $number => $path
@@ -130,7 +130,7 @@
         public function deletePhoto($number) {
 //            dd ($number);
             if (!preg_match('/^[1-4]$/', $number))
-                return redirect()->back();
+                abort(419);
             
             $photo = 'photo' . $number;
     
@@ -149,13 +149,5 @@
                 'result' => true,
                 'rating' => round($this->model_profile->rating, 1)
             ]);
-        }
-
-        protected function increaseRating() {
-            if ($this->model_profile->rating < 100) {
-                $this->model_profile->increment('rating', 0.5);
-                if ($this->model_profile->rating >= 100)
-                    $this->model_profile->rating = 100;
-            }
         }
     }
