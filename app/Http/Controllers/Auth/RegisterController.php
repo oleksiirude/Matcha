@@ -108,6 +108,7 @@ class RegisterController extends Controller
     
         Profile::create([
             'user_id' => $id->id,
+            'login' => $data['login'],
             'name' => ucfirst(strtolower($data['name'])),
             'surname' => ucfirst(strtolower($data['surname'])),
         ]);
