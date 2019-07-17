@@ -91,6 +91,12 @@
                                             @method('PUT')
                                             <editdata-component name="bio" bio="{{ $profile->bio }}"></editdata-component>
                                         </form>
+                                        <form action="{{ route('delete.bio') }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit">delete bio</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

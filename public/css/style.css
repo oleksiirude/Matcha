@@ -220,25 +220,66 @@ a:hover {
     color: var(--main_one_color);
 }
 
- /*profile*/
+/*profile*/
 .card_profile {
-    margin: 20px;
+    padding-left: 20px;
     width: 100%;
-    background-color: white;
+    /*background-color: white;*/
 }
 
-#div_useravatar {
-    display: inline-block;
-    max-width: 50%;
-    float: left;
+/*.color_div {*/
+/*    margin-top: 40px;*/
+/*    padding: 40px;*/
+/*    background: var(--main-color-ob);*/
+/*    background: var(--main-color-ob1);*/
+/*    background: var(--main-color);*/
+/*    width: 50%;*/
+
+/*}*/
+
+.white_div {
+    width:80%;
+    margin-left: 20px;
+    background-color: white;
+    box-shadow: 5px 5px 8px rgba(74, 50, 60, 0.3);
+    min-height: 400px;
 }
-#delete_btn {
+.white_div .card-body {
+    margin-top: 40px;
+    text-align: left;
+    display: flex;
+}
+#right_card {
+    display: inline-block;
+    margin-left: 40px;
+    margin-right: 60px;
+    margin-top: 60px;
+    width: calc(100% - 100px);
+}
+#user_bio {
+    display: inline-block;
+    width: 100%;
+}
+#user_bio textarea {
+    word-wrap: break-word;
+    width: calc(100% - 30px);
+    max-height: 100%;
+    min-height: 180px;
+}
+#div_useravatar {
+    top: -90px;
+    display: inline-block;
+    height: 300px;
+    box-shadow: 5px 5px 8px rgba(74, 50, 60, 0.3);
+    position: relative;
+    /*float: left;*/
+}
+.delete_btn {
     border: none;
     background-color: transparent;
     z-index: 99;
     position: relative;
 }
-
 .delete_btn img {
     opacity: 0.7;
 }
@@ -374,4 +415,7 @@ label {
     font-weight: bold;
     border: none;
     cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
