@@ -3,6 +3,7 @@
     namespace App\Http\Controllers;
     
     use App\Profile;
+    use App\User;
     use Auth;
     use App\Like;
 
@@ -37,11 +38,38 @@
         }
         
         public function showLikedByMeProfiles() {
-            return view('liked.liked-by-me');
+            $id = Auth::id();
+            $profiles = Like::where('user', $id)->get();
+    
+            $users = [];
+            foreach ($profiles as $profile) {
+                $result = Like::where([
+                    'user' => $id,
+                    'liked' => $profile->liked
+                ])->first();
+                if ($result)
+                    $users[] = User::find($result->liked);
+            }
+    
+            $profiles = $this->getProfiles($users);
+            return view('liked.liked-by-me', ['profiles' => $profiles]);
         }
     
         public function showLikedMeProfiles() {
-            return view('liked.liked-me');
+            $id = Auth::id();
+            $profiles = Like::where('liked', $id)->get();
+            
+            $users = [];
+            foreach ($profiles as $profile) {
+                $result = Like::where([
+                    'user' => $profile->user,
+                    'liked' => $id
+                ])->first();
+                if ($result)
+                    $users[] = User::find($result->user);
+            }
+    
+            $profiles = $this->getProfiles($users);
+            return view('liked.liked-me', ['profiles' => $profiles]);
         }
-        
     }

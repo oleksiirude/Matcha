@@ -29,7 +29,7 @@
                 $visited = Carbon::parse($profile->date);
                 $diff = $this->now->diffInMinutes($visited, true);
                 $time = substr(explode(' ', $profile->date)[1], 0, 5);
-                $profile->date = $this->getFineActivityView($diff, $visited, $time);
+                $profile->visited = $this->getFineActivityView($diff, $visited, $time);
 
                 $status = User::find($profile->viewed);
                 $profile->user->status = $this->checkLastActivity($status);
@@ -52,7 +52,7 @@
                 $visited = Carbon::parse($profile->date);
                 $diff = $this->now->diffInMinutes($visited, true);
                 $time = substr(explode(' ', $profile->date)[1], 0, 5);
-                $profile->date = $this->getFineActivityView($diff, $visited, $time);
+                $profile->visited = $this->getFineActivityView($diff, $visited, $time);
 
                 $status = User::find($profile->watcher);
                 $profile->user->status = $this->checkLastActivity($status);
@@ -63,7 +63,7 @@
             return view('viewed-history.viewed-my-profile', ['profiles' => $profiles]);
         }
 
-        protected function checkLastActivity(User $user) {
+        public function checkLastActivity(User $user) {
             if (!$user->isOnline()) {
                 $last = Carbon::parse($user->last_activity);
                 $diff = $this->now->diffInMinutes($last, true);

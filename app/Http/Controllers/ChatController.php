@@ -2,7 +2,6 @@
     
     namespace App\Http\Controllers;
     
-    
     use App\Profile;
 
     class ChatController extends Controller {

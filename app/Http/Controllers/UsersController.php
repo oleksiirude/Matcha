@@ -56,24 +56,13 @@
             return view('user', ['profile' => $profile]);
         }
 
-        protected function increaseRating($id) {
+        public function increaseRating($id) {
             $profile = Profile::find($id);
             if ($profile->rating < 100) {
                 $profile->increment('rating', 0.1);
                 if ($profile->rating >= 100)
                     $profile->rating = 100;
             }
-        }
-
-        protected function checkLastActivity(User $user) {
-            if (!$user->isOnline()) {
-                $now = Carbon::now();
-                $last = Carbon::parse($user->last_activity);
-                $diff = $now->diffInMinutes($last, true);
-                $time = substr(explode(' ', $user->last_activity)[1], 0, 5);
-                return 'last seen ' . $this->getFineActivityView($diff, $last, $time);
-            }
-            return 'online';
         }
 
         protected function addDataToVisitsTable($viewed, $watcher) {

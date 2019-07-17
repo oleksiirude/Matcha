@@ -30,7 +30,7 @@
                                             <span>{{ $profile->user->status }}</span>
                                         @endif
 
-                                        | Visited your profile: {{ $profile->date }}
+                                        | Visited your profile: {{ $profile->visited }}
 
                                         <form action="{{ route('delete.viewed.me.profile', $profile->user->user_id) }}" method="POST">
                                             @csrf
