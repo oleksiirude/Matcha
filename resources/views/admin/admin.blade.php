@@ -10,8 +10,8 @@
                         @if (count($reports))
                             <ul>
                             @foreach($reports as $report)
-                                <li>User {{ $report->login_who }} (id = {{ $report->user }})
-                                    reported user {{ $report->login_whom }} (id = {{ $report->reported }}) as fake account
+                                <li>User <b>{{ $report->login_who }}</b> (id = {{ $report->user }})
+                                    reported user <b>{{ $report->login_whom }}</b> (id = {{ $report->reported }}) as fake account
                                     at {{ $report->date }}
                                 </li>
                             @endforeach

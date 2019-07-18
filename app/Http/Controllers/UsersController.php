@@ -12,7 +12,10 @@
     class UsersController extends Controller {
     
         public function show() {
-            $users = User::select()->whereNotNull('email_verified_at')->get();
+            $users = User::select()
+                ->whereNotNull('email_verified_at')
+                ->where('id', '!=', 1)
+                ->get();
         
             foreach ($users as $user) {
                 if (!$user->isOnline()) {

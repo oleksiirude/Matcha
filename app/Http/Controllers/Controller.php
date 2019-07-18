@@ -54,6 +54,42 @@
             return false;
         }
         
+        public static function checkIfTotallyFilled($data) {
+            $counter = 0;
+            $empty = [];
+    
+            if (!$data['allow'])
+                $empty['fill'][] = 'your location';
+            if (!$data['age'])
+                $empty['fill'][] = 'age';
+            if (!$data['preferences'])
+                $empty['fill'][] = 'sexual preferences';
+            if (!$data['bio'])
+                $empty['fill'][] = 'bio';
+            if (!count($data['interests']))
+                $empty['fill'][] = 'interests (more the better)';
+            
+            if (!$data['avatar_uploaded'])
+                $empty['upload'][] = 'avatar';
+            if (!$data['photo1'])
+                $counter++;
+            if (!$data['photo2'])
+                $counter++;
+            if (!$data['photo3'])
+                $counter++;
+            if (!$data['photo4'])
+                $counter++;
+            
+            if ($counter === 1)
+                $empty['upload'][] = 'one more photo';
+            elseif ($counter > 1)
+                $empty['upload'][] = 'more photos';
+            
+            if (!count($empty))
+                return false;
+            return $empty;
+        }
+        
         public function checkIfConnected($liked, $user) {
             if (Like::where([
                     'user' => $user,

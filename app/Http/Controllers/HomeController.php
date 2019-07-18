@@ -10,8 +10,8 @@
     use Illuminate\Http\Request;
     
     class HomeController extends Controller {
-        protected $model_profile;
-        protected $model_user;
+        public $model_profile;
+        public $model_user;
     
         public function __construct()
         {
@@ -27,18 +27,22 @@
          *
          * @return \Illuminate\Contracts\Support\Renderable
          */
-        public function show() {
-            $profile = $this->model_profile->where('user_id', $this->model_user->id)->first();
+        public static function show() {
+            $user = User::find(Auth::id());
+            $profile = Profile::find(Auth::id());
+            
+            $profile = $profile->where('user_id', $user->id)->first();
             $profile['login'] = auth()->user()->login;
             $profile['email'] = auth()->user()->email;
         
-            $location = Location::where('user_id',$this->model_user->id)->first();
+            $location = Location::where('user_id', $user->id)->first();
             $profile['country'] = $location->country;
             $profile['city'] = $location->city;
             $profile['allow'] = $location->allow;
             
-            $interests = Interest::select('tag')->where('user_id', $this->model_user->id)->get();
+            $interests = Interest::select('tag')->where('user_id', $user->id)->get();
             $profile['interests'] = $interests;
+            $profile['totally_filled'] = Controller::checkIfTotallyFilled($profile->getAttributes());
             
             return view('profile', ['profile' => $profile]);
         }
@@ -121,19 +125,14 @@
             
             if (!preg_match('/^male|female$/', $gender))
                 return redirect()->back();
-        
-            $rating = $this->model_profile->gender ? false : true;
+            
     
             $this->model_profile->update([
                 'gender' => $gender
             ]);
-        
-            if ($rating === true)
-                $this->increaseRating($this->model_profile);
 
             return response()->json([
-                'result' => true,
-                'rating' => round($this->model_profile->rating, 1)
+                'result' => true
             ]);
         }
         

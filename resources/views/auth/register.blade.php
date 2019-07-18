@@ -72,6 +72,22 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
+                            <div class="col-md-6">
+                                <select id="gender" class="custom-select @error('gender') is-invalid @enderror" name="gender" required autocomplete="gender">
+                                    <option selected></option>
+                                    <option value="male">male</option>
+                                    <option value="female">female</option>
+                                </select>
+
+                                    @error('gender')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                            </div>
+                        </div>
 
                         <input id="gps_latitude" type="hidden" class="" name="gps_latitude"  autocomplete="gps">
                         <input id="gps_longitude" type="hidden" class="" name="gps_longitude"  autocomplete="gps">

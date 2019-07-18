@@ -29,7 +29,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img class="logo_img" src="{{ asset('images/service/heart.png') }}">
+                    <img class="logo_img" alt="Matcha" src="{{ asset('images/service/heart.png') }}">
                     {{ config('app.name', 'Matcha') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -55,6 +55,14 @@
                                 </li>
                             @endif
                         @else
+                            <form id="suggestions-form" action="{{ route('suggestions') }}" method="GET">
+                                <button type="submit" class="btn btn-outline-secondary">Browse profiles</button>
+                            </form>
+
+                            <form id="research-form" action="{{ route('research') }}" method="GET">
+                                <button type="submit" class="btn btn-outline-secondary">Advanced research</button>
+                            </form>
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->login }} <span class="caret"></span>
@@ -136,6 +144,8 @@
                                     </a>
 
                                     <form id="blocked-users-form" action="{{ route('blocked.users') }}" method="GET" style="display: none;"></form>
+
+                                    <div class="dropdown-divider"></div>
 
                                     {{--Logout--}}
                                     <a class="dropdown-item" href="{{ route('logout') }}"

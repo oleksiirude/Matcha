@@ -28,7 +28,7 @@ class CreateProfilesTable extends Migration
             $table->string('photo2')->nullable();
             $table->string('photo3')->nullable();
             $table->string('photo4')->nullable();
-            $table->double('rating', 110, 1)->default(0.4);
+            $table->double('rating', 110, 1)->default(0.9);
         });
     }
     

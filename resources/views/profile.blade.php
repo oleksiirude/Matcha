@@ -12,6 +12,24 @@
                 <div class="card">
                     <div class="card-header">My profile</div>
                     <div class="card-body">
+
+                        @if ($profile->totally_filled)
+                            Hey! For more efficient search you should:
+                            <ul>
+                            @if (isset($profile->totally_filled['upload']))
+                                    @foreach($profile->totally_filled['upload'] as $upload)
+                                        <li>upload {{ $upload }}</li>
+                                    @endforeach
+                            @endif
+
+                            @if (isset($profile->totally_filled['fill']))
+                                    @foreach($profile->totally_filled['fill'] as $fill)
+                                        <li>fill {{ $fill }}</li>
+                                    @endforeach
+                            @endif
+                            </ul>
+                        @endif
+
                         <p><b>Rating:</b> {{ $profile->rating }}</p>
                         <b>new avatar</b>
                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.avatar') }}">
@@ -143,7 +161,6 @@
                             @method('PUT')
 
                             <select name="gender">
-                                <option disabled>choose gender</option>
                                 <option value="male">male</option>
                                 <option value="female">female</option>
                             </select>

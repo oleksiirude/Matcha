@@ -62,6 +62,8 @@ class RegisterController extends Controller
             
             'surname' => ['required', 'string', 'regex:/^[a-zA-Z]{2,20}$/'],
             // only letters, from 2 to 20
+    
+            'gender' => ['required', 'string', 'regex:/^male|female$/'],
             
             'password' => ['required', 'string', 'confirmed', 'regex:/^(?=.*[A-Z]{1,})(?=.*[!@#$%^&*()_+-]{1,})(?=.*[0-9]{1,})(?=.*[a-z]{1,}).{8,}$/'],
             // at least: 1 special symbol, 1 lowercase, 1 uppercase, min length - 8 symbols
@@ -114,6 +116,7 @@ class RegisterController extends Controller
             'login' => $data['login'],
             'name' => ucfirst(strtolower($data['name'])),
             'surname' => ucfirst(strtolower($data['surname'])),
+            'gender' => $data['gender']
         ]);
     }
     

@@ -4,7 +4,7 @@
 
 	define('DSN', 'mysql:host=127.0.0.1;dbname=matcha;port=3306;charset=utf8mb4');
 	define('USERNAME', 'root');
-	define('PASSWORD', 'password');
+	define('PASSWORD', 'root');
 
 	$connection = new PDO(DSN, USERNAME, PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 	
@@ -14,6 +14,10 @@
 		TRUNCATE TABLE tags; 
 		TRUNCATE TABLE interests; 
 		TRUNCATE TABLE locations;
+		TRUNCATE TABLE reports;
+		TRUNCATE TABLE likes;
+		TRUNCATE TABLE bans;
+		TRUNCATE TABLE visits;
 	");
 
 	foreach (USERS as $title => $table)
@@ -30,8 +34,8 @@
 
 	$path = str_replace('storage/filler', 'public/images', dirname(__FILE__));
 	
-	exec('rm -R ' . $path . '/profiles');
-	
-	exec("cp -R profiles $path");
+//	exec('rm -R ' . $path . '/profiles');
+//
+//	exec("cp -R profiles $path");
 
 	echo "filler: done\n";
