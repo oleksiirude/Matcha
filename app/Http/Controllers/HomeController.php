@@ -82,13 +82,7 @@
             if ($rating === true && $bio)
                 $this->increaseRating($this->model_profile);
             
-            $profile = Controller::getAttributesForAuthUserProfile();
-            
-            return response()->json([
-                'result' => true,
-                'rating' => round($this->model_profile->rating, 1),
-                'empty' => $profile['totally_filled']
-            ]);
+            return $this->returnJsonBox();
         }
         
         public function deleteBio(){
@@ -101,13 +95,7 @@
             $this->model_profile->save();
             $this->model_profile->decrement('rating', 0.5);
     
-            $profile = Controller::getAttributesForAuthUserProfile();
-    
-            return response()->json([
-                'result' => true,
-                'rating' => round($this->model_profile->rating, 1),
-                'empty' => $profile['totally_filled']
-            ]);
+            return $this->returnJsonBox();
         }
         
         public function setGender(Request $request) {
@@ -148,13 +136,7 @@
             if ($rating === true)
                 $this->increaseRating($this->model_profile);
     
-            $profile = Controller::getAttributesForAuthUserProfile();
-    
-            return response()->json([
-                'result' => true,
-                'rating' => round($this->model_profile->rating, 1),
-                'empty' => $profile['totally_filled']
-            ]);
+            return $this->returnJsonBox();
         }
         
         public function setPreferences(Request $request) {
@@ -172,13 +154,7 @@
             if ($rating === true)
                 $this->increaseRating($this->model_profile);
     
-            $profile = Controller::getAttributesForAuthUserProfile();
-    
-            return response()->json([
-                'result' => true,
-                'rating' => round($this->model_profile->rating, 1),
-                'empty' => $profile['totally_filled']
-            ]);
+            return $this->returnJsonBox();
         }
         
         public function changeLogin(Request $request) {
@@ -272,5 +248,15 @@
             ]);
             
             return response()->json(['result' => true]);
+        }
+        
+        protected function returnJsonBox() {
+            $profile = Controller::getAttributesForAuthUserProfile();
+    
+            return response()->json([
+                'result' => true,
+                'rating' => round($this->model_profile->rating, 1),
+                'empty' => $profile['totally_filled']
+            ]);
         }
     }
