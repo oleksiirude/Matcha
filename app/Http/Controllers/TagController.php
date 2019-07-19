@@ -110,8 +110,8 @@
             }
         }
         
-        // FINDING MATCHING TAGS
-        public function findTagMatches(Request $request) {
+        // FINDING MATCHING TAGS WITH AJAX
+        public function findTagMatchesAjax(Request $request) {
             $piece = strtolower($request->get('piece'));
     
             if (!preg_match('/^[a-z0-9]{2,20}$/', $piece))
@@ -135,6 +135,34 @@
             return response()->json([
                 'result' => false
             ]);
+        }
+    
+        // FINDING MATCHING TAGS IN SUGGESTIONS
+        static public function findTagMatches($profiles, $id) {
+            $auth = Interest::where('user_id', $id)->get();
+            $auth_tags = $auth->pluck('tag');
+            
+            $collection = collect();
+            
+            foreach ($profiles as $profile) {
+                $user = Interest::where('user_id', $profile->user_id)->get();
+                $user_tags = $user->pluck('tag');
+                
+                $i = 0; $j = 0; $matches = 0;
+                while ($i < count($auth_tags)) {
+                    while ($j < count($user_tags)) {
+                        if ($auth_tags[$i] === $user_tags[$j])
+                            $matches++;
+                        $j++;
+                    }
+                    $j = 0;
+                    $i++;
+                }
+                $profile['matches'] = $matches;
+                $collection[] = $profile;
+            }
+            
+            return $collection;
         }
         
         protected function returnJsonBox(){

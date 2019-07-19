@@ -22,21 +22,19 @@
         }
         
         public function uploadAvatar(Request $request) {
-            if (($result = $this->validator($request, 'avatar')) !== true)
-                return response()->json($result);
+            $base64 = (array)json_decode($request->get('crop'));
+    
+            $base64 = str_replace('data:image/jpeg;base64,', '', $base64);
             
-
-            $avatar = $request->file('avatar');
-            $extension = $avatar->getClientOriginalExtension();
             $savePath = public_path() . '/images/profiles/' .
-                auth()->user()->login . '/' . 'avatar' . '.' . $extension;
-            
-            $this->manager->make($avatar)
-                ->heighten(640)
-                ->orientate()
-                ->save($savePath);
+                auth()->user()->login . '/' . 'avatar' . '.jpeg';
             
             $path = str_replace(public_path() . '/','', $savePath);
+    
+            $photo = base64_decode($base64);
+            $photo = imagecreatefromstring($photo);
+            imagejpeg($photo, $path);
+            imagedestroy($photo);
             
             $this->insertAvatarToDB($path);
     
@@ -47,6 +45,14 @@
                 'path' => $path,
                 'rating' => round($this->model_profile->rating, 1),
                 'empty' => $profile['totally_filled']
+            ]);
+        }
+        
+        public function checkUploadingAvatar(Request $request) {
+            if (($result = $this->validator($request, 'avatar')) !== true)
+                return response()->json($result);
+            return response()->json([
+                'result' => true
             ]);
         }
         

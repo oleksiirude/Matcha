@@ -31,6 +31,7 @@
 
     // UPLOADING
     Route::group(['prefix' => '/upload', 'middleware' => 'verified'], function () {
+        Route::post('/check/avatar', 'ImageController@checkUploadingAvatar')->name('upload.check.avatar');
         Route::post('/avatar', 'ImageController@uploadAvatar')->name('upload.avatar');
         Route::post('/photo', 'ImageController@uploadPhoto')->name('upload.photo');
     });
@@ -65,7 +66,7 @@
 
     // FINDING
     Route::group(['prefix' => '/find', 'middleware' => 'verified'], function () {
-        Route::post('/tag/matches', 'TagController@findTagMatches')->name('find.tag.matches');
+        Route::post('/tag/matches', 'TagController@findTagMatchesAjax')->name('find.tag.matches');
     });
 
     // USERS
