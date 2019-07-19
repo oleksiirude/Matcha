@@ -37,7 +37,6 @@
                         </form>
 
                         <div class="card_profile">
-                            <h1>My profile</h1>
 
                             <div class="card-body">
                                 <div id="div_useravatar">
@@ -272,6 +271,7 @@
                         </form>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 @endsection
