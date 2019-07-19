@@ -1,8 +1,23 @@
 @extends('layouts.app')
 
 @push('scripts')
+
+    <script src="{{ asset('cropperjs/dist/cropper.min.js')}}" defer></script>
+{{--    <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>--}}
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>--}}
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.3/cropper.js"></script>--}}
     <script src="{{ asset('js/profile/profile.js')}}" defer></script>
+{{--    <script>--}}
+{{--        import Cropper from 'cropperjs';--}}
+{{--    </script>--}}
 {{--    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>--}}
+@endpush
+
+@push('style')
+    <link rel="stylesheet" href="{{ asset('cropperjs/dist/cropper.css')}}">
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.3/cropper.css">--}}
+
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.3/cropper.css">--}}
 @endpush
 
 @section('content')
@@ -13,6 +28,7 @@
 {{--                    <div class="color_div">--}}
                         <div class="white_div">
                             <div class="card-body">
+                                <crop-component></crop-component>
                                 <div id="left_card">
                                     <div id="div_useravatar">
                                         <img src="{{ $profile->avatar }}" alt="avatar" id="avatar" title='download avatar' onclick="choose_file('avatar_label')">
@@ -26,7 +42,6 @@
                                             <deletebtn-component srcavatar="{{ asset('images/service/del.png') }}" idbtn="delete_btn"></deletebtn-component>
                                         </form>
                                         <span id="avatar_errormsg"></span>
-                                        <crop-component></crop-component>
 {{--                                        <canvas id="canvas" width="900" height="600"></canvas>--}}
                                     </div>
                                     <div>
@@ -35,24 +50,24 @@
                                         </progress>
                                     </div>
                                 </div>
-                                <div id="usr_name_div">
-                                    <form action="/set/name" method="POST" id="name_form">
-                                        @csrf
-                                        @method('PUT')
-                                        <editinput-component value="{{ $profile->name }}" name="name" id_btn="name_btn"></editinput-component>
-    {{--                                    <button type="submit" class="btn edit_submit">Save</button>--}}
-                                    </form>
-                                    <form action="/set/surname" method="POST" id="surname_form">
-                                        @csrf
-                                        @method('PUT')
-                                        <div>
-                                            <editinput-component value="{{ $profile->surname }}"  name="surname" id_btn="surname_btn"></editinput-component>
-{{--                                            <img src="/images/service/edit.png" class="edit" @click="editInput()" id="">--}}
-                                        </div>
-                                    </form>
-                                    <span id="name_error_msg" class="error_msg"></span>
-                                </div>
                                 <div id="right_card">
+                                    <div id="usr_name_div">
+                                        <form action="/set/name" method="POST" id="name_form">
+                                            @csrf
+                                            @method('PUT')
+                                            <editinput-component value="{{ $profile->name }}" name="name" id_btn="name_btn"></editinput-component>
+                                            {{--                                    <button type="submit" class="btn edit_submit">Save</button>--}}
+                                        </form>
+                                        <form action="/set/surname" method="POST" id="surname_form">
+                                            @csrf
+                                            @method('PUT')
+                                            <div>
+                                                <editinput-component value="{{ $profile->surname }}"  name="surname" id_btn="surname_btn"></editinput-component>
+                                                {{--                                            <img src="/images/service/edit.png" class="edit" @click="editInput()" id="">--}}
+                                            </div>
+                                        </form>
+                                        <span id="name_error_msg" class="error_msg"></span>
+                                    </div>
                                     <div>
 {{--                                        <p><b>Change login</b></p>--}}
                                         <form action="/change/login" method="POST" id="login_form">

@@ -25,24 +25,24 @@
             if (($result = $this->validator($request, 'avatar')) !== true)
                 return response()->json($result);
             
-            $avatar = $request->file('avatar');
-            $extension = $avatar->getClientOriginalExtension();
-            $savePath = public_path() . '/images/profiles/' .
-                auth()->user()->login . '/' . 'avatar' . '.' . $extension;
-            
-            $this->manager->make($avatar)
-                ->heighten(640)
-                ->orientate()
-                ->save($savePath);
-            
-            $path = str_replace(public_path() . '/','', $savePath);
-            
-            $this->insertAvatarToDB($path);
-            
+//            $avatar = $request->file('avatar');
+//            $extension = $avatar->getClientOriginalExtension();
+//            $savePath = public_path() . '/images/profiles/' .
+//                auth()->user()->login . '/' . 'avatar' . '.' . $extension;
+//
+//            $this->manager->make($avatar)
+//                ->heighten(640)
+//                ->orientate()
+//                ->save($savePath);
+//
+//            $path = str_replace(public_path() . '/','', $savePath);
+//
+//            $this->insertAvatarToDB($path);
+//
             return response()->json([
-                'result' => true,
-                'path' => $path,
-                'rating' => round($this->model_profile->rating, 1)
+                'result' => true
+//                'path' => $path,
+//                'rating' => round($this->model_profile->rating, 1)
             ]);
         }
         

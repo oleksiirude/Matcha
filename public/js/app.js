@@ -1704,86 +1704,90 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
   props: {},
   methods: {
-    // processImage: function () {
-    //     var FR= new FileReader();
-    //     FR.onload = function(e) {
-    //         var img = new Image();
-    //         img.addEventListener("load", function() {
-    //             context.drawImage(img, 0, 0);
-    //         });
-    //         img.src = e.target.result;
-    //     };
-    //     FR.readAsDataURL( this.files[0] );
-    // },
-    cropImage: function cropImage(image, croppingCoords) {
-      console.log('image', image);
-      var cc = croppingCoords;
-      var workCan = document.createElement("canvas"); // create a canvas
-
-      workCan.width = Math.floor(cc.width); // set the canvas resolution to the cropped image size
-
-      workCan.height = Math.floor(cc.height);
-      var ctx = workCan.getContext("2d"); // get a 2D rendering interface
-
-      ctx.drawImage(image, -Math.floor(cc.x), -Math.floor(cc.y)); // draw the image offset to place it correctly on the cropped region
-
-      image.src = workCan.toDataURL(); // set the image source to the canvas as a data URL
-
-      return image;
-    },
     crop: function crop(e) {
-      var canvas = document.getElementById('imageCanvas');
-      var ctx = canvas.getContext('2d');
-      handleImage(e);
-
-      function handleImage(e) {
-        var reader = new FileReader();
-
-        reader.onload = function (event) {
-          var img = new Image();
-
-          img.onload = function () {
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.drawImage(img, 0, 0);
-          };
-
-          img.src = event.target.result;
-          document.getElementById('resize_image').src = img.src;
-          resizeableImage($('.resize-image'));
-          console.log('canvas', img.src);
-        };
-
-        reader.readAsDataURL(e.target.files[0]); // var url = canvas.toDataURL();
-        //
-        // var newImg = document.createElement("img"); // create img tag
-        // newImg.src = url;
-        // document.body.appendChild(newImg);
-        // document.getElementById('resize_image').src = canvas.toDataURL();
-      } // let file = document.getElementById("avatar_input").files[0];
-      // console.log('file', file);
-      // if (file.size > 5000000) {
-      //     document.getElementById('avatar_errormsg').innerHTML = '&#9755; ERROR: Too big image';
-      // } else {
-      //     this.processImage();
-      //     console.log('CROP');
-      //     var image = new Image();
-      //     image.src = file.name; // load the image
-      //     this.cropImage(
-      //         this, {
-      //             x: this.width / 4,     // crop keeping the center
-      //             y: this.height / 4,
-      //             width: this.width / 2,
-      //             height: this.height / 2,
-      //         });
-      //     document.body.appendChild(this);  // Add the image to the DOM
-      // }
-
+      upload();
     },
+    // crop: function (e) {
+    //     let crop_div = document.getElementById('crop_div');
+    //     let file = document.getElementById("avatar_input").files[0];
+    //     if (file.size > 5000000)
+    //     {
+    //         document.getElementById('avatar_errormsg').innerHTML = '&#9755; ERROR: Too big image';
+    //     }
+    //     else {
+    //         var canvas = document.getElementById('imageCanvas');
+    //         var ctx = canvas.getContext('2d');
+    //         handleImage(e);
+    //
+    //         function handleImage(e) {
+    //             // const CIP = require('canvas_image_processing');
+    //
+    //             var reader = new FileReader();
+    //             reader.onload = function (event) {
+    //                 var img = new Image();
+    //                 img.onload = function () {
+    //                     canvas.width = img.width;
+    //                     canvas.height = img.height;
+    //                     ctx.drawImage(img, 0, 0);
+    //                 }
+    //                 img.src = event.target.result;
+    //                 document.getElementById('resize_image').src = img.src;
+    //                 crop_div.hidden = false;
+    //
+    //
+    //                 // let base64_image = img.src;
+    //
+    //                 // CIP.cropImage64(base64_image, 0, 0, 400, 400).then(cropped_image => {
+    //                 //     console.log('cropped base64 image: ', cropped_image);
+    //                 //     document.getElementById('avatar').src = cropped_image;
+    //                 // });
+    //                 // CIP.resizeImage64(base64_image, 600, 600).then(cropped_image => {
+    //                 //     console.log('resized base64 image: ', cropped_image);
+    //                 //     document.getElementById('avatar').src = cropped_image;
+    //                 // });
+    //
+    //
+    //
+    //                 resizeableImage(document.getElementsByClassName('resize-image'));
+    //                 // console.log('canvas', img.src);
+    //             }
+    //             reader.readAsDataURL(e.target.files[0]);
+    //
+    //             // var url = canvas.toDataURL();
+    //             //
+    //             // var newImg = document.createElement("img"); // create img tag
+    //             // newImg.src = url;
+    //             // document.body.appendChild(newImg);
+    //             // document.getElementById('resize_image').src = canvas.toDataURL();
+    //         }
+    //     }
+    //
+    //     // let file = document.getElementById("avatar_input").files[0];
+    //     // console.log('file', file);
+    //     // if (file.size > 5000000) {
+    //     //     document.getElementById('avatar_errormsg').innerHTML = '&#9755; ERROR: Too big image';
+    //     // } else {
+    //     //     this.processImage();
+    //     //     console.log('CROP');
+    //     //     var image = new Image();
+    //     //     image.src = file.name; // load the image
+    //     //     this.cropImage(
+    //     //         this, {
+    //     //             x: this.width / 4,     // crop keeping the center
+    //     //             y: this.height / 4,
+    //     //             width: this.width / 2,
+    //     //             height: this.height / 2,
+    //     //         });
+    //     //     document.body.appendChild(this);  // Add the image to the DOM
+    //     // }
+    // },
     downloadphoto: function downloadphoto() {
       var file = document.getElementById("avatar_input").files[0];
       console.log('file', file);
@@ -1855,305 +1859,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['image'],
-  data: function data() {
-    return {
-      mutableValue: this.image
-    };
-  },
-  // mounted () {
-  //     this.resizeableImage(document.getElementById('resize-image'));
-  // },
-  methods: {
-    cropImage: function cropImage(image, croppingCoords) {
-      console.log('image', image);
-      var cc = croppingCoords;
-      var workCan = document.createElement("canvas"); // create a canvas
-
-      workCan.width = Math.floor(cc.width); // set the canvas resolution to the cropped image size
-
-      workCan.height = Math.floor(cc.height);
-      var ctx = workCan.getContext("2d"); // get a 2D rendering interface
-
-      ctx.drawImage(image, -Math.floor(cc.x), -Math.floor(cc.y)); // draw the image offset to place it correctly on the cropped region
-
-      image.src = workCan.toDataURL(); // set the image source to the canvas as a data URL
-
-      return image;
-    },
-    crop: function crop() {
-      var file = document.getElementById("avatar_input").files[0];
-      console.log('file', file);
-
-      if (file.size > 5000000) {
-        document.getElementById('avatar_errormsg').innerHTML = '&#9755; ERROR: Too big image';
-      } else {
-        console.log('CROP');
-        var image = new Image();
-        image.src = document.getElementById("avatar_input").files[0]; // load the image
-
-        this.cropImage(this, {
-          x: this.width / 4,
-          // crop keeping the center
-          y: this.height / 4,
-          width: this.width / 2,
-          height: this.height / 2
-        });
-        document.body.appendChild(this); // Add the image to the DOM
-      }
-    } // resizeableImage : function() {
-    //     this.mutableValue = document.getElementById('resize_image');
-    //     console.log('image_target', this.image);
-    //     let $container,
-    //         orig_src = new Image(),
-    //         image = $this.mutableValue,
-    //         event_state = {},
-    //         constrain = false,
-    //         min_width = 60, // Change as required
-    //         min_height = 60,
-    //         max_width = 1800, // Change as required
-    //         max_height = 1900,
-    //         init_height=500,
-    //         resize_canvas = document.createElement('canvas');
-    //     imageData=null;
-    //
-    //     // init = function(){
-    //     //
-    //     //     //add the reset evewnthandler
-    //     //     $('.reset').click(function() {
-    //     //         if(imageData)
-    //     //             loadData();
-    //     //     });
-    //     //
-    //     //
-    //     //     // When resizing, we will always use this copy of the original as the base
-    //     //     orig_src.src=this.mutableValue.src;
-    //     //
-    //     //     // Wrap the image with the container and add resize handles
-    //     //     $(image).height(init_height)
-    //     //         .wrap('<div class="resize-container"></div>')
-    //     //         .before('<span class="resize-handle resize-handle-nw"></span>')
-    //     //         .before('<span class="resize-handle resize-handle-ne"></span>')
-    //     //         .after('<span class="resize-handle resize-handle-se"></span>')
-    //     //         .after('<span class="resize-handle resize-handle-sw"></span>');
-    //     //
-    //     //     // Assign the container to a variable
-    //     //     $container =  $('.resize-container');
-    //     //
-    //     //     $container.prepend('<div class="resize-container-ontop"></div>');
-    //     //
-    //     //     // Add events
-    //     //     $container.on('mousedown touchstart', '.resize-handle', startResize);
-    //     //     $container.on('mousedown touchstart', '.resize-container-ontop', startMoving);
-    //     //     $('.crop').on('click', crop);
-    //     // };
-    //     //
-    //     // loadData = function() {
-    //     //
-    //     //     //set the image target
-    //     //     image.src=imageData;
-    //     //     orig_src.src=image.src;
-    //     //
-    //     //     //set the image tot he init height
-    //     //     $(image).css({
-    //     //         width:'auto',
-    //     //         height:init_height
-    //     //     });
-    //     //
-    //     //
-    //     //     //resize the canvas
-    //     //     $(orig_src).bind('load',function() {
-    //     //         resizeImageCanvas($(image).width(),$(image).height());
-    //     //     });
-    //     // };
-    //     //
-    //     // startResize = function(e){
-    //     //     e.preventDefault();
-    //     //     e.stopPropagation();
-    //     //     saveEventState(e);
-    //     //     $(document).on('mousemove touchmove', resizing);
-    //     //     $(document).on('mouseup touchend', endResize);
-    //     // };
-    //     //
-    //     // endResize = function(e){
-    //     //     resizeImageCanvas($(image).width(), $(image).height())
-    //     //     e.preventDefault();
-    //     //     $(document).off('mouseup touchend', endResize);
-    //     //     $(document).off('mousemove touchmove', resizing);
-    //     // };
-    //     //
-    //     // saveEventState = function(e){
-    //     //     // Save the initial event details and container state
-    //     //     event_state.container_width = $container.width();
-    //     //     event_state.container_height = $container.height();
-    //     //     event_state.container_left = $container.offset().left;
-    //     //     event_state.container_top = $container.offset().top;
-    //     //     event_state.mouse_x = (e.clientX || e.pageX || e.originalEvent.touches[0].clientX) + $(window).scrollLeft();
-    //     //     event_state.mouse_y = (e.clientY || e.pageY || e.originalEvent.touches[0].clientY) + $(window).scrollTop();
-    //     //
-    //     //     // This is a fix for mobile safari
-    //     //     // For some reason it does not allow a direct copy of the touches property
-    //     //     if(typeof e.originalEvent.touches !== 'undefined'){
-    //     //         event_state.touches = [];
-    //     //         $.each(e.originalEvent.touches, function(i, ob){
-    //     //             event_state.touches[i] = {};
-    //     //             event_state.touches[i].clientX = 0+ob.clientX;
-    //     //             event_state.touches[i].clientY = 0+ob.clientY;
-    //     //         });
-    //     //     }
-    //     //     event_state.evnt = e;
-    //     // };
-    //     //
-    //     // resizing = function(e){
-    //     //     var mouse={},width,height,left,top,offset=$container.offset();
-    //     //     mouse.x = (e.clientX || e.pageX || e.originalEvent.touches[0].clientX) + $(window).scrollLeft();
-    //     //     mouse.y = (e.clientY || e.pageY || e.originalEvent.touches[0].clientY) + $(window).scrollTop();
-    //     //
-    //     //     // Position image differently depending on the corner dragged and constraints
-    //     //     if( $(event_state.evnt.target).hasClass('resize-handle-se') ){
-    //     //         width = mouse.x - event_state.container_left;
-    //     //         height = mouse.y  - event_state.container_top;
-    //     //         left = event_state.container_left;
-    //     //         top = event_state.container_top;
-    //     //     } else if($(event_state.evnt.target).hasClass('resize-handle-sw') ){
-    //     //         width = event_state.container_width - (mouse.x - event_state.container_left);
-    //     //         height = mouse.y  - event_state.container_top;
-    //     //         left = mouse.x;
-    //     //         top = event_state.container_top;
-    //     //     } else if($(event_state.evnt.target).hasClass('resize-handle-nw') ){
-    //     //         width = event_state.container_width - (mouse.x - event_state.container_left);
-    //     //         height = event_state.container_height - (mouse.y - event_state.container_top);
-    //     //         left = mouse.x;
-    //     //         top = mouse.y;
-    //     //         if(constrain || e.shiftKey){
-    //     //             top = mouse.y - ((width / orig_src.width * orig_src.height) - height);
-    //     //         }
-    //     //     } else if($(event_state.evnt.target).hasClass('resize-handle-ne') ){
-    //     //         width = mouse.x - event_state.container_left;
-    //     //         height = event_state.container_height - (mouse.y - event_state.container_top);
-    //     //         left = event_state.container_left;
-    //     //         top = mouse.y;
-    //     //         if(constrain || e.shiftKey){
-    //     //             top = mouse.y - ((width / orig_src.width * orig_src.height) - height);
-    //     //         }
-    //     //     }
-    //     //
-    //     //     // Optionally maintain aspect ratio
-    //     //     if(constrain || e.shiftKey){
-    //     //         height = width / orig_src.width * orig_src.height;
-    //     //     }
-    //     //
-    //     //     if(width > min_width && height > min_height && width < max_width && height < max_height){
-    //     //         // To improve performance you might limit how often resizeImage() is called
-    //     //         resizeImage(width, height);
-    //     //         // Without this Firefox will not re-calculate the the image dimensions until drag end
-    //     //         $container.offset({'left': left, 'top': top});
-    //     //     }
-    //     // }
-    //     //
-    //     // resizeImage = function(width, height){
-    //     //     $(image).width(width).height(height);
-    //     // };
-    //     //
-    //     // resizeImageCanvas = function(width, height){
-    //     //     resize_canvas.width = width;
-    //     //     resize_canvas.height = height;
-    //     //     resize_canvas.getContext('2d').drawImage(orig_src, 0, 0, width, height);
-    //     //     $(image).attr('src', resize_canvas.toDataURL("image/png"));
-    //     //     //$(image_target).width(width).height(height);
-    //     // };
-    //     //
-    //     // startMoving = function(e){
-    //     //     e.preventDefault();
-    //     //     e.stopPropagation();
-    //     //     saveEventState(e);
-    //     //     $(document).on('mousemove touchmove', moving);
-    //     //     $(document).on('mouseup touchend', endMoving);
-    //     // };
-    //     //
-    //     // endMoving = function(e){
-    //     //     e.preventDefault();
-    //     //     $(document).off('mouseup touchend', endMoving);
-    //     //     $(document).off('mousemove touchmove', moving);
-    //     // };
-    //     //
-    //     // moving = function(e){
-    //     //     var  mouse={}, touches;
-    //     //     e.preventDefault();
-    //     //     e.stopPropagation();
-    //     //
-    //     //     touches = e.originalEvent.touches;
-    //     //
-    //     //     mouse.x = (e.clientX || e.pageX || touches[0].clientX) + $(window).scrollLeft();
-    //     //     mouse.y = (e.clientY || e.pageY || touches[0].clientY) + $(window).scrollTop();
-    //     //     $container.offset({
-    //     //         'left': mouse.x - ( event_state.mouse_x - event_state.container_left ),
-    //     //         'top': mouse.y - ( event_state.mouse_y - event_state.container_top )
-    //     //     });
-    //     //     // Watch for pinch zoom gesture while moving
-    //     //     if(event_state.touches && event_state.touches.length > 1 && touches.length > 1){
-    //     //         var width = event_state.container_width, height = event_state.container_height;
-    //     //         var a = event_state.touches[0].clientX - event_state.touches[1].clientX;
-    //     //         a = a * a;
-    //     //         var b = event_state.touches[0].clientY - event_state.touches[1].clientY;
-    //     //         b = b * b;
-    //     //         var dist1 = Math.sqrt( a + b );
-    //     //
-    //     //         a = e.originalEvent.touches[0].clientX - touches[1].clientX;
-    //     //         a = a * a;
-    //     //         b = e.originalEvent.touches[0].clientY - touches[1].clientY;
-    //     //         b = b * b;
-    //     //         var dist2 = Math.sqrt( a + b );
-    //     //
-    //     //         var ratio = dist2 /dist1;
-    //     //
-    //     //         width = width * ratio;
-    //     //         height = height * ratio;
-    //     //         // To improve performance you might limit how often resizeImage() is called
-    //     //         resizeImage(width, height);
-    //     //     }
-    //     // };
-    //     //
-    //     // crop = function(){
-    //     //     //Find the part of the image that is inside the crop box
-    //     //     var crop_canvas,
-    //     //         left = $('.overlay').offset().left- $container.offset().left,
-    //     //         top =  $('.overlay').offset().top - $container.offset().top,
-    //     //         width = $('.overlay').width(),
-    //     //         height = $('.overlay').height();
-    //     //
-    //     //     crop_canvas = document.createElement('canvas');
-    //     //
-    //     //     crop_canvas.width = width;
-    //     //     crop_canvas.height = height;
-    //     //
-    //     //     crop_canvas.getContext('2d').drawImage(image, left, top, width, height, 0, 0, width, height);
-    //     //     var dataURL=crop_canvas.toDataURL("image/png");
-    //     //     image.src=dataURL;
-    //     //     orig_src.src=image.src;
-    //     //
-    //     //
-    //     //     $(image).bind("load",function() {
-    //     //         $(this).css({
-    //     //             width:width,
-    //     //             height:height
-    //     //         }).unbind('load').parent().css({
-    //     //             top:$('.overlay').offset().top- $('.crop-wrapper').offset().top,
-    //     //             left:$('.overlay').offset().left- $('.crop-wrapper').offset().left
-    //     //         })
-    //     //     });
-    //         //window.open(crop_canvas.toDataURL("image/png"));
-    //     }
-    //
-    // }
-
+  // props: [
+  //     // 'croppedImage',
+  //     // 'canvasWidth',
+  //     // 'canvasHeight',
+  //     // 'roundCorners'
+  // ],
+  methods: {// selectFile: function (evt) {
   }
 });
 
@@ -17939,7 +17652,7 @@ return jQuery;
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
  * @license
  * Lodash <https://lodash.com/>
- * Copyright JS Foundation and other contributors <https://js.foundation/>
+ * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -17950,7 +17663,7 @@ return jQuery;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.11';
+  var VERSION = '4.17.15';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -20609,16 +20322,10 @@ return jQuery;
         value.forEach(function(subValue) {
           result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
         });
-
-        return result;
-      }
-
-      if (isMap(value)) {
+      } else if (isMap(value)) {
         value.forEach(function(subValue, key) {
           result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
         });
-
-        return result;
       }
 
       var keysFunc = isFull
@@ -21542,8 +21249,8 @@ return jQuery;
         return;
       }
       baseFor(source, function(srcValue, key) {
+        stack || (stack = new Stack);
         if (isObject(srcValue)) {
-          stack || (stack = new Stack);
           baseMergeDeep(object, source, key, srcIndex, baseMerge, customizer, stack);
         }
         else {
@@ -23360,7 +23067,7 @@ return jQuery;
       return function(number, precision) {
         number = toNumber(number);
         precision = precision == null ? 0 : nativeMin(toInteger(precision), 292);
-        if (precision) {
+        if (precision && nativeIsFinite(number)) {
           // Shift with exponential notation to avoid floating-point issues.
           // See [MDN](https://mdn.io/round#Examples) for more details.
           var pair = (toString(number) + 'e').split('e'),
@@ -24543,7 +24250,7 @@ return jQuery;
     }
 
     /**
-     * Gets the value at `key`, unless `key` is "__proto__".
+     * Gets the value at `key`, unless `key` is "__proto__" or "constructor".
      *
      * @private
      * @param {Object} object The object to query.
@@ -24551,6 +24258,10 @@ return jQuery;
      * @returns {*} Returns the property value.
      */
     function safeGet(object, key) {
+      if (key === 'constructor' && typeof object[key] === 'function') {
+        return;
+      }
+
       if (key == '__proto__') {
         return;
       }
@@ -28351,6 +28062,7 @@ return jQuery;
           }
           if (maxing) {
             // Handle invocations in a tight loop.
+            clearTimeout(timerId);
             timerId = setTimeout(timerExpired, wait);
             return invokeFunc(lastCallTime);
           }
@@ -32737,9 +32449,12 @@ return jQuery;
       , 'g');
 
       // Use a sourceURL for easier debugging.
+      // The sourceURL gets injected into the source that's eval-ed, so be careful
+      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
+      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
       var sourceURL = '//# sourceURL=' +
-        ('sourceURL' in options
-          ? options.sourceURL
+        (hasOwnProperty.call(options, 'sourceURL')
+          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -32772,7 +32487,9 @@ return jQuery;
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
-      var variable = options.variable;
+      // Like with sourceURL, we take care to not check the option's prototype,
+      // as this configuration is a code injection vector.
+      var variable = hasOwnProperty.call(options, 'variable') && options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
       }
@@ -34977,10 +34694,11 @@ return jQuery;
     baseForOwn(LazyWrapper.prototype, function(func, methodName) {
       var lodashFunc = lodash[methodName];
       if (lodashFunc) {
-        var key = (lodashFunc.name + ''),
-            names = realNames[key] || (realNames[key] = []);
-
-        names.push({ 'name': methodName, 'func': lodashFunc });
+        var key = lodashFunc.name + '';
+        if (!hasOwnProperty.call(realNames, key)) {
+          realNames[key] = [];
+        }
+        realNames[key].push({ 'name': methodName, 'func': lodashFunc });
       }
     });
 
@@ -38165,10 +37883,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CropComponent.vue?vue&type=template&id=1c5edd1c&scoped=true&":
-/*!****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CropComponent.vue?vue&type=template&id=1c5edd1c&scoped=true& ***!
-  \****************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CropComponent.vue?vue&type=template&id=1c5edd1c&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CropComponent.vue?vue&type=template&id=1c5edd1c& ***!
+  \****************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -38180,51 +37898,33 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("canvas", { attrs: { id: "imageCanvas" } }),
-    _vm._v(" "),
-    _c(
-      "button",
-      { staticClass: "btn-primary reset", attrs: { id: "reset_btn" } },
-      [_vm._v("Reset")]
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      { staticClass: "btn-primary crop", attrs: { id: "crop_btn" } },
-      [_vm._v("Crop")]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "crop-wrapper" }, [
-      _c("div", { staticClass: "top-overlay" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "bottom-overlay" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "left-overlay" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "right-overlay" }),
-      _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _c("img", {
-        staticClass: "resize-image",
-        attrs: { src: "", alt: "image for resizing", id: "resize_image" },
-        on: {
-          click: function($event) {
-            return _vm.resizeableImage()
-          }
-        }
-      })
-    ])
-  ])
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "overlay" }, [
-      _c("div", { staticClass: "overlay-inner" })
+    return _c("div", { attrs: { id: "crop_div", hidden: "" } }, [
+      _c("p", [
+        _c("input", {
+          attrs: { type: "button", id: "btnCrop", value: "Crop and download" }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "button", id: "btnRestore", value: "Restore" }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "button", id: "btnRotate", value: "Rotate" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", [_c("canvas", { attrs: { id: "canvas" } })]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "result" } }, [
+        _c("img", { attrs: { id: "result_img", src: "" } })
+      ])
     ])
   }
 ]
@@ -51049,7 +50749,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CropComponent_vue_vue_type_template_id_1c5edd1c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CropComponent.vue?vue&type=template&id=1c5edd1c&scoped=true& */ "./resources/js/components/CropComponent.vue?vue&type=template&id=1c5edd1c&scoped=true&");
+/* harmony import */ var _CropComponent_vue_vue_type_template_id_1c5edd1c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CropComponent.vue?vue&type=template&id=1c5edd1c& */ "./resources/js/components/CropComponent.vue?vue&type=template&id=1c5edd1c&");
 /* harmony import */ var _CropComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CropComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/CropComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -51061,11 +50761,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _CropComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _CropComponent_vue_vue_type_template_id_1c5edd1c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _CropComponent_vue_vue_type_template_id_1c5edd1c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _CropComponent_vue_vue_type_template_id_1c5edd1c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CropComponent_vue_vue_type_template_id_1c5edd1c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "1c5edd1c",
+  null,
   null
   
 )
@@ -51091,19 +50791,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/CropComponent.vue?vue&type=template&id=1c5edd1c&scoped=true&":
-/*!**********************************************************************************************!*\
-  !*** ./resources/js/components/CropComponent.vue?vue&type=template&id=1c5edd1c&scoped=true& ***!
-  \**********************************************************************************************/
+/***/ "./resources/js/components/CropComponent.vue?vue&type=template&id=1c5edd1c&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/CropComponent.vue?vue&type=template&id=1c5edd1c& ***!
+  \**********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CropComponent_vue_vue_type_template_id_1c5edd1c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CropComponent.vue?vue&type=template&id=1c5edd1c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CropComponent.vue?vue&type=template&id=1c5edd1c&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CropComponent_vue_vue_type_template_id_1c5edd1c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CropComponent_vue_vue_type_template_id_1c5edd1c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CropComponent.vue?vue&type=template&id=1c5edd1c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CropComponent.vue?vue&type=template&id=1c5edd1c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CropComponent_vue_vue_type_template_id_1c5edd1c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CropComponent_vue_vue_type_template_id_1c5edd1c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CropComponent_vue_vue_type_template_id_1c5edd1c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
