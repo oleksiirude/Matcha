@@ -22,6 +22,16 @@ window.Vue = require('vue');
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('header-component', require('./components/HeaderComponent').default);
 Vue.component('avatar-component', require('./components/AvatarComponent').default);
+Vue.component('photo-component', require('./components/PhotoComponent').default);
+Vue.component('crop-component', require('./components/CropComponent').default);
+Vue.component('deletebtn-component', require('./components/DeletebtnComponent').default);
+Vue.component('deletedefault-component', require('./components/DeletedefaultComponent').default);
+Vue.component('deletephotobtn-component', require('./components/DeletephotobtnComponent').default);
+Vue.component('editdata-component', require('./components/EditdataComponent').default);
+Vue.component('editinput-component', require('./components/EditinputComponent').default);
+Vue.component('ed_in_lbl-component', require('./components/Edit_input_labelComponent').default);
+Vue.component('gender-component', require('./components/GenderComponent').default);
+Vue.component('preferences-component', require('./components/PreferencesComponent').default);
 Vue.component('footer-component', require('./components/FooterComponent').default);
 
 /**

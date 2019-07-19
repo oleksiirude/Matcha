@@ -25,6 +25,7 @@
             if (($result = $this->validator($request, 'avatar')) !== true)
                 return response()->json($result);
             
+
             $avatar = $request->file('avatar');
             $extension = $avatar->getClientOriginalExtension();
             $savePath = public_path() . '/images/profiles/' .
@@ -139,6 +140,7 @@
         }
     
         public function deletePhoto($number) {
+//            dd ($number);
             if (!preg_match('/^[1-4]$/', $number))
                 abort(419);
             

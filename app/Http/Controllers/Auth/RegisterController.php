@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
-
 use App\Location;
 use App\Profile;
 use App\User;
@@ -11,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
 class RegisterController extends Controller
 {
     /*
@@ -24,16 +21,13 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
     use RegistersUsers;
-
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
     protected $redirectTo = '/home';
-
     /**
      * Create a new controller instance.
      *
@@ -42,7 +36,6 @@ class RegisterController extends Controller
     public function __construct() {
         $this->middleware('guest');
     }
-
     /**
      * Get a validator for an incoming registration request.
      *
@@ -53,23 +46,23 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'login' => ['required', 'string', 'unique:users', 'regex:/^[a-zA-Z]{3,20}$/'],
             // only lowercase letters, from 3 to 20
-            
+
             'email' => ['required', 'string', 'email', 'unique:users', 'regex:/^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,255}$/'],
             // classic email regexp
-            
+
             'name' => ['required', 'string', 'regex:/^[a-zA-Z]{2,20}$/'],
             // only letters, from 2 to 20
-            
+
             'surname' => ['required', 'string', 'regex:/^[a-zA-Z]{2,20}$/'],
             // only letters, from 2 to 20
     
             'gender' => ['required', 'string', 'regex:/^male|female$/'],
-            
+
             'password' => ['required', 'string', 'confirmed', 'regex:/^(?=.*[A-Z]{1,})(?=.*[!@#$%^&*()_+-]{1,})(?=.*[0-9]{1,})(?=.*[a-z]{1,}).{8,}$/'],
             // at least: 1 special symbol, 1 lowercase, 1 uppercase, min length - 8 symbols
         ]);
     }
-    
+
     /**
      * Handle a registration request for the application.
      *
@@ -78,22 +71,22 @@ class RegisterController extends Controller
      */
     public function register(Request $request) {
         $this->validator($request->all())->validate();
-        
+
         $data = $request->all();
 
         if (!$this->validateLocation($data))
             return view('messages.smth-went-wrong');
-        
+
         event(new Registered($user = $this->createUser($data)));
-        
+
         $this->createProfile($data);
         $this->createLocation($data);
         $this->createDirectory($data['login']);
-        
+
         return redirect('result')
             ->with('message', 'Please, check your email to confirm registration');
     }
-    
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -107,10 +100,10 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
-    
+
     protected function createProfile (array $data) {
         $id = User::where('login', $data['login'])->first();
-    
+
         Profile::create([
             'user_id' => $id->id,
             'login' => $data['login'],
@@ -119,10 +112,10 @@ class RegisterController extends Controller
             'gender' => $data['gender']
         ]);
     }
-    
+
     protected function createLocation (array $data) {
         $id = User::where('login', $data['login'])->first();
-        
+
         if ($data['gps_allowlocation'] === '1') {
             $allow = true;
             $profile = Profile::find($id->id);
@@ -130,7 +123,7 @@ class RegisterController extends Controller
         }
         else
             $allow = false;
-        
+
         Location::create([
             'user_id' => $id->id,
             'country' => $data['gps_country'],
@@ -142,11 +135,10 @@ class RegisterController extends Controller
             'allow' => $allow
         ]);
     }
-    
+
     protected function createDirectory($login) {
         if (!file_exists(public_path() . '/images/profiles'))
             mkdir(public_path() . '/images/profiles');
-
         if (!file_exists(public_path() . '/images/profiles/' . $login))
             mkdir(public_path() . '/images/profiles/' . $login);
     }
