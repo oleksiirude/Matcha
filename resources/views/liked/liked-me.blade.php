@@ -23,7 +23,40 @@
                                         @else
                                             <span>{{ $profile->last_activity }}</span>
                                     @endif
+                                    <p>
+                                    @if($profile->connected && !$profile->blocked)
+                                         <span style="color: #1d643b; font-weight: bold">You are connected with {{ $profile->login }}</span>
 
+                                        <form action="{{ route('show.chat', $profile->login) }}" method="GET">
+
+                                            <button type="submit">go chatting with {{ $profile->login }}</button>
+                                        </form>
+                                    @endif
+
+                                    {{--Like block--}}
+                                    @if($profile->auth_user_avatar_uploaded)
+                                        @if($profile->liked)
+                                            <form action="{{ route('unlike.user', [
+                                                        'id' => $profile->user_id,
+                                                        'login' => $profile->login
+                                                        ]) }}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+
+                                                <button type="submit">unlike</button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('like.user', [
+                                                         'id' => $profile->user_id,
+                                                         'login' => $profile->login
+                                                         ]) }}" method="POST">
+                                                @method('PUT')
+                                                @csrf
+
+                                                <button type="submit">like back</button>
+                                            </form>
+                                        @endif
+                                    @endif
                                     <p></p>
                                 </div>
 

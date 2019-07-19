@@ -46,11 +46,8 @@
                 ]);
             
             $this->increaseRatingTag();
-            
-            return response()->json([
-                'result' => true,
-                'rating' => round($this->model_profile->rating, 1)
-            ]);
+    
+            return $this->returnJsonBox();
         }
         
         protected function saveInTagsTable($tag) {
@@ -98,11 +95,8 @@
                 }
                 
                 $this->decreaseRating();
-                
-                return response()->json([
-                    'result' => true,
-                    'rating' => round($this->model_profile->rating, 1)
-                ]);
+    
+                return $this->returnJsonBox();
             }
             
             return redirect()->back();
@@ -140,6 +134,16 @@
     
             return response()->json([
                 'result' => false
+            ]);
+        }
+        
+        protected function returnJsonBox(){
+            $profile = Controller::getAttributesForAuthUserProfile();
+    
+            return response()->json([
+                'result' => true,
+                'rating' => round($this->model_profile->rating, 1),
+                'empty' => $profile['totally_filled']
             ]);
         }
     }

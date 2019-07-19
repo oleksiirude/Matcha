@@ -3,125 +3,147 @@
 @push('scripts')
 
     <script src="{{ asset('cropperjs/dist/cropper.min.js')}}" defer></script>
-{{--    <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>--}}
-{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>--}}
-{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.3/cropper.js"></script>--}}
+
     <script src="{{ asset('js/profile/profile.js')}}" defer></script>
-{{--    <script>--}}
-{{--        import Cropper from 'cropperjs';--}}
-{{--    </script>--}}
-{{--    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>--}}
+
 @endpush
+
 
 @push('style')
     <link rel="stylesheet" href="{{ asset('cropperjs/dist/cropper.css')}}">
-{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.3/cropper.css">--}}
 
-{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.3/cropper.css">--}}
 @endpush
 
 @section('content')
     <div class="profile_container" id="main_container">
-        <div class="justify-content-center">
-                <div class="card_profile">
-                    <h1>My profile</h1>
-{{--                    <div class="color_div">--}}
-                        <div class="white_div">
-                            <div class="card-body">
-                                <crop-component></crop-component>
-                                <div id="left_card">
-                                    <div id="div_useravatar">
-                                        <img src="{{ $profile->avatar }}" alt="avatar" id="avatar" title='download avatar' onclick="choose_file('avatar_label')">
-                                        <form enctype="multipart/form-data" method="POST" action="/upload/avatar" id="useravatar_form">
-                                            @csrf
-                                            <avatar-component></avatar-component>
-                                        </form>
-                                        <form action="/delete/avatar" method="POST" class="profile_delete_form" id="deleteavatar_form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <deletebtn-component srcavatar="{{ asset('images/service/del.png') }}" idbtn="delete_btn"></deletebtn-component>
-                                        </form>
-                                        <span id="avatar_errormsg"></span>
-{{--                                        <canvas id="canvas" width="900" height="600"></canvas>--}}
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">My profile</div>
+                    <div class="card-body">
+
+                        @if ($profile->totally_filled)
+                            Hey! For more efficient search you should:
+                            <ul>
+                            @if (isset($profile->totally_filled['upload']))
+                                    @foreach($profile->totally_filled['upload'] as $upload)
+                                        <li>upload {{ $upload }}</li>
+                                    @endforeach
+                            @endif
+
+                            @if (isset($profile->totally_filled['fill']))
+                                    @foreach($profile->totally_filled['fill'] as $fill)
+                                        <li>fill {{ $fill }}</li>
+                                    @endforeach
+                            @endif
+                            </ul>
+                        @endif
+
+                        <p><b>Rating:</b> {{ $profile->rating }}</p>
+                        <b>new avatar</b>
+                        <form enctype="multipart/form-data" method="POST" action="{{ route('upload.avatar') }}">
+                            @csrf
+                        </form>
+
+                        <div class="card_profile">
+
+                            <h1>My profile</h1>
+
+                            <div class="white_div">
+                                <div class="card-body">
+                                    <crop-component></crop-component>
+                                    <div id="left_card">
+                                        <div id="div_useravatar">
+                                            <img src="{{ $profile->avatar }}" alt="avatar" id="avatar" title='download avatar' onclick="choose_file('avatar_label')">
+                                            <form enctype="multipart/form-data" method="POST" action="/upload/avatar" id="useravatar_form">
+                                                @csrf
+                                                <avatar-component></avatar-component>
+                                            </form>
+                                            <form action="/delete/avatar" method="POST" class="profile_delete_form" id="deleteavatar_form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <deletebtn-component srcavatar="{{ asset('images/service/del.png') }}" idbtn="delete_btn"></deletebtn-component>
+                                            </form>
+                                            <span id="avatar_errormsg"></span>
+                                        </div>
+                                        <div>
+                                            <p><b>Rating:</b><span id="rating"> {{ $profile->rating }} </span></p>
+                                            <progress id = "rating_progress" value="{{ $profile->rating }}" max="100">
+                                            </progress>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p><b>Rating:</b><span id="rating"> {{ $profile->rating }} </span></p>
-                                        <progress id = "rating_progress" value="{{ $profile->rating }}" max="100">
-                                        </progress>
-                                    </div>
-                                </div>
-                                <div id="right_card">
-                                    <div id="usr_name_div">
-                                        <form action="/set/name" method="POST" id="name_form">
-                                            @csrf
-                                            @method('PUT')
-                                            <editinput-component value="{{ $profile->name }}" name="name" id_btn="name_btn"></editinput-component>
-                                            {{--                                    <button type="submit" class="btn edit_submit">Save</button>--}}
-                                        </form>
-                                        <form action="/set/surname" method="POST" id="surname_form">
-                                            @csrf
-                                            @method('PUT')
-                                            <div>
-                                                <editinput-component value="{{ $profile->surname }}"  name="surname" id_btn="surname_btn"></editinput-component>
-                                                {{--                                            <img src="/images/service/edit.png" class="edit" @click="editInput()" id="">--}}
-                                            </div>
-                                        </form>
-                                        <span id="name_error_msg" class="error_msg"></span>
-                                    </div>
-                                    <div>
-{{--                                        <p><b>Change login</b></p>--}}
-                                        <form action="/change/login" method="POST" id="login_form">
-                                            @csrf
-                                            <ed_in_lbl-component name="login" value="{{ $profile->login }}" label="Login:" id_btn="login_btn" url="/change/login"></ed_in_lbl-component>
-{{--                                            New login:--}}
-{{--                                            <input type="text" name="login">--}}
-{{--                                            <button type="submit">change login</button>--}}
-                                        </form>
-                                        <span id="login_error_msg" class="error_msg" hidden></span>
-                                    </div>
-                                    <div>
-                                        <form action="/set/gender" method="POST" id="gender_form">
-                                            @csrf
-                                            @method('PUT')
-                                            <gender-component value="{{ $profile->gender }}" name="gender"></gender-component>
-                                        </form>
-                                    </div>
-                                    <div>
-                                        <form action="/set/age" method="POST" id="age_form">
-                                            @csrf
-                                            @method('PUT')
-                                            <ed_in_lbl-component name="age" value="{{ $profile->age }}" label="Age:" id_btn="age_btn" url="/set/age"></ed_in_lbl-component>
-                                        </form>
-                                        <span id="age_error_msg" class="error_msg" hidden></span>
-                                    </div>
-                                    <div>
-{{--                                        <p><b>Sexual preferences:</b> {{ $profile->preferences }}</p>--}}
-                                        <form action="/set/preferences" method="POST" id="preferences_form">
-                                            @csrf
-                                            @method('PUT')
-                                            <preferences-component value="{{ $profile->preferences }}" name="preferences"></preferences-component>
-                                        </form>
-                                        <span id="preferences_error_msg" class="error_msg" hidden></span>
-                                    </div>
-                                    <div id="user_bio">
-                                        <p>
-                                            <h2>About</h2>
-                                        </p>
-                                        <form action="{{ route('delete.bio') }}" method="POST" id="deletebio_form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <deletedefault-component name="deletebio" url="/delete/bio"></deletedefault-component>
-                                        </form>
-                                        <form action="/set/bio" method="POST" id="bio_form">
-                                            @csrf
-                                            @method('PUT')
-                                            <editdata-component name="bio" bio="{{ $profile->bio }}"></editdata-component>
-                                        </form>
-                                        <span id="bio_error_msg" class="error_msg" hidden></span>
+                                    <div id="right_card">
+                                        <div id="usr_name_div">
+                                            <form action="/set/name" method="POST" id="name_form">
+                                                @csrf
+                                                @method('PUT')
+                                                <editinput-component value="{{ $profile->name }}" name="name" id_btn="name_btn"></editinput-component>
+                                                {{--                                    <button type="submit" class="btn edit_submit">Save</button>--}}
+                                            </form>
+                                            <form action="/set/surname" method="POST" id="surname_form">
+                                                @csrf
+                                                @method('PUT')
+                                                <div>
+                                                    <editinput-component value="{{ $profile->surname }}"  name="surname" id_btn="surname_btn"></editinput-component>
+                                                    {{--                                            <img src="/images/service/edit.png" class="edit" @click="editInput()" id="">--}}
+                                                </div>
+                                            </form>
+                                            <span id="name_error_msg" class="error_msg"></span>
+                                        </div>
+                                        <div>
+    {{--                                        <p><b>Change login</b></p>--}}
+                                            <form action="/change/login" method="POST" id="login_form">
+                                                @csrf
+                                                <ed_in_lbl-component name="login" value="{{ $profile->login }}" label="Login:" id_btn="login_btn" url="/change/login"></ed_in_lbl-component>
+    {{--                                            New login:--}}
+    {{--                                            <input type="text" name="login">--}}
+    {{--                                            <button type="submit">change login</button>--}}
+                                            </form>
+                                            <span id="login_error_msg" class="error_msg" hidden></span>
+                                        </div>
+                                        <div>
+                                            <form action="/set/gender" method="POST" id="gender_form">
+                                                @csrf
+                                                @method('PUT')
+                                                <gender-component value="{{ $profile->gender }}" name="gender"></gender-component>
+                                            </form>
+                                        </div>
+                                        <div>
+                                            <form action="/set/age" method="POST" id="age_form">
+                                                @csrf
+                                                @method('PUT')
+                                                <ed_in_lbl-component name="age" value="{{ $profile->age }}" label="Age:" id_btn="age_btn" url="/set/age"></ed_in_lbl-component>
+                                            </form>
+                                            <span id="age_error_msg" class="error_msg" hidden></span>
+                                        </div>
+                                        <div>
+    {{--                                        <p><b>Sexual preferences:</b> {{ $profile->preferences }}</p>--}}
+                                            <form action="/set/preferences" method="POST" id="preferences_form">
+                                                @csrf
+                                                @method('PUT')
+                                                <preferences-component value="{{ $profile->preferences }}" name="preferences"></preferences-component>
+                                            </form>
+                                            <span id="preferences_error_msg" class="error_msg" hidden></span>
+                                        </div>
+                                        <div id="user_bio">
+                                            <p>
+                                                <h2>About</h2>
+                                            </p>
+                                            <form action="{{ route('delete.bio') }}" method="POST" id="deletebio_form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <deletedefault-component name="deletebio" url="/delete/bio"></deletedefault-component>
+                                            </form>
+                                            <form action="/set/bio" method="POST" id="bio_form">
+                                                @csrf
+                                                @method('PUT')
+                                                <editdata-component name="bio" bio="{{ $profile->bio }}"></editdata-component>
+                                            </form>
+                                            <span id="bio_error_msg" class="error_msg" hidden></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 {{--                    </div>--}}
 
                     <div>
@@ -239,9 +261,9 @@
                             <input type="text" name="piece">
                             <button type="submit">find matches</button>
                         </form>
-
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 @endsection

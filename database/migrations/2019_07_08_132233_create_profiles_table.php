@@ -23,11 +23,12 @@ class CreateProfilesTable extends Migration
             $table->string('preferences', 12)->nullable();
             $table->string('bio', 500)->nullable();
             $table->string('avatar')->default('images/service/default_avatar.png');
+            $table->boolean('avatar_uploaded')->default(false);
             $table->string('photo1')->nullable();
             $table->string('photo2')->nullable();
             $table->string('photo3')->nullable();
             $table->string('photo4')->nullable();
-            $table->double('rating', 110, 1)->default(0.4);
+            $table->double('rating', 110, 1)->default(0.9);
         });
     }
     

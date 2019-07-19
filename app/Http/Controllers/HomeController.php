@@ -10,8 +10,8 @@
     use Illuminate\Http\Request;
     
     class HomeController extends Controller {
-        protected $model_profile;
-        protected $model_user;
+        public $model_profile;
+        public $model_user;
     
         public function __construct()
         {
@@ -27,20 +27,8 @@
          *
          * @return \Illuminate\Contracts\Support\Renderable
          */
-        public function show() {
-            $profile = $this->model_profile->where('user_id', $this->model_user->id)->first();
-            $profile['login'] = auth()->user()->login;
-            $profile['email'] = auth()->user()->email;
-        
-            $location = Location::where('user_id',$this->model_user->id)->first();
-            $profile['country'] = $location->country;
-            $profile['city'] = $location->city;
-            $profile['allow'] = $location->allow;
-            
-            $interests = Interest::select('tag')->where('user_id', $this->model_user->id)->get();
-            $profile['interests'] = $interests;
-            
-            return view('profile', ['profile' => $profile]);
+        public static function show() {
+            return view('profile', ['profile' => Controller::getAttributesForAuthUserProfile()]);
         }
         
         public function setName(Request $request) {
@@ -93,11 +81,8 @@
             
             if ($rating === true && $bio)
                 $this->increaseRating($this->model_profile);
-        
-            return response()->json([
-                'result' => true,
-                'rating' => round($this->model_profile->rating, 1)
-            ]);
+            
+            return $this->returnJsonBox();
         }
         
         public function deleteBio(){
@@ -109,11 +94,8 @@
             $this->model_profile->bio = "";
             $this->model_profile->save();
             $this->model_profile->decrement('rating', 0.5);
-
-            return response()->json([
-                'result' => true,
-                'rating' => round($this->model_profile->rating, 1)
-            ]);
+    
+            return $this->returnJsonBox();
         }
         
         public function setGender(Request $request) {
@@ -121,19 +103,14 @@
             
             if (!preg_match('/^male|female$/', $gender))
                 return redirect()->back();
-        
-            $rating = $this->model_profile->gender ? false : true;
+            
     
             $this->model_profile->update([
                 'gender' => $gender
             ]);
-        
-            if ($rating === true)
-                $this->increaseRating($this->model_profile);
 
             return response()->json([
-                'result' => true,
-                'rating' => round($this->model_profile->rating, 1)
+                'result' => true
             ]);
         }
         
@@ -158,11 +135,8 @@
         
             if ($rating === true)
                 $this->increaseRating($this->model_profile);
-
-            return response()->json([
-                'result' => true,
-                'rating' => round($this->model_profile->rating, 1)
-            ]);
+    
+            return $this->returnJsonBox();
         }
         
         public function setPreferences(Request $request) {
@@ -179,11 +153,8 @@
         
             if ($rating === true)
                 $this->increaseRating($this->model_profile);
-
-            return response()->json([
-                'result' => true,
-                'rating' => round($this->model_profile->rating, 1)
-            ]);
+    
+            return $this->returnJsonBox();
         }
         
         public function changeLogin(Request $request) {
@@ -277,5 +248,15 @@
             ]);
             
             return response()->json(['result' => true]);
+        }
+        
+        protected function returnJsonBox() {
+            $profile = Controller::getAttributesForAuthUserProfile();
+    
+            return response()->json([
+                'result' => true,
+                'rating' => round($this->model_profile->rating, 1),
+                'empty' => $profile['totally_filled']
+            ]);
         }
     }

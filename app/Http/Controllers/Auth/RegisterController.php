@@ -55,6 +55,8 @@ class RegisterController extends Controller
 
             'surname' => ['required', 'string', 'regex:/^[a-zA-Z]{2,20}$/'],
             // only letters, from 2 to 20
+    
+            'gender' => ['required', 'string', 'regex:/^male|female$/'],
 
             'password' => ['required', 'string', 'confirmed', 'regex:/^(?=.*[A-Z]{1,})(?=.*[!@#$%^&*()_+-]{1,})(?=.*[0-9]{1,})(?=.*[a-z]{1,}).{8,}$/'],
             // at least: 1 special symbol, 1 lowercase, 1 uppercase, min length - 8 symbols
@@ -71,6 +73,9 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
 
         $data = $request->all();
+
+        if (!$this->validateLocation($data))
+            return view('messages.smth-went-wrong');
 
         event(new Registered($user = $this->createUser($data)));
 
@@ -104,6 +109,7 @@ class RegisterController extends Controller
             'login' => $data['login'],
             'name' => ucfirst(strtolower($data['name'])),
             'surname' => ucfirst(strtolower($data['surname'])),
+            'gender' => $data['gender']
         ]);
     }
 
@@ -136,6 +142,19 @@ class RegisterController extends Controller
         if (!file_exists(public_path() . '/images/profiles/' . $login))
             mkdir(public_path() . '/images/profiles/' . $login);
     }
+
+
+    protected function validateLocation($data) {
+        if (!isset($data['gps_country'])
+            || !isset($data['gps_region'])
+            || !isset($data['gps_city'])
+            || !isset($data['gps_code'])
+            || !isset($data['gps_latitude'])
+            || !isset($data['gps_longitude']))
+            return false;
+        return true;
+    }
+
     public function index() {
         $json_data = array(['result' => true]);
         return $json_data;

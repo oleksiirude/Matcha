@@ -21,6 +21,7 @@
             'preferences',
             'bio',
             'avatar',
+            'avatar_uploaded',
             'photo1', 'photo2', 'photo3', 'photo4',
             'rating',
         ];

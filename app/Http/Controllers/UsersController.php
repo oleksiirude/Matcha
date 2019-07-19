@@ -12,7 +12,10 @@
     class UsersController extends Controller {
     
         public function show() {
-            $users = User::select()->get();
+            $users = User::select()
+                ->whereNotNull('email_verified_at')
+                ->where('id', '!=', 1)
+                ->get();
         
             foreach ($users as $user) {
                 if (!$user->isOnline()) {
@@ -29,31 +32,39 @@
         
         public function showUser($login) {
             $user = User::where('login', $login)->first();
-        
-            if (!$user)
+
+            if (!$user || !$user->email_verified_at)
                 return abort(404);
             
             if ($login === auth()->user()->login)
                 return redirect('profile');
 
             $this->addDataToVisitsTable($user->id, auth()->user()->id);
+        
+            return view('user', ['profile' => $this->fillDataInBox($user)]);
+        }
 
+        protected function fillDataInBox(User $user) {
             $profile = Profile::find($user->id);
             $location = Location::find($user->id);
             $interests = Interest::where('user_id', $user->id)->get();
-            
+
+            $aim = $user->id;
+            $auth = auth()->user()->id;
+
+            $profile['auth_user_avatar_uploaded'] = $this->ifAvatarUploaded();
             $profile['login'] = $user->login;
             $profile['country'] = $location->country;
             $profile['allow'] = $location->allow;
             $profile['city'] = $location->city;
             $profile['interests'] = $interests;
+            $profile['reported'] = $this->checkIfReported($auth, $aim);
             $profile['last_activity'] = $this->checkLastActivity($user);
-            $profile['liked'] = $this->checkIfLiked($user->id, auth()->user()->id);
-            $profile['blocked'] = $this->checkIfBlocked($user->id, auth()->user()->id);
-            $profile['connected'] = $this->checkIfConnected($user->id, auth()->user()->id);
-            
-        
-            return view('user', ['profile' => $profile]);
+            $profile['liked'] = $this->checkIfLiked($aim, $auth);
+            $profile['liked_me'] = $this->checkIfLikedMe($aim, $auth);
+            $profile['blocked'] = $this->checkIfBlocked($aim, $auth);
+            $profile['connected'] = $this->checkIfConnected($aim, $auth);
+            return $profile;
         }
 
         public function increaseRating($id) {

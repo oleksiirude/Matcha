@@ -25,24 +25,28 @@
             if (($result = $this->validator($request, 'avatar')) !== true)
                 return response()->json($result);
             
-//            $avatar = $request->file('avatar');
-//            $extension = $avatar->getClientOriginalExtension();
-//            $savePath = public_path() . '/images/profiles/' .
-//                auth()->user()->login . '/' . 'avatar' . '.' . $extension;
-//
-//            $this->manager->make($avatar)
-//                ->heighten(640)
-//                ->orientate()
-//                ->save($savePath);
-//
-//            $path = str_replace(public_path() . '/','', $savePath);
-//
-//            $this->insertAvatarToDB($path);
-//
+
+            $avatar = $request->file('avatar');
+            $extension = $avatar->getClientOriginalExtension();
+            $savePath = public_path() . '/images/profiles/' .
+                auth()->user()->login . '/' . 'avatar' . '.' . $extension;
+            
+            $this->manager->make($avatar)
+                ->heighten(640)
+                ->orientate()
+                ->save($savePath);
+            
+            $path = str_replace(public_path() . '/','', $savePath);
+            
+            $this->insertAvatarToDB($path);
+    
+            $profile = Controller::getAttributesForAuthUserProfile();
+    
             return response()->json([
-                'result' => true
-//                'path' => $path,
-//                'rating' => round($this->model_profile->rating, 1)
+                'result' => true,
+                'path' => $path,
+                'rating' => round($this->model_profile->rating, 1),
+                'empty' => $profile['totally_filled']
             ]);
         }
         
@@ -69,11 +73,14 @@
             $path = str_replace(public_path() . '/','', $savePath);
             
             $this->insertPhotoToDB($path, $number);
-            
+    
+            $profile = Controller::getAttributesForAuthUserProfile();
+    
             return response()->json([
                 'result' => true,
                 'path' => str_replace(public_path() . '/','', $savePath),
-                'rating' => round($this->model_profile->rating, 1)
+                'rating' => round($this->model_profile->rating, 1),
+                'empty' => $profile['totally_filled']
             ]);
         }
         
@@ -97,7 +104,8 @@
             $this->increaseRating($this->model_profile);
     
             $this->model_profile->update([
-               'avatar' => $path
+               'avatar' => $path,
+                'avatar_uploaded' => true
             ]);
         }
         
@@ -105,7 +113,7 @@
             $this->increaseRating($this->model_profile);
     
             $this->model_profile->update([
-                'photo' . $number => $path
+                'photo' . $number => $path,
             ]);
         }
     
@@ -118,12 +126,16 @@
             $this->model_profile->decrement('rating', 0.5);
     
             $this->model_profile->update([
-                'avatar' => 'images/service/default_avatar.png'
+                'avatar' => 'images/service/default_avatar.png',
+                'avatar_uploaded' => false
             ]);
-        
+    
+            $profile = Controller::getAttributesForAuthUserProfile();
+    
             return response()->json([
                 'result' => true,
-                'rating' => round($this->model_profile->rating, 1)
+                'rating' => round($this->model_profile->rating, 1),
+                'empty' => $profile['totally_filled']
             ]);
         }
     
@@ -144,10 +156,13 @@
             $this->model_profile->update([
                 $photo => null
             ]);
-
+            
+            $profile = Controller::getAttributesForAuthUserProfile();
+    
             return response()->json([
                 'result' => true,
-                'rating' => round($this->model_profile->rating, 1)
+                'rating' => round($this->model_profile->rating, 1),
+                'empty' => $profile['totally_filled']
             ]);
         }
     }

@@ -23,6 +23,7 @@
                                                     'login' => $profile->user->login
                                                     ]) }}" method="POST">
                                             @csrf
+                                            @method('DELETE')
 
                                         <button type="submit">unblock {{ $profile->login }}</button>
                                     </form>

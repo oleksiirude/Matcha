@@ -19,6 +19,7 @@
     // PROFILE
     Route::group(['prefix' => '/profile', 'middleware' => 'verified'], function () {
         Route::get('/', 'HomeController@show')->name('profile');
+        Route::get('/info', 'HomeController@show')->middleware('filled_profile');
         Route::get('/viewed/profiles', 'HomeController@showViewedProfiles')->name('viewed.profiles');
         Route::get('/viewed/profiles', 'VisitController@showViewedProfiles')->name('viewed.profiles');
         Route::get('/viewed/my-profile', 'VisitController@showUsersViewedMyProfile')->name('viewed.my.profile');
@@ -75,6 +76,17 @@
         Route::delete('/unblock/{id}/{login}', 'BlockingController@unblockUser')->name('unblock.user');
         Route::put('/like/{id}/{login}', 'LikeController@likeUser')->name('like.user');
         Route::delete('/unlike/{id}/{login}', 'LikeController@unlikeUser')->name('unlike.user');
+        Route::post('/report/{id}/{login}', 'ReportController@makeReport')->name('report');
+    });
+    
+    // SUGGESTIONS
+    Route::group(['prefix' => '/suggestions', 'middleware' => 'verified'], function () {
+        Route::get('/', 'SuggestionController@show')->name('suggestions');
+    });
+    
+    // ADVANCED RESEARCH
+    Route::group(['prefix' => '/research', 'middleware' => 'verified'], function () {
+        Route::get('/', 'ResearchController@show')->name('research');
     });
     
     // CHAT ROOM

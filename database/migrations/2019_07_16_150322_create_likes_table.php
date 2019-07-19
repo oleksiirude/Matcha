@@ -14,7 +14,7 @@
             Schema::create('likes', function (Blueprint $table) {
                 $table->bigInteger('user');
                 $table->bigInteger('liked');
-                $table->timestamp('date');;
+                $table->timestamp('date');
             });
         }
     
