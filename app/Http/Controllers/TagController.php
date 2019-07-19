@@ -46,10 +46,13 @@
                 ]);
             
             $this->increaseRatingTag();
-            
+    
+            $profile = Controller::getAttributesForAuthUserProfile();
+    
             return response()->json([
                 'result' => true,
-                'rating' => round($this->model_profile->rating, 1)
+                'rating' => round($this->model_profile->rating, 1),
+                'empty' => $profile['totally_filled']
             ]);
         }
         
@@ -98,10 +101,13 @@
                 }
                 
                 $this->decreaseRating();
-                
+    
+                $profile = Controller::getAttributesForAuthUserProfile();
+    
                 return response()->json([
                     'result' => true,
-                    'rating' => round($this->model_profile->rating, 1)
+                    'rating' => round($this->model_profile->rating, 1),
+                    'empty' => $profile['totally_filled']
                 ]);
             }
             

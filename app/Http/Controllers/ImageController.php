@@ -38,11 +38,14 @@
             $path = str_replace(public_path() . '/','', $savePath);
             
             $this->insertAvatarToDB($path);
-            
+    
+            $profile = Controller::getAttributesForAuthUserProfile();
+    
             return response()->json([
                 'result' => true,
                 'path' => $path,
-                'rating' => round($this->model_profile->rating, 1)
+                'rating' => round($this->model_profile->rating, 1),
+                'empty' => $profile['totally_filled']
             ]);
         }
         
@@ -69,11 +72,14 @@
             $path = str_replace(public_path() . '/','', $savePath);
             
             $this->insertPhotoToDB($path, $number);
-            
+    
+            $profile = Controller::getAttributesForAuthUserProfile();
+    
             return response()->json([
                 'result' => true,
                 'path' => str_replace(public_path() . '/','', $savePath),
-                'rating' => round($this->model_profile->rating, 1)
+                'rating' => round($this->model_profile->rating, 1),
+                'empty' => $profile['totally_filled']
             ]);
         }
         
@@ -122,10 +128,13 @@
                 'avatar' => 'images/service/default_avatar.png',
                 'avatar_uploaded' => false
             ]);
-        
+    
+            $profile = Controller::getAttributesForAuthUserProfile();
+    
             return response()->json([
                 'result' => true,
-                'rating' => round($this->model_profile->rating, 1)
+                'rating' => round($this->model_profile->rating, 1),
+                'empty' => $profile['totally_filled']
             ]);
         }
     
@@ -145,10 +154,13 @@
             $this->model_profile->update([
                 $photo => null
             ]);
-
+            
+            $profile = Controller::getAttributesForAuthUserProfile();
+    
             return response()->json([
                 'result' => true,
-                'rating' => round($this->model_profile->rating, 1)
+                'rating' => round($this->model_profile->rating, 1),
+                'empty' => $profile['totally_filled']
             ]);
         }
     }

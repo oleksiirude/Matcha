@@ -28,23 +28,7 @@
          * @return \Illuminate\Contracts\Support\Renderable
          */
         public static function show() {
-            $user = User::find(Auth::id());
-            $profile = Profile::find(Auth::id());
-            
-            $profile = $profile->where('user_id', $user->id)->first();
-            $profile['login'] = auth()->user()->login;
-            $profile['email'] = auth()->user()->email;
-        
-            $location = Location::where('user_id', $user->id)->first();
-            $profile['country'] = $location->country;
-            $profile['city'] = $location->city;
-            $profile['allow'] = $location->allow;
-            
-            $interests = Interest::select('tag')->where('user_id', $user->id)->get();
-            $profile['interests'] = $interests;
-            $profile['totally_filled'] = Controller::checkIfTotallyFilled($profile->getAttributes());
-            
-            return view('profile', ['profile' => $profile]);
+            return view('profile', ['profile' => Controller::getAttributesForAuthUserProfile()]);
         }
         
         public function setName(Request $request) {
@@ -97,10 +81,13 @@
             
             if ($rating === true && $bio)
                 $this->increaseRating($this->model_profile);
-        
+            
+            $profile = Controller::getAttributesForAuthUserProfile();
+            
             return response()->json([
                 'result' => true,
-                'rating' => round($this->model_profile->rating, 1)
+                'rating' => round($this->model_profile->rating, 1),
+                'empty' => $profile['totally_filled']
             ]);
         }
         
@@ -113,10 +100,13 @@
             $this->model_profile->bio = "";
             $this->model_profile->save();
             $this->model_profile->decrement('rating', 0.5);
-
+    
+            $profile = Controller::getAttributesForAuthUserProfile();
+    
             return response()->json([
                 'result' => true,
-                'rating' => round($this->model_profile->rating, 1)
+                'rating' => round($this->model_profile->rating, 1),
+                'empty' => $profile['totally_filled']
             ]);
         }
         
@@ -157,10 +147,13 @@
         
             if ($rating === true)
                 $this->increaseRating($this->model_profile);
-
+    
+            $profile = Controller::getAttributesForAuthUserProfile();
+    
             return response()->json([
                 'result' => true,
-                'rating' => round($this->model_profile->rating, 1)
+                'rating' => round($this->model_profile->rating, 1),
+                'empty' => $profile['totally_filled']
             ]);
         }
         
@@ -178,10 +171,13 @@
         
             if ($rating === true)
                 $this->increaseRating($this->model_profile);
-
+    
+            $profile = Controller::getAttributesForAuthUserProfile();
+    
             return response()->json([
                 'result' => true,
-                'rating' => round($this->model_profile->rating, 1)
+                'rating' => round($this->model_profile->rating, 1),
+                'empty' => $profile['totally_filled']
             ]);
         }
         
