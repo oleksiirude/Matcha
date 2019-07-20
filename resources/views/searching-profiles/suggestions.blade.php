@@ -10,6 +10,11 @@
                     <div class="card-body">
                         <div class="flex-center position-ref full-height">
                             @if (count($profiles))
+
+                                <div class="card-body">filtering</div>
+
+                                <div class="card-body">sorting</div>
+
                                 @foreach($profiles as $profile)
                                     <div style="background-color: darkgrey">
                                         <p>
@@ -39,7 +44,7 @@
                                         </p>
 
                                         <p>
-                                            {{ $profile->name }} is {{ $profile->distance }} from you
+                                            {{ $profile->name }} is {{ $profile->distance }}
                                         </p>
 
                                         <p>

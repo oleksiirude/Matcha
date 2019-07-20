@@ -57,7 +57,7 @@
                             @endif
                         @else
                             <form id="suggestions-form" action="{{ route('suggestions') }}" method="GET">
-                                <button type="submit" class="btn btn-outline-secondary">Browse profiles</button>
+                                <button type="submit" class="btn btn-outline-secondary">Suggestions</button>
                             </form>
 
                             <form id="research-form" action="{{ route('research') }}" method="GET">

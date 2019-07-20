@@ -24,8 +24,8 @@
                 
                 $distance = round($distance->getLength(new Haversine()));
                 
-                // distance might be 40km, 4000 just for testing
-                if ($distance <= 40000000) {
+                // default search distance -> up to 100km
+                if ($distance <= 1000000) {
                     $profile['distance'] = $distance;
                     $nearby[] = $profile;
                 }

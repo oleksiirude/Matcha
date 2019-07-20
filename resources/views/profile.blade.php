@@ -45,7 +45,7 @@
                                     <crop-component></crop-component>
                                     <div id="left_card">
                                         <div id="div_useravatar">
-                                            <img src="{{ $profile->avatar }}" alt="avatar" id="avatar" title='download avatar' onclick="choose_file('avatar_label')">
+                                            <img src="{{ asset($profile->avatar) }}" alt="avatar" id="avatar" title='download avatar' onclick="choose_file('avatar_label')">
                                             <form enctype="multipart/form-data" method="POST" action="{{ route('upload.avatar') }}" id="useravatar_form">
                                                 @csrf
                                                 <avatar-component></avatar-component>
@@ -134,7 +134,7 @@
                                 <div class="usr_gallery">
                                     <div class="usr_photo_div">
                                         <img src="{{ asset('images/service/photo_gray.png') }}" onclick="choose_file('photo1_label')" class="camera">
-                                        <img src="{{ $profile->photo1 }}" alt="photo1" class="usr_photo" id="img1" onclick="choose_file('photo1_label')" @if ( $profile->photo1  == null) hidden @endif>
+                                        <img src="{{ asset($profile->photo1) }}" alt="photo1" class="usr_photo" id="img1" onclick="choose_file('photo1_label')" @if ( $profile->photo1  == null) hidden @endif>
                                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}" id="photo1_form">
                                             @csrf
                                             <photo-component photovalue="1" inputid="photo1" labelid="photo1_label"></photo-component>
@@ -148,7 +148,7 @@
                                     </div>
                                     <div class="usr_photo_div">
                                         <img src="{{ asset('images/service/photo_gray.png') }}" onclick="choose_file('photo2_label')" class="camera">
-                                        <img src="{{ $profile->photo2 }}" alt="photo2" class="usr_photo" id="img2" onclick="choose_file('photo2_label')" @if ( $profile->photo2  == null) hidden @endif>
+                                        <img src="{{ asset($profile->photo2) }}" alt="photo2" class="usr_photo" id="img2" onclick="choose_file('photo2_label')" @if ( $profile->photo2  == null) hidden @endif>
                                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}" id="photo2_form">
                                             @csrf
                                             <photo-component photovalue="2" inputid="photo2" labelid="photo2_label"></photo-component>
@@ -162,7 +162,7 @@
                                     </div>
                                     <div class="usr_photo_div">
                                         <img src="{{ asset('images/service/photo_gray.png') }}" onclick="choose_file('photo3_label')" class="camera">
-                                        <img src="{{ $profile->photo3 }}" alt="photo3" class="usr_photo" id="img3" onclick="choose_file('photo3_label')"  @if ( $profile->photo3  == null) hidden @endif>
+                                        <img src="{{ asset($profile->photo3) }}" alt="photo3" class="usr_photo" id="img3" onclick="choose_file('photo3_label')"  @if ( $profile->photo3  == null) hidden @endif>
                                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}" id="photo3_form">
                                             @csrf
                                             <photo-component photovalue="3" inputid="photo3" labelid="photo3_label"></photo-component>
@@ -176,7 +176,7 @@
                                     </div>
                                     <div class="usr_photo_div">
                                         <img src="{{ asset('images/service/photo_gray.png') }}" onclick="choose_file('photo4_label')" class="camera">
-                                        <img src="{{ $profile->photo4 }}" alt="photo4" class="usr_photo" id="img4" onclick="choose_file('photo4_label')"  @if ( $profile->photo4  == null) hidden @endif>
+                                        <img src="{{ asset($profile->photo4) }}" alt="photo4" class="usr_photo" id="img4" onclick="choose_file('photo4_label')"  @if ( $profile->photo4  == null) hidden @endif>
                                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}" id="photo4_form">
                                             @csrf
                                             <photo-component photovalue="4" inputid="photo4" labelid="photo4_label"></photo-component>

@@ -92,7 +92,7 @@
                 $empty['fill'][] = 'interests (more the better)';
         
             if (!$data['avatar_uploaded'])
-                $empty['upload'][] = 'avatar';
+                $empty['upload'][] = "avatar (you won't appear in other people search without avatar)";
             if (!$data['photo1'])
                 $counter++;
             if (!$data['photo2'])

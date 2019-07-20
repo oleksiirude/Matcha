@@ -118,6 +118,8 @@
                 ->sortBy('distance')
                 ->values()->all();
             
+            $sorted = $this->getFineDistanceView($sorted);
+            
             return $sorted;
         }
         
@@ -143,6 +145,23 @@
                 $i++;
             }
             
+            return $profiles;
+        }
+        
+        public function getFineDistanceView($profiles) {
+            $i = 0;
+            foreach ($profiles as $profile) {
+                if ($profile->distance <= 10)
+                    $profile->distance = 'right behind you!';
+                elseif ($profile->distance < 1000)
+                    $profile->distance = 'about ' . $profile->distance . ' metres from you';
+                elseif ($profile->distance / 1000 === 1)
+                    $profile->distance = 'about ' . '1 km from you';
+                else
+                    $profile->distance = 'about ' . round($profile->distance / 1000) . ' km from you';
+                $profiles[$i] = $profile;
+                $i++;
+            }
             return $profiles;
         }
     }
