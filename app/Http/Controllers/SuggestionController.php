@@ -6,9 +6,10 @@
     use App\Profile;
     use App\User;
     use App\Location;
+    use Illuminate\Http\Request;
 
     class SuggestionController extends Controller {
-    
+        
         public $profile;
     
         public function __construct()
@@ -23,6 +24,29 @@
             $profiles = $this->findProfilesByBaseCriterias();
             return view('searching-profiles.suggestions', ['profiles' => $profiles]);
         }
+    
+        public function sort(Request $request) {
+            $this->validateSortRequest($request->all());
+            
+            $profiles = $this->findProfilesByBaseCriterias();
+    
+            if (count($profiles)) {
+                $sorter = new SortController($profiles, $request->all());
+                $profiles = $sorter->sort();
+            }
+            
+//          return response()->json(['result' => $profiles]);
+            return view('searching-profiles.suggestions', ['profiles' => $profiles]);
+        }
+        
+        public function validateSortRequest($request) {
+            if (!isset($request['sort']) || !isset($request['order']))
+                abort(419);
+            
+            if (!preg_match('/^age|distance|rating|interests$/', $request['sort'])
+                    || !preg_match('/^ascending|descending$/', $request['order']))
+                abort(419);
+        }
         
         public function findProfilesByBaseCriterias() {
             if (!$this->profile->preferences)
@@ -34,12 +58,15 @@
                 $profiles = $this->getMatchedProfilesForHomosexuals();
             else
                 $profiles = $this->getMatchedProfilesForBisexuals();
+            
+            if (!count($profiles))
+                return $profiles;
     
             $profiles = LocationController::filterByDistance($profiles, $this->profile->user_id);
             $profiles = TagController::findTagMatches($profiles, $this->profile->user_id);
-            $profiles = $this->sortByDefault($profiles);
+            $profiles = $this->getFineDistanceView(SortController::sortByDefault($profiles));
             
-            return $this->addInfoAboutActivityAndLocation($profiles);
+            return collect($this->addInfoAboutActivityAndLocation($profiles));
         }
         
         public function getMatchedProfilesForClassics() {
@@ -109,18 +136,6 @@
             }
             
             return $clean_profiles;
-        }
-        
-        public function sortByDefault($profiles) {
-            $sorted = collect($profiles)
-                ->sortByDesc('rating')
-                ->sortByDesc('matches')
-                ->sortBy('distance')
-                ->values()->all();
-            
-            $sorted = $this->getFineDistanceView($sorted);
-            
-            return $sorted;
         }
         
         public function addInfoAboutActivityAndLocation($profiles) {

@@ -1,12 +1,10 @@
 <?php
 
     namespace App\Http\Controllers;
-    
-    use App\Interest;
+
+    use Auth;
     use App\Profile;
     use App\User;
-    use App\Location;
-    use Auth;
     use Illuminate\Http\Request;
     
     class HomeController extends Controller {
@@ -31,7 +29,7 @@
             return view('profile', ['profile' => Controller::getAttributesForAuthUserProfile()]);
         }
         
-        public function setName(Request $request) {
+        public function changeName(Request $request) {
             $name = $request->get('name');
             
             if (!preg_match('/^[a-zA-Z]{2,20}$/', $name))
@@ -48,7 +46,7 @@
             return response()->json(['result' => true]);
         }
         
-        public function setSurname(Request $request) {
+        public function changeSurname(Request $request) {
             $surname = $request->get('surname');
             
             if (!preg_match('/^[a-zA-Z]{2,20}$/', $surname))
@@ -98,7 +96,7 @@
             return $this->returnJsonBox();
         }
         
-        public function setGender(Request $request) {
+        public function changeGender(Request $request) {
             $gender = $request->get('gender');
             
             if (!preg_match('/^male|female$/', $gender))

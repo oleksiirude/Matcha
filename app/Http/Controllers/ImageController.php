@@ -108,7 +108,8 @@
         }
         
         protected function insertAvatarToDB($path) {
-            $this->increaseRating($this->model_profile);
+            if (!$this->model_profile->avatar_uploaded)
+                $this->increaseRating($this->model_profile);
     
             $this->model_profile->update([
                'avatar' => $path,
@@ -147,7 +148,6 @@
         }
     
         public function deletePhoto($number) {
-//            dd ($number);
             if (!preg_match('/^[1-4]$/', $number))
                 abort(419);
             

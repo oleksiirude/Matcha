@@ -6,15 +6,42 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Profiles which you will probably like</div>
-
-                    <div class="card-body">
                         <div class="flex-center position-ref full-height">
                             @if (count($profiles))
 
-                                <div class="card-body">filtering</div>
+                                <div class="card-body" style="background-color: antiquewhite">
+                                    <div class="form-group row">
+                                        <form method="GET" action="{{ route('sort') }}">
 
-                                <div class="card-body">sorting</div>
+                                            Sorting by:
+                                            <select class="form-control" name="sort">
+                                                <option value="age">age</option>
+                                                <option value="distance">distance</option>
+                                                <option value="rating">rating</option>
+                                                <option value="interests">interests</option>
+                                            </select>
+                                            Order:
+                                            <select class="form-control" name="order">
+                                                <option value="ascending">min to max</option>
+                                                <option value="descending">max to min</option>
+                                            </select>
+                                            <button type="submit">sort</button>
+                                        </form>
+                                    </div>
+                                </div>
 
+                                <div class="card-body" style="background-color: wheat">
+                                    <div class="form-group row">
+                                        <form method="GET" action="{{ route('sort') }}">
+
+                                            Age:
+                                            <input type="search">
+                                            <button type="submit">sort</button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
                                 @foreach($profiles as $profile)
                                     <div style="background-color: darkgrey">
                                         <p>
@@ -25,6 +52,14 @@
                                             </a>
 
                                             {{ $profile->name }} {{ $profile->surname }}
+
+                                            <p>Age:
+                                            @if($profile->age)
+                                                {{ $profile->age }} years
+                                            @else
+                                                isn't specified
+                                            @endif
+                                            </p>
                                         </p>
 
                                         <p>

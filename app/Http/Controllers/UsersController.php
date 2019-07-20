@@ -2,11 +2,11 @@
 
     namespace App\Http\Controllers;
     
+    use App\User;
+    use App\Visit;
     use App\Interest;
     use App\Profile;
-    use App\User;
     use App\Location;
-    use App\Visit;
     use Carbon\Carbon;
 
     class UsersController extends Controller {
@@ -64,6 +64,7 @@
             $profile['liked_me'] = $this->checkIfLikedMe($aim, $auth);
             $profile['blocked'] = $this->checkIfBlocked($aim, $auth);
             $profile['connected'] = $this->checkIfConnected($aim, $auth);
+            
             return $profile;
         }
 
@@ -90,7 +91,8 @@
                 $visits->watcher = $watcher;
                 $visits->date = Carbon::now();
                 $visits->save();
-            } else {
+            }
+            else {
                 $visits->deleted_by_watcher = false;
                 $visits->deleted_by_viewed = false;
                 $visits->date = Carbon::now();

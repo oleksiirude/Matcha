@@ -3,9 +3,9 @@
     namespace App\Http\Controllers;
     
     use App\Location;
+    use Location\Line;
     use Location\Coordinate;
     use Location\Distance\Haversine;
-    use Location\Line;
 
     class LocationController extends Controller {
         
