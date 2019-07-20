@@ -32,6 +32,9 @@
                 $profiles = $this->getMatchedProfilesForBisexuals();
             
             $profiles = LocationController::filterByDistance($profiles, $this->profile->user_id);
+            $profiles = TagController::findTagMatches($profiles, $this->profile->user_id);
+            $profiles = $this->sortByDefault($profiles);
+            
             dd($profiles);
             
             return view('searching-profiles.suggestions');
@@ -103,5 +106,15 @@
             }
             
             return $clean_profiles;
+        }
+        
+        public function sortByDefault($profiles) {
+            $sorted = collect($profiles)
+                ->sortByDesc('rating')
+                ->sortByDesc('matches')
+                ->sortBy('distance')
+                ->values()->all();
+            
+            return $sorted;
         }
     }

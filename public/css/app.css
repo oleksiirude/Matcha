@@ -3072,12 +3072,12 @@ fieldset:disabled a.btn {
 
 .btn-outline-secondary {
   color: #6c757d;
-  border-color: transparent;
+  border-color: #6c757d;
 }
 
 .btn-outline-secondary:hover {
   color: #fff;
-  background-color: #D76D77;
+  background-color: #6c757d;
   border-color: #6c757d;
 }
 

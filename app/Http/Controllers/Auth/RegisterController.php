@@ -143,7 +143,6 @@ class RegisterController extends Controller
             mkdir(public_path() . '/images/profiles/' . $login);
     }
 
-
     protected function validateLocation($data) {
         if (!isset($data['gps_country'])
             || !isset($data['gps_region'])
