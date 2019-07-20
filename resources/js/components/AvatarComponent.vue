@@ -3,7 +3,7 @@
 
         <input type="file" accept=".jpg, .jpeg" name="avatar" @change='crop' id="avatar_input" class="photo_input"/>
         <label for="avatar_input" id="avatar_label">Выберите файл</label>
-<!--        <input type="image" name="crop_avatar" id="cropavatar_input" hidden/>-->
+        <input name="crop" id="crop_avatar" hidden/>
 
     </div>
 </template>

@@ -22,7 +22,7 @@
         }
         
         public function uploadAvatar(Request $request) {
-            $base64 = (array)json_decode($request->get('crop'));
+            $base64 = $request->get('crop');
     
             $base64 = str_replace('data:image/jpeg;base64,', '', $base64);
             
