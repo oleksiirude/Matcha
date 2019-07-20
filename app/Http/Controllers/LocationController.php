@@ -22,10 +22,10 @@
                   new Coordinate($user->latitude, $user->longitude)
                 );
                 
-                $distance = round($distance->getLength(new Haversine()) / 1000);
+                $distance = round($distance->getLength(new Haversine()));
                 
                 // distance might be 40km, 4000 just for testing
-                if ($distance <= 4000) {
+                if ($distance <= 40000000) {
                     $profile['distance'] = $distance;
                     $nearby[] = $profile;
                 }

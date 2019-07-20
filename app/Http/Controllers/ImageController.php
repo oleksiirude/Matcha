@@ -21,6 +21,7 @@
             });
         }
         
+        // NEED TESTING
         public function uploadAvatar(Request $request) {
             $base64 = (array)json_decode($request->get('crop'));
     

@@ -158,6 +158,14 @@
                     $j = 0;
                     $i++;
                 }
+                
+                if ($matches) {
+                    if ($matches > 1)
+                        $matches = $matches . ' common interests';
+                    else
+                        $matches = $matches . ' common interest';
+                }
+                
                 $profile['matches'] = $matches;
                 $collection[] = $profile;
             }

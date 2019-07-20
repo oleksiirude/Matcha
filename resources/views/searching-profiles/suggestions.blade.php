@@ -9,7 +9,53 @@
 
                     <div class="card-body">
                         <div class="flex-center position-ref full-height">
-                            <p>Profiles list...</p>
+                            @if (count($profiles))
+                                @foreach($profiles as $profile)
+                                    <div style="background-color: darkgrey">
+                                        <p>
+                                            <a href="{{ route('show.certain.user', $profile->login) }}">
+                                                <img src="{{ URL::asset($profile->avatar) }}"
+                                                     alt="{{ $profile->login }}'s avatar" style="width: 100px"
+                                                     title="{{ $profile->login }}">
+                                            </a>
+
+                                            {{ $profile->name }} {{ $profile->surname }}
+                                        </p>
+
+                                        <p>
+                                            Rating: {{ $profile->rating }}
+                                        </p>
+
+                                        <p>
+                                        @if($profile->allow)
+                                            from {{ $profile->country }}, {{ $profile->city }}
+                                        @endif
+                                        </p>
+
+                                        <p>
+                                        @if ($profile->matches)
+                                            {{ $profile->name }} has {{ $profile->matches }} with you
+                                        @endif
+                                        </p>
+
+                                        <p>
+                                            {{ $profile->name }} is {{ $profile->distance }} from you
+                                        </p>
+
+                                        <p>
+                                        @if ($profile->last_activity)
+                                            <span style="color: #1e7e34">{{ $profile->last_activity }}</span>
+                                        @endif
+                                        </p>
+                                    </div>
+
+                                @endforeach
+                            @else
+                                <p>
+                                    Unfortunately, we cannot find anyone matched you in your geographical area
+                                    <br>Try <a href="{{ route('research') }}">Advanced research</a>
+                                </p>
+                            @endif
                         </div>
                     </div>
                 </div>

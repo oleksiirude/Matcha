@@ -5,39 +5,41 @@
     use Auth;
     use App\Profile;
     use App\User;
+    use App\Location;
 
     class SuggestionController extends Controller {
     
         public $profile;
-        public $user;
     
         public function __construct()
         {
             $this->middleware(function ($request, $next) {
                 $this->profile = Profile::find(Auth::id());
-                $this->user = User::find(Auth::id());
                 return $next($request);
             });
         }
     
         public function show() {
+            $profiles = $this->findProfilesByBaseCriterias();
+            return view('searching-profiles.suggestions', ['profiles' => $profiles]);
+        }
+        
+        public function findProfilesByBaseCriterias() {
             if (!$this->profile->preferences)
                 $this->profile->preferences = 'bisexual';
-            
+    
             if ($this->profile->preferences === 'heterosexual')
                 $profiles = $this->getMatchedProfilesForClassics();
             elseif ($this->profile->preferences === 'homosexual')
                 $profiles = $this->getMatchedProfilesForHomosexuals();
             else
                 $profiles = $this->getMatchedProfilesForBisexuals();
-            
+    
             $profiles = LocationController::filterByDistance($profiles, $this->profile->user_id);
             $profiles = TagController::findTagMatches($profiles, $this->profile->user_id);
             $profiles = $this->sortByDefault($profiles);
             
-            dd($profiles);
-            
-            return view('searching-profiles.suggestions');
+            return $this->addInfoAboutActivityAndLocation($profiles);
         }
         
         public function getMatchedProfilesForClassics() {
@@ -100,9 +102,10 @@
         public function removeBlockedProfiles($profiles) {
             $clean_profiles = collect();
             
-            foreach ($profiles as $item) {
-                if (!$this->checkIfBlocked($item->user_id, $this->profile->user_id))
-                    $clean_profiles[] = $item;
+            foreach ($profiles as $profile) {
+                if (!$this->checkIfBlocked($profile->user_id, $this->profile->user_id)
+                                                            && $profile->avatar_uploaded)
+                    $clean_profiles[] = $profile;
             }
             
             return $clean_profiles;
@@ -116,5 +119,30 @@
                 ->values()->all();
             
             return $sorted;
+        }
+        
+        public function addInfoAboutActivityAndLocation($profiles) {
+            $i = 0;
+            foreach ($profiles as $profile) {
+                $status = User::find($profile->user_id);
+                
+                if ($this->checkLastActivity($status) === 'online')
+                    $profile['last_activity'] = 'online';
+                else
+                    $profile['last_activity'] = null;
+                
+                $location = Location::find($profile->user_id);
+                if ($location->allow) {
+                    $profile['allow'] = true;
+                    $profile['country'] = $location->country;
+                    $profile['city'] = $location->city;
+                }
+                else
+                    $profile['allow'] = false;
+                $profiles[$i] = $profile;
+                $i++;
+            }
+            
+            return $profiles;
         }
     }
