@@ -2,6 +2,7 @@
 
     namespace App\Http\Controllers;
     
+    use App\Http\Controllers\Auth\RegisterController;
     use App\Profile;
     use Auth;
     use Illuminate\Http\Request;
@@ -21,17 +22,18 @@
             });
         }
         
-        // NEED TESTING
         public function uploadAvatar(Request $request) {
             $base64 = $request->get('crop');
     
             $base64 = str_replace('data:image/jpeg;base64,', '', $base64);
             
             $savePath = public_path() . '/images/profiles/' .
-                auth()->user()->login . '/' . 'avatar' . '.jpeg';
+                auth()->user()->login . '/' . 'avatar' . '.jpg';
             
             $path = str_replace(public_path() . '/','', $savePath);
     
+            RegisterController::createDirectory(auth()->user()->login);
+            
             $photo = base64_decode($base64);
             $photo = imagecreatefromstring($photo);
             imagejpeg($photo, $path);
@@ -66,6 +68,8 @@
             
             if (($result = $this->validator($request, 'photo')) !== true)
                 return response()->json($result);
+    
+            RegisterController::createDirectory(auth()->user()->login);
             
             $pic = $request->file('photo');
             $extension = $pic->getClientOriginalExtension();

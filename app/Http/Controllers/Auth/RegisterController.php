@@ -136,7 +136,7 @@ class RegisterController extends Controller
         ]);
     }
 
-    protected function createDirectory($login) {
+    public static function createDirectory($login) {
         if (!file_exists(public_path() . '/images/profiles'))
             mkdir(public_path() . '/images/profiles');
         if (!file_exists(public_path() . '/images/profiles/' . $login))
