@@ -19,17 +19,17 @@
 		TRUNCATE TABLE bans;
 		TRUNCATE TABLE visits;
 	");
-
-	foreach (USERS as $title => $table)
-		$connection->query($table);
-	foreach (PROFILES as $table => $query)
-		$connection->query($query);
-	foreach (INTERESTS as $table => $query)
-		$connection->query($query);
-	foreach (TAGS as $table => $query)
-		$connection->query($query);
-	foreach (LOCATIONS as $table => $query)
-		$connection->query($query);
+	
+	foreach (USERS as $query => $insert)
+		$connection->query($insert);
+	foreach (PROFILES as $query => $insert)
+		$connection->query($insert);
+	foreach (INTERESTS as $query => $insert)
+		$connection->query($insert);
+	foreach (TAGS as $query => $insert)
+		$connection->query($insert);
+	foreach (LOCATIONS as $query => $insert)
+		$connection->query($insert);
 
 
 	$path = str_replace('storage/filler', 'public/images', dirname(__FILE__));
