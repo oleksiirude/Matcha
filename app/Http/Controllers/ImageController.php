@@ -2,6 +2,7 @@
 
     namespace App\Http\Controllers;
     
+    use App\Http\Controllers\Auth\RegisterController;
     use App\Profile;
     use Auth;
     use Illuminate\Http\Request;
@@ -21,17 +22,16 @@
             });
         }
         
-        // NEED TESTING
         public function uploadAvatar(Request $request) {
             $base64 = $request->get('crop');
     
             $base64 = str_replace('data:image/jpeg;base64,', '', $base64);
             
             $savePath = public_path() . '/images/profiles/' .
-                auth()->user()->login . '/' . 'avatar' . '.jpeg';
+                auth()->user()->login . '/' . 'avatar' . '.jpg';
             
             $path = str_replace(public_path() . '/','', $savePath);
-    
+            
             $photo = base64_decode($base64);
             $photo = imagecreatefromstring($photo);
             imagejpeg($photo, $path);
@@ -108,7 +108,8 @@
         }
         
         protected function insertAvatarToDB($path) {
-            $this->increaseRating($this->model_profile);
+            if (!$this->model_profile->avatar_uploaded)
+                $this->increaseRating($this->model_profile);
     
             $this->model_profile->update([
                'avatar' => $path,
@@ -147,7 +148,6 @@
         }
     
         public function deletePhoto($number) {
-//            dd ($number);
             if (!preg_match('/^[1-4]$/', $number))
                 abort(419);
             

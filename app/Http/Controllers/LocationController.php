@@ -3,9 +3,9 @@
     namespace App\Http\Controllers;
     
     use App\Location;
+    use Location\Line;
     use Location\Coordinate;
     use Location\Distance\Haversine;
-    use Location\Line;
 
     class LocationController extends Controller {
         
@@ -22,10 +22,10 @@
                   new Coordinate($user->latitude, $user->longitude)
                 );
                 
-                $distance = round($distance->getLength(new Haversine()));
+                $distance = (int)$distance->getLength(new Haversine());
                 
-                // default search distance -> up to 100km
-                if ($distance <= 1000000) {
+                // default search distance -> up to 10km
+                if ($distance <= 10000) {
                     $profile['distance'] = $distance;
                     $nearby[] = $profile;
                 }

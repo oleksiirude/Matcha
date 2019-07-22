@@ -2,11 +2,11 @@
 
     namespace App\Http\Controllers;
 
-    use App\Location;
-    use App\Profile;
-    use App\Visit;
-    use App\User;
     use Auth;
+    use App\User;
+    use App\Visit;
+    use App\Profile;
+    use App\Location;
     use Carbon\Carbon;
 
     class VisitController extends Controller {

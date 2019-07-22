@@ -6,9 +6,10 @@
     use App\Profile;
     use App\User;
     use App\Location;
+    use Illuminate\Http\Request;
 
     class SuggestionController extends Controller {
-    
+        
         public $profile;
     
         public function __construct()
@@ -20,8 +21,36 @@
         }
     
         public function show() {
-            $profiles = $this->findProfilesByBaseCriterias();
+            $profiles = $this->getFineDistanceView(
+                    $this->findProfilesByBaseCriterias());
+            
             return view('searching-profiles.suggestions', ['profiles' => $profiles]);
+        }
+    
+        public function sort(Request $request) {
+            $this->validateSortRequest($request->all());
+            
+            $profiles = $this->findProfilesByBaseCriterias();
+            
+            if (count($profiles)) {
+                $sorter = new SortController($profiles, $request->all());
+                $profiles = $this->getFineDistanceView($sorter->sortMain());
+            }
+       
+            if ($request->get('sort') === 'age')
+                $profiles = $this->putWithoutAgeDown($profiles);
+            
+//          return response()->json(['result' => $profiles]);
+            return view('searching-profiles.suggestions', ['profiles' => $profiles]);
+        }
+        
+        public function validateSortRequest($request) {
+            if (!isset($request['sort']) || !isset($request['order']))
+                abort(419);
+            
+            if (!preg_match('/^age|distance|rating|interests$/', $request['sort'])
+                    || !preg_match('/^ascending|descending$/', $request['order']))
+                abort(419);
         }
         
         public function findProfilesByBaseCriterias() {
@@ -34,17 +63,20 @@
                 $profiles = $this->getMatchedProfilesForHomosexuals();
             else
                 $profiles = $this->getMatchedProfilesForBisexuals();
-    
+            
+            if (!count($profiles))
+                return $profiles;
+            
             $profiles = LocationController::filterByDistance($profiles, $this->profile->user_id);
             $profiles = TagController::findTagMatches($profiles, $this->profile->user_id);
-            $profiles = $this->sortByDefault($profiles);
-            
+            $profiles = SortController::sortByDefault($profiles);
+           
             return $this->addInfoAboutActivityAndLocation($profiles);
         }
         
         public function getMatchedProfilesForClassics() {
             $profiles = Profile::where('gender', '!=', $this->profile->gender)
-                                    ->where('preferences', $this->profile->preferences)
+                                    ->where('preferences', '!=', 'homosexual')
                                     ->get();
             
             return $this->removeBlockedProfiles($profiles);
@@ -111,29 +143,16 @@
             return $clean_profiles;
         }
         
-        public function sortByDefault($profiles) {
-            $sorted = collect($profiles)
-                ->sortByDesc('rating')
-                ->sortByDesc('matches')
-                ->sortBy('distance')
-                ->values()->all();
-            
-            $sorted = $this->getFineDistanceView($sorted);
-            
-            return $sorted;
-        }
-        
         public function addInfoAboutActivityAndLocation($profiles) {
             $i = 0;
             foreach ($profiles as $profile) {
-                $status = User::find($profile->user_id);
-                
+                $status = User::find($profile['user_id']);
                 if ($this->checkLastActivity($status) === 'online')
                     $profile['last_activity'] = 'online';
                 else
                     $profile['last_activity'] = null;
                 
-                $location = Location::find($profile->user_id);
+                $location = Location::find($profile['user_id']);
                 if ($location->allow) {
                     $profile['allow'] = true;
                     $profile['country'] = $location->country;
@@ -141,6 +160,7 @@
                 }
                 else
                     $profile['allow'] = false;
+                $profile['rating'] = (string)$profile['rating'];
                 $profiles[$i] = $profile;
                 $i++;
             }
@@ -151,17 +171,39 @@
         public function getFineDistanceView($profiles) {
             $i = 0;
             foreach ($profiles as $profile) {
-                if ($profile->distance <= 10)
-                    $profile->distance = 'right behind you!';
-                elseif ($profile->distance < 1000)
-                    $profile->distance = 'about ' . $profile->distance . ' metres from you';
-                elseif ($profile->distance / 1000 === 1)
-                    $profile->distance = 'about ' . '1 km from you';
+                if ($profile['distance'] <= 10)
+                    $profile['distance'] = 'right behind you!';
+                elseif ($profile['distance'] < 1000)
+                    $profile['distance'] = 'about ' . $profile['distance'] . ' metres from you';
+                elseif ($profile['distance'] / 1000 === 1)
+                    $profile['distance'] = 'about ' . '1 km from you';
                 else
-                    $profile->distance = 'about ' . round($profile->distance / 1000) . ' km from you';
+                    $profile['distance'] = 'about ' . round($profile['distance'] / 1000) . ' km from you';
                 $profiles[$i] = $profile;
                 $i++;
             }
+            
+            return $profiles;
+        }
+    
+        protected function putWithoutAgeDown($profiles) {
+            $box = collect();
+        
+            $i = 0;
+            foreach ($profiles as $item) {
+                if (!$item['age']) {
+                    $box[] = $item;
+                    unset($profiles[$i]);
+                }
+                $i++;
+            }
+        
+            $i = 0;
+            while ($i < count($box)) {
+                $profiles[] = $box[$i];
+                $i++;
+            }
+        
             return $profiles;
         }
     }

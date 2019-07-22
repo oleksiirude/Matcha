@@ -1,11 +1,11 @@
 <?php
 
     namespace App\Http\Controllers;
-    
-    use App\Interest;
-    use App\Profile;
+
     use App\Tag;
     use App\User;
+    use App\Interest;
+    use App\Profile;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Auth;
     
@@ -158,6 +158,7 @@
                     $j = 0;
                     $i++;
                 }
+                $profile['interests'] = $matches;
                 
                 if ($matches) {
                     if ($matches > 1)
@@ -166,8 +167,8 @@
                         $matches = $matches . ' common interest';
                 }
                 
-                $profile['matches'] = $matches;
-                $collection[] = $profile;
+                $profile['interests_matched'] = $matches;
+                $collection[] = collect($profile);
             }
             
             return $collection;

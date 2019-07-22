@@ -3,9 +3,9 @@
     namespace App\Http\Controllers;
 
     use Auth;
-    use App\Profile;
     use App\User;
     use App\Like;
+    use App\Profile;
     use Carbon\Carbon;
 
     class LikeController extends Controller {

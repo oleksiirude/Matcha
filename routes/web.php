@@ -1,20 +1,10 @@
 <?php
-    /*
-    |--------------------------------------------------------------------------
-    | Web Routes
-    |--------------------------------------------------------------------------
-    |
-    | Here is where you can register web routes for your application. These
-    | routes are loaded by the RouteServiceProvider within a group which
-    | contains the "web" middleware group. Now create something great!
-    |
-    */
+    
+    Auth::routes(['verify' => true]);
     
     Route::get('/', function () {
         return view('welcome');
     })->middleware('guest');
-    
-    Auth::routes(['verify' => true]);
 
     // PROFILE
     Route::group(['prefix' => '/profile', 'middleware' => 'verified'], function () {
@@ -48,9 +38,6 @@
 
     // SET
     Route::group(['prefix' => '/set', 'middleware' => 'verified'], function () {
-        Route::put('/name', 'HomeController@setName')->name('set.name');
-        Route::put('/surname', 'HomeController@setSurname')->name('set.surname');
-        Route::put('/gender', 'HomeController@setGender')->name('set.gender');
         Route::put('/preferences', 'HomeController@setPreferences')->name('set.preferences');
         Route::put('/bio', 'HomeController@setBio')->name('set.bio');
         Route::put('/age', 'HomeController@setAge')->name('set.age');
@@ -59,9 +46,12 @@
 
     // CHANGE
     Route::group(['prefix' => '/change', 'middleware' => 'verified'], function () {
-        Route::post('/login', 'HomeController@changeLogin')->name('change.login');
-        Route::post('/email', 'HomeController@changeEmail')->name('change.email');
-        Route::post('/password', 'HomeController@changePassword')->name('change.password');
+        Route::put('/name', 'HomeController@changeName')->name('change.name');
+        Route::put('/surname', 'HomeController@changeSurname')->name('change.surname');
+        Route::put('/gender', 'HomeController@changeGender')->name('change.gender');
+        Route::put('/login', 'HomeController@changeLogin')->name('change.login');
+        Route::put('/email', 'HomeController@changeEmail')->name('change.email');
+        Route::put('/password', 'HomeController@changePassword')->name('change.password');
     });
 
     // FINDING
@@ -83,6 +73,7 @@
     // SUGGESTIONS
     Route::group(['prefix' => '/suggestions', 'middleware' => 'verified'], function () {
         Route::get('/', 'SuggestionController@show')->name('suggestions');
+        Route::get('/sort', 'SuggestionController@sort')->name('sort');
     });
     
     // ADVANCED RESEARCH
