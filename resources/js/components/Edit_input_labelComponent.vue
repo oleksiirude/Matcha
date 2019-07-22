@@ -1,7 +1,7 @@
 <template>
     <div>
         <label :for="name">{{ label }}</label>
-        <input type="text" :name="name" class="profiledata" :value="value" @click="editInput(name)" :id="name" @keyup="show_btn(name)">
+        <input type="text" :name="name" class="profiledata" :value="value" @click="editInput(name)" :id="name" @keyup="show_btn(name)" placeholder="">
         <button type="submit" class="btn edit_submit" :id="id_btn" hidden @click="save">Save</button>
     </div>
 </template>

@@ -65,12 +65,21 @@ let crop_prepare = function() {
                 // const context = canvas.getContext('2d');
                 // context.clearRect(0, 0, canvas.width, canvas.height);
             });
+            document.getElementById('parent_popup').addEventListener('click', function (e) {
+                if (e.target !== this)
+                    return;
+                document.getElementById('crop_div').hidden = true;
+                cropper.destroy();
+                document.getElementById('parent_popup').style.display='none';
+                document.getElementById('avatar_input').value = '';
+                // const context = canvas.getContext('2d');
+                // context.clearRect(0, 0, canvas.width, canvas.height);
+            });
             document.getElementById('btnCrop').addEventListener('click', function () {
                 let tmp = cropper.getCroppedCanvas();
                 console.log('tmp', tmp);
                 if (tmp != null) {
                     let croppedImageDataURL = tmp.toDataURL('image/jpeg');
-                    // document.getElementById('result_img').src = croppedImageDataURL;
                     document.getElementById('crop_avatar').value = croppedImageDataURL;
                     upload_crop_avatar();
                     cropper.destroy();
