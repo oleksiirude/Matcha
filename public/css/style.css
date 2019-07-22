@@ -373,9 +373,9 @@ a:hover {
     /*position: absolute;*/
     max-height: 140px;
 }
-#name_form {
+#name_form, #surname_form {
     position: relative;
-    z-index: 999;
+    /*z-index: 999;*/
     background-color: transparent;
     font-size: 46px;
     font-weight: bold;
@@ -384,17 +384,17 @@ a:hover {
     /*width: 100%;*/
     height: 70px;
 }
-#surname_form {
-    position: relative;
-    z-index: 999;
-    background-color: transparent;
-    font-size: 46px;
-    font-weight: bold;
-    /*top: -50px;*/
-    /*left: -15%;*/
-    /*width: 100%;*/
-    height: 70px;
-}
+/*#surname_form {*/
+/*    position: relative;*/
+/*    !*z-index: 999;*!*/
+/*    background-color: transparent;*/
+/*    font-size: 46px;*/
+/*    font-weight: bold;*/
+/*    !*top: -50px;*!*/
+/*    !*left: -15%;*!*/
+/*    !*width: 100%;*!*/
+/*    height: 70px;*/
+/*}*/
 #name_form input, #surname_form input {
     /*width: calc(100% - 100px);*/
     background-color: transparent;
@@ -450,60 +450,19 @@ progress::-webkit-progress-value { background: #FFAF7B; }
 
 /*crop*/
 
-/*#imageCanvas {*/
-/*    display: none;*/
-/*}*/
-/*.crop_buttons {*/
-/*    position: absolute;*/
-/*    z-index: 9997;*/
-/*}*/
-/*#crop_btn, #reset_btn {*/
-/*    margin: 10px;*/
-/*}*/
-
 #crop_div {
-    position: absolute;
-    width:80%;
-    height: 70%;
+    position: fixed;
+    width:50%;
+    top: 50px;
+    left: 20%;
+    /*height: 70%;*/
     z-index: 9995;
+    -webkit-filter: blur(0);
+    -moz-filter: blur(0);
+    -o-filter: blur(0);
+    -ms-filter: blur(0);
+    filter: blur(0);
 }
-
-/*.crop-wrapper {*/
-/*    background-color:rgba(255,255,255,1);*/
-/*    position:absolute;*/
-/*    width:100%;*/
-/*    height: 100%;*/
-/*    overflow:hidden;*/
-/*    z-index: 9996;*/
-/*}*/
-
-/*.resize-container {*/
-/*    position: relative;*/
-/*    display: inline-block;*/
-/*    cursor: move;*/
-/*    margin: 0 auto;*/
-/*}*/
-
-/*.resize-container-ontop {*/
-/*    position:absolute;*/
-/*    cursor:move;*/
-/*    background-color:rgba(5,255,5,0);*/
-/*    z-index:1000;*/
-/*    width:100%;*/
-/*    height:100%;*/
-/*}*/
-
-/*.resize-container img {*/
-/*    display: block;*/
-/*    !*width: 100%;*!*/
-/*    !*height: auto;*!*/
-/*}*/
-
-/*.resize-container:hover img,*/
-/*.resize-container:active img {*/
-/*    outline: 2px dashed rgba(0,0,0,.9);*/
-/*}*/
-
 
 img {
     max-width: 100%; /* This rule is very important, please do not ignore this! */
@@ -516,3 +475,41 @@ img {
     cursor: default;
     border: 1px solid black;
 }
+.close_btn {
+    float: right;
+    color: white;
+    background-color: darkred;
+}
+#crop_div .btn,  #crop_div .close_btn {
+    filter: grayscale(1);
+}
+#crop_div .btn:hover,  #crop_div .close_btn:hover{
+    filter: grayscale(0%);
+}
+/*.to_blur.blur {*/
+/*    -webkit-filter: blur(5px);*/
+/*    -moz-filter: blur(5px);*/
+/*    -o-filter: blur(5px);*/
+/*    -ms-filter: blur(5px);*/
+/*    filter: blur(5px);*/
+/*}*/
+#parent_popup {
+    display: none;
+    background: white;
+    height: 100%;
+    opacity: 0.9;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    top: 0;
+    left: 0;
+}
+/*#popup {*/
+/*    background-color: white;*/
+/*    height: 200px;*/
+/*    */
+/*    top: 100px;*/
+/*    left: 40%;*/
+/*    color: #f00;*/
+/*    width: 300px;*/
+/*}*/

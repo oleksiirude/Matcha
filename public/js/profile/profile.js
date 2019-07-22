@@ -1,6 +1,7 @@
 let canvas  = document.getElementById('canvas'),
     context = canvas.getContext("2d"),
     result = document.getElementById('result');
+// let cropper;
 
 let upload_crop_avatar = function() {
     console.log('TTT', document.getElementById('crop_avatar').value);
@@ -22,7 +23,10 @@ let upload_crop_avatar = function() {
                 document.getElementById('avatar_errormsg').innerHTML = '';
                 document.getElementById('delete_btn').hidden = false;
                 update_raiting(string.rating);
+                document.getElementById('crop_div').hidden = true;
+                document.getElementById('parent_popup').style.display='none';
                 console.log('uploadajax', string.path);
+                document.getElementById('avatar_input').value = '';
             } else if (string.result == false) {
                 document.getElementById('avatar_errormsg').innerHTML = '&#9755; ERROR: ' + string.error;
                 console.log('uploaderror', string.error);
@@ -37,6 +41,7 @@ let upload_crop_avatar = function() {
 let crop_prepare = function() {
     let file = document.getElementById("avatar_input").files[0];
     document.getElementById('crop_div').hidden = false;
+    document.getElementById('parent_popup').style.display='block';
     let reader = new FileReader();
     reader.onload = function (evt) {
         let img = new Image();
@@ -45,18 +50,31 @@ let crop_prepare = function() {
             context.canvas.width = img.width;
             context.drawImage(img, 0, 0);
             const cropper = new Cropper(document.getElementById('canvas'), {
+                viewMode: 1,
                 aspectRatio: 1 / 1,
+                center: false,
                 rotatable: true,
                 crop(event) {
                 },
             });
+            document.getElementById('btnClose').addEventListener('click', function () {
+                document.getElementById('crop_div').hidden = true;
+                cropper.destroy();
+                document.getElementById('parent_popup').style.display='none';
+                document.getElementById('avatar_input').value = '';
+                // const context = canvas.getContext('2d');
+                // context.clearRect(0, 0, canvas.width, canvas.height);
+            });
             document.getElementById('btnCrop').addEventListener('click', function () {
                 let tmp = cropper.getCroppedCanvas();
                 console.log('tmp', tmp);
-                let croppedImageDataURL = tmp.toDataURL('image/jpeg');
-                document.getElementById('result_img').src = croppedImageDataURL;
-                document.getElementById('crop_avatar').value = croppedImageDataURL;
-                upload_crop_avatar();
+                if (tmp != null) {
+                    let croppedImageDataURL = tmp.toDataURL('image/jpeg');
+                    // document.getElementById('result_img').src = croppedImageDataURL;
+                    document.getElementById('crop_avatar').value = croppedImageDataURL;
+                    upload_crop_avatar();
+                    cropper.destroy();
+                }
                 // document.getElementById('avatar').src = croppedImageDataURL;
             });
             document.getElementById('btnRestore').addEventListener('click', function () {

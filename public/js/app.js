@@ -1859,6 +1859,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   // props: [
   //     // 'croppedImage',
@@ -1866,7 +1869,12 @@ __webpack_require__.r(__webpack_exports__);
   //     // 'canvasHeight',
   //     // 'roundCorners'
   // ],
-  methods: {// selectFile: function (evt) {
+  methods: {
+    close_window: function close_window() {
+      document.getElementById('crop_div').hidden = true;
+      cropper.destroy(); // const context = canvas.getContext('2d');
+      // context.clearRect(0, 0, canvas.width, canvas.height);
+    }
   }
 });
 
@@ -37907,25 +37915,38 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "crop_div", hidden: "" } }, [
-      _c("p", [
-        _c("input", {
-          attrs: { type: "button", id: "btnCrop", value: "Crop and download" }
-        }),
+    return _c("div", { attrs: { id: "parent_popup" } }, [
+      _c("div", { attrs: { id: "crop_div", hidden: "" } }, [
+        _c("p", [
+          _c(
+            "button",
+            { staticClass: "btn btn-primary", attrs: { id: "btnCrop" } },
+            [_vm._v("✄ Crop and download")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "btn btn-primary", attrs: { id: "btnRestore" } },
+            [_vm._v("Restore")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "btn btn-primary", attrs: { id: "btnRotate" } },
+            [_vm._v("↺ Rotate")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "close_btn",
+            attrs: { type: "button", id: "btnClose", value: "X" }
+          })
+        ]),
         _vm._v(" "),
-        _c("input", {
-          attrs: { type: "button", id: "btnRestore", value: "Restore" }
-        }),
+        _c("div", [_c("canvas", { attrs: { id: "canvas" } })]),
         _vm._v(" "),
-        _c("input", {
-          attrs: { type: "button", id: "btnRotate", value: "Rotate" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", [_c("canvas", { attrs: { id: "canvas" } })]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "result" } }, [
-        _c("img", { attrs: { id: "result_img", src: "" } })
+        _c("div", { attrs: { id: "result" } }, [
+          _c("img", { attrs: { id: "result_img", src: "" } })
+        ])
       ])
     ])
   }
