@@ -78,12 +78,18 @@
                                             <span id="name_error_msg" class="error_msg"></span>
                                         </div>
                                         <div>
-
                                             <form action="{{ route('change.login') }}" method="POST" id="login_form">
                                                 @csrf
                                                 <ed_in_lbl-component name="login" value="{{ $profile->login }}" label="Login:" id_btn="login_btn" url="/change/login"></ed_in_lbl-component>
                                             </form>
                                             <span id="login_error_msg" class="error_msg" hidden></span>
+                                        </div>
+                                        <div>
+                                            <form action="{{ route('change.email') }}" method="POST" id="email_form">
+                                                @csrf
+                                                <ed_email-component name="email" value="{{ $profile->email }}" label="Email:" id_btn="email_btn" url="{{ route('change.email') }}"></ed_email-component>
+                                            </form>
+                                            <span id="email_error_msg" class="error_msg" hidden></span>
                                         </div>
                                         <div>
                                             <form action="{{ route('set.gender') }}" method="POST" id="gender_form">
@@ -109,10 +115,16 @@
                                             <span id="preferences_error_msg" class="error_msg" hidden></span>
                                         </div>
                                         <div>
-                                            <p><b>Country:</b> {{ $profile->country }}</p>
+                                            <form>
+                                                <label for="">Country:</label>
+                                                <input type="text" id="" name="" value="{{ $profile->country }}" class="profiledata">
+                                            </form>
                                         </div>
                                         <div>
-                                            <p><b>City:</b> {{ $profile->city }}</p>
+                                            <form>
+                                                <label for="">City:</label>
+                                                <input type="text" id="" name="" value="{{ $profile->city }}" class="profiledata">
+                                            </form>
                                         </div>
 
                                         <div id="user_bio">
@@ -132,21 +144,8 @@
                                             <span id="bio_error_msg" class="error_msg" hidden></span>
                                         </div>
                                         <div>
-                                            <p><b>Email:</b> {{ $profile->email }}</p>
-                                            <p><b>Change email</b></p>
-                                            <form action="{{ route('change.email') }}" method="POST">
-                                                @csrf
-
-                                                New email:
-                                                <p><input id="email" type="email" name="email"></p>
-                                                Password:
-                                                <p><input type="password" name="password"></p>
-                                                <button type="submit">change login</button>
-                                            </form>
-                                        </div>
-                                        <div>
                                             <p><b>Change password</b></p>
-                                            <form action="{{ route('change.password') }}" method="POST">
+                                            <form action="{{ route('change.password') }}" method="POST" id="password_form">
                                                 @csrf
 
                                                 Current password:
@@ -157,6 +156,7 @@
                                                 <p><input type="password" name="new_password_confirm"></p>
                                                 <button type="submit">change password</button>
                                             </form>
+                                            <span id="password_error_msg" class="error_msg" hidden></span>
                                         </div>
                                         <div>
                                             <p><b>Interests:</b></p>

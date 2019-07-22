@@ -2051,7 +2051,6 @@ __webpack_require__.r(__webpack_exports__);
 
         if (xhr.status === 200) {
           var string = xhr.response;
-          console.log('res', string);
 
           if (string.result == true) {
             _this.mutableValue = document.getElementById(_this.name).value;
@@ -2061,11 +2060,9 @@ __webpack_require__.r(__webpack_exports__);
 
             if (_this.name == 'login') {
               var i = document.getElementById('navbarDropdown').firstChild;
-              document.getElementById('navbarDropdown').firstChild.nodeValue = _this.mutableValue; // i.data = this.mutableValue;
-
-              console.log('ok', i.nodeValue); // document.getElementById('navbarDropdown').firstChild = this.mutableValue;
-
-              console.log('ok1', document.getElementById('navbarDropdown').firstChild);
+              document.getElementById('navbarDropdown').firstChild.nodeValue = _this.mutableValue; // console.log('ok', i.nodeValue);
+              // document.getElementById('navbarDropdown').firstChild = this.mutableValue;
+              // console.log('ok1', document.getElementById('navbarDropdown').firstChild);
             }
 
             if (_this.name != 'login') {
@@ -2075,11 +2072,9 @@ __webpack_require__.r(__webpack_exports__);
           } else if (string.result == false) {
             document.getElementById(_this.name).value = _this.mutableValue;
             document.getElementById(_this.name + '_error_msg').hidden = false;
-            document.getElementById(_this.name + '_error_msg').innerHTML = string.error;
-            console.log('error');
-          }
+            document.getElementById(_this.name + '_error_msg').innerHTML = string.error; // console.log('error');
+          } // console.log('res', string);
 
-          console.log('res', string);
         }
       };
 
@@ -2165,6 +2160,99 @@ __webpack_require__.r(__webpack_exports__);
           }
 
           console.log('res', string);
+        }
+      };
+
+      xhr.send(form);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditemailComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EditemailComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['value', 'name', 'id_btn', 'label', 'url'],
+  data: function data() {
+    return {
+      mutableValue: this.value
+    };
+  },
+  methods: {
+    editInput: function editInput(name) {
+      var input = document.getElementById(name);
+      input.focus();
+    },
+    show_btn: function show_btn(name) {
+      document.getElementById('email_confirm_pass').hidden = false;
+      document.getElementById(name + '_btn').hidden = false;
+      document.getElementById(name + '_btn_cancel').hidden = false;
+    },
+    cancel: function cancel(name) {
+      document.getElementById(this.name).value = this.mutableValue;
+      document.getElementById('email_confirm_pass').hidden = true;
+      document.getElementById(name + '_btn').hidden = true;
+      document.getElementById(name + '_btn_cancel').hidden = true;
+      document.getElementById(this.name + '_error_msg').innerHTML = '';
+      document.getElementById(this.name + '_error_msg').hidden = true;
+      document.getElementById('password').value = '';
+    },
+    save: function save(e) {
+      var _this = this;
+
+      e.preventDefault();
+      var idform = this.name + '_form';
+      var form = new FormData(document.getElementById(idform));
+      var XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
+      var xhr = new XHR();
+      xhr.responseType = 'json';
+      var url = this.url;
+      xhr.open('POST', url, true);
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState !== 4) {
+          return;
+        }
+
+        if (xhr.status === 200) {
+          var string = xhr.response;
+
+          if (string.result == true) {
+            _this.mutableValue = document.getElementById(_this.name).value;
+            document.getElementById(_this.name + '_btn').hidden = true;
+            document.getElementById(_this.name + '_btn_cancel').hidden = true;
+            document.getElementById('email_confirm_pass').hidden = true;
+            document.getElementById(_this.name + '_error_msg').innerHTML = '';
+            document.getElementById(_this.name + '_error_msg').hidden = true;
+            document.getElementById('password').value = ''; // update_raiting(string.rating);
+          } else if (string.result == false) {
+            document.getElementById(_this.name).value = _this.mutableValue;
+            document.getElementById(_this.name + '_error_msg').hidden = false;
+            document.getElementById(_this.name + '_error_msg').innerHTML = string.error;
+            document.getElementById('password').value = ''; // console.log('error');
+          } // console.log('res', string);
+
         }
       };
 
@@ -38115,6 +38203,84 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditemailComponent.vue?vue&type=template&id=4f80bd14&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EditemailComponent.vue?vue&type=template&id=4f80bd14&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("label", { attrs: { for: _vm.name } }, [_vm._v(_vm._s(_vm.label))]),
+    _vm._v(" "),
+    _c("input", {
+      staticClass: "profiledata",
+      attrs: { type: "email", name: _vm.name, id: _vm.name, placeholder: "" },
+      domProps: { value: _vm.value },
+      on: {
+        click: function($event) {
+          return _vm.editInput(_vm.name)
+        },
+        keyup: function($event) {
+          return _vm.show_btn(_vm.name)
+        }
+      }
+    }),
+    _c("br"),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn edit_submit",
+        attrs: { type: "submit", id: _vm.id_btn, hidden: "" },
+        on: { click: _vm.save }
+      },
+      [_vm._v("Save")]
+    ),
+    _vm._v(" "),
+    _c("input", {
+      staticClass: "btn edit_submit cancel_submit",
+      attrs: { id: "email_btn_cancel", hidden: "", value: "Cancel" },
+      on: {
+        click: function($event) {
+          return _vm.cancel(_vm.name)
+        }
+      }
+    })
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "email_confirm_pass", hidden: "" } }, [
+      _c("label", { attrs: { for: "password" } }, [
+        _vm._v("Your password to confirm changes")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "password", name: "password", id: "password" }
+      })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditinputComponent.vue?vue&type=template&id=90175ff0&scoped=true&":
 /*!*********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EditinputComponent.vue?vue&type=template&id=90175ff0&scoped=true& ***!
@@ -50554,6 +50720,7 @@ Vue.component('deletephotobtn-component', __webpack_require__(/*! ./components/D
 Vue.component('editdata-component', __webpack_require__(/*! ./components/EditdataComponent */ "./resources/js/components/EditdataComponent.vue")["default"]);
 Vue.component('editinput-component', __webpack_require__(/*! ./components/EditinputComponent */ "./resources/js/components/EditinputComponent.vue")["default"]);
 Vue.component('ed_in_lbl-component', __webpack_require__(/*! ./components/Edit_input_labelComponent */ "./resources/js/components/Edit_input_labelComponent.vue")["default"]);
+Vue.component('ed_email-component', __webpack_require__(/*! ./components/EditemailComponent */ "./resources/js/components/EditemailComponent.vue")["default"]);
 Vue.component('gender-component', __webpack_require__(/*! ./components/GenderComponent */ "./resources/js/components/GenderComponent.vue")["default"]);
 Vue.component('preferences-component', __webpack_require__(/*! ./components/PreferencesComponent */ "./resources/js/components/PreferencesComponent.vue")["default"]);
 Vue.component('footer-component', __webpack_require__(/*! ./components/FooterComponent */ "./resources/js/components/FooterComponent.vue")["default"]);
@@ -51110,6 +51277,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditdataComponent_vue_vue_type_template_id_bf066164_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditdataComponent_vue_vue_type_template_id_bf066164_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/EditemailComponent.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/EditemailComponent.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EditemailComponent_vue_vue_type_template_id_4f80bd14_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditemailComponent.vue?vue&type=template&id=4f80bd14&scoped=true& */ "./resources/js/components/EditemailComponent.vue?vue&type=template&id=4f80bd14&scoped=true&");
+/* harmony import */ var _EditemailComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditemailComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/EditemailComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EditemailComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EditemailComponent_vue_vue_type_template_id_4f80bd14_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EditemailComponent_vue_vue_type_template_id_4f80bd14_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "4f80bd14",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/EditemailComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/EditemailComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/EditemailComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditemailComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./EditemailComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditemailComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditemailComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/EditemailComponent.vue?vue&type=template&id=4f80bd14&scoped=true&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/EditemailComponent.vue?vue&type=template&id=4f80bd14&scoped=true& ***!
+  \***************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditemailComponent_vue_vue_type_template_id_4f80bd14_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./EditemailComponent.vue?vue&type=template&id=4f80bd14&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditemailComponent.vue?vue&type=template&id=4f80bd14&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditemailComponent_vue_vue_type_template_id_4f80bd14_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditemailComponent_vue_vue_type_template_id_4f80bd14_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

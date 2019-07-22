@@ -214,16 +214,16 @@ let update_fill_profile = function(text_fill) {
 
 document.addEventListener('DOMContentLoaded', function() {
     let gallery = document.getElementsByClassName('usr_photo');
-    console.log('gallery', gallery);
-    console.log('bio', document.getElementById('bio').innerHTML);
+    // console.log('gallery', gallery);
+    // console.log('bio', document.getElementById('bio').innerHTML);
     if (document.getElementById('bio').innerHTML != '')
     {
         document.getElementById('deletebio_btn').hidden = false;
     }
-    console.log('tttt', document.getElementById('fill_profile').innerHTML)
+    // console.log('tttt', document.getElementById('fill_profile').innerHTML)
     if (document.getElementById('fill_profile').innerHTML == '')
     {
-        console.log('ok');
+        // console.log('ok');
         document.getElementById('fill_profile').hidden = true;
     }
     let count = 1;
