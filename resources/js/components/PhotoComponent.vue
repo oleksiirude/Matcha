@@ -43,6 +43,7 @@
                                 document.getElementById(this.inputid + '_errormsg').innerHTML = '';
                                 document.getElementById(id_img).hidden = false;
                                 document.getElementById('deletephoto_form' + this.photovalue).hidden = false;
+                                document.getElementById(this.inputid+ '_camera').hidden = true;
                                 update_raiting(string.rating);
                                 console.log('ajax', string.path);
                                 update_fill_profile(string.empty);

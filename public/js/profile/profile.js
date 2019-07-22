@@ -220,6 +220,12 @@ document.addEventListener('DOMContentLoaded', function() {
     {
         document.getElementById('deletebio_btn').hidden = false;
     }
+    console.log('tttt', document.getElementById('fill_profile').innerHTML)
+    if (document.getElementById('fill_profile').innerHTML == '')
+    {
+        console.log('ok');
+        document.getElementById('fill_profile').hidden = true;
+    }
     let count = 1;
 
 });

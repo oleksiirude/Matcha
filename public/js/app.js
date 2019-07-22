@@ -1982,6 +1982,7 @@ __webpack_require__.r(__webpack_exports__);
             document.getElementById(imgid).src = '';
             document.getElementById(imgid).hidden = true;
             document.getElementById(_this.idform).hidden = true;
+            document.getElementById('photo' + _this.photo + '_camera').hidden = false;
             update_raiting(string.rating);
             update_fill_profile(string.empty);
           } else if (string.result == false) {
@@ -2417,6 +2418,7 @@ __webpack_require__.r(__webpack_exports__);
               document.getElementById(_this.inputid + '_errormsg').innerHTML = '';
               document.getElementById(id_img).hidden = false;
               document.getElementById('deletephoto_form' + _this.photovalue).hidden = false;
+              document.getElementById(_this.inputid + '_camera').hidden = true;
               update_raiting(string.rating);
               console.log('ajax', string.path);
               update_fill_profile(string.empty);
