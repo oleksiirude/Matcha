@@ -900,7 +900,7 @@
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('104', 'wave', 'Tamara', 'Gurieva', '29', 'female', 'heterosexual', '$bio',
-		                'images/profiles/wave/avatar.jpg', '1', '70.6');
+		                'images/profiles/wave/avatar.jpg', '1', '60.2');
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('105', 'morning', 'Marina', 'Nakonechnaya', '30', 'female', 'heterosexual', '$bio',
@@ -1283,55 +1283,55 @@
 /*women*/
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
         		VALUES ('71', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-                		'50.43520396', '30.41976929', '1');
+                		'50.51833843', '30.49633026', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('72', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		                '50.43520396', '30.41976929', '1');
+		                '50.51506388', '30.43796539', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('73', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		               '50.43520396', '30.41976929', '1');
+		                '50.4980326', '30.43144226', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('74', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		               '50.43520396', '30.41976929', '1');
+		                '50.46701114', '30.4668045', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('75', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		                '50.43520396', '30.41976929', '1');
+		                '50.47181862', '30.47298431', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('76', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		                '50.43520396', '30.41976929', '1');
+		                '50.44930669', '30.51074982', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('77', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		               '50.43520396', '30.41976929', '1');
+		                '50.5074224', '30.49942017', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('78', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		                '50.43520396', '30.41976929', '1');
+		                '50.49410143', '30.51315308', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('79', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		                '50.43520396', '30.41976929', '1');
+		                '50.46722968', '30.41255951', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('80', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		               '50.43520396', '30.41976929', '1');
+		                '50.45214859', '30.4486084', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('81', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		               '50.43520396', '30.41976929', '1');
+		                '50.52292241', '30.4561615', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('82', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		                '50.43520396', '30.41976929', '1');
+		                '50.52183102', '30.51761627', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('83', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		                '50.43520396', '30.41976929', '1');
+		                '50.52183102', '30.48019409', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('84', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		                '50.43520396', '30.41976929', '1');
+		                '50.48645655', '30.50045013', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('85', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		                '50.43520396', '30.41976929', '1');
+		                '50.45171139', '30.42869568', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('86', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		                '50.43520396', '30.41976929', '1');
+		                '50.40195299', '30.47607422', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('87', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		                '50.43520396', '30.41976929', '1');
+		                '50.41333095', '30.63674927', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('88', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
 		                '50.43520396', '30.41976929', '1');
@@ -1383,7 +1383,7 @@
 		                '50.38592075', '30.44260025', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('104', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		                '50.43520396', '30.41976929', '1');
+		                '50.43165028', '30.4343605', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('105', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
 		                '50.4226829', '30.37479401', '1');
@@ -1423,6 +1423,7 @@
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('117', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
 		                '50.46717504', '30.4810524', '1');
+		
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('118', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
 		                '50.46630091', '30.46062469', '1');
@@ -1892,7 +1893,6 @@
 		INSERT INTO interests(user_id, tag) VALUES ('88', 'pizza');
 		INSERT INTO interests(user_id, tag) VALUES ('88', 'love');
 		INSERT INTO interests(user_id, tag) VALUES ('88', 'sex');
-		INSERT INTO interests(user_id, tag) VALUES ('88', 'ufc');
 		INSERT INTO interests(user_id, tag) VALUES ('88', 'fitness');
 		INSERT INTO interests(user_id, tag) VALUES ('89', 'muscles');
 		INSERT INTO interests(user_id, tag) VALUES ('89', 'sport');

@@ -158,6 +158,7 @@
                     $j = 0;
                     $i++;
                 }
+                $profile['interests'] = $matches;
                 
                 if ($matches) {
                     if ($matches > 1)
@@ -166,8 +167,8 @@
                         $matches = $matches . ' common interest';
                 }
                 
-                $profile['matches'] = $matches;
-                $collection[] = $profile;
+                $profile['interests_matched'] = $matches;
+                $collection[] = collect($profile);
             }
             
             return $collection;

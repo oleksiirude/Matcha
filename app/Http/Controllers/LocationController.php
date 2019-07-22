@@ -22,7 +22,7 @@
                   new Coordinate($user->latitude, $user->longitude)
                 );
                 
-                $distance = round($distance->getLength(new Haversine()));
+                $distance = (int)$distance->getLength(new Haversine());
                 
                 // default search distance -> up to 100km
                 if ($distance <= 1000000) {
@@ -30,7 +30,6 @@
                     $nearby[] = $profile;
                 }
             }
-            
             return $nearby;
         }
     }

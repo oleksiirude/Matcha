@@ -7,6 +7,7 @@
     use App\User;
     use App\Location;
     use Illuminate\Http\Request;
+    use Illuminate\Support\Collection;
 
     class SuggestionController extends Controller {
         
@@ -21,7 +22,7 @@
         }
     
         public function show() {
-            $profiles = $this->findProfilesByBaseCriterias();
+            $profiles = $this->getFineDistanceView($this->findProfilesByBaseCriterias());
             return view('searching-profiles.suggestions', ['profiles' => $profiles]);
         }
     
@@ -29,10 +30,10 @@
             $this->validateSortRequest($request->all());
             
             $profiles = $this->findProfilesByBaseCriterias();
-    
+            
             if (count($profiles)) {
                 $sorter = new SortController($profiles, $request->all());
-                $profiles = $sorter->sort();
+                $profiles = $sorter->sortMain();
             }
             
 //          return response()->json(['result' => $profiles]);
@@ -61,17 +62,17 @@
             
             if (!count($profiles))
                 return $profiles;
-    
+            
             $profiles = LocationController::filterByDistance($profiles, $this->profile->user_id);
             $profiles = TagController::findTagMatches($profiles, $this->profile->user_id);
-            $profiles = $this->getFineDistanceView(SortController::sortByDefault($profiles));
-            
-            return collect($this->addInfoAboutActivityAndLocation($profiles));
+            $profiles = SortController::sortByDefault($profiles);
+           
+            return $this->addInfoAboutActivityAndLocation($profiles);
         }
         
         public function getMatchedProfilesForClassics() {
             $profiles = Profile::where('gender', '!=', $this->profile->gender)
-                                    ->where('preferences', $this->profile->preferences)
+                                    ->where('preferences', '!=', 'homosexual')
                                     ->get();
             
             return $this->removeBlockedProfiles($profiles);
@@ -138,17 +139,16 @@
             return $clean_profiles;
         }
         
-        public function addInfoAboutActivityAndLocation($profiles) {
+        public function addInfoAboutActivityAndLocation(Collection $profiles) {
             $i = 0;
             foreach ($profiles as $profile) {
-                $status = User::find($profile->user_id);
-                
+                $status = User::find($profile['user_id']);
                 if ($this->checkLastActivity($status) === 'online')
                     $profile['last_activity'] = 'online';
                 else
                     $profile['last_activity'] = null;
                 
-                $location = Location::find($profile->user_id);
+                $location = Location::find($profile['user_id']);
                 if ($location->allow) {
                     $profile['allow'] = true;
                     $profile['country'] = $location->country;
@@ -156,6 +156,7 @@
                 }
                 else
                     $profile['allow'] = false;
+                $profile['rating'] = (string)$profile['rating'];
                 $profiles[$i] = $profile;
                 $i++;
             }
@@ -163,20 +164,21 @@
             return $profiles;
         }
         
-        public function getFineDistanceView($profiles) {
+        public function getFineDistanceView(Collection $profiles) {
             $i = 0;
             foreach ($profiles as $profile) {
-                if ($profile->distance <= 10)
-                    $profile->distance = 'right behind you!';
-                elseif ($profile->distance < 1000)
-                    $profile->distance = 'about ' . $profile->distance . ' metres from you';
-                elseif ($profile->distance / 1000 === 1)
-                    $profile->distance = 'about ' . '1 km from you';
+                if ($profile['distance'] <= 10)
+                    $profile['distance'] = 'right behind you!';
+                elseif ($profile['distance'] < 1000)
+                    $profile['distance'] = 'about ' . $profile['distance'] . ' metres from you';
+                elseif ($profile['distance'] / 1000 === 1)
+                    $profile['distance'] = 'about ' . '1 km from you';
                 else
-                    $profile->distance = 'about ' . round($profile->distance / 1000) . ' km from you';
+                    $profile['distance'] = 'about ' . round($profile['distance'] / 1000) . ' km from you';
                 $profiles[$i] = $profile;
                 $i++;
             }
+            
             return $profiles;
         }
     }
