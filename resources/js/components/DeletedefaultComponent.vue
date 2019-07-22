@@ -1,6 +1,6 @@
 <template>
     <button type="submit" id="deletebio_btn" class="delete_btn" title="delete bio" @click="deletesmth" hidden>
-        &#10008;
+        <img src="/images/service/trash_50px.png" class="edit cancel">
     </button>
 </template>
 

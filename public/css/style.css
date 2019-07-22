@@ -42,6 +42,10 @@ textarea::-webkit-input-placeholder { color: rgba(68, 79, 87, 0.4); }
 .logo_img {
     width: 80px;
 }
+.navbar-collapse.show {
+    background: var(--main-color);
+    z-index: 99999;
+}
 .navbar-light .navbar-brand {
     color: rgba(255, 255, 255, 0.9);
 }
@@ -53,6 +57,7 @@ textarea::-webkit-input-placeholder { color: rgba(68, 79, 87, 0.4); }
 
 .navbar-light .navbar-nav .nav-link {
     color: rgba(255, 255, 255, 0.5);
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
 }
 
 .navbar-light .navbar-nav .nav-link:hover,
@@ -81,6 +86,9 @@ textarea::-webkit-input-placeholder { color: rgba(68, 79, 87, 0.4); }
 }
 
 /*main*/
+.row {
+    width: 100%;
+}
 .py-4 {
 
 }
@@ -264,6 +272,9 @@ a:hover {
     text-align: left;
     display: flex;
 }
+#password_form {
+    margin-bottom: 0.5rem;
+}
 #fill_profile {
     background: white;
     position: fixed;
@@ -275,6 +286,15 @@ a:hover {
 #fill_profile ul {
     text-align: left;
 }
+#interests_tags li {
+    cursor: pointer;
+    background: url("../images/service/hash.png") 0 0% no-repeat;
+    list-style-type: none;
+    padding-left: 20px;
+}
+#interests_tags li:hover {
+    color: rgba(68, 79, 87, 0.4);
+}
 
 #right_card {
     display: inline-block;
@@ -282,6 +302,13 @@ a:hover {
     margin-right: 60px;
     /*margin-top: 60px;*/
     width: calc(100% - 100px);
+}
+#change_password_title, #interests_tags_title {
+    color: rgba(68, 79, 87, 0.4);
+}
+#change_password_title:hover {
+    color: rgba(68, 79, 87, 0.8);
+    cursor: pointer;
 }
 #email {
     width: calc(100% - 80px);
@@ -378,8 +405,11 @@ a:hover {
     width: 20px;
     opacity: 0.6;
     /*vertical-align: top;*/
-    float: right;
+    /*float: right;*/
     height: 20px;
+}
+.cancel{
+    float: none;
 }
 .edit:hover{
     opacity: 1;
@@ -397,7 +427,7 @@ a:hover {
     /*width: 350px;*/
     /*left: 350px;*/
     display: flex;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     /*position: relative;*/
     /*position: absolute;*/
     max-height: 140px;
@@ -406,12 +436,12 @@ a:hover {
     position: relative;
     /*z-index: 999;*/
     background-color: transparent;
-    font-size: 46px;
+    font-size: 42px;
     font-weight: bold;
     /*left: -5%;*/
     /*top: -100px;*/
     /*width: 100%;*/
-    height: 70px;
+    /*height: 70px;*/
 }
 /*#surname_form {*/
 /*    position: relative;*/

@@ -61,6 +61,10 @@
                                 update_fill_profile(string.empty);
                             }
                         } else if (string.result == false) {
+                            // if (this.name == 'login' && string.error == '') {
+                            //     update_raiting(string.rating);
+                            //     update_fill_profile(string.empty);
+                            // }
                             document.getElementById(this.name).value = this.mutableValue;
                             document.getElementById(this.name + '_error_msg').hidden = false;
                             document.getElementById(this.name + '_error_msg').innerHTML = string.error;

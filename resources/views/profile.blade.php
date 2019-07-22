@@ -85,6 +85,13 @@
                                             <span id="login_error_msg" class="error_msg" hidden></span>
                                         </div>
                                         <div>
+                                            <form action="{{ route('change.password') }}" method="POST" id="password_form">
+                                                @csrf
+                                                <edit_password-component name="password" id_btn="password_btn" url="{{ route('change.password') }}"></edit_password-component>
+                                            </form>
+                                            <span id="password_error_msg" class="error_msg" hidden></span>
+                                        </div>
+                                        <div>
                                             <form action="{{ route('change.email') }}" method="POST" id="email_form">
                                                 @csrf
                                                 <ed_email-component name="email" value="{{ $profile->email }}" label="Email:" id_btn="email_btn" url="{{ route('change.email') }}"></ed_email-component>
@@ -126,7 +133,28 @@
                                                 <input type="text" id="" name="" value="{{ $profile->city }}" class="profiledata">
                                             </form>
                                         </div>
+                                        <div>
+                                            <p id="interests_tags_title">Interests:</p>
+                                            <ul id="interests_tags" type="#">
+                                            @foreach($profile->interests as $interest)
+                                                    <tagsdelete-component value="{{ $interest->tag }}" csrf="{{ csrf_token() }}" url="{{ route('delete.tag', $interest->tag) }}" id_li="{{ $interest->tag }}_li" id_form="{{ $interest->tag }}_form"></tagsdelete-component>
+                                            @endforeach
+                                            </ul>
+                                            <br>
+                                            <form action="{{ route('set.tag') }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
 
+                                                <input type="text" name="tag">
+                                                <button type="submit">add interest</button>
+                                            </form>
+                                            <form action="{{ route('find.tag.matches') }}" method="POST">
+                                                @csrf
+
+                                                <input type="text" name="piece">
+                                                <button type="submit">find matches</button>
+                                            </form>
+                                        </div>
                                         <div id="user_bio">
                                             <p>
                                             <h2>About</h2>
@@ -142,47 +170,6 @@
                                                 <editdata-component name="bio" bio="{{ $profile->bio }}"></editdata-component>
                                             </form>
                                             <span id="bio_error_msg" class="error_msg" hidden></span>
-                                        </div>
-                                        <div>
-                                            <p><b>Change password</b></p>
-                                            <form action="{{ route('change.password') }}" method="POST" id="password_form">
-                                                @csrf
-
-                                                Current password:
-                                                <p><input type="password" name="current_password"></p>
-                                                New password:
-                                                <p><input type="password" name="new_password"></p>
-                                                Confirm new password:
-                                                <p><input type="password" name="new_password_confirm"></p>
-                                                <button type="submit">change password</button>
-                                            </form>
-                                            <span id="password_error_msg" class="error_msg" hidden></span>
-                                        </div>
-                                        <div>
-                                            <p><b>Interests:</b></p>
-                                            @foreach($profile->interests as $interest)
-                                                {{ $interest->tag }}
-                                                <form action="{{ route('delete.tag', $interest->tag) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-
-                                                    <button type="submit">delete</button>
-                                                </form>
-                                            @endforeach
-                                            <br>
-                                            <form action="{{ route('set.tag') }}" method="POST">
-                                                @csrf
-                                                @method('PUT')
-
-                                                <input type="text" name="tag">
-                                                <button type="submit">add interest</button>
-                                            </form>
-                                            <form action="{{ route('find.tag.matches') }}" method="POST">
-                                                @csrf
-
-                                                <input type="text" name="piece">
-                                                <button type="submit">find matches</button>
-                                            </form>
                                         </div>
                                     </div>
                                 </div>

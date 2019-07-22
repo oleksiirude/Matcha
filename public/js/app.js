@@ -2070,6 +2070,10 @@ __webpack_require__.r(__webpack_exports__);
               update_fill_profile(string.empty);
             }
           } else if (string.result == false) {
+            // if (this.name == 'login' && string.error == '') {
+            //     update_raiting(string.rating);
+            //     update_fill_profile(string.empty);
+            // }
             document.getElementById(_this.name).value = _this.mutableValue;
             document.getElementById(_this.name + '_error_msg').hidden = false;
             document.getElementById(_this.name + '_error_msg').innerHTML = string.error; // console.log('error');
@@ -2281,6 +2285,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['value', 'name', 'id_btn'],
+  data: function data() {
+    return {
+      mutableValue: this.value
+    };
+  },
   methods: {
     editInput: function editInput(name) {
       var input = document.getElementById(name);
@@ -2311,18 +2320,130 @@ __webpack_require__.r(__webpack_exports__);
           console.log('res', string);
 
           if (string.result == true) {
-            _this.value = document.getElementById(_this.name).value;
+            _this.mutableValue = document.getElementById(_this.name).value;
             document.getElementById(_this.name + '_btn').hidden = true;
             document.getElementById('name_error_msg').innerHTML = '';
-            update_raiting(string.rating);
-            update_fill_profile(string.empty);
           } else if (string.result == false) {
-            document.getElementById(_this.name).value = _this.value;
+            document.getElementById(_this.name).value = _this.mutableValue;
             document.getElementById('name_error_msg').innerHTML = string.error;
             console.log('error');
           }
 
           console.log('res', string);
+        }
+      };
+
+      xhr.send(form);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditpasswordComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EditpasswordComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['value', 'name', 'id_btn', 'label', 'url'],
+  data: function data() {
+    return {
+      mutableValue: this.value
+    };
+  },
+  methods: {
+    check: function check() {
+      var register_button = document.getElementById(this.id_btn);
+
+      if (document.getElementById('new_password').value == document.getElementById('new_password_confirm').value && document.getElementById('new_password').value != 0) {
+        document.getElementById(this.name + '_error_msg').innerHTML = '';
+        document.getElementById(this.name + '_error_msg').hidden = true;
+        register_button.type = "submit";
+        register_button.classList.remove('disabled');
+      } else {
+        document.getElementById(this.name + '_error_msg').hidden = false;
+        document.getElementById(this.name + '_error_msg').style.color = '#D76D77';
+        document.getElementById(this.name + '_error_msg').innerHTML = 'Confirm your password!';
+        register_button.classList.add('disabled');
+        register_button.type = "button";
+      }
+    },
+    editPassword: function editPassword(name) {
+      document.getElementById('change_password_div').hidden = false;
+    },
+    editInput: function editInput(name) {
+      var input = document.getElementById(name);
+      input.focus();
+    },
+    show_btn: function show_btn(name) {
+      // document.getElementById('email_confirm_pass').hidden = false;
+      document.getElementById(name + '_btn').hidden = false;
+      document.getElementById(name + '_btn_cancel').hidden = false;
+    },
+    cancel: function cancel() {
+      document.getElementById(this.name).value = this.mutableValue;
+      document.getElementById('current_password').value = '';
+      document.getElementById('new_password').value = '';
+      document.getElementById('new_password_confirm').value = '';
+      document.getElementById(this.name + '_error_msg').innerHTML = '';
+      document.getElementById(this.name + '_error_msg').hidden = true;
+      document.getElementById('change_password_div').hidden = true;
+    },
+    save: function save(e) {
+      var _this = this;
+
+      e.preventDefault();
+      var idform = this.name + '_form';
+      var form = new FormData(document.getElementById(idform));
+      var XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
+      var xhr = new XHR();
+      xhr.responseType = 'json';
+      var url = this.url;
+      xhr.open('POST', url, true);
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState !== 4) {
+          return;
+        }
+
+        if (xhr.status === 200) {
+          var string = xhr.response;
+
+          if (string.result == true) {
+            _this.mutableValue = document.getElementById(_this.name).value;
+            document.getElementById('current_password').value = '';
+            document.getElementById('new_password').value = '';
+            document.getElementById('new_password_confirm').value = '';
+            document.getElementById(_this.name + '_error_msg').innerHTML = '';
+            document.getElementById(_this.name + '_error_msg').hidden = true;
+            document.getElementById('change_password_div').hidden = true;
+          } else if (string.result == false) {
+            document.getElementById(_this.name).value = _this.mutableValue;
+            document.getElementById(_this.name + '_error_msg').hidden = false;
+            document.getElementById(_this.name + '_error_msg').innerHTML = string.error; // console.log('error');
+          } // console.log('res', string);
+
         }
       };
 
@@ -2593,6 +2714,76 @@ __webpack_require__.r(__webpack_exports__);
     },
     show_btn: function show_btn() {
       document.getElementById(this.name + '_btn').hidden = false;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TagsdeleteComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TagsdeleteComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['value', 'id_li', 'id_form', 'csrf', 'url', 'name', 'id_btn'],
+  methods: {
+    delete_tag: function delete_tag(e) {
+      var _this = this;
+
+      console.log('this', this);
+      e.preventDefault();
+      var form = new FormData(document.getElementById(this.id_form));
+      var XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
+      var xhr = new XHR();
+      xhr.responseType = 'json';
+      var url = this.url;
+      xhr.open('POST', url, true);
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState !== 4) {
+          return;
+        }
+
+        if (xhr.status === 200) {
+          var string = xhr.response;
+
+          if (string.result == true) {
+            document.getElementById(_this.id_li).remove(); // this.mutableValue = document.getElementById(this.name).value;
+            // document.getElementById(this.name + '_btn').hidden = true;
+            // document.getElementById(this.name + '_error_msg').innerHTML = '';
+            // document.getElementById(this.name + '_error_msg').hidden = true;
+
+            update_raiting(string.rating);
+            update_fill_profile(string.empty);
+          } else if (string.result == false) {// document.getElementById(this.name).value = this.mutableValue;
+            // document.getElementById(this.name + '_error_msg').hidden = false;
+            // document.getElementById(this.name + '_error_msg').innerHTML = string.error;
+            // console.log('error');
+          }
+
+          console.log('res', string);
+        }
+      };
+
+      xhr.send(form);
     }
   }
 });
@@ -38042,7 +38233,12 @@ var render = function() {
       },
       on: { click: _vm.deletesmth }
     },
-    [_vm._v("\n    ✘\n")]
+    [
+      _c("img", {
+        staticClass: "edit cancel",
+        attrs: { src: "/images/service/trash_50px.png" }
+      })
+    ]
   )
 }
 var staticRenderFns = []
@@ -38329,6 +38525,113 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditpasswordComponent.vue?vue&type=template&id=9b0f0b06&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EditpasswordComponent.vue?vue&type=template&id=9b0f0b06&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "span",
+      {
+        attrs: { id: "change_password_title" },
+        on: { click: _vm.editPassword }
+      },
+      [
+        _vm._v("Change password "),
+        _c("img", {
+          staticClass: "edit",
+          staticStyle: { float: "none" },
+          attrs: { src: "/images/service/edit.png", id: "" }
+        })
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", { attrs: { id: "change_password_div", hidden: "" } }, [
+      _c("label", { attrs: { for: "current_password" } }, [
+        _vm._v("Current password:")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: {
+          type: "password",
+          name: "current_password",
+          id: "current_password"
+        }
+      }),
+      _c("br"),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "new_password" } }, [
+        _vm._v("New password:")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "password", name: "new_password", id: "new_password" },
+        on: {
+          keyup: function($event) {
+            return _vm.check()
+          }
+        }
+      }),
+      _c("br"),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "new_password_confirm" } }, [
+        _vm._v("Confirm new password:")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: {
+          type: "password",
+          name: "new_password_confirm",
+          id: "new_password_confirm"
+        },
+        on: {
+          keyup: function($event) {
+            return _vm.check()
+          }
+        }
+      }),
+      _c("br"),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn edit_submit disabled",
+          attrs: { type: "submit", id: _vm.id_btn },
+          on: { click: _vm.save }
+        },
+        [_vm._v("change password")]
+      ),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "btn edit_submit cancel_submit",
+        attrs: { id: "password_btn_cancel", value: "Cancel" },
+        on: {
+          click: function($event) {
+            return _vm.cancel()
+          }
+        }
+      })
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FooterComponent.vue?vue&type=template&id=abfbddf2&scoped=true&":
 /*!******************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FooterComponent.vue?vue&type=template&id=abfbddf2&scoped=true& ***!
@@ -38538,6 +38841,59 @@ var render = function() {
         on: { click: _vm.change_gender }
       },
       [_vm._v("Save")]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TagsdeleteComponent.vue?vue&type=template&id=606067be&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TagsdeleteComponent.vue?vue&type=template&id=606067be&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "li",
+      {
+        attrs: { title: "click to delete", id: _vm.id_li },
+        on: { click: _vm.delete_tag }
+      },
+      [
+        _vm._v("\n        " + _vm._s(_vm.value) + "\n        "),
+        _c(
+          "form",
+          { attrs: { action: _vm.url, method: "POST", id: _vm.id_form } },
+          [
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: _vm.csrf }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "_method", value: "DELETE" }
+            }),
+            _vm._v(" "),
+            _c("button", { attrs: { type: "submit", hidden: "" } }, [
+              _vm._v("delete")
+            ])
+          ]
+        )
+      ]
     )
   ])
 }
@@ -50721,6 +51077,8 @@ Vue.component('editdata-component', __webpack_require__(/*! ./components/Editdat
 Vue.component('editinput-component', __webpack_require__(/*! ./components/EditinputComponent */ "./resources/js/components/EditinputComponent.vue")["default"]);
 Vue.component('ed_in_lbl-component', __webpack_require__(/*! ./components/Edit_input_labelComponent */ "./resources/js/components/Edit_input_labelComponent.vue")["default"]);
 Vue.component('ed_email-component', __webpack_require__(/*! ./components/EditemailComponent */ "./resources/js/components/EditemailComponent.vue")["default"]);
+Vue.component('edit_password-component', __webpack_require__(/*! ./components/EditpasswordComponent */ "./resources/js/components/EditpasswordComponent.vue")["default"]);
+Vue.component('tagsdelete-component', __webpack_require__(/*! ./components/TagsdeleteComponent */ "./resources/js/components/TagsdeleteComponent.vue")["default"]);
 Vue.component('gender-component', __webpack_require__(/*! ./components/GenderComponent */ "./resources/js/components/GenderComponent.vue")["default"]);
 Vue.component('preferences-component', __webpack_require__(/*! ./components/PreferencesComponent */ "./resources/js/components/PreferencesComponent.vue")["default"]);
 Vue.component('footer-component', __webpack_require__(/*! ./components/FooterComponent */ "./resources/js/components/FooterComponent.vue")["default"]);
@@ -51420,6 +51778,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/EditpasswordComponent.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/EditpasswordComponent.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EditpasswordComponent_vue_vue_type_template_id_9b0f0b06_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditpasswordComponent.vue?vue&type=template&id=9b0f0b06&scoped=true& */ "./resources/js/components/EditpasswordComponent.vue?vue&type=template&id=9b0f0b06&scoped=true&");
+/* harmony import */ var _EditpasswordComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditpasswordComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/EditpasswordComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EditpasswordComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EditpasswordComponent_vue_vue_type_template_id_9b0f0b06_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EditpasswordComponent_vue_vue_type_template_id_9b0f0b06_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "9b0f0b06",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/EditpasswordComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/EditpasswordComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/EditpasswordComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditpasswordComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./EditpasswordComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditpasswordComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditpasswordComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/EditpasswordComponent.vue?vue&type=template&id=9b0f0b06&scoped=true&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/EditpasswordComponent.vue?vue&type=template&id=9b0f0b06&scoped=true& ***!
+  \******************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditpasswordComponent_vue_vue_type_template_id_9b0f0b06_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./EditpasswordComponent.vue?vue&type=template&id=9b0f0b06&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditpasswordComponent.vue?vue&type=template&id=9b0f0b06&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditpasswordComponent_vue_vue_type_template_id_9b0f0b06_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditpasswordComponent_vue_vue_type_template_id_9b0f0b06_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/FooterComponent.vue":
 /*!*****************************************************!*\
   !*** ./resources/js/components/FooterComponent.vue ***!
@@ -51760,6 +52187,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PreferencesComponent_vue_vue_type_template_id_754da960_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PreferencesComponent_vue_vue_type_template_id_754da960_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/TagsdeleteComponent.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/TagsdeleteComponent.vue ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TagsdeleteComponent_vue_vue_type_template_id_606067be_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TagsdeleteComponent.vue?vue&type=template&id=606067be&scoped=true& */ "./resources/js/components/TagsdeleteComponent.vue?vue&type=template&id=606067be&scoped=true&");
+/* harmony import */ var _TagsdeleteComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TagsdeleteComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/TagsdeleteComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TagsdeleteComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TagsdeleteComponent_vue_vue_type_template_id_606067be_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TagsdeleteComponent_vue_vue_type_template_id_606067be_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "606067be",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/TagsdeleteComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/TagsdeleteComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/TagsdeleteComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TagsdeleteComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./TagsdeleteComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TagsdeleteComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TagsdeleteComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/TagsdeleteComponent.vue?vue&type=template&id=606067be&scoped=true&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/TagsdeleteComponent.vue?vue&type=template&id=606067be&scoped=true& ***!
+  \****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TagsdeleteComponent_vue_vue_type_template_id_606067be_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./TagsdeleteComponent.vue?vue&type=template&id=606067be&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TagsdeleteComponent.vue?vue&type=template&id=606067be&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TagsdeleteComponent_vue_vue_type_template_id_606067be_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TagsdeleteComponent_vue_vue_type_template_id_606067be_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
