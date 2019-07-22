@@ -31,8 +31,6 @@
                 auth()->user()->login . '/' . 'avatar' . '.jpg';
             
             $path = str_replace(public_path() . '/','', $savePath);
-    
-            RegisterController::createDirectory(auth()->user()->login);
             
             $photo = base64_decode($base64);
             $photo = imagecreatefromstring($photo);
@@ -68,8 +66,6 @@
             
             if (($result = $this->validator($request, 'photo')) !== true)
                 return response()->json($result);
-    
-            RegisterController::createDirectory(auth()->user()->login);
             
             $pic = $request->file('photo');
             $extension = $pic->getClientOriginalExtension();

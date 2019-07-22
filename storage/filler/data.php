@@ -1031,13 +1031,15 @@
 		                'images/profiles/love/avatar.jpg', '1',
 		                'images/profiles/love/photo1.jpg', '14.4');
 
-		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio, rating)
-		        VALUES ('80', 'cloudy', 'Tanita', 'Kum', '56', 'female', 'heterosexual', '$bio', '3.4');
+		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
+		                    avatar, avatar_uploaded, rating)
+		        VALUES ('80', 'cloudy', 'Tanita', 'Kum', '56', 'female', 'heterosexual', '$bio', 
+		        		'images/profiles/cloudy/avatar.jpg', '1', '4.4');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('81', 'vika', 'Victoria', 'Bilenko', '28', 'female', 'heterosexual', '$bio',
-		                'images/profiles/sunny/avatar.jpg', '1', '31.9');   
+		                'images/profiles/vika/avatar.jpg', '1', '31.9');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
