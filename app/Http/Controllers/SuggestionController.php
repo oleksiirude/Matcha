@@ -7,7 +7,6 @@
     use App\User;
     use App\Location;
     use Illuminate\Http\Request;
-    use Illuminate\Support\Collection;
 
     class SuggestionController extends Controller {
         
@@ -22,7 +21,9 @@
         }
     
         public function show() {
-            $profiles = $this->getFineDistanceView($this->findProfilesByBaseCriterias());
+            $profiles = $this->getFineDistanceView(
+                    $this->findProfilesByBaseCriterias());
+            
             return view('searching-profiles.suggestions', ['profiles' => $profiles]);
         }
     
@@ -33,8 +34,11 @@
             
             if (count($profiles)) {
                 $sorter = new SortController($profiles, $request->all());
-                $profiles = $sorter->sortMain();
+                $profiles = $this->getFineDistanceView($sorter->sortMain());
             }
+       
+            if ($request->get('sort') === 'age')
+                $profiles = $this->putWithoutAgeDown($profiles);
             
 //          return response()->json(['result' => $profiles]);
             return view('searching-profiles.suggestions', ['profiles' => $profiles]);
@@ -139,7 +143,7 @@
             return $clean_profiles;
         }
         
-        public function addInfoAboutActivityAndLocation(Collection $profiles) {
+        public function addInfoAboutActivityAndLocation($profiles) {
             $i = 0;
             foreach ($profiles as $profile) {
                 $status = User::find($profile['user_id']);
@@ -164,7 +168,7 @@
             return $profiles;
         }
         
-        public function getFineDistanceView(Collection $profiles) {
+        public function getFineDistanceView($profiles) {
             $i = 0;
             foreach ($profiles as $profile) {
                 if ($profile['distance'] <= 10)
@@ -179,6 +183,27 @@
                 $i++;
             }
             
+            return $profiles;
+        }
+    
+        protected function putWithoutAgeDown($profiles) {
+            $box = collect();
+        
+            $i = 0;
+            foreach ($profiles as $item) {
+                if (!$item['age']) {
+                    $box[] = $item;
+                    unset($profiles[$i]);
+                }
+                $i++;
+            }
+        
+            $i = 0;
+            while ($i < count($box)) {
+                $profiles[] = $box[$i];
+                $i++;
+            }
+        
             return $profiles;
         }
     }

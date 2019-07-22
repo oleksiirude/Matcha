@@ -2,182 +2,239 @@
 	$password = '$2y$10$AjxhKLprRMFLjNUGaSO6IeUxcTI4RGTubZXgGh/7HXWAOg.1CNlXK';
 	$password_admin = '$2y$10$p.I668kvXrO2SjEl1TBKC.PXce5Nu6B/vImuL7bQc3LQMtQ/kcDrG';
 	$bio = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent augue augue, placerat in ipsum vel, convallis consequat justo. Cras vulputate fermentum egestas. Morbi placerat justo vel libero laoreet imperdiet. Morbi orci nibh, cursus id augue vel, congue interdum nisi. In nisi ipsum, tristique nec tortor et, tempor interdum ante. In hac habitasse platea dictumst. Mauris lacus quam, pharetra eleifend ex nec, eleifend aliquam felis.';
+
 	$users = array(
+
 /*men*/
+
 		'users' => "
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
         		VALUES (/*1*/ 'admin', 'admin@gmail.com', '2019-07-12 18:36:03', '$password_admin',
-        		'2019-07-20 02:00:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');	
+        		'2019-07-20 02:00:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
         		VALUES (/*2*/ 'maximus', 'maximus@gmail.com', '2019-07-12 18:36:03', '$password',
         		'2019-07-18 01:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*3*/ 'dobby', 'coolguy@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-17 10:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*4*/ 'bigboy', 'bigboy@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-20 18:36:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*5*/ 'captain', 'oldcaptain@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-13 18:56:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*6*/ 'serious', 'carl@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-13 13:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*7*/ 'massive', 'massive@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-14 10:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*8*/ 'johnny', 'johnny@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-15 11:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*9*/ 'womanizer', 'cragson@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-16 12:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*10*/ 'beast', 'username@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-17 13:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*11*/ 'cooler', 'coolerrr@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-18 17:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03'); 
+		        '2019-07-18 17:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*12*/ 'kipsta', 'kipsta@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-19 18:33:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*13*/ 'ehorro', 'ehorro@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-19 18:40:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*14*/ 'sergio', 'sergio@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-17 18:17:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*15*/ 'kopa', 'kopa@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-17 18:40:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*16*/ 'dimas', 'dimas@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-16 23:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*17*/ 'nubilas', 'nubilas@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-13 22:40:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*18*/ 'rubae', 'rubae@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-14 19:55:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*19*/ 'crop', 'crop@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-12 18:50:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');    
+		        '2019-07-12 18:50:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03'); 
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*20*/ 'super', 'super@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-13 20:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*21*/ 'rudolf', 'rudolf@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-14 17:40:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*22*/ 'patriot', 'patriot@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-15 18:42:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*23*/ 'cool', 'cool@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-16 16:42:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*24*/ 'camagru', 'camagru@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-17 17:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*25*/ 'manu', 'manu@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-18 18:51:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*26*/ 'shrai', 'shrai@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-19 18:50:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*27*/ 'virgo', 'virgo@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-20 10:15:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');     
+		        '2019-07-20 10:15:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03'); 
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*28*/ 'kupor', 'kupor@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-20 09:00:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*29*/ 'vitalino', 'vitalino@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-19 10:00:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*30*/ 'phobiq', 'phobiq@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-13 16:40:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*31*/ 'cutor', 'cutor@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-14 17:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*32*/ 'longer', 'longer@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-15 18:39:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*33*/ 'strong', 'strong@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-16 18:40:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*34*/ 'stigor', 'stigor@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-17 18:43:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*35*/ 'ivor', 'ivor@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-18 18:45:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');   
+		        '2019-07-18 18:45:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03'); 
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*36*/ 'nesamovitii', 'nesamovitii@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-19 23:23:59', '2019-07-12 18:26:03', '2019-07-12 18:36:03');     
-		        
+		        '2019-07-19 23:23:59', '2019-07-12 18:26:03', '2019-07-12 18:36:03');  
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*37*/ 'insane', 'insane@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-20 23:59:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*38*/ 'ilnev', 'ilnev@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-19 22:49:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*39*/ 'ruban', 'ruban@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-18 22:13:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*40*/ 'silver', 'silver@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-17 12:00:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*41*/ 'king', 'poroh@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-16 19:36:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*42*/ 'best', 'best@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-15 11:42:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*43*/ 'sadovii', 'sadovii@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-14 20:42:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');   
+		        '2019-07-14 20:42:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');  
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*44*/ 'muraev', 'muraev@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-13 04:40:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03'); 
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*45*/ 'juda', 'juda@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-12 19:42:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*46*/ 'stefa', 'stefa@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-13 10:48:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*47*/ 'slava', 'slava@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-14 15:16:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');     
+		        '2019-07-14 15:16:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');  
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*48*/ 'vilkul', 'vilkul@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-15 10:36:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*49*/ 'shar', 'shar@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-16 19:16:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*50*/ 'zhan', 'zhan@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-17 12:51:55', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*51*/ 'blackfire', 'blackfire@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-18 20:20:21', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*52*/ 'belka', 'belka@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-19 06:16:05', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*53*/ 'rusik', 'rusik@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-20 16:11:13', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*54*/ 'beatmaker', 'beatmaker@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-19 14:09:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*55*/ 'mordar', 'mordar@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-18 22:20:13', '2019-07-12 18:26:03', '2019-07-12 18:36:03');   
+		        '2019-07-18 22:20:13', '2019-07-12 18:26:03', '2019-07-12 18:36:03');  
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*56*/ 'serg', 'serg@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-17 23:23:23', '2019-07-12 18:26:03', '2019-07-12 18:36:03');     
-		        
+		        '2019-07-17 23:23:23', '2019-07-12 18:26:03', '2019-07-12 18:36:03');  
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*57*/ 'bard', 'bard@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-16 23:59:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*58*/ 'dminakov', 'dminakov@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-15 09:16:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
@@ -185,269 +242,357 @@
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*59*/ 'olrudenk', 'olrudenk@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-14 10:42:19', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*60*/ 'yora', 'yora@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-14 10:40:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*61*/ 'bulb', 'bulb@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-13 14:17:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*62*/ 'ramzes', 'ramzes@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-14 13:11:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*63*/ 'baboshka', 'baboshka@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-13 11:41:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*64*/ 'wrestler', 'wrestler@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-16 00:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');   
+		        '2019-07-16 00:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*65*/ 'rovnii', 'rovnii@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-18 15:16:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03'); 
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*66*/ 'kiparis', 'kiparis@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-16 19:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*67*/ 'gulechko', 'gulechko@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-12 18:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*68*/ 'kaban', 'kaban@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-13 21:36:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*69*/ 'sidor', 'sidor@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-14 20:44:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*70*/ 'razumnii', 'razumnii@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-13 19:16:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');	    
+
 /*women*/
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*71*/ 'cherry', 'cherry@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-15 14:40:00', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*72*/ 'caroline', 'caroline@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-19 13:13:13', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*73*/ 'kichi', 'amanda@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-21 18:40:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*74*/ 'pretty', 'ann_johnson@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-14 17:07:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*75*/ 'tiny', 'prett@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-16 17:40:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*76*/ 'sunny', 'cleopatra@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-17 15:16:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*77*/ 'leonna', 'leo@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-18 16:32:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*78*/ 'chika', 'chika_worldwide@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-21 17:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*79*/ 'love', 'lovanda@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-21 18:49:13', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*80*/ 'cloudy', 'eleonora@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-21 14:42:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*81*/ 'vika', 'vika@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-21 14:42:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*82*/ 'samara', 'samara@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-19 13:41:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*83*/ 'kitty', 'kitty@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-18 22:36:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*84*/ 'anna', 'ann@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-17 23:47:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*85*/ 'kissa', 'kissa@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-18 23:11:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*86*/ 'catty', 'catty@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-18 21:23:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*87*/ 'flower', 'flower@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-19 20:21:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*88*/ 'igirl', 'igirl@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-14 17:17:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*89*/ 'cute', 'cute@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-13 22:42:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');        	
+		        '2019-07-13 22:42:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');   
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*90*/ 'reddy', 'reddy@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-14 12:42:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*91*/ 'miumiu', 'miumiu@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-15 19:49:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*92*/ 'murmur', 'murmur@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-16 18:40:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*93*/ 'hello', 'hello@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-16 14:11:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*94*/ 'yours', 'yours@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-17 04:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*95*/ 'little', 'little@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-18 00:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*96*/ 'potion', 'potion@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-19 12:12:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*97*/ 'bird', 'bird@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-19 13:40:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*98*/ 'confident', 'confident@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-20 13:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');        	
+		        '2019-07-20 13:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');   
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*99*/ 'beloved', 'beloved@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-21 18:18:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');        
+		        '2019-07-21 18:18:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');    
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*100*/ 'pet', 'pet@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-21 15:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');   
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*101*/ 'petty', 'petty@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-13 19:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*102*/ 'sexxxy', 'sexxxy@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-14 22:40:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*103*/ 'curl', 'curl@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-15 21:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*104*/ 'wave', 'wave@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-16 22:16:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*105*/ 'morning', 'morning@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-17 22:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*106*/ 'evening', 'evening@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-18 21:33:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*107*/ 'sunset', 'sunset@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-19 18:40:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*108*/ 'sun', 'sun@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-19 19:56:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');        	
+		        '2019-07-19 19:56:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03'); 
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*109*/ 'sea', 'sea@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-19 17:07:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');        
+		        '2019-07-19 17:07:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03'); 
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*110*/ 'wild', 'wild@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-20 18:00:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');              
+		        '2019-07-20 18:00:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');    
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*111*/ 'wildy', 'wildy@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-21 10:00:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*112*/ 'tiger', 'tiger@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-20 12:40:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*113*/ 'puma', 'puma@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-21 11:10:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*114*/ 'clever', 'clever@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-21 14:32:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*115*/ 'krispi', 'krispi@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-17 10:11:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*116*/ 'kuki', 'kuki@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-18 13:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*117*/ 'shevy', 'shevy@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-19 21:30:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*118*/ 'compari', 'compari@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-19 22:02:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');        	
+		        '2019-07-19 22:02:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');   
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*119*/ 'mara', 'mara@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-18 22:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');        
+		        '2019-07-18 22:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');  
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*120*/ 'martini', 'martini@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-19 07:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');         	
+		        '2019-07-19 07:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');  
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*121*/ 'tiva', 'tiva@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-17 18:01:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*122*/ 'jodi', 'jodi@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-17 18:40:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*123*/ 'matilda', 'matilda@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-17 16:00:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*124*/ 'kilimondshara', 'kilimondshara@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-18 01:59:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*125*/ 'bestgirlinyourlife', 'bestgirlinyourlife@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-18 02:00:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*126*/ 'cabanga', 'cabanga@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-16 04:40:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*127*/ 'shmoka', 'shmoka@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-14 11:11:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*128*/ 'casatca', 'casatca@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-15 13:40:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');        	
+		        '2019-07-15 13:40:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03'); 
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*129*/ 'barcelona', 'barcelona@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-15 16:18:30', '2019-07-12 18:26:03', '2019-07-12 18:36:03');        
+		        '2019-07-15 16:18:30', '2019-07-12 18:26:03', '2019-07-12 18:36:03');  
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*130*/ 'cosmo', 'cosmo@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-15 15:15:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');       
+		        '2019-07-15 15:15:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');  
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*131*/ 'teva', 'teva@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-16 10:53:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*132*/ 'monka', 'monka@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-17 19:18:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*133*/ 'viva', 'viva@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-18 20:40:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*134*/ 'cuttiest', 'cuttiest@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-18 21:48:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*135*/ 'light', 'light@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-19 23:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*136*/ 'cuba', 'cuba@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-18 15:36:09', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*137*/ 'kimi', 'kimi@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-19 13:03:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*138*/ 'enrose', 'enrose@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-19 14:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');        	
+		        '2019-07-19 14:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');   
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*139*/ 'tictac', 'tictac@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-19 19:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');        
+		        '2019-07-19 19:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');  
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*140*/ 'miracle', 'miracle@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-19 08:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');     
+		        '2019-07-19 08:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');  
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*141*/ 'fabious', 'fabious@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-18 11:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*142*/ 'beautiful', 'beautiful@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-18 14:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*143*/ 'fancy', 'fancy@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-13 17:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');        	
+		        '2019-07-13 17:46:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');   
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*144*/ 'cozy', 'cozy@gmail.com', '2019-07-12 18:36:03', '$password',
-		        '2019-07-14 18:16:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');        
+		        '2019-07-14 18:16:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');  
+
 		INSERT INTO users(login, email, email_verified_at, password, last_activity, created_at, updated_at)
 		        VALUES (/*145*/ 'mummy', 'mummy@gmail.com', '2019-07-12 18:36:03', '$password',
 		        '2019-07-16 18:41:03', '2019-07-12 18:26:03', '2019-07-12 18:36:03');"
 	);
+
 	define('USERS', $users);
 	$profiles = array(
+
 /*men*/
+
 		'profiles' => "
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
                     avatar, avatar_uploaded, photo1, photo2, photo3, rating)
@@ -456,6 +601,7 @@
 		                'images/profiles/maximus/photo1.jpg',
 		                'images/profiles/maximus/photo2.jpg',
 		                'images/profiles/maximus/photo3.jpg', '6.4');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, photo3, photo4, rating)
 		        VALUES ('3', 'dobby', 'Alexander', 'Cherednichok', '34', 'male', 'heterosexual', '$bio',
@@ -464,27 +610,32 @@
 		                'images/profiles/dobby/photo2.jpg',
 		                'images/profiles/dobby/photo3.jpg',
 		                'images/profiles/dobby/photo4.jpg', '6.0');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, rating)
 		        VALUES ('4', 'bigboy', 'Ruslan', 'Drobyazko', '42', 'male', 'heterosexual', '$bio',
 		                'images/profiles/bigboy/avatar.jpg', '1',
 		                'images/profiles/bigboy/photo1.jpg', '14.4');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, rating)
 		        VALUES ('5', 'captain', 'Vlad', 'kropolenko', '41', 'male', 'heterosexual', '$bio',
 		                'images/profiles/captain/avatar.jpg', '1',
 		                'images/profiles/captain/photo1.jpg',
 		                'images/profiles/captain/photo2.jpg', '24.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('6', 'serious', 'Nikolay', 'Kuzhko', '19', 'male', 'heterosexual', '$bio',
 		                'images/profiles/serious/avatar.jpg', '1', '3.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, rating)
 		        VALUES ('7', 'massive', 'Sergey', 'Stanko', '29', 'male', 'heterosexual', '$bio',
 		                'images/profiles/massive/avatar.jpg', '1',
 		                'images/profiles/massive/photo1.jpg',
 		                'images/profiles/massive/photo2.jpg', '7.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, photo3, rating)
 		        VALUES ('8', 'johnny', 'Denis', 'Petrenko', '31', 'male', 'heterosexual', '$bio',
@@ -492,6 +643,7 @@
 		                'images/profiles/johnny/photo1.jpg',
 		                'images/profiles/johnny/photo2.jpg',
 		                'images/profiles/johnny/photo3.jpg', '8.4');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, photo3, photo4, rating)
 		        VALUES ('9', 'womanizer', 'Pavel', 'Kunickii', '37', 'male', 'heterosexual', '$bio',
@@ -500,247 +652,304 @@
 		                'images/profiles/womanizer/photo2.jpg',
 		                'images/profiles/womanizer/photo3.jpg',
 		                'images/profiles/womanizer/photo4.jpg', '15.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, rating)
 		        VALUES ('10', 'beast', 'Fedor', 'Emalnyanenko', '42', 'male', 'heterosexual', '$bio',
 		                'images/profiles/beast/avatar.jpg', '1',
 		                'images/profiles/beast/photo1.jpg',
 		                'images/profiles/beast/photo2.jpg', '24.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('11', 'cooler', 'Vladimir', 'Markov', '27', 'male', 'heterosexual', '$bio',
 		                'images/profiles/cooler/avatar.jpg', '1', '33.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('12', 'kipsta', 'Vadim', 'Markovenko', '31', 'male', 'heterosexual', '$bio',
 		                'images/profiles/kipsta/avatar.jpg', '1', '23.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('13', 'ehorro', 'Ehor', 'Putenko', '35', 'male', 'heterosexual', '$bio',
 		                'images/profiles/ehorro/avatar.jpg', '1', '5.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('14', 'sergio', 'Sergey', 'Leonenko', '28', 'male', 'heterosexual', '$bio',
-		                'images/profiles/sergio/avatar.jpg', '1', '6.9');                                     
+		                'images/profiles/sergio/avatar.jpg', '1', '6.9');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('15', 'kopa', 'Kiril', 'Eremenko', '40', 'male', 'heterosexual', '$bio',
 		                'images/profiles/kopa/avatar.jpg', '1', '10.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('16', 'dimas', 'Dmitrii', 'Golovko', '26', 'male', 'heterosexual', '$bio',
 		                'images/profiles/dimas/avatar.jpg', '1', '6.3');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('17', 'nubilas', 'Nikolay', 'Lasiskii', '31', 'male', 'heterosexual', '$bio',
 		                'images/profiles/nubilas/avatar.jpg', '1', '9.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('18', 'rubae', 'Nikita', 'Alexeev', '23', 'male', 'heterosexual', '$bio',
-		                'images/profiles/rubae/avatar.jpg', '1', '19.9'); 
+		                'images/profiles/rubae/avatar.jpg', '1', '19.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('19', 'crop', 'Oleksii', 'Rudchenko', '28', 'male', 'heterosexual', '$bio',
 		                'images/profiles/crop/avatar.jpg', '1', '8.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('20', 'super', 'Slava', 'Lepsheev', '32', 'male', 'heterosexual', '$bio',
 		                'images/profiles/super/avatar.jpg', '1', '10.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('21', 'rudolf', 'Rudolf', 'Shneer', '45', 'male', 'heterosexual', '$bio',
 		                'images/profiles/rudolf/avatar.jpg', '1', '20.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('22', 'patriot', 'Andrey', 'Bilko', '38', 'male', 'heterosexual', '$bio',
 		                'images/profiles/patriot/avatar.jpg', '1', '40.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('23', 'cool', 'Sasha', 'Andrienko', '32', 'male', 'heterosexual', '$bio',
 		                'images/profiles/cool/avatar.jpg', '1', '31.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('24', 'camagru', 'Franz', 'Herion', '37', 'male', 'heterosexual', '$bio',
-		                'images/profiles/camagru/avatar.jpg', '1', '20.9');      
+		                'images/profiles/camagru/avatar.jpg', '1', '20.9');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('25', 'manu', 'Oleksii', 'Shumko', '22', 'male', 'heterosexual', '$bio',
-		                'images/profiles/manu/avatar.jpg', '1', '69.9');                                       
+		                'images/profiles/manu/avatar.jpg', '1', '69.9');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('26', 'shrai', 'Maksim', 'Marchuk', '20', 'male', 'heterosexual', '$bio',
-		                'images/profiles/shrai/avatar.jpg', '1', '8.9');                   
-        
+		                'images/profiles/shrai/avatar.jpg', '1', '8.9');   
+
         INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('27', 'virgo', 'Vova', 'Klimchuk', '35', 'male', 'heterosexual', '$bio',
-		                'images/profiles/virgo/avatar.jpg', '1', '17.9');  
+		                'images/profiles/virgo/avatar.jpg', '1', '17.9'); 
+
         INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('28', 'kupor', 'Konstantin', 'Grigorenko', '31', 'male', 'heterosexual', '$bio',
 		                'images/profiles/kupor/avatar.jpg', '1', '51.9');  	
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('29', 'vitalino', 'Vitalii', 'Zaicev', '44', 'male', 'heterosexual', '$bio',
 		                'images/profiles/vitalino/avatar.jpg', '1', '77.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('30', 'phobiq', 'Alexander', 'Shiyan', '35', 'male', 'heterosexual', '$bio',
 		                'images/profiles/phobiq/avatar.jpg', '1', '25.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('31', 'cutor', 'Borislav', 'Romanov', '30', 'male', 'heterosexual', '$bio',
 		                'images/profiles/cutor/avatar.jpg', '1', '18.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('32', 'longer', 'Garri', 'Frolov', '25', 'male', 'heterosexual', '$bio',
 		                'images/profiles/longer/avatar.jpg', '1', '41.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('33', 'strong', 'Gordeii', 'Sergeev', '40', 'male', 'heterosexual', '$bio',
 		                'images/profiles/strong/avatar.jpg', '1', '41.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('34', 'stigor', 'German', 'Sorokin', '39', 'male', 'heterosexual', '$bio',
 		                'images/profiles/stigor/avatar.jpg', '1', '24.9');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('35', 'ivor', 'Ivor', 'Muleev', '24', 'male', 'heterosexual', '$bio',
-		                'images/profiles/ivor/avatar.jpg', '1', '7.9');   
+		                'images/profiles/ivor/avatar.jpg', '1', '7.9');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('36', 'nesamovitii', 'Ihor', 'Korolev', '26', 'male', 'heterosexual', '$bio',
-		                'images/profiles/nesamovitii/avatar.jpg', '1', '34.9');                  
+		                'images/profiles/nesamovitii/avatar.jpg', '1', '34.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('37', 'insane', 'David', 'Tarasov', '48', 'male', 'heterosexual', '$bio',
-		                'images/profiles/insane/avatar.jpg', '1', '66.9');      
+		                'images/profiles/insane/avatar.jpg', '1', '66.9');   
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('38', 'ilnev', 'Itan', 'Ilnev', '41', 'male', 'heterosexual', '$bio',
-		                'images/profiles/ilnev/avatar.jpg', '1', '81.9');   
+		                'images/profiles/ilnev/avatar.jpg', '1', '81.9');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('39', 'ruban', 'Sergey', 'Ruaban', '35', 'male', 'heterosexual', '$bio',
 		                'images/profiles/ruban/avatar.jpg', '1', '90.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('40', 'silver', 'Zurab', 'Zufar', '31', 'male', 'heterosexual', '$bio',
 		                'images/profiles/silver/avatar.jpg', '1', '55.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('41', 'king', 'Petro', 'Poroshenko', '55', 'male', 'heterosexual', '$bio',
 		                'images/profiles/king/avatar.jpg', '1', '33.2');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('42', 'best', 'Vladimir', 'Zelenskii', '41', 'male', 'heterosexual', '$bio',
 		                'images/profiles/best/avatar.jpg', '1', '17.2');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('43', 'sadovii', 'Andrii', 'Sadovii', '49', 'male', 'heterosexual', '$bio',
 		                'images/profiles/sadovii/avatar.jpg', '1', '18.4');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('44', 'muraev', 'Evgenii', 'Muraev', '40', 'male', 'heterosexual', '$bio',
-		                'images/profiles/muraev/avatar.jpg', '1', '20.1');        
+		                'images/profiles/muraev/avatar.jpg', '1', '20.1'); 
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('45', 'juda', 'Vladimir', 'Groysman', '38', 'male', 'heterosexual', '$bio',
-		                'images/profiles/juda/avatar.jpg', '1', '9.9');      
+		                'images/profiles/juda/avatar.jpg', '1', '9.9');     
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('46', 'stefa', 'Stanislav', 'Stefanchuk', '41', 'male', 'heterosexual', '$bio',
-		                'images/profiles/stefa/avatar.jpg', '1', '12.2');     
+		                'images/profiles/stefa/avatar.jpg', '1', '12.2');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('47', 'slava', 'Slava', 'Vakarchuk', '41', 'male', 'heterosexual', '$bio',
-		                'images/profiles/slava/avatar.jpg', '1', '18.3');     
+		                'images/profiles/slava/avatar.jpg', '1', '18.3');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('48', 'vilkul', 'Ruslan', 'Vilkul', '43', 'male', 'heterosexual', '$bio',
-		                'images/profiles/vilkul/avatar.jpg', '1', '23.7');    
+		                'images/profiles/vilkul/avatar.jpg', '1', '23.7');   
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('49', 'shar', 'Anatolii', 'Sharii', '42', 'male', 'heterosexual', '$bio',
-		                'images/profiles/shar/avatar.jpg', '1', '20.0');         
+		                'images/profiles/shar/avatar.jpg', '1', '20.0');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('50', 'zhan', 'Zhan', 'Belenyuk', '29', 'male', 'heterosexual', '$bio',
-		                'images/profiles/zhan/avatar.jpg', '1', '20.4');      
+		                'images/profiles/zhan/avatar.jpg', '1', '20.4');    
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('51', 'blackfire', 'Oleksii', 'Dmitrenko', '30', 'male', 'heterosexual', '$bio',
 		                'images/profiles/blackfire/avatar.jpg', '1', '27.3'); 
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('52', 'belka', 'Dmitrii', 'Belchenko', '30', 'male', 'heterosexual', '$bio',
-		                'images/profiles/belka/avatar.jpg', '1', '77.3');        
+		                'images/profiles/belka/avatar.jpg', '1', '77.3');   
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('53', 'rusik', 'Ruslan', 'Zshmachenko', '30', 'male', 'heterosexual', '$bio',
-		                'images/profiles/rusik/avatar.jpg', '1', '28.9');      
+		                'images/profiles/rusik/avatar.jpg', '1', '28.9');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('54', 'beatmaker', 'Denis', 'Kuszhelnii', '29', 'male', 'heterosexual', '$bio',
-		                'images/profiles/beatmaker/avatar.jpg', '1', '37.3');   
+		                'images/profiles/beatmaker/avatar.jpg', '1', '37.3'); 
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('55', 'mordar', 'Oleh', 'Mordachev', '29', 'male', 'heterosexual', '$bio',
-		                'images/profiles/mordar/avatar.jpg', '1', '57.3');      
+		                'images/profiles/mordar/avatar.jpg', '1', '57.3');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('56', 'serg', 'Sergey', 'Morshin', '32', 'male', 'heterosexual', '$bio',
 		                'images/profiles/serg/avatar.jpg', '1', '96.3');    
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('57', 'bard', 'Sergey', 'Bardachenko', '29', 'male', 'heterosexual', '$bio',
-		                'images/profiles/bard/avatar.jpg', '1', '44.5');    
+		                'images/profiles/bard/avatar.jpg', '1', '44.5');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('58', 'dminakov', 'Denis', 'Minakov', '27', 'male', 'heterosexual', 
-		        '$bio',
-		                'images/profiles/dminakov/avatar.jpg', '1', '50.0');  
+		        VALUES ('58', 'dminakov', 'Denis', 'Minakov', '27', 'male', 'heterosexual', '$bio', 
+		        		'images/profiles/dminakov/avatar.jpg', '1', '50.0');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('59', 'olrudenk', 'Oleksii', 'Rudenko', '30', 'male', 'heterosexual', '$bio',
 		                'images/profiles/olrudenk/avatar.jpg', '1', '40.1');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('60', 'yora', 'Yura', 'Tigibko', '25', 'male', 'heterosexual','$bio',
 		                'images/profiles/yora/avatar.jpg', '1', '13.0');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('61', 'bulb', 'Dmitrii', 'Bulbotenko', '30', 'male', 'heterosexual', '$bio',
-		                'images/profiles/bulb/avatar.jpg', '1', '41.2');         
+		                'images/profiles/bulb/avatar.jpg', '1', '41.2');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('62', 'ramzes', 'Roma', 'Tkachenko', '30', 'male', 'heterosexual', '$bio',
 		                'images/profiles/ramzes/avatar.jpg', '1', '17.7');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('63', 'baboshka', 'Dmitrii', 'Baboshkin', '30', 'male', 'heterosexual', '$bio',
 		                'images/profiles/baboshka/avatar.jpg', '1', '20.1');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('64', 'wrestler', 'Maksim', 'Goncharenko', '28', 'male', 'heterosexual', '$bio',
 		                'images/profiles/wrestler/avatar.jpg', '1', '9.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('65', 'rovnii', 'Yaroslav', 'Rovnii', '29', 'male', 'heterosexual', '$bio',
-		                'images/profiles/rovnii/avatar.jpg', '1', '7.4');    
+		                'images/profiles/rovnii/avatar.jpg', '1', '7.4');   
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('66', 'kiparis', 'Maksim', 'Kalinskii', '30', 'male', 'heterosexual', '$bio',
-		                'images/profiles/kiparis/avatar.jpg', '1', '27.4');  
+		                'images/profiles/kiparis/avatar.jpg', '1', '27.4'); 
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('67', 'gulechko', 'Sergii', 'Gulechko', '30', 'male', 'heterosexual', '$bio',
-		                'images/profiles/gulechko/avatar.jpg', '1', '24.8');             
+		                'images/profiles/gulechko/avatar.jpg', '1', '24.8');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('68', 'kaban', 'Ilya', 'Danyuk', '25', 'male', 'heterosexual', 
-		        '$bio',
-		                'images/profiles/kaban/avatar.jpg', '1', '33.6');  
+		        VALUES ('68', 'kaban', 'Ilya', 'Danyuk', '25', 'male', 'heterosexual', '$bio', 
+		        		'images/profiles/kaban/avatar.jpg', '1', '33.6');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('69', 'sidor', 'Oleksii', 'Sirdorenko', '41', 'male', 'heterosexual', '$bio',
@@ -749,23 +958,28 @@
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('70', 'razumnii', 'Andrii', 'Razumnii', '42', 'male', 'heterosexual', '$bio',
 		                'images/profiles/razumnii/avatar.jpg', '1', '78.5');    
+
 /*women*/
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, rating)
 		        VALUES ('71', 'cherry', 'Alexandra', 'Cherry', '25', 'female', 'heterosexual', '$bio',
 		                'images/profiles/cherry/avatar.jpg', '1',
 		                'images/profiles/cherry/photo1.jpg',
 		                'images/profiles/cherry/photo2.jpg', '64.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, rating)
 		        VALUES ('72', 'caroline', 'Carolina', 'Samsenko', '24', 'female', 'heterosexual', '$bio',
 		                'images/profiles/caroline/avatar.jpg', '1',
 		                'images/profiles/caroline/photo1.jpg', '34.4');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, rating)
 		        VALUES ('73', 'kichi', 'Lilly', 'Ambrusko', '30', 'female', 'heterosexual', '$bio',
 		                'images/profiles/kichi/avatar.jpg', '1',
 		                'images/profiles/kichi/photo1.jpg', '44.4');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, photo3, photo4, rating)
 		        VALUES ('74', 'pretty', 'Annet', 'Dobkina', '41', 'female', 'heterosexual', '$bio',
@@ -774,301 +988,375 @@
 		                'images/profiles/pretty/photo2.jpg',
 		                'images/profiles/pretty/photo3.jpg',
 		                'images/profiles/pretty/photo4.jpg', '25.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, rating)
 		        VALUES ('75', 'tiny', 'Ella', 'Hmara', '37', 'female', 'heterosexual', '$bio',
 		                'images/profiles/tiny/avatar.jpg', '1',
 		                'images/profiles/tiny/photo1.jpg',
 		                'images/profiles/tiny/photo2.jpg', '44.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('76', 'sunny', 'Kate', 'Johnson', '35', 'female', 'heterosexual', '$bio',
 		                'images/profiles/sunny/avatar.jpg', '1', '13.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, rating)
 		        VALUES ('77', 'leonna', 'Leona', 'Klimchak', '44', 'female', 'heterosexual', '$bio',
 		                'images/profiles/leonna/avatar.jpg', '1',
 		                'images/profiles/leonna/photo1.jpg',
 		                'images/profiles/leonna/photo2.jpg', '44.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, rating)
 		        VALUES ('78', 'chika', 'Lera', 'Illenko', '22', 'female', 'heterosexual', '$bio',
 		                'images/profiles/chika/avatar.jpg', '1',
 		                'images/profiles/chika/photo1.jpg',
 		                'images/profiles/chika/photo2.jpg', '24.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, rating)
 		        VALUES ('79', 'love', 'Kseniya', 'Adamenko', '30', 'female', 'heterosexual', '$bio',
 		                'images/profiles/love/avatar.jpg', '1',
 		                'images/profiles/love/photo1.jpg', '14.4');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('80', 'cloudy', 'Tanita', 'Kum', '56', 'female', 'heterosexual', '$bio', 
 		        		'images/profiles/cloudy/avatar.jpg', '1', '4.4');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('81', 'vika', 'Victoria', 'Bilenko', '28', 'female', 'heterosexual', '$bio',
-		                'images/profiles/vika/avatar.jpg', '1', '31.9');   
+		                'images/profiles/vika/avatar.jpg', '1', '31.9'); 
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('82', 'samara', 'Samara', 'Morgan', '24', 'female', 'heterosexual', '$bio',
-		                'images/profiles/samara/avatar.jpg', '1', '11.9');     
+		                'images/profiles/samara/avatar.jpg', '1', '11.9');   
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('83', 'kitty', 'Kateryna', 'Rodchenko', '26', 'female', 'heterosexual', '$bio',
-		                'images/profiles/kitty/avatar.jpg', '1', '24.9');   
+		                'images/profiles/kitty/avatar.jpg', '1', '24.9'); 
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('84', 'anna', 'Anna', 'Tomchuk', '27', 'female', 'heterosexual', '$bio',
 		                'images/profiles/anna/avatar.jpg', '1', '40.9');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('85', 'kissa', 'Valya', 'Shomko', '30', 'female', 'heterosexual', '$bio',
-		                'images/profiles/kissa/avatar.jpg', '1', '10.2');   
+		                'images/profiles/kissa/avatar.jpg', '1', '10.2'); 
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('86', 'catty', 'Nina', 'Alieva', '32', 'female', 'heterosexual', '$bio',
-		                'images/profiles/catty/avatar.jpg', '1', '25.5');     
+		                'images/profiles/catty/avatar.jpg', '1', '25.5'); 
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('87', 'flower', 'Anabet', 'Kozachenko', '29', 'female', 'heterosexual', '$bio',
-		                'images/profiles/flower/avatar.jpg', '1', '14.7');   
+		                'images/profiles/flower/avatar.jpg', '1', '14.7'); 
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('88', 'igirl', 'Alisa', 'Moloyovich', '25', 'female', 'heterosexual', '$bio',
 		                'images/profiles/igirl/avatar.jpg', '1', '70.5');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('89', 'cute', 'Ira', 'Titarenko', '22', 'female', 'heterosexual', '$bio',
 		                'images/profiles/cute/avatar.jpg', '1', '8.5');   
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('90', 'reddy', 'Valeria', 'Fuks', '32', 'female', 'heterosexual', '$bio',
 		                'images/profiles/reddy/avatar.jpg', '1', '41.2');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('91', 'miumiu', 'Lida', 'Goloborodchenko', '44', 'female', 'heterosexual', '$bio',
-		                'images/profiles/miumiu/avatar.jpg', '1', '45.2');   
+		                'images/profiles/miumiu/avatar.jpg', '1', '45.2'); 
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('92', 'murmur', 'Tanya', 'Morzeeva', '20', 'female', 'heterosexual', '$bio',
-		                'images/profiles/murmur/avatar.jpg', '1', '78.7');     
+		                'images/profiles/murmur/avatar.jpg', '1', '78.7');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('93', 'hello', 'Olga', 'Kushmak', '29', 'female', 'heterosexual', '$bio',
-		                'images/profiles/hello/avatar.jpg', '1', '27.9');   
+		                'images/profiles/hello/avatar.jpg', '1', '27.9');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('94', 'yours', 'Kateryna', 'Tarashanskaya', '30', 'female', 'heterosexual', '$bio',
 		                'images/profiles/yours/avatar.jpg', '1', '10.2');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('95', 'little', 'Dariia', 'Ivanova', '32', 'female', 'heterosexual', '$bio',
-		                'images/profiles/little/avatar.jpg', '1', '50.2');   
+		                'images/profiles/little/avatar.jpg', '1', '50.2'); 
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('96', 'potion', 'Anastasia', 'Ivleva', '35', 'female', 'heterosexual', '$bio',
-		                'images/profiles/potion/avatar.jpg', '1', '31.8');     
+		                'images/profiles/potion/avatar.jpg', '1', '31.8');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('97', 'bird', 'Vika', 'Fomenko', '27', 'female', 'heterosexual', '$bio',
 		                'images/profiles/bird/avatar.jpg', '1', '64.6');   
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('98', 'confident', 'Victoria', 'Lotchuk', '29', 'female', 'heterosexual', '$bio',
 		                'images/profiles/confident/avatar.jpg', '1', '17.5');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('99', 'beloved', 'Alexandra', 'Titakova', '33', 'female', 'heterosexual', '$bio',
-		                'images/profiles/beloved/avatar.jpg', '1', '88.5');   
+		                'images/profiles/beloved/avatar.jpg', '1', '88.5'); 
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('100', 'pet', 'Evgenia', 'Dobrovolskaya', '35', 'female', 'heterosexual', '$bio',
-		                'images/profiles/pet/avatar.jpg', '1', '11.2');   
+		                'images/profiles/pet/avatar.jpg', '1', '11.2');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('101', 'petty', 'Jane', 'Lavrinets', '29', 'female', 'heterosexual', '$bio',
-		                'images/profiles/petty/avatar.jpg', '1', '15.2');   
+		                'images/profiles/petty/avatar.jpg', '1', '15.2');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('102', 'sexxxy', 'Elvira', 'Sexxxy', '35', 'female', 'heterosexual', '$bio',
 		                'images/profiles/sexxxy/avatar.jpg', '1', '98.7');     
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('103', 'curl', 'Alina', 'Grosu', '28', 'female', 'heterosexual', '$bio',
 		                'images/profiles/curl/avatar.jpg', '1', '25.0');   
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('104', 'wave', 'Tamara', 'Gurieva', '29', 'female', 'heterosexual', '$bio',
 		                'images/profiles/wave/avatar.jpg', '1', '60.2');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('105', 'morning', 'Marina', 'Nakonechnaya', '30', 'female', 'heterosexual', '$bio',
-		                'images/profiles/morning/avatar.jpg', '1', '20.5');   
+		                'images/profiles/morning/avatar.jpg', '1', '20.5');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('106', 'evening', 'Kira', 'Ninova', '22', 'female', 'heterosexual', '$bio',
-		                'images/profiles/evening/avatar.jpg', '1', '81.8');     
+		                'images/profiles/evening/avatar.jpg', '1', '81.8'); 
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('107', 'sunset', 'Zara', 'Fomenchenko', '35', 'female', 'heterosexual', '$bio',
 		                'images/profiles/sunset/avatar.jpg', '1', '14.5');   
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('108', 'sun', 'Sofia', 'Dron', '27', 'female', 'heterosexual', '$bio',
 		                'images/profiles/sun/avatar.jpg', '1', '77.5');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('109', 'sea', 'Sasha', 'Ivanko', '39', 'female', 'heterosexual', '$bio',
 		                'images/profiles/sea/avatar.jpg', '1', '18.5');   
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('110', 'wild', 'Elena', 'Kiss', '42', 'female', 'heterosexual', '$bio',
 		                'images/profiles/wild/avatar.jpg', '1', '31.1');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('111', 'wildy', 'Fiona', 'Lavrok', '34', 'female', 'heterosexual', '$bio',
 		                'images/profiles/wildy/avatar.jpg', '1', '25.2');   
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('112', 'tiger', 'Vera', 'Voichuk', '32', 'female', 'heterosexual', '$bio',
-		                'images/profiles/tiger/avatar.jpg', '1', '18.7');     
+		                'images/profiles/tiger/avatar.jpg', '1', '18.7'); 
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('113', 'puma', 'Veronika', 'Mumko', '36', 'female', 'heterosexual', '$bio',
 		                'images/profiles/puma/avatar.jpg', '1', '35.0');   
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('114', 'clever', 'Tatyana', 'Golovko', '45', 'female', 'heterosexual', '$bio',
 		                'images/profiles/clever/avatar.jpg', '1', '16.2');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('115', 'krispi', 'Margo', 'Nakos', '51', 'female', 'heterosexual', '$bio',
-		                'images/profiles/krispi/avatar.jpg', '1', '7.5');   
+		                'images/profiles/krispi/avatar.jpg', '1', '7.5');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('116', 'kuki', 'Anna', 'Kovaleva', '21', 'female', 'heterosexual', '$bio',
-		                'images/profiles/kuki/avatar.jpg', '1', '89.8');     
+		                'images/profiles/kuki/avatar.jpg', '1', '89.8');   
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('117', 'shevy', 'Gina', 'Soloveeva', '25', 'female', 'heterosexual', '$bio',
-		                'images/profiles/shevy/avatar.jpg', '1', '34.5');   
+		                'images/profiles/shevy/avatar.jpg', '1', '34.5');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('118', 'compari', 'Sofia', 'Burbak', '27', 'female', 'heterosexual', '$bio',
 		                'images/profiles/compari/avatar.jpg', '1', '17.5');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('119', 'mara', 'Marina', 'Ivashevich', '30', 'female', 'heterosexual', '$bio',
-		                'images/profiles/mara/avatar.jpg', '1', '38.5');   
+		                'images/profiles/mara/avatar.jpg', '1', '38.5');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('120', 'martini', 'Galya', 'Onoprienko', '22', 'female', 'heterosexual', '$bio',
-		                'images/profiles/martini/avatar.jpg', '1', '11.1');   
+		                'images/profiles/martini/avatar.jpg', '1', '11.1'); 
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('121', 'tiva', 'Malvina', 'Yakimchuk', '29', 'female', 'heterosexual', '$bio',
 		                'images/profiles/tiva/avatar.jpg', '1', '45.2');   
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('122', 'jodi', 'Liza', 'Loik', '19', 'female', 'heterosexual', '$bio',
-		                'images/profiles/jodi/avatar.jpg', '1', '78.1');     
+		                'images/profiles/jodi/avatar.jpg', '1', '78.1'); 
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('123', 'matilda', 'Matilda', 'Vovko', '26', 'female', 'heterosexual', '$bio',
-		                'images/profiles/matilda/avatar.jpg', '1', '15.0');   
+		                'images/profiles/matilda/avatar.jpg', '1', '15.0');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('124', 'kilimondshara', 'Liza', 'Boyko', '40', 'female', 'heterosexual', '$bio',
 		                'images/profiles/kilimondshara/avatar.jpg', '1', '26.2');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('125', 'bestgirlinyourlife', 'Anna', 'Radchenko', '21', 'female', 'heterosexual', '$bio',
-		                'images/profiles/bestgirlinyourlife/avatar.jpg', '1', '77.5');   
+		                'images/profiles/bestgirlinyourlife/avatar.jpg', '1', '77.5');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('126', 'cabanga', 'Evelena', 'Hoienko', '23', 'female', 'heterosexual', '$bio',
-		                'images/profiles/cabanga/avatar.jpg', '1', '19.8');     
+		                'images/profiles/cabanga/avatar.jpg', '1', '19.8');   
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('127', 'shmoka', 'Yana', 'Solomko', '26', 'female', 'heterosexual', '$bio',
-		                'images/profiles/shmoka/avatar.jpg', '1', '24.5');   
+		                'images/profiles/shmoka/avatar.jpg', '1', '24.5'); 
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('128', 'casatca', 'Laura', 'Bonitta', '25', 'female', 'heterosexual', '$bio',
 		                'images/profiles/casatca/avatar.jpg', '1', '37.5');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('129', 'barcelona', 'Hanna', 'Africa', '32', 'female', 'heterosexual', '$bio',
-		                'images/profiles/barcelona/avatar.jpg', '1', '58.9');   
+		                'images/profiles/barcelona/avatar.jpg', '1', '58.9'); 
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('130', 'cosmo', 'Jannet', 'Kovalchuk', '26', 'female', 'heterosexual', '$bio',
 		                'images/profiles/cosmo/avatar.jpg', '1', '71.1');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('131', 'teva', 'Angelina', 'Yakumiv', '32', 'female', 'heterosexual', '$bio',
-		                'images/profiles/teva/avatar.jpg', '1', '15.2');   
+		                'images/profiles/teva/avatar.jpg', '1', '15.2');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('132', 'monka', 'Inna', 'Martinyuk', '31', 'female', 'heterosexual', '$bio',
-		                'images/profiles/monka/avatar.jpg', '1', '48.1');     
+		                'images/profiles/monka/avatar.jpg', '1', '48.1');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('133', 'viva', 'Inga', 'Kumko', '30', 'female', 'heterosexual', '$bio',
-		                'images/profiles/viva/avatar.jpg', '1', '65.0');   
+		                'images/profiles/viva/avatar.jpg', '1', '65.0');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('134', 'cuttiest', 'Izabella', 'Dmutriv', '34', 'female', 'heterosexual', '$bio',
 		                'images/profiles/cuttiest/avatar.jpg', '1', '26.1');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('135', 'light', 'Rita', 'Petrova', '22', 'female', 'heterosexual', '$bio',
-		                'images/profiles/light/avatar.jpg', '1', '17.5');   
+		                'images/profiles/light/avatar.jpg', '1', '17.5');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('136', 'cuba', 'Elza', 'Buzina', '25', 'female', 'heterosexual', '$bio',
-		                'images/profiles/cuba/avatar.jpg', '1', '39.2');     
+		                'images/profiles/cuba/avatar.jpg', '1', '39.2');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('137', 'kimi', 'Yanita', 'Solko', '29', 'female', 'heterosexual', '$bio',
-		                'images/profiles/kimi/avatar.jpg', '1', '34.5');   
+		                'images/profiles/kimi/avatar.jpg', '1', '34.5');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('138', 'enrose', 'Roza', 'Shneimann', '28', 'female', 'heterosexual', '$bio',
 		                'images/profiles/enrose/avatar.jpg', '1', '87.5');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('139', 'tictac', 'Anna', 'Greckaya', '34', 'female', 'heterosexual', '$bio',
-		                'images/profiles/tictac/avatar.jpg', '1', '18.9');   
+		                'images/profiles/tictac/avatar.jpg', '1', '18.9');  
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('140', 'miracle', 'Tata', 'Yurova', '31', 'female', 'heterosexual', '$bio',
 		                'images/profiles/miracle/avatar.jpg', '1', '21.1');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('141', 'fabious', 'Simona', 'Bushanina', '29', 'female', 'heterosexual', '$bio',
-		                'images/profiles/fabious/avatar.jpg', '1', '19.2');     
+		                'images/profiles/fabious/avatar.jpg', '1', '19.2'); 
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('142', 'beautiful', 'Yana', 'Sokolova', '37', 'female', 'heterosexual', '$bio',
-		                'images/profiles/beautiful/avatar.jpg', '1', '84.5');   
+		                'images/profiles/beautiful/avatar.jpg', '1', '84.5'); 
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('143', 'fancy', 'Vera', 'Logdanidi', '32', 'female', 'heterosexual', '$bio',
 		                'images/profiles/fancy/avatar.jpg', '1', '17.5');
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('144', 'cozy', 'Monika', 'Belkova', '49', 'female', 'heterosexual', '$bio',
 		                'images/profiles/cozy/avatar.jpg', '1', '99.2');   
+
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('145', 'mummy', 'Snezhana', 'Didenko', '26', 'female', 'heterosexual', '$bio',
 		                'images/profiles/mummy/avatar.jpg', '1', '31.1');"
 			);
 	define('PROFILES', $profiles);
+
 	$locations = array(
+
 /*men*/
+
 		'locations' => "
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
         		VALUES ('2', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
@@ -1127,7 +1415,6 @@
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('20', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
 		                '50.45608325', '30.37445068', '1');
-		
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('21', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
 		                '50.4611104', '30.35007477', '1');
@@ -1211,8 +1498,7 @@
 		                '50.48503665', '30.45135498', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('48', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		                '50.43607867', '30.38955688', '1');
-		
+		                '50.43607867', '30.38955688', '1');	
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('49', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
 		                '50.39199504', '30.63262939', '1');
@@ -1257,8 +1543,7 @@
 		                '50.42831505', '30.64979553', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('63', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		                '50.42678405', '30.5979538', '1');
-		
+		                '50.42678405', '30.5979538', '1');	
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('64', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
 		                '50.42197199', '30.53100586', '1');
@@ -1280,7 +1565,9 @@
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('70', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
 		                '50.42765891', '30.4335022', '1'); 
+
 /*women*/
+
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
         		VALUES ('71', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
                 		'50.51833843', '30.49633026', '1');
@@ -1338,7 +1625,6 @@
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('89', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
 		                '50.43257973', '30.38406372', '1');
-		
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('90', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
 		                '50.44045198', '30.53100586', '1');
@@ -1422,8 +1708,7 @@
 		                '50.46498967', '30.47401428', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('117', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		                '50.46717504', '30.4810524', '1');
-		
+		                '50.46717504', '30.4810524', '1');		
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('118', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
 		                '50.46630091', '30.46062469', '1');
@@ -1468,8 +1753,7 @@
 		                '50.4588701', '30.36724091', '1');
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('132', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		                '50.45198464', '30.38303375', '1');
-		
+		                '50.45198464', '30.38303375', '1');	
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('133', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
 		                '50.45799582', '30.36226273', '1');
@@ -1502,8 +1786,7 @@
 		                '50.44859619', '30.52362442', '1');  
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('143', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
-		                '50.44214653', '30.53255081', '1'); 
-		
+		                '50.44214653', '30.53255081', '1'); 	
 		INSERT INTO locations(user_id, country, region, city, gps_code, latitude, longitude, allow)
 		        VALUES ('144', 'Ukraine', 'Kyiv city', 'Kyiv', 'FC89+93',
 		                '50.44990788', '30.49804688', '1');
@@ -1512,6 +1795,7 @@
 		                '50.46630091', '30.47212601', '1');"
 	);
 	define('LOCATIONS', $locations);
+
 	$tags = array(
 		'tag' => "
 				INSERT INTO tags(tag) VALUES ('football');
@@ -1570,8 +1854,11 @@
 				INSERT INTO tags(tag) VALUES ('cooking');"
 	);
 	define('TAGS', $tags);
+
 	$interests = array(
+
 /*men*/
+
 		'interests' => "
 		INSERT INTO interests(user_id, tag) VALUES ('2', 'football');
 		INSERT INTO interests(user_id, tag) VALUES ('2', 'sport');
@@ -1802,7 +2089,9 @@
 		INSERT INTO interests(user_id, tag) VALUES ('70', 'painting');
 		INSERT INTO interests(user_id, tag) VALUES ('70', 'art');
 		INSERT INTO interests(user_id, tag) VALUES ('70', 'children');
+
 /*women*/
+
 		INSERT INTO interests(user_id, tag) VALUES ('71', 'food');
 		INSERT INTO interests(user_id, tag) VALUES ('71', 'sex');
 		INSERT INTO interests(user_id, tag) VALUES ('71', 'love');

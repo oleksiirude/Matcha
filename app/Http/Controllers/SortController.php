@@ -24,9 +24,6 @@
     
             $sorted = $this->sortByParams($params);
             
-            if ($this->params['sort'] === 'age')
-                $sorted = $this->putWithoutAgeDown($sorted);
-            
             return $sorted;
         }
         
@@ -150,26 +147,5 @@
                             return $profiles->sortByDesc('rating');
                 });
             })->flatten(2);
-        }
-    
-        protected function putWithoutAgeDown($sorted) {
-            $box = collect();
-        
-            $i = 0;
-            foreach ($sorted as $item) {
-                if (!$item['age']) {
-                    $box[] = $item;
-                    unset($sorted[$i]);
-                }
-                $i++;
-            }
-        
-            $i = 0;
-            while ($i < count($box)) {
-                $sorted[] = $box[$i];
-                $i++;
-            }
-        
-            return $sorted;
         }
     }
