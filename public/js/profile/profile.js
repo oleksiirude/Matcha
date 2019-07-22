@@ -3,6 +3,10 @@ let canvas  = document.getElementById('canvas'),
     result = document.getElementById('result');
 // let cropper;
 
+let show_element = function(id) {
+    document.getElementById(id).hidden = false;
+}
+
 let upload_crop_avatar = function() {
     // console.log('TTT', document.getElementById('crop_avatar').value);
     let formData = new FormData(document.forms.useravatar_form);

@@ -140,20 +140,22 @@
                                                     <tagsdelete-component value="{{ $interest->tag }}" csrf="{{ csrf_token() }}" url="{{ route('delete.tag', $interest->tag) }}" id_li="{{ $interest->tag }}_li" id_form="{{ $interest->tag }}_form"></tagsdelete-component>
                                             @endforeach
                                             </ul>
-                                            <br>
-                                            <form action="{{ route('set.tag') }}" method="POST">
-                                                @csrf
-                                                @method('PUT')
+                                            <img src="{{asset('/images/service/plus.png')}}" onclick="show_element('add_interests_div')" title="add interests" alt="add interests" id="add_interests_img">
+                                            <div id="add_interests_div" hidden>
+                                                <form action="{{ route('set.tag') }}" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
 
-                                                <input type="text" name="tag">
-                                                <button type="submit">add interest</button>
-                                            </form>
-                                            <form action="{{ route('find.tag.matches') }}" method="POST">
-                                                @csrf
+                                                    <input type="text" name="tag">
+                                                    <button type="submit">add interest</button>
+                                                </form>
+                                                <form action="{{ route('find.tag.matches') }}" method="POST">
+                                                    @csrf
 
-                                                <input type="text" name="piece">
-                                                <button type="submit">find matches</button>
-                                            </form>
+                                                    <input type="text" name="piece">
+                                                    <button type="submit">find matches</button>
+                                                </form>
+                                            </div>
                                         </div>
                                         <div id="user_bio">
                                             <p>
@@ -233,11 +235,6 @@
                                             <span id="photo4_errormsg"></span>
                                         </div>
                                     </div>
-
-
-
-
-
                                 </div>
                             </div>
 
