@@ -15,9 +15,8 @@
         <div class="row justify-content-center">
             <div class="">
                     <div class="card-body">
-
-                        @if ($profile->totally_filled)
-                            Hey! For more efficient search you should:
+                        <div id="fill_profile">
+                        @if ($profile->totally_filled) &#9758; Hey! For more efficient search <b>you should</b>:
                             <ul>
                                 @if (isset($profile->totally_filled['upload']))
                                     @foreach($profile->totally_filled['upload'] as $upload)
@@ -32,6 +31,7 @@
                                 @endif
                             </ul>
                         @endif
+                        </div>
 
                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.avatar') }}">
                             @csrf

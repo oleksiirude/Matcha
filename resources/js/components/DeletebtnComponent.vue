@@ -37,6 +37,7 @@
                             document.getElementById('avatar').src = 'images/service/default_avatar.png';
                             document.getElementById('delete_btn').hidden = true;
                             update_raiting(string.rating);
+                            update_fill_profile(string.empty);
                         } else if (string.result == false) {
                             console.log('default avatar');
                         }

@@ -58,8 +58,10 @@
                                 // document.getElementById('navbarDropdown').firstChild = this.mutableValue;
                                 console.log('ok1', document.getElementById('navbarDropdown').firstChild);
                             }
-                            if (this.name != 'login')
+                            if (this.name != 'login') {
                                 update_raiting(string.rating);
+                                update_fill_profile(string.empty);
+                            }
                         } else if (string.result == false) {
                             document.getElementById(this.name).value = this.mutableValue;
                             document.getElementById(this.name + '_error_msg').hidden = false;

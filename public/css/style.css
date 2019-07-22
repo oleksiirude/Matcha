@@ -179,6 +179,14 @@ footer {
 .btn:hover {
     cursor: pointer;
 }
+.btn-outline-secondary {
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+}
+.btn-outline-secondary:hover {
+    background-color: transparent;color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.7);
+}
 
 .btn-primary, .edit_submit {
     color: #fff;
@@ -249,6 +257,18 @@ a:hover {
     text-align: left;
     display: flex;
 }
+#fill_profile {
+    background: white;
+    position: fixed;
+    right: 20px;
+    padding: 10px;
+    box-shadow: 5px 5px 8px rgba(74, 50, 60, 0.3);
+    z-index: 100;
+}
+#fill_profile ul {
+    text-align: left;
+}
+
 #right_card {
     display: inline-block;
     margin-left: 40px;

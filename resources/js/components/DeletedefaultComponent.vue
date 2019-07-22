@@ -34,6 +34,7 @@
                             document.getElementById('bio_error_msg').innerHTML = '';
                             document.getElementById('bio_error_msg').hidden = true;
                             update_raiting(string.rating);
+                            update_fill_profile(string.empty);
                         } else if (string.result == false) {
                             console.log('error');
                         }
