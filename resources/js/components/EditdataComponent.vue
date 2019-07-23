@@ -53,6 +53,7 @@
                                                 document.getElementById(this.name + '_error_msg').innerHTML = '';
                                                 document.getElementById(this.name + '_error_msg').hidden = true;
                                                 console.log('this.mutableValue', this.mutableValue);
+                                                update_fill_profile(string.empty);
                                         } else if (string.result == false) {
                                                 document.getElementById(this.name).value = this.mutableValue;
                                                 document.getElementById(this.name + '_error_msg').hidden = false;

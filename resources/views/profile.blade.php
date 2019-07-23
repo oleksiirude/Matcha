@@ -13,13 +13,10 @@
 @section('content')
     <div class="profile_container" id="main_container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">My profile</div>
+            <div class="">
                     <div class="card-body">
-
-                        @if ($profile->totally_filled)
-                            Hey! For more efficient search you should:
+                        <div id="fill_profile">
+                        @if ($profile->totally_filled) &#9758; Hey! For more efficient search <b>you should</b>:
                             <ul>
                                 @if (isset($profile->totally_filled['upload']))
                                     @foreach($profile->totally_filled['upload'] as $upload)
@@ -34,6 +31,7 @@
                                 @endif
                             </ul>
                         @endif
+                        </div>
 
                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.avatar') }}">
                             @csrf
@@ -84,7 +82,6 @@
                                             <span id="name_error_msg" class="error_msg"></span>
                                         </div>
                                         <div>
-
                                             <form action="{{ route('change.login') }}" method="POST" id="login_form">
                                                 @csrf
                                                 @method('PUT')
@@ -92,6 +89,20 @@
                                                 <ed_in_lbl-component name="login" value="{{ $profile->login }}" label="Login:" id_btn="login_btn" url="/change/login"></ed_in_lbl-component>
                                             </form>
                                             <span id="login_error_msg" class="error_msg" hidden></span>
+                                        </div>
+                                        <div>
+                                            <form action="{{ route('change.password') }}" method="POST" id="password_form">
+                                                @csrf
+                                                <edit_password-component name="password" id_btn="password_btn" url="{{ route('change.password') }}"></edit_password-component>
+                                            </form>
+                                            <span id="password_error_msg" class="error_msg" hidden></span>
+                                        </div>
+                                        <div>
+                                            <form action="{{ route('change.email') }}" method="POST" id="email_form">
+                                                @csrf
+                                                <ed_email-component name="email" value="{{ $profile->email }}" label="Email:" id_btn="email_btn" url="{{ route('change.email') }}"></ed_email-component>
+                                            </form>
+                                            <span id="email_error_msg" class="error_msg" hidden></span>
                                         </div>
                                         <div>
                                             <form action="{{ route('change.gender') }}" method="POST" id="gender_form">
@@ -119,6 +130,42 @@
                                             </form>
                                             <span id="preferences_error_msg" class="error_msg" hidden></span>
                                         </div>
+                                        <div>
+                                            <form>
+                                                <label for="">Country:</label>
+                                                <input type="text" id="" name="" value="{{ $profile->country }}" class="profiledata">
+                                            </form>
+                                        </div>
+                                        <div>
+                                            <form>
+                                                <label for="">City:</label>
+                                                <input type="text" id="" name="" value="{{ $profile->city }}" class="profiledata">
+                                            </form>
+                                        </div>
+                                        <div>
+                                            <p id="interests_tags_title">Interests:</p>
+                                            <ul id="interests_tags" type="#">
+                                            @foreach($profile->interests as $interest)
+                                                    <tagsdelete-component value="{{ $interest->tag }}" csrf="{{ csrf_token() }}" url="{{ route('delete.tag', $interest->tag) }}" id_li="{{ $interest->tag }}_li" id_form="{{ $interest->tag }}_form"></tagsdelete-component>
+                                            @endforeach
+                                            </ul>
+                                            <img src="{{asset('/images/service/plus.png')}}" onclick="show_element('add_interests_div')" title="add interests" alt="add interests" id="add_interests_img">
+                                            <div id="add_interests_div" hidden>
+                                                <form action="{{ route('set.tag') }}" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+
+                                                    <input type="text" name="tag">
+                                                    <button type="submit">add interest</button>
+                                                </form>
+                                                <form action="{{ route('find.tag.matches') }}" method="POST">
+                                                    @csrf
+
+                                                    <input type="text" name="piece">
+                                                    <button type="submit">find matches</button>
+                                                </form>
+                                            </div>
+                                        </div>
                                         <div id="user_bio">
                                             <p>
                                             <h2>About</h2>
@@ -139,134 +186,70 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
-                                <h2>My photos</h2>
-                                <div class="usr_gallery">
-                                    <div class="usr_photo_div">
-                                        <img src="{{ asset('images/service/photo_gray.png') }}" onclick="choose_file('photo1_label')" class="camera">
-                                        <img src="{{ asset($profile->photo1) }}" alt="photo1" class="usr_photo" id="img1" onclick="choose_file('photo1_label')" @if ( $profile->photo1  == null) hidden @endif>
-                                        <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}" id="photo1_form">
-                                            @csrf
-
-                                            <photo-component photovalue="1" inputid="photo1" labelid="photo1_label"></photo-component>
-                                        </form>
-                                        <form action="{{ route('delete.photo', 1) }}" method="POST" class="profile_delete_form" id="deletephoto_form1" @if ( $profile->photo1  == null) hidden @endif>
-                                            @csrf
-                                            @method('DELETE')
-
-                                            <deletephotobtn-component srcavatar="{{ asset('images/service/del.png') }}" idbtn="delete_btn_1" idform ="deletephoto_form1" photo="1"></deletephotobtn-component>
-                                        </form>
-                                        <span id="photo1_errormsg"></span>
-                                    </div>
-                                    <div class="usr_photo_div">
-                                        <img src="{{ asset('images/service/photo_gray.png') }}" onclick="choose_file('photo2_label')" class="camera">
-                                        <img src="{{ asset($profile->photo2) }}" alt="photo2" class="usr_photo" id="img2" onclick="choose_file('photo2_label')" @if ( $profile->photo2  == null) hidden @endif>
-                                        <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}" id="photo2_form">
-                                            @csrf
-
-                                            <photo-component photovalue="2" inputid="photo2" labelid="photo2_label"></photo-component>
-                                        </form>
-                                        <form action="{{ route('delete.photo', 2) }}" method="POST" class="profile_delete_form" id="deletephoto_form2" @if ( $profile->photo2  == null) hidden @endif>
-                                            @csrf
-                                            @method('DELETE')
-
-                                            <deletephotobtn-component srcavatar="{{ asset('images/service/del.png') }}" idbtn="delete_btn_2" idform ="deletephoto_form2" photo="2"></deletephotobtn-component>
-                                        </form>
-                                        <span id="photo2_errormsg"></span>
-                                    </div>
-                                    <div class="usr_photo_div">
-                                        <img src="{{ asset('images/service/photo_gray.png') }}" onclick="choose_file('photo3_label')" class="camera">
-                                        <img src="{{ asset($profile->photo3) }}" alt="photo3" class="usr_photo" id="img3" onclick="choose_file('photo3_label')"  @if ( $profile->photo3  == null) hidden @endif>
-                                        <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}" id="photo3_form">
-                                            @csrf
-
-                                            <photo-component photovalue="3" inputid="photo3" labelid="photo3_label"></photo-component>
-                                        </form>
-                                        <form action="{{ route('delete.photo', 3) }}" method="POST" class="profile_delete_form" id="deletephoto_form3" @if ( $profile->photo3  == null) hidden @endif>
-                                            @csrf
-                                            @method('DELETE')
-
-                                            <deletephotobtn-component srcavatar="{{ asset('images/service/del.png') }}" idbtn="delete_btn_3" idform ="deletephoto_form3" photo="3"></deletephotobtn-component>
-                                        </form>
-                                        <span id="photo3_errormsg"></span>
-                                    </div>
-                                    <div class="usr_photo_div">
-                                        <img src="{{ asset('images/service/photo_gray.png') }}" onclick="choose_file('photo4_label')" class="camera">
-                                        <img src="{{ asset($profile->photo4) }}" alt="photo4" class="usr_photo" id="img4" onclick="choose_file('photo4_label')"  @if ( $profile->photo4  == null) hidden @endif>
-                                        <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}" id="photo4_form">
-                                            @csrf
-
-                                            <photo-component photovalue="4" inputid="photo4" labelid="photo4_label"></photo-component>
-                                        </form>
-                                        <form action="{{ route('delete.photo', 4) }}" method="POST" class="profile_delete_form" id="deletephoto_form4" @if ( $profile->photo4  == null) hidden @endif>
-                                            @csrf
-                                            @method('DELETE')
-
-                                            <deletephotobtn-component srcavatar="{{ asset('images/service/del.png') }}" idbtn="delete_btn_4" idform ="deletephoto_form4" photo="4"></deletephotobtn-component>
-                                        </form>
-                                        <span id="photo4_errormsg"></span>
+                                <div class="container">
+                                    <h2>My photos</h2>
+                                    <div class="row usr_gallery">
+                                        <div class="usr_photo_div col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <img src="{{ asset('images/service/photo_gray.png') }}" onclick="choose_file('photo1_label')" class="camera" id="photo1_camera" @if ( $profile->photo1  != null) hidden @endif>
+                                            <img src="{{ asset($profile->photo1) }}" alt="photo1" class="usr_photo" id="img1" onclick="choose_file('photo1_label')" @if ( $profile->photo1  == null) hidden @endif>
+                                            <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}" id="photo1_form">
+                                                @csrf
+                                                <photo-component photovalue="1" inputid="photo1" labelid="photo1_label"></photo-component>
+                                            </form>
+                                            <form action="{{ route('delete.photo', 1) }}" method="POST" class="profile_delete_form" id="deletephoto_form1" @if ( $profile->photo1  == null) hidden @endif>
+                                                @csrf
+                                                @method('DELETE')
+                                                <deletephotobtn-component srcavatar="{{ asset('images/service/del.png') }}" idbtn="delete_btn_1" idform ="deletephoto_form1" photo="1"></deletephotobtn-component>
+                                            </form>
+                                            <span id="photo1_errormsg"></span>
+                                        </div>
+                                        <div class="usr_photo_div col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <img src="{{ asset('images/service/photo_gray.png') }}" onclick="choose_file('photo2_label')" class="camera" id="photo2_camera" @if ( $profile->photo2  != null) hidden @endif>
+                                            <img src="{{ asset($profile->photo2) }}" alt="photo2" class="usr_photo" id="img2" onclick="choose_file('photo2_label')" @if ( $profile->photo2  == null) hidden @endif>
+                                            <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}" id="photo2_form">
+                                                @csrf
+                                                <photo-component photovalue="2" inputid="photo2" labelid="photo2_label"></photo-component>
+                                            </form>
+                                            <form action="{{ route('delete.photo', 2) }}" method="POST" class="profile_delete_form" id="deletephoto_form2" @if ( $profile->photo2  == null) hidden @endif>
+                                                @csrf
+                                                @method('DELETE')
+                                                <deletephotobtn-component srcavatar="{{ asset('images/service/del.png') }}" idbtn="delete_btn_2" idform ="deletephoto_form2" photo="2"></deletephotobtn-component>
+                                            </form>
+                                            <span id="photo2_errormsg"></span>
+                                        </div>
+                                        <div class="usr_photo_div col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <img src="{{ asset('images/service/photo_gray.png') }}" onclick="choose_file('photo3_label')" class="camera" id="photo3_camera" @if ( $profile->photo3  != null) hidden @endif>
+                                            <img src="{{ asset($profile->photo3) }}" alt="photo3" class="usr_photo" id="img3" onclick="choose_file('photo3_label')"  @if ( $profile->photo3  == null) hidden @endif>
+                                            <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}" id="photo3_form">
+                                                @csrf
+                                                <photo-component photovalue="3" inputid="photo3" labelid="photo3_label"></photo-component>
+                                            </form>
+                                            <form action="{{ route('delete.photo', 3) }}" method="POST" class="profile_delete_form" id="deletephoto_form3" @if ( $profile->photo3  == null) hidden @endif>
+                                                @csrf
+                                                @method('DELETE')
+                                                <deletephotobtn-component srcavatar="{{ asset('images/service/del.png') }}" idbtn="delete_btn_3" idform ="deletephoto_form3" photo="3"></deletephotobtn-component>
+                                            </form>
+                                            <span id="photo3_errormsg"></span>
+                                        </div>
+                                        <div class="usr_photo_div col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <img src="{{ asset('images/service/photo_gray.png') }}" onclick="choose_file('photo4_label')" class="camera" id="photo4_camera" @if ( $profile->photo4  != null) hidden @endif>
+                                            <img src="{{ asset($profile->photo4) }}" alt="photo4" class="usr_photo" id="img4" onclick="choose_file('photo4_label')"  @if ( $profile->photo4  == null) hidden @endif>
+                                            <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}" id="photo4_form">
+                                                @csrf
+                                                <photo-component photovalue="4" inputid="photo4" labelid="photo4_label"></photo-component>
+                                            </form>
+                                            <form action="{{ route('delete.photo', 4) }}" method="POST" class="profile_delete_form" id="deletephoto_form4" @if ( $profile->photo4  == null) hidden @endif>
+                                                @csrf
+                                                @method('DELETE')
+                                                <deletephotobtn-component srcavatar="{{ asset('images/service/del.png') }}" idbtn="delete_btn_4" idform ="deletephoto_form4" photo="4"></deletephotobtn-component>
+                                            </form>
+                                            <span id="photo4_errormsg"></span>
+                                        </div>
                                     </div>
                                 </div>
-
-
-                                <p><b>Country:</b> {{ $profile->country }}</p>
-                                <p><b>City:</b> {{ $profile->city }}</p>
-                                <p><b>Email:</b> {{ $profile->email }}</p>
-                                <p><b>Change email</b></p>
-                                <form action="{{ route('change.email') }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-
-                                    New email:
-                                    <p><input id="email" type="email" name="email"></p>
-                                    Password:
-                                    <p><input type="password" name="password"></p>
-                                    <button type="submit">change email</button>
-                                </form>
-
-                                <p><b>Change password</b></p>
-                                <form action="{{ route('change.password') }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-
-                                    Current password:
-                                    <p><input type="password" name="current_password"></p>
-                                    New password:
-                                    <p><input type="password" name="new_password"></p>
-                                    Confirm new password:
-                                    <p><input type="password" name="new_password_confirm"></p>
-                                    <button type="submit">change password</button>
-                                </form>
-
-                                <p><b>Interests:</b></p>
-                                    @foreach($profile->interests as $interest)
-                                        {{ $interest->tag }}
-                                        <form action="{{ route('delete.tag', $interest->tag) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-
-                                            <button type="submit">delete</button>
-                                        </form>
-                                    @endforeach
-                                <br>
-                                <form action="{{ route('set.tag') }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-
-                                    <input type="text" name="tag">
-                                    <button type="submit">add interest</button>
-                                </form>
-                                <form action="{{ route('find.tag.matches') }}" method="POST">
-                                    @csrf
-
-                                    <input type="text" name="piece">
-                                    <button type="submit">find matches</button>
-                                </form>
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>

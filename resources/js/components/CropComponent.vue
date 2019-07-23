@@ -1,16 +1,19 @@
 <template>
-    <div id="crop_div" hidden>
-        <p>
-            <input type="button" id="btnCrop" value="Crop and download" />
-            <input type="button" id="btnRestore" value="Restore" />
-            <input type="button" id="btnRotate" value="Rotate" />
-        </p>
-        <div>
-            <canvas id="canvas">
-            </canvas>
-        </div>
-        <div id="result">
-            <img id="result_img" src="">
+    <div id="parent_popup">
+        <div id="crop_div" hidden>
+            <p>
+                <button id="btnCrop" class="btn btn-primary">&#x2704; Crop and download</button>
+                <button id="btnRestore" class="btn btn-primary">Restore</button>
+                <button id="btnRotate" class="btn btn-primary">&#x21ba; Rotate</button>
+                <input type="button" id="btnClose" class="close_btn" value="X" />
+            </p>
+            <div>
+                <canvas id="canvas">
+                </canvas>
+            </div>
+            <div id="result">
+                <img id="result_img" src="">
+            </div>
         </div>
     </div>
 </template>
@@ -24,8 +27,12 @@
         //     // 'roundCorners'
         // ],
         methods: {
-
-            // selectFile: function (evt) {
+            close_window: function () {
+                document.getElementById('crop_div').hidden = true;
+                cropper.destroy();
+                // const context = canvas.getContext('2d');
+                // context.clearRect(0, 0, canvas.width, canvas.height);
+            }
 
 
         }

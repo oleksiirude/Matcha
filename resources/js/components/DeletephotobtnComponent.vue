@@ -42,7 +42,9 @@
                             document.getElementById(imgid).src = '';
                             document.getElementById(imgid).hidden = true;
                             document.getElementById(this.idform).hidden = true;
+                            document.getElementById('photo' + this.photo + '_camera').hidden = false;
                             update_raiting(string.rating);
+                            update_fill_profile(string.empty);
                         } else if (string.result == false) {
                             console.log('error');
                         }

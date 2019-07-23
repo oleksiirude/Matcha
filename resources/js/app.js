@@ -30,6 +30,9 @@ Vue.component('deletephotobtn-component', require('./components/DeletephotobtnCo
 Vue.component('editdata-component', require('./components/EditdataComponent').default);
 Vue.component('editinput-component', require('./components/EditinputComponent').default);
 Vue.component('ed_in_lbl-component', require('./components/Edit_input_labelComponent').default);
+Vue.component('ed_email-component', require('./components/EditemailComponent').default);
+Vue.component('edit_password-component', require('./components/EditpasswordComponent').default);
+Vue.component('tagsdelete-component', require('./components/TagsdeleteComponent').default);
 Vue.component('gender-component', require('./components/GenderComponent').default);
 Vue.component('preferences-component', require('./components/PreferencesComponent').default);
 Vue.component('footer-component', require('./components/FooterComponent').default);
