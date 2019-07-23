@@ -71,7 +71,7 @@
         public function getFilteredProfiles($profiles, $min, $max, $aim) {
             $i = 0;
             foreach ($profiles as $profile) {
-                if ($profile[$aim] <= $min || $profile[$aim] >= $max)
+                if ($profile[$aim] < $min || $profile[$aim] > $max)
                     unset($profiles[$i]);
                 $i++;
             }
