@@ -29,7 +29,7 @@
                 let XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
                 let xhr = new XHR();
                 xhr.responseType = 'json';
-                let url = '/set/' + this.name;
+                let url = '/change/' + this.name;
                 xhr.open('POST', url, true);
                 xhr.onreadystatechange = () => {
                     if (xhr.readyState !== 4) {
