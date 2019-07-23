@@ -117,7 +117,7 @@
                                                 @csrf
                                                 @method('PUT')
 
-                                                <ed_in_lbl-component name="age" value="{{ $profile->age }}" label="Age:" id_btn="age_btn" url="/set/age"></ed_in_lbl-component>
+                                                <edit_age-component name="age" value="{{ $profile->age }}" label="Date of birth:" id_btn="age_btn" url="{{ route('set.age') }}"></edit_age-component>
                                             </form>
                                             <span id="age_error_msg" class="error_msg" hidden></span>
                                         </div>
