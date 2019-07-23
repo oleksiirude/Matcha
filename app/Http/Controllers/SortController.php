@@ -1,10 +1,10 @@
 <?php
 
     namespace App\Http\Controllers;
-
-        use Illuminate\Support\Collection as Collection;
-
-        class SortController extends Controller {
+    
+    use Illuminate\Support\Collection as Collection;
+    
+    class SortController extends Controller {
         
         protected $profiles;
         protected $params;
