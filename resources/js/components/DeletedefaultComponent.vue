@@ -1,6 +1,6 @@
 <template>
     <button type="submit" id="deletebio_btn" class="delete_btn" title="delete bio" @click="deletesmth" hidden>
-        &#10008;
+        <img src="/images/service/trash_50px.png" class="edit cancel">
     </button>
 </template>
 
@@ -34,6 +34,7 @@
                             document.getElementById('bio_error_msg').innerHTML = '';
                             document.getElementById('bio_error_msg').hidden = true;
                             update_raiting(string.rating);
+                            update_fill_profile(string.empty);
                         } else if (string.result == false) {
                             console.log('error');
                         }

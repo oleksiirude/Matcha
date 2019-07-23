@@ -12,6 +12,11 @@
             'name',
             'id_btn'
         ],
+        data: function () {
+            return {
+                mutableValue: this.value
+            }
+        },
         methods: {
             editInput: function (name) {
 
@@ -38,12 +43,11 @@
                         let string = xhr.response;
                         console.log('res', string);
                         if (string.result == true) {
-                            this.value = document.getElementById(this.name).value;
+                            this.mutableValue = document.getElementById(this.name).value;
                             document.getElementById(this.name + '_btn').hidden = true;
                             document.getElementById('name_error_msg').innerHTML = '';
-                            update_raiting(string.rating);
                         } else if (string.result == false) {
-                            document.getElementById(this.name).value = this.value;
+                            document.getElementById(this.name).value = this.mutableValue;
                             document.getElementById('name_error_msg').innerHTML = string.error;
                             console.log('error');
 
