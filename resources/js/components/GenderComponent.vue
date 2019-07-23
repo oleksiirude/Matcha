@@ -39,8 +39,6 @@
                         let string = xhr.response;
                         console.log('res', string);
                         if (string.result == true) {
-                            update_raiting(string.rating);
-                            update_fill_profile(string.empty);
                             document.getElementById(this.name + '_btn').hidden = true;
                         } else if (string.result == false) {
                             console.log('error');
