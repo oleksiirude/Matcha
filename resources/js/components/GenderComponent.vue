@@ -29,7 +29,7 @@
                 let XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
                 let xhr = new XHR();
                 xhr.responseType = 'json';
-                let url = '/set/' + this.name;
+                let url = '/change/' + this.name;
                 xhr.open('POST', url, true);
                 xhr.onreadystatechange = () => {
                     if (xhr.readyState !== 4) {
@@ -39,8 +39,6 @@
                         let string = xhr.response;
                         console.log('res', string);
                         if (string.result == true) {
-                            update_raiting(string.rating);
-                            update_fill_profile(string.empty);
                             document.getElementById(this.name + '_btn').hidden = true;
                         } else if (string.result == false) {
                             console.log('error');
