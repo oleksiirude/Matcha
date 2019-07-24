@@ -306,10 +306,13 @@ a:hover {
     /*margin-top: 60px;*/
     width: calc(100% - 100px);
 }
-#change_password_title, #interests_tags_title {
+#change_password_title, #interests_tags_title, #age_title {
     color: rgba(68, 79, 87, 0.4);
 }
-#change_password_title:hover {
+#user_age {
+    color: rgba(68, 79, 87, 0.8);
+}
+#change_password_title:hover, #age_title:hover, #user_age:hover {
     color: rgba(68, 79, 87, 0.8);
     cursor: pointer;
 }

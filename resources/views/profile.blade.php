@@ -112,23 +112,14 @@
                                                 <gender-component value="{{ $profile->gender }}" name="gender"></gender-component>
                                             </form>
                                         </div>
-
-                                        <p><b>Age</b>:
-                                            @if($profile->age)
-                                                {{ $profile->age }} years
-                                            @else
-                                                isn't specified
-                                            @endif
-                                        </p>
-
                                         <div>
-                                            <form action="{{ route('set.age') }}" method="POST" id="age_form">
+                                            <form action="{{ route('set.age') }}" method="POST" id="date_form">
                                                 @csrf
                                                 @method('PUT')
 
-                                                <edit_age-component name="age" value="{{ $profile->age }}" label="Date of birth:" id_btn="age_btn" url="{{ route('set.age') }}"></edit_age-component>
+                                                <edit_age-component name="date" label="Date of birth:" id_btn="date_btn" url="{{ route('set.age') }}" value="{{ $profile->age }}"></edit_age-component>
                                             </form>
-                                            <span id="age_error_msg" class="error_msg" hidden></span>
+                                            <span id="date_error_msg" class="error_msg" hidden></span>
                                         </div>
                                         <div>
                                             <form action="{{ route('set.preferences') }}" method="POST" id="preferences_form">

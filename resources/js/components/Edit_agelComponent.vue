@@ -1,7 +1,10 @@
 <template>
     <div>
-        <label for='userage'>Age:</label>
-        <input type="text" name="userage" class="profiledata" value="" @click="show_birthday_input" id="userage" placeholder="" readonly><br>
+        <p style="margin-bottom: 0.5rem;"><span id="age_title" @click="show_birthday_input">Age:</span>
+            <span id="user_age" @click="show_birthday_input">{{ mutableSpan }} </span>
+        </p>
+<!--        <label for='userage'>Age:</label>-->
+<!--        <input type="text" name="userage" class="profiledata" value="" @click="show_birthday_input" id="userage" placeholder="" readonly><br>-->
         <div id="fill_birthday" hidden>
             <label :for="name">{{ label }}</label>
             <input type="date" :name="name" min="1899-01-01" max="2002-01-01" class="profiledata" :value="value" @click="editInput(name)" :id="name" @change="show_btn(name)" placeholder="">
@@ -17,17 +20,35 @@
             'name',
             'id_btn',
             'label',
-            'url'
+            'url',
         ],
         data: function () {
             return {
-                mutableValue: this.value
+                mutableValue: this.value,
+                mutableSpan : this.value
+            }
+        },
+        mounted() {
+            if (this.value)
+            {
+                this.mutableSpan = this.value + ' years';
+            }
+            else {
+                this.mutableSpan =  "isn't specified";
             }
         },
         methods: {
             show_birthday_input: function () {
-                document.getElementById('fill_birthday').hidden = false;
-                document.getElementById(this.name).focus();
+                if (document.getElementById('fill_birthday').hidden == true) {
+                    document.getElementById('fill_birthday').hidden = false;
+                    document.getElementById(this.name).focus();
+                }
+                else {
+                    document.getElementById('fill_birthday').hidden = true;
+                    document.getElementById(this.name).blur();
+                    document.getElementById(this.name + '_error_msg').innerHTML = '';
+                    document.getElementById(this.name + '_error_msg').hidden = true;
+                }
             },
             editInput: function (name) {
 
@@ -53,32 +74,26 @@
                     if (xhr.status === 200) {
                         let string = xhr.response;
                         if (string.result == true) {
-                            this.mutableValue = document.getElementById(this.name).value;
+                            this.mutableSpan = string.age + ' years';
                             document.getElementById(this.name + '_btn').hidden = true;
                             document.getElementById(this.name + '_error_msg').innerHTML = '';
                             document.getElementById(this.name + '_error_msg').hidden = true;
-                            if (this.name == 'login') {
-                                let i = document.getElementById('navbarDropdown').firstChild;
-                                document.getElementById('navbarDropdown').firstChild.nodeValue = this.mutableValue;
-                                // console.log('ok', i.nodeValue);
-                                // document.getElementById('navbarDropdown').firstChild = this.mutableValue;
-                                // console.log('ok1', document.getElementById('navbarDropdown').firstChild);
-                            }
-                            if (this.name != 'login') {
-                                update_raiting(string.rating);
-                                update_fill_profile(string.empty);
-                            }
+                            document.getElementById('user_age').innerHTML = this.mutableSpan;
+                            update_raiting(string.rating);
+                            update_fill_profile(string.empty);
+                            document.getElementById('fill_birthday').hidden = true;
+                            document.getElementById(this.name).blur();
                         } else if (string.result == false) {
                             // if (this.name == 'login' && string.error == '') {
                             //     update_raiting(string.rating);
                             //     update_fill_profile(string.empty);
                             // }
-                            document.getElementById(this.name).value = this.mutableValue;
+                            document.getElementById('user_age').innerHTML = this.mutableSpan;
                             document.getElementById(this.name + '_error_msg').hidden = false;
                             document.getElementById(this.name + '_error_msg').innerHTML = string.error;
                             // console.log('error');
                         }
-                        // console.log('res', string);
+                        console.log('res', string);
                     }
                 };
                 xhr.send(form);
