@@ -71,6 +71,7 @@
     
             $interests = Interest::select('tag')->where('user_id', $user->id)->get();
             $profile['interests'] = $interests;
+            $profile->age = Carbon::parse($profile->age)->age;
             $profile['totally_filled'] = Controller::checkIfTotallyFilled($profile->getAttributes());
             
             return $profile;

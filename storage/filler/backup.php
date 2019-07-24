@@ -765,7 +765,7 @@
 		'profiles' => "
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
                     avatar, avatar_uploaded, photo1, photo2, photo3, rating)
-		        VALUES ('2', 'maximus', 'Maxim', 'Chumko', '24', 'male', 'heterosexual', '$bio',
+		        VALUES ('2', 'maximus', 'Maxim', 'Chumko', '1995-12-28', 'male', 'heterosexual', '$bio',
 		                'images/profiles/maximus/avatar.jpg', '1',
 		                'images/profiles/maximus/photo1.jpg',
 		                'images/profiles/maximus/photo2.jpg',
@@ -773,7 +773,7 @@
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, photo3, photo4, rating)
-		        VALUES ('3', 'dobby', 'Alexander', 'Cherednichok', '34', 'male', 'heterosexual', '$bio',
+		        VALUES ('3', 'dobby', 'Alexander', 'Cherednichok', '1985-05-20', 'male', 'heterosexual', '$bio',
 		                'images/profiles/dobby/avatar.jpg', '1',
 		                'images/profiles/dobby/photo1.jpg',
 		                'images/profiles/dobby/photo2.jpg',
@@ -782,32 +782,32 @@
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, rating)
-		        VALUES ('4', 'bigboy', 'Ruslan', 'Drobyazko', '42', 'male', 'heterosexual', '$bio',
+		        VALUES ('4', 'bigboy', 'Ruslan', 'Drobyazko', '1977-05-01', 'male', 'heterosexual', '$bio',
 		                'images/profiles/bigboy/avatar.jpg', '1',
 		                'images/profiles/bigboy/photo1.jpg', '14.4');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, rating)
-		        VALUES ('5', 'captain', 'Vlad', 'kropolenko', '41', 'male', 'heterosexual', '$bio',
+		        VALUES ('5', 'captain', 'Vlad', 'kropolenko', '1978-05-01', 'male', 'heterosexual', '$bio',
 		                'images/profiles/captain/avatar.jpg', '1',
 		                'images/profiles/captain/photo1.jpg',
 		                'images/profiles/captain/photo2.jpg', '24.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('6', 'serious', 'Nikolay', 'Kuzhko', '19', 'male', 'heterosexual', '$bio',
+		        VALUES ('6', 'serious', 'Nikolay', 'Kuzhko', '2000-03-05', 'male', 'heterosexual', '$bio',
 		                'images/profiles/serious/avatar.jpg', '1', '3.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, rating)
-		        VALUES ('7', 'massive', 'Sergey', 'Stanko', '29', 'male', 'heterosexual', '$bio',
+		        VALUES ('7', 'massive', 'Sergey', 'Stanko', '1989-02-21', 'male', 'heterosexual', '$bio',
 		                'images/profiles/massive/avatar.jpg', '1',
 		                'images/profiles/massive/photo1.jpg',
 		                'images/profiles/massive/photo2.jpg', '7.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, photo3, rating)
-		        VALUES ('8', 'johnny', 'Denis', 'Petrenko', '31', 'male', 'heterosexual', '$bio',
+		        VALUES ('8', 'johnny', 'Denis', 'Petrenko', '1987-02-10', 'male', 'heterosexual', '$bio',
 		                'images/profiles/johnny/avatar.jpg', '1',
 		                'images/profiles/johnny/photo1.jpg',
 		                'images/profiles/johnny/photo2.jpg',
@@ -815,7 +815,7 @@
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, photo3, photo4, rating)
-		        VALUES ('9', 'womanizer', 'Pavel', 'Kunickii', '37', 'male', 'heterosexual', '$bio',
+		        VALUES ('9', 'womanizer', 'Pavel', 'Kunickii', '1982-12-10', 'male', 'heterosexual', '$bio',
 		                'images/profiles/womanizer/avatar.jpg', '1',
 		                'images/profiles/womanizer/photo1.jpg',
 		                'images/profiles/womanizer/photo2.jpg',
@@ -824,334 +824,334 @@
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, rating)
-		        VALUES ('10', 'beast', 'Fedor', 'Emalnyanenko', '42', 'male', 'heterosexual', '$bio',
+		        VALUES ('10', 'beast', 'Fedor', 'Emalnyanenko', '1977-10-12', 'male', 'heterosexual', '$bio',
 		                'images/profiles/beast/avatar.jpg', '1',
 		                'images/profiles/beast/photo1.jpg',
 		                'images/profiles/beast/photo2.jpg', '24.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('11', 'cooler', 'Vladimir', 'Markov', '27', 'male', 'heterosexual', '$bio',
+		        VALUES ('11', 'cooler', 'Vladimir', 'Markov', '1993-06-12', 'male', 'heterosexual', '$bio',
 		                'images/profiles/cooler/avatar.jpg', '1', '33.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('12', 'kipsta', 'Vadim', 'Markovenko', '31', 'male', 'heterosexual', '$bio',
+		        VALUES ('12', 'kipsta', 'Vadim', 'Markovenko', '1988-07-07', 'male', 'heterosexual', '$bio',
 		                'images/profiles/kipsta/avatar.jpg', '1', '23.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('13', 'ehorro', 'Ehor', 'Putenko', '35', 'male', 'heterosexual', '$bio',
+		        VALUES ('13', 'ehorro', 'Ehor', 'Putenko', '1984-03-11', 'male', 'heterosexual', '$bio',
 		                'images/profiles/ehorro/avatar.jpg', '1', '5.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('14', 'sergio', 'Sergey', 'Leonenko', '28', 'male', 'heterosexual', '$bio',
+		        VALUES ('14', 'sergio', 'Sergey', 'Leonenko', '1991-06-01', 'male', 'heterosexual', '$bio',
 		                'images/profiles/sergio/avatar.jpg', '1', '6.9');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('15', 'kopa', 'Kiril', 'Eremenko', '40', 'male', 'heterosexual', '$bio',
+		        VALUES ('15', 'kopa', 'Kiril', 'Eremenko', '1978-09-01', 'male', 'heterosexual', '$bio',
 		                'images/profiles/kopa/avatar.jpg', '1', '10.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('16', 'dimas', 'Dmitrii', 'Golovko', '26', 'male', 'heterosexual', '$bio',
+		        VALUES ('16', 'dimas', 'Dmitrii', 'Golovko', '1993-10-11', 'male', 'heterosexual', '$bio',
 		                'images/profiles/dimas/avatar.jpg', '1', '6.3');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('17', 'nubilas', 'Nikolay', 'Lasiskii', '31', 'male', 'heterosexual', '$bio',
+		        VALUES ('17', 'nubilas', 'Nikolay', 'Lasiskii', '1987-06-11', 'male', 'heterosexual', '$bio',
 		                'images/profiles/nubilas/avatar.jpg', '1', '9.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('18', 'rubae', 'Nikita', 'Alexeev', '23', 'male', 'heterosexual', '$bio',
+		        VALUES ('18', 'rubae', 'Nikita', 'Alexeev', '1998-06-01', 'male', 'heterosexual', '$bio',
 		                'images/profiles/rubae/avatar.jpg', '1', '19.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('19', 'crop', 'Oleksii', 'Rudchenko', '28', 'male', 'heterosexual', '$bio',
+		        VALUES ('19', 'crop', 'Oleksii', 'Rudchenko', '1991-02-01', 'male', 'heterosexual', '$bio',
 		                'images/profiles/crop/avatar.jpg', '1', '8.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('20', 'super', 'Slava', 'Lepsheev', '32', 'male', 'heterosexual', '$bio',
+		        VALUES ('20', 'super', 'Slava', 'Lepsheev', '1986-01-02', 'male', 'heterosexual', '$bio',
 		                'images/profiles/super/avatar.jpg', '1', '10.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('21', 'rudolf', 'Rudolf', 'Shneer', '45', 'male', 'heterosexual', '$bio',
+		        VALUES ('21', 'rudolf', 'Rudolf', 'Shneer', '1974-06-27', 'male', 'heterosexual', '$bio',
 		                'images/profiles/rudolf/avatar.jpg', '1', '20.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('22', 'patriot', 'Andrey', 'Bilko', '38', 'male', 'heterosexual', '$bio',
+		        VALUES ('22', 'patriot', 'Andrey', 'Bilko', '1981-12-01', 'male', 'heterosexual', '$bio',
 		                'images/profiles/patriot/avatar.jpg', '1', '40.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('23', 'cool', 'Sasha', 'Andrienko', '32', 'male', 'heterosexual', '$bio',
+		        VALUES ('23', 'cool', 'Sasha', 'Andrienko', '1987-03-11', 'male', 'heterosexual', '$bio',
 		                'images/profiles/cool/avatar.jpg', '1', '31.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('24', 'camagru', 'Franz', 'Herion', '37', 'male', 'heterosexual', '$bio',
+		        VALUES ('24', 'camagru', 'Franz', 'Herion', '1982-03-17', 'male', 'heterosexual', '$bio',
 		                'images/profiles/camagru/avatar.jpg', '1', '20.9');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('25', 'manu', 'Oleksii', 'Shumko', '22', 'male', 'heterosexual', '$bio',
+		        VALUES ('25', 'manu', 'Oleksii', 'Shumko', '1999-01-02', 'male', 'heterosexual', '$bio',
 		                'images/profiles/manu/avatar.jpg', '1', '69.9');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('26', 'shrai', 'Maksim', 'Marchuk', '20', 'male', 'heterosexual', '$bio',
+		        VALUES ('26', 'shrai', 'Maksim', 'Marchuk', '2000-06-01', 'male', 'heterosexual', '$bio',
 		                'images/profiles/shrai/avatar.jpg', '1', '8.9');   
 
         INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('27', 'virgo', 'Vova', 'Klimchuk', '35', 'male', 'heterosexual', '$bio',
+		        VALUES ('27', 'virgo', 'Vova', 'Klimchuk', '1984-03-20', 'male', 'heterosexual', '$bio',
 		                'images/profiles/virgo/avatar.jpg', '1', '17.9'); 
 
         INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('28', 'kupor', 'Konstantin', 'Grigorenko', '31', 'male', 'heterosexual', '$bio',
+		        VALUES ('28', 'kupor', 'Konstantin', 'Grigorenko', '1987-09-22', 'male', 'heterosexual', '$bio',
 		                'images/profiles/kupor/avatar.jpg', '1', '51.9');  	
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('29', 'vitalino', 'Vitalii', 'Zaicev', '44', 'male', 'heterosexual', '$bio',
+		        VALUES ('29', 'vitalino', 'Vitalii', 'Zaicev', '1976-02-03', 'male', 'heterosexual', '$bio',
 		                'images/profiles/vitalino/avatar.jpg', '1', '77.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('30', 'phobiq', 'Alexander', 'Shiyan', '35', 'male', 'heterosexual', '$bio',
+		        VALUES ('30', 'phobiq', 'Alexander', 'Shiyan', '1984-09-22', 'male', 'heterosexual', '$bio',
 		                'images/profiles/phobiq/avatar.jpg', '1', '25.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('31', 'cutor', 'Borislav', 'Romanov', '30', 'male', 'heterosexual', '$bio',
+		        VALUES ('31', 'cutor', 'Borislav', 'Romanov', '1988-08-02', 'male', 'heterosexual', '$bio',
 		                'images/profiles/cutor/avatar.jpg', '1', '18.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('32', 'longer', 'Garri', 'Frolov', '25', 'male', 'heterosexual', '$bio',
+		        VALUES ('32', 'longer', 'Garri', 'Frolov', '1993-10-12', 'male', 'heterosexual', '$bio',
 		                'images/profiles/longer/avatar.jpg', '1', '41.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('33', 'strong', 'Gordeii', 'Sergeev', '40', 'male', 'heterosexual', '$bio',
+		        VALUES ('33', 'strong', 'Gordeii', 'Sergeev', '1979-09-22', 'male', 'heterosexual', '$bio',
 		                'images/profiles/strong/avatar.jpg', '1', '41.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('34', 'stigor', 'German', 'Sorokin', '39', 'male', 'heterosexual', '$bio',
+		        VALUES ('34', 'stigor', 'German', 'Sorokin', '1980-10-23', 'male', 'heterosexual', '$bio',
 		                'images/profiles/stigor/avatar.jpg', '1', '24.9');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('35', 'ivor', 'Ivor', 'Muleev', '24', 'male', 'heterosexual', '$bio',
+		        VALUES ('35', 'ivor', 'Ivor', 'Muleev', '1994-10-22', 'male', 'heterosexual', '$bio',
 		                'images/profiles/ivor/avatar.jpg', '1', '7.9');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('36', 'nesamovitii', 'Ihor', 'Korolev', '26', 'male', 'heterosexual', '$bio',
+		        VALUES ('36', 'nesamovitii', 'Ihor', 'Korolev', '1993-12-31', 'male', 'heterosexual', '$bio',
 		                'images/profiles/nesamovitii/avatar.jpg', '1', '34.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('37', 'insane', 'David', 'Tarasov', '48', 'male', 'heterosexual', '$bio',
+		        VALUES ('37', 'insane', 'David', 'Tarasov', '1971-09-22', 'male', 'heterosexual', '$bio',
 		                'images/profiles/insane/avatar.jpg', '1', '66.9');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('38', 'ilnev', 'Itan', 'Ilnev', '41', 'male', 'heterosexual', '$bio',
+		        VALUES ('38', 'ilnev', 'Itan', 'Ilnev', '1978-10-02', 'male', 'heterosexual', '$bio',
 		                'images/profiles/ilnev/avatar.jpg', '1', '81.9');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('39', 'ruban', 'Sergey', 'Ruaban', '35', 'male', 'heterosexual', '$bio',
+		        VALUES ('39', 'ruban', 'Sergey', 'Ruaban', '1984-09-02', 'male', 'heterosexual', '$bio',
 		                'images/profiles/ruban/avatar.jpg', '1', '90.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('40', 'silver', 'Zurab', 'Zufar', '31', 'male', 'heterosexual', '$bio',
+		        VALUES ('40', 'silver', 'Zurab', 'Zufar', '1987-09-02', 'male', 'heterosexual', '$bio',
 		                'images/profiles/silver/avatar.jpg', '1', '55.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('41', 'king', 'Petro', 'Poroshenko', '55', 'male', 'heterosexual', '$bio',
+		        VALUES ('41', 'king', 'Petro', 'Poroshenko', '1964-10-10', 'male', 'heterosexual', '$bio',
 		                'images/profiles/king/avatar.jpg', '1', '33.2');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('42', 'best', 'Vladimir', 'Zelenskii', '41', 'male', 'heterosexual', '$bio',
+		        VALUES ('42', 'best', 'Vladimir', 'Zelenskii', '1979-07-22', 'male', 'heterosexual', '$bio',
 		                'images/profiles/best/avatar.jpg', '1', '17.2');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('43', 'sadovii', 'Andrii', 'Sadovii', '49', 'male', 'heterosexual', '$bio',
+		        VALUES ('43', 'sadovii', 'Andrii', 'Sadovii', '1971-03-02', 'male', 'heterosexual', '$bio',
 		                'images/profiles/sadovii/avatar.jpg', '1', '18.4');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('44', 'muraev', 'Evgenii', 'Muraev', '40', 'male', 'heterosexual', '$bio',
+		        VALUES ('44', 'muraev', 'Evgenii', 'Muraev', '1977-12-22', 'male', 'heterosexual', '$bio',
 		                'images/profiles/muraev/avatar.jpg', '1', '20.1'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('45', 'juda', 'Vladimir', 'Groysman', '38', 'male', 'heterosexual', '$bio',
+		        VALUES ('45', 'juda', 'Vladimir', 'Groysman', '1979-12-22', 'male', 'heterosexual', '$bio',
 		                'images/profiles/juda/avatar.jpg', '1', '9.9');     
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('46', 'stefa', 'Stanislav', 'Stefanchuk', '41', 'male', 'heterosexual', '$bio',
+		        VALUES ('46', 'stefa', 'Stanislav', 'Stefanchuk', '1981-07-29', 'male', 'heterosexual', '$bio',
 		                'images/profiles/stefa/avatar.jpg', '1', '12.2');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('47', 'slava', 'Slava', 'Vakarchuk', '41', 'male', 'heterosexual', '$bio',
+		        VALUES ('47', 'slava', 'Slava', 'Vakarchuk', '1979-12-22', 'male', 'heterosexual', '$bio',
 		                'images/profiles/slava/avatar.jpg', '1', '18.3');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('48', 'vilkul', 'Ruslan', 'Vilkul', '43', 'male', 'heterosexual', '$bio',
+		        VALUES ('48', 'vilkul', 'Ruslan', 'Vilkul', '1977-09-12', 'male', 'heterosexual', '$bio',
 		                'images/profiles/vilkul/avatar.jpg', '1', '23.7');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('49', 'shar', 'Anatolii', 'Sharii', '42', 'male', 'heterosexual', '$bio',
+		        VALUES ('49', 'shar', 'Anatolii', 'Sharii', '1978-02-23', 'male', 'heterosexual', '$bio',
 		                'images/profiles/shar/avatar.jpg', '1', '20.0');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('50', 'zhan', 'Zhan', 'Belenyuk', '29', 'male', 'heterosexual', '$bio',
+		        VALUES ('50', 'zhan', 'Zhan', 'Belenyuk', '1990-09-22', 'male', 'heterosexual', '$bio',
 		                'images/profiles/zhan/avatar.jpg', '1', '20.4');    
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('51', 'blackfire', 'Oleksii', 'Dmitrenko', '30', 'male', 'heterosexual', '$bio',
+		        VALUES ('51', 'blackfire', 'Oleksii', 'Dmitrenko', '1988-11-16', 'male', 'heterosexual', '$bio',
 		                'images/profiles/blackfire/avatar.jpg', '1', '27.3'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('52', 'belka', 'Dmitrii', 'Belchenko', '30', 'male', 'heterosexual', '$bio',
+		        VALUES ('52', 'belka', 'Dmitrii', 'Belchenko', '1989-02-22', 'male', 'heterosexual', '$bio',
 		                'images/profiles/belka/avatar.jpg', '1', '77.3');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('53', 'rusik', 'Ruslan', 'Zshmachenko', '30', 'male', 'heterosexual', '$bio',
+		        VALUES ('53', 'rusik', 'Ruslan', 'Zshmachenko', '1989-03-12', 'male', 'heterosexual', '$bio',
 		                'images/profiles/rusik/avatar.jpg', '1', '28.9');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('54', 'beatmaker', 'Denis', 'Kuszhelnii', '29', 'male', 'heterosexual', '$bio',
+		        VALUES ('54', 'beatmaker', 'Denis', 'Kuszhelnii', '1989-12-07', 'male', 'heterosexual', '$bio',
 		                'images/profiles/beatmaker/avatar.jpg', '1', '37.3'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('55', 'mordar', 'Oleh', 'Mordachev', '29', 'male', 'heterosexual', '$bio',
+		        VALUES ('55', 'mordar', 'Oleh', 'Mordachev', '1990-09-30', 'male', 'heterosexual', '$bio',
 		                'images/profiles/mordar/avatar.jpg', '1', '57.3');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('56', 'serg', 'Sergey', 'Morshin', '32', 'male', 'heterosexual', '$bio',
+		        VALUES ('56', 'serg', 'Sergey', 'Morshin', '1986-09-06', 'male', 'heterosexual', '$bio',
 		                'images/profiles/serg/avatar.jpg', '1', '96.3');    
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('57', 'bard', 'Sergey', 'Bardachenko', '29', 'male', 'heterosexual', '$bio',
+		        VALUES ('57', 'bard', 'Sergey', 'Bardachenko', '1989-12-22', 'male', 'heterosexual', '$bio',
 		                'images/profiles/bard/avatar.jpg', '1', '44.5');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('58', 'dminakov', 'Denis', 'Minakov', '27', 'male', 'heterosexual', '$bio', 
+		        VALUES ('58', 'dminakov', 'Denis', 'Minakov', '1992-10-22', 'male', 'heterosexual', '$bio', 
 		        		'images/profiles/dminakov/avatar.jpg', '1', '50.0');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('59', 'olrudenk', 'Oleksii', 'Rudenko', '30', 'male', 'heterosexual', '$bio',
+		        VALUES ('59', 'olrudenk', 'Oleksii', 'Rudenko', '1988-09-22', 'male', 'heterosexual', '$bio',
 		                'images/profiles/olrudenk/avatar.jpg', '1', '40.1');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('60', 'yora', 'Yura', 'Tigibko', '25', 'male', 'heterosexual','$bio',
+		        VALUES ('60', 'yora', 'Yura', 'Tigibko', '1994-09-24', 'male', 'heterosexual','$bio',
 		                'images/profiles/yora/avatar.jpg', '1', '13.0');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('61', 'bulb', 'Dmitrii', 'Bulbotenko', '30', 'male', 'heterosexual', '$bio',
+		        VALUES ('61', 'bulb', 'Dmitrii', 'Bulbotenko', '1987-05-15', 'male', 'heterosexual', '$bio',
 		                'images/profiles/bulb/avatar.jpg', '1', '41.2');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('62', 'ramzes', 'Roma', 'Tkachenko', '30', 'male', 'heterosexual', '$bio',
+		        VALUES ('62', 'ramzes', 'Roma', 'Tkachenko', '1987-05-16', 'male', 'heterosexual', '$bio',
 		                'images/profiles/ramzes/avatar.jpg', '1', '17.7');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('63', 'baboshka', 'Dmitrii', 'Baboshkin', '30', 'male', 'heterosexual', '$bio',
+		        VALUES ('63', 'baboshka', 'Dmitrii', 'Baboshkin', '1987-07-15', 'male', 'heterosexual', '$bio',
 		                'images/profiles/baboshka/avatar.jpg', '1', '20.1');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('64', 'wrestler', 'Maksim', 'Goncharenko', '28', 'male', 'heterosexual', '$bio',
+		        VALUES ('64', 'wrestler', 'Maksim', 'Goncharenko', '1992-05-15', 'male', 'heterosexual', '$bio',
 		                'images/profiles/wrestler/avatar.jpg', '1', '9.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('65', 'rovnii', 'Yaroslav', 'Rovnii', '29', 'male', 'heterosexual', '$bio',
+		        VALUES ('65', 'rovnii', 'Yaroslav', 'Rovnii', '1989-12-15', 'male', 'heterosexual', '$bio',
 		                'images/profiles/rovnii/avatar.jpg', '1', '7.4');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('66', 'kiparis', 'Maksim', 'Kalinskii', '30', 'male', 'heterosexual', '$bio',
+		        VALUES ('66', 'kiparis', 'Maksim', 'Kalinskii', '1988-11-15', 'male', 'heterosexual', '$bio',
 		                'images/profiles/kiparis/avatar.jpg', '1', '27.4'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('67', 'gulechko', 'Sergii', 'Gulechko', '30', 'male', 'heterosexual', '$bio',
+		        VALUES ('67', 'gulechko', 'Sergii', 'Gulechko', '1988-12-13', 'male', 'heterosexual', '$bio',
 		                'images/profiles/gulechko/avatar.jpg', '1', '24.8');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('68', 'kaban', 'Ilya', 'Danyuk', '25', 'male', 'heterosexual', '$bio', 
+		        VALUES ('68', 'kaban', 'Ilya', 'Danyuk', '1994-09-17', 'male', 'heterosexual', '$bio', 
 		        		'images/profiles/kaban/avatar.jpg', '1', '33.6');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('69', 'sidor', 'Oleksii', 'Sirdorenko', '41', 'male', 'heterosexual', '$bio',
+		        VALUES ('69', 'sidor', 'Oleksii', 'Sirdorenko', '1978-04-07', 'male', 'heterosexual', '$bio',
 		                'images/profiles/sidor/avatar.jpg', '1', '44.1');
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('70', 'razumnii', 'Andrii', 'Razumnii', '42', 'male', 'heterosexual', '$bio',
+		        VALUES ('70', 'razumnii', 'Andrii', 'Razumnii', '1977-12-07', 'male', 'heterosexual', '$bio',
 		                'images/profiles/razumnii/avatar.jpg', '1', '78.5');    
 
 /*women*/
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, rating)
-		        VALUES ('71', 'cherry', 'Alexandra', 'Cherry', '25', 'female', 'heterosexual', '$bio',
+		        VALUES ('71', 'cherry', 'Alexandra', 'Cherry', '1993-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/cherry/avatar.jpg', '1',
 		                'images/profiles/cherry/photo1.jpg',
 		                'images/profiles/cherry/photo2.jpg', '64.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, rating)
-		        VALUES ('72', 'caroline', 'Carolina', 'Samsenko', '24', 'female', 'heterosexual', '$bio',
+		        VALUES ('72', 'caroline', 'Carolina', 'Samsenko', '1994-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/caroline/avatar.jpg', '1',
 		                'images/profiles/caroline/photo1.jpg', '34.4');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, rating)
-		        VALUES ('73', 'kichi', 'Lilly', 'Ambrusko', '30', 'female', 'heterosexual', '$bio',
+		        VALUES ('73', 'kichi', 'Lilly', 'Ambrusko', '1988-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/kichi/avatar.jpg', '1',
 		                'images/profiles/kichi/photo1.jpg', '44.4');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, photo3, photo4, rating)
-		        VALUES ('74', 'pretty', 'Annet', 'Dobkina', '41', 'female', 'heterosexual', '$bio',
+		        VALUES ('74', 'pretty', 'Annet', 'Dobkina', '1978-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/pretty/avatar.jpg', '1',
 		                'images/profiles/pretty/photo1.jpg',
 		                'images/profiles/pretty/photo2.jpg',
@@ -1160,570 +1160,570 @@
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, rating)
-		        VALUES ('75', 'tiny', 'Ella', 'Hmara', '37', 'female', 'heterosexual', '$bio',
+		        VALUES ('75', 'tiny', 'Ella', 'Hmara', '1981-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/tiny/avatar.jpg', '1',
 		                'images/profiles/tiny/photo1.jpg',
 		                'images/profiles/tiny/photo2.jpg', '44.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('76', 'sunny', 'Kate', 'Johnson', '35', 'female', 'heterosexual', '$bio',
+		        VALUES ('76', 'sunny', 'Kate', 'Johnson', '1984-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/sunny/avatar.jpg', '1', '13.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, rating)
-		        VALUES ('77', 'leonna', 'Leona', 'Klimchak', '44', 'female', 'heterosexual', '$bio',
+		        VALUES ('77', 'leonna', 'Leona', 'Klimchak', '1975-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/leonna/avatar.jpg', '1',
 		                'images/profiles/leonna/photo1.jpg',
 		                'images/profiles/leonna/photo2.jpg', '44.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, photo2, rating)
-		        VALUES ('78', 'chika', 'Lera', 'Illenko', '22', 'female', 'heterosexual', '$bio',
+		        VALUES ('78', 'chika', 'Lera', 'Illenko', '1998-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/chika/avatar.jpg', '1',
 		                'images/profiles/chika/photo1.jpg',
 		                'images/profiles/chika/photo2.jpg', '24.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, photo1, rating)
-		        VALUES ('79', 'love', 'Kseniya', 'Adamenko', '30', 'female', 'heterosexual', '$bio',
+		        VALUES ('79', 'love', 'Kseniya', 'Adamenko', '1988-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/love/avatar.jpg', '1',
 		                'images/profiles/love/photo1.jpg', '14.4');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('80', 'cloudy', 'Tanita', 'Kum', '56', 'female', 'heterosexual', '$bio', 
+		        VALUES ('80', 'cloudy', 'Tanita', 'Kum', '1963-06-07', 'female', 'heterosexual', '$bio', 
 		        		'images/profiles/cloudy/avatar.jpg', '1', '4.4');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('81', 'vika', 'Victoria', 'Bilenko', '28', 'female', 'heterosexual', '$bio',
+		        VALUES ('81', 'vika', 'Victoria', 'Bilenko', '1992-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/vika/avatar.jpg', '1', '31.9'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('82', 'samara', 'Samara', 'Morgan', '24', 'female', 'heterosexual', '$bio',
+		        VALUES ('82', 'samara', 'Samara', 'Morgan', '1995-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/samara/avatar.jpg', '1', '11.9');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('83', 'kitty', 'Kateryna', 'Rodchenko', '26', 'female', 'heterosexual', '$bio',
+		        VALUES ('83', 'kitty', 'Kateryna', 'Rodchenko', '1994-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/kitty/avatar.jpg', '1', '24.9'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('84', 'anna', 'Anna', 'Tomchuk', '27', 'female', 'heterosexual', '$bio',
+		        VALUES ('84', 'anna', 'Anna', 'Tomchuk', '1992-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/anna/avatar.jpg', '1', '40.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('85', 'kissa', 'Valya', 'Shomko', '30', 'female', 'heterosexual', '$bio',
+		        VALUES ('85', 'kissa', 'Valya', 'Shomko', '1988-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/kissa/avatar.jpg', '1', '10.2'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('86', 'catty', 'Nina', 'Alieva', '32', 'female', 'heterosexual', '$bio',
+		        VALUES ('86', 'catty', 'Nina', 'Alieva', '1986-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/catty/avatar.jpg', '1', '25.5'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('87', 'flower', 'Anabet', 'Kozachenko', '29', 'female', 'heterosexual', '$bio',
+		        VALUES ('87', 'flower', 'Anabet', 'Kozachenko', '1989-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/flower/avatar.jpg', '1', '14.7'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('88', 'igirl', 'Alisa', 'Moloyovich', '25', 'female', 'heterosexual', '$bio',
+		        VALUES ('88', 'igirl', 'Alisa', 'Moloyovich', '1992-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/igirl/avatar.jpg', '1', '70.5');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('89', 'cute', 'Ira', 'Titarenko', '22', 'female', 'heterosexual', '$bio',
+		        VALUES ('89', 'cute', 'Ira', 'Titarenko', '1997-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/cute/avatar.jpg', '1', '8.5');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('90', 'reddy', 'Valeria', 'Fuks', '32', 'female', 'heterosexual', '$bio',
+		        VALUES ('90', 'reddy', 'Valeria', 'Fuks', '1986-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/reddy/avatar.jpg', '1', '41.2');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('91', 'miumiu', 'Lida', 'Goloborodchenko', '44', 'female', 'heterosexual', '$bio',
+		        VALUES ('91', 'miumiu', 'Lida', 'Goloborodchenko', '1975-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/miumiu/avatar.jpg', '1', '45.2'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('92', 'murmur', 'Tanya', 'Morzeeva', '20', 'female', 'heterosexual', '$bio',
+		        VALUES ('92', 'murmur', 'Tanya', 'Morzeeva', '1999-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/murmur/avatar.jpg', '1', '78.7');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('93', 'hello', 'Olga', 'Kushmak', '29', 'female', 'heterosexual', '$bio',
+		        VALUES ('93', 'hello', 'Olga', 'Kushmak', '1990-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/hello/avatar.jpg', '1', '27.9');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('94', 'yours', 'Kateryna', 'Tarashanskaya', '30', 'female', 'heterosexual', '$bio',
+		        VALUES ('94', 'yours', 'Kateryna', 'Tarashanskaya', '1988-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/yours/avatar.jpg', '1', '10.2');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('95', 'little', 'Dariia', 'Ivanova', '32', 'female', 'heterosexual', '$bio',
+		        VALUES ('95', 'little', 'Dariia', 'Ivanova', '1986-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/little/avatar.jpg', '1', '50.2'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('96', 'potion', 'Anastasia', 'Ivleva', '35', 'female', 'heterosexual', '$bio',
+		        VALUES ('96', 'potion', 'Anastasia', 'Ivleva', '1984-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/potion/avatar.jpg', '1', '31.8');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('97', 'bird', 'Vika', 'Fomenko', '27', 'female', 'heterosexual', '$bio',
+		        VALUES ('97', 'bird', 'Vika', 'Fomenko', '1992-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/bird/avatar.jpg', '1', '64.6');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('98', 'confident', 'Victoria', 'Lotchuk', '29', 'female', 'heterosexual', '$bio',
+		        VALUES ('98', 'confident', 'Victoria', 'Lotchuk', '1990-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/confident/avatar.jpg', '1', '17.5');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('99', 'beloved', 'Alexandra', 'Titakova', '33', 'female', 'heterosexual', '$bio',
+		        VALUES ('99', 'beloved', 'Alexandra', 'Titakova', '1986-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/beloved/avatar.jpg', '1', '88.5'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('100', 'pet', 'Evgenia', 'Dobrovolskaya', '35', 'female', 'heterosexual', '$bio',
+		        VALUES ('100', 'pet', 'Evgenia', 'Dobrovolskaya', '1994-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/pet/avatar.jpg', '1', '11.2');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('101', 'petty', 'Jane', 'Lavrinets', '29', 'female', 'heterosexual', '$bio',
+		        VALUES ('101', 'petty', 'Jane', 'Lavrinets', '1990-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/petty/avatar.jpg', '1', '15.2');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('102', 'sexxxy', 'Elvira', 'Sexxxy', '35', 'female', 'heterosexual', '$bio',
+		        VALUES ('102', 'sexxxy', 'Elvira', 'Sexxxy', '1984-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/sexxxy/avatar.jpg', '1', '98.7');     
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('103', 'curl', 'Alina', 'Grosu', '28', 'female', 'heterosexual', '$bio',
+		        VALUES ('103', 'curl', 'Alina', 'Grosu', '1991-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/curl/avatar.jpg', '1', '25.0');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('104', 'wave', 'Tamara', 'Gurieva', '29', 'female', 'heterosexual', '$bio',
+		        VALUES ('104', 'wave', 'Tamara', 'Gurieva', '1989-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/wave/avatar.jpg', '1', '60.2');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('105', 'morning', 'Marina', 'Nakonechnaya', '30', 'female', 'heterosexual', '$bio',
+		        VALUES ('105', 'morning', 'Marina', 'Nakonechnaya', '1988-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/morning/avatar.jpg', '1', '20.5');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('106', 'evening', 'Kira', 'Ninova', '22', 'female', 'heterosexual', '$bio',
+		        VALUES ('106', 'evening', 'Kira', 'Ninova', '1997-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/evening/avatar.jpg', '1', '81.8'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('107', 'sunset', 'Zara', 'Fomenchenko', '35', 'female', 'heterosexual', '$bio',
+		        VALUES ('107', 'sunset', 'Zara', 'Fomenchenko', '1984-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/sunset/avatar.jpg', '1', '14.5');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('108', 'sun', 'Sofia', 'Dron', '27', 'female', 'heterosexual', '$bio',
+		        VALUES ('108', 'sun', 'Sofia', 'Dron', '1993-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/sun/avatar.jpg', '1', '77.5');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('109', 'sea', 'Sasha', 'Ivanko', '39', 'female', 'heterosexual', '$bio',
+		        VALUES ('109', 'sea', 'Sasha', 'Ivanko', '1979-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/sea/avatar.jpg', '1', '18.5');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('110', 'wild', 'Elena', 'Kiss', '42', 'female', 'heterosexual', '$bio',
+		        VALUES ('110', 'wild', 'Elena', 'Kiss', '1976-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/wild/avatar.jpg', '1', '31.1');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('111', 'wildy', 'Fiona', 'Lavrok', '34', 'female', 'heterosexual', '$bio',
+		        VALUES ('111', 'wildy', 'Fiona', 'Lavrok', '1985-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/wildy/avatar.jpg', '1', '25.2');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('112', 'tiger', 'Vera', 'Voichuk', '32', 'female', 'heterosexual', '$bio',
+		        VALUES ('112', 'tiger', 'Vera', 'Voichuk', '1987-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/tiger/avatar.jpg', '1', '18.7'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('113', 'puma', 'Veronika', 'Mumko', '36', 'female', 'heterosexual', '$bio',
+		        VALUES ('113', 'puma', 'Veronika', 'Mumko', '1983-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/puma/avatar.jpg', '1', '35.0');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('114', 'clever', 'Tatyana', 'Golovko', '45', 'female', 'heterosexual', '$bio',
+		        VALUES ('114', 'clever', 'Tatyana', 'Golovko', '1974-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/clever/avatar.jpg', '1', '16.2');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('115', 'krispi', 'Margo', 'Nakos', '51', 'female', 'heterosexual', '$bio',
+		        VALUES ('115', 'krispi', 'Margo', 'Nakos', '1968-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/krispi/avatar.jpg', '1', '7.5');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('116', 'kuki', 'Anna', 'Kovaleva', '21', 'female', 'heterosexual', '$bio',
+		        VALUES ('116', 'kuki', 'Anna', 'Kovaleva', '1998-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/kuki/avatar.jpg', '1', '89.8');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('117', 'shevy', 'Gina', 'Soloveeva', '25', 'female', 'heterosexual', '$bio',
+		        VALUES ('117', 'shevy', 'Gina', 'Soloveeva', '1993-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/shevy/avatar.jpg', '1', '34.5');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('118', 'compari', 'Sofia', 'Burbak', '27', 'female', 'heterosexual', '$bio',
+		        VALUES ('118', 'compari', 'Sofia', 'Burbak', '1991-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/compari/avatar.jpg', '1', '17.5');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('119', 'mara', 'Marina', 'Ivashevich', '30', 'female', 'heterosexual', '$bio',
+		        VALUES ('119', 'mara', 'Marina', 'Ivashevich', '1988-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/mara/avatar.jpg', '1', '38.5');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('120', 'martini', 'Galya', 'Onoprienko', '22', 'female', 'heterosexual', '$bio',
+		        VALUES ('120', 'martini', 'Galya', 'Onoprienko', '1998-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/martini/avatar.jpg', '1', '11.1'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('121', 'tiva', 'Malvina', 'Yakimchuk', '29', 'female', 'heterosexual', '$bio',
+		        VALUES ('121', 'tiva', 'Malvina', 'Yakimchuk', '1989-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/tiva/avatar.jpg', '1', '45.2');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('122', 'jodi', 'Liza', 'Loik', '19', 'female', 'heterosexual', '$bio',
+		        VALUES ('122', 'jodi', 'Liza', 'Loik', '2000-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/jodi/avatar.jpg', '1', '78.1'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('123', 'matilda', 'Matilda', 'Vovko', '26', 'female', 'heterosexual', '$bio',
+		        VALUES ('123', 'matilda', 'Matilda', 'Vovko', '1992-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/matilda/avatar.jpg', '1', '15.0');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('124', 'kilimondshara', 'Liza', 'Boyko', '40', 'female', 'heterosexual', '$bio',
+		        VALUES ('124', 'kilimondshara', 'Liza', 'Boyko', '1979-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/kilimondshara/avatar.jpg', '1', '26.2');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('125', 'bestgirlinyourlife', 'Anna', 'Radchenko', '21', 'female', 'heterosexual', '$bio',
+		        VALUES ('125', 'bestgirlinyourlife', 'Anna', 'Radchenko', '1999-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/bestgirlinyourlife/avatar.jpg', '1', '77.5');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('126', 'cabanga', 'Evelena', 'Hoienko', '23', 'female', 'heterosexual', '$bio',
+		        VALUES ('126', 'cabanga', 'Evelena', 'Hoienko', '1998-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/cabanga/avatar.jpg', '1', '19.8');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('127', 'shmoka', 'Yana', 'Solomko', '26', 'female', 'heterosexual', '$bio',
+		        VALUES ('127', 'shmoka', 'Yana', 'Solomko', '1992-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/shmoka/avatar.jpg', '1', '24.5'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('128', 'casatca', 'Laura', 'Bonitta', '25', 'female', 'heterosexual', '$bio',
+		        VALUES ('128', 'casatca', 'Laura', 'Bonitta', '1993-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/casatca/avatar.jpg', '1', '37.5');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('129', 'barcelona', 'Hanna', 'Africa', '32', 'female', 'heterosexual', '$bio',
+		        VALUES ('129', 'barcelona', 'Hanna', 'Africa', '1986-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/barcelona/avatar.jpg', '1', '58.9'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('130', 'cosmo', 'Jannet', 'Kovalchuk', '26', 'female', 'heterosexual', '$bio',
+		        VALUES ('130', 'cosmo', 'Jannet', 'Kovalchuk', '1992-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/cosmo/avatar.jpg', '1', '71.1');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('131', 'teva', 'Angelina', 'Yakumiv', '32', 'female', 'heterosexual', '$bio',
+		        VALUES ('131', 'teva', 'Angelina', 'Yakumiv', '1986-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/teva/avatar.jpg', '1', '15.2');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('132', 'monka', 'Inna', 'Martinyuk', '31', 'female', 'heterosexual', '$bio',
+		        VALUES ('132', 'monka', 'Inna', 'Martinyuk', '1987-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/monka/avatar.jpg', '1', '48.1');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('133', 'viva', 'Inga', 'Kumko', '30', 'female', 'heterosexual', '$bio',
+		        VALUES ('133', 'viva', 'Inga', 'Kumko', '1988-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/viva/avatar.jpg', '1', '65.0');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('134', 'cuttiest', 'Izabella', 'Dmutriv', '34', 'female', 'heterosexual', '$bio',
+		        VALUES ('134', 'cuttiest', 'Izabella', 'Dmutriv', '1985-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/cuttiest/avatar.jpg', '1', '26.1');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('135', 'light', 'Rita', 'Petrova', '22', 'female', 'heterosexual', '$bio',
+		        VALUES ('135', 'light', 'Rita', 'Petrova', '1997-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/light/avatar.jpg', '1', '17.5');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('136', 'cuba', 'Elza', 'Buzina', '25', 'female', 'heterosexual', '$bio',
+		        VALUES ('136', 'cuba', 'Elza', 'Buzina', '1994-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/cuba/avatar.jpg', '1', '39.2');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('137', 'kimi', 'Yanita', 'Solko', '29', 'female', 'heterosexual', '$bio',
+		        VALUES ('137', 'kimi', 'Yanita', 'Solko', '1990-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/kimi/avatar.jpg', '1', '34.5');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('138', 'enrose', 'Roza', 'Shneimann', '28', 'female', 'heterosexual', '$bio',
+		        VALUES ('138', 'enrose', 'Roza', 'Shneimann', '1991-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/enrose/avatar.jpg', '1', '87.5');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('139', 'tictac', 'Anna', 'Greckaya', '34', 'female', 'heterosexual', '$bio',
+		        VALUES ('139', 'tictac', 'Anna', 'Greckaya', '1986-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/tictac/avatar.jpg', '1', '18.9');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('140', 'miracle', 'Tata', 'Yurova', '31', 'female', 'heterosexual', '$bio',
+		        VALUES ('140', 'miracle', 'Tata', 'Yurova', '1987-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/miracle/avatar.jpg', '1', '21.1');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('141', 'fabious', 'Simona', 'Bushanina', '29', 'female', 'heterosexual', '$bio',
+		        VALUES ('141', 'fabious', 'Simona', 'Bushanina', '1990-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/fabious/avatar.jpg', '1', '19.2'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('142', 'beautiful', 'Yana', 'Sokolova', '37', 'female', 'heterosexual', '$bio',
+		        VALUES ('142', 'beautiful', 'Yana', 'Sokolova', '1982-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/beautiful/avatar.jpg', '1', '84.5'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('143', 'fancy', 'Vera', 'Logdanidi', '32', 'female', 'heterosexual', '$bio',
+		        VALUES ('143', 'fancy', 'Vera', 'Logdanidi', '1986-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/fancy/avatar.jpg', '1', '17.5');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('144', 'cozy', 'Monika', 'Belkova', '49', 'female', 'heterosexual', '$bio',
+		        VALUES ('144', 'cozy', 'Monika', 'Belkova', '1970-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/cozy/avatar.jpg', '1', '99.2');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('145', 'mummy', 'Snezhana', 'Didenko', '26', 'female', 'heterosexual', '$bio',
+		        VALUES ('145', 'mummy', 'Snezhana', 'Didenko', '1992-06-07', 'female', 'heterosexual', '$bio',
 		                'images/profiles/mummy/avatar.jpg', '1', '31.1');
 
 /*homo men*/
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('146', 'shiva', 'Edgar', 'Zaharov', '25', 'male', 'homosexual', '$bio',
+		        VALUES ('146', 'shiva', 'Edgar', 'Zaharov', '1993-06-07', 'male', 'homosexual', '$bio',
 		                'images/profiles/shiva/avatar.jpg', '1', '19.2');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('147', 'como', 'Sasha', 'Kupchenko', '28', 'male', 'homosexual', '$bio',
+		        VALUES ('147', 'como', 'Sasha', 'Kupchenko', '1991-06-07', 'male', 'homosexual', '$bio',
 		                'images/profiles/como/avatar.jpg', '1', '16.5');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('148', 'rapirus', 'Ehor', 'Shtutmann', '24', 'male', 'homosexual', '$bio',
+		        VALUES ('148', 'rapirus', 'Ehor', 'Shtutmann', '1994-06-07', 'male', 'homosexual', '$bio',
 		                'images/profiles/rapirus/avatar.jpg', '1', '17.7');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('149', 'komus', 'Lesha', 'Komarov', '27', 'male', 'homosexual', '$bio',
+		        VALUES ('149', 'komus', 'Lesha', 'Komarov', '1992-06-07', 'male', 'homosexual', '$bio',
 		                'images/profiles/komus/avatar.jpg', '1', '28.9');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('150', 'slaver', 'Serg', 'Yurov', '25', 'male', 'homosexual', '$bio',
+		        VALUES ('150', 'slaver', 'Serg', 'Yurov', '1994-06-07', 'male', 'homosexual', '$bio',
 		                'images/profiles/slaver/avatar.jpg', '1', '21.1');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('151', 'winner', 'Oleh', 'Kurtov', '29', 'male', 'homosexual', '$bio',
+		        VALUES ('151', 'winner', 'Oleh', 'Kurtov', '1990-06-07', 'male', 'homosexual', '$bio',
 		                'images/profiles/winner/avatar.jpg', '1', '19.9'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('152', 'sweetty', 'Sweet', 'Candy', '24', 'male', 'homosexual', '$bio',
+		        VALUES ('152', 'sweetty', 'Sweet', 'Candy', '1994-06-07', 'male', 'homosexual', '$bio',
 		                'images/profiles/sweetty/avatar.jpg', '1', '24.5'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('153', 'lover', 'Nikolya', 'Loshanskii', '22', 'male', 'homosexual', '$bio',
+		        VALUES ('153', 'lover', 'Nikolya', 'Loshanskii', '1997-06-07', 'male', 'homosexual', '$bio',
 		                'images/profiles/lover/avatar.jpg', '1', '17.5');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('154', 'carlos', 'Carlos', 'Robeev', '31', 'male', 'homosexual', '$bio',
+		        VALUES ('154', 'carlos', 'Carlos', 'Robeev', '1986-06-07', 'male', 'homosexual', '$bio',
 		                'images/profiles/carlos/avatar.jpg', '1', '24.2');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('155', 'shibu', 'Snezh', 'Didov', '26', 'male', 'homosexual', '$bio',
+		        VALUES ('155', 'shibu', 'Snezh', 'Didov', '1993-06-07', 'male', 'homosexual', '$bio',
 		                'images/profiles/shibu/avatar.jpg', '1', '31.1');
 
 /*homo women*/
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('156', 'marta', 'Toto', 'Iiova', '48', 'female', 'homosexual', '$bio',
+		        VALUES ('156', 'marta', 'Toto', 'Iiova', '1971-06-07', 'female', 'homosexual', '$bio',
 		                'images/profiles/marta/avatar.jpg', '1', '22.1');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('157', 'josse', 'Yanina', 'Sokolovko', '30', 'female', 'homosexual', '$bio',
+		        VALUES ('157', 'josse', 'Yanina', 'Sokolovko', '1988-06-07', 'female', 'homosexual', '$bio',
 		                'images/profiles/josse/avatar.jpg', '1', '14.5');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('158', 'liver', 'Linda', 'Kaufmann', '28', 'female', 'homosexual', '$bio',
+		        VALUES ('158', 'liver', 'Linda', 'Kaufmann', '1991-06-07', 'female', 'homosexual', '$bio',
 		                'images/profiles/liver/avatar.jpg', '1', '27.5');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('159', 'ammuse', 'The', 'Greatest', '30', 'female', 'homosexual', '$bio',
+		        VALUES ('159', 'ammuse', 'The', 'Greatest', '1988-06-07', 'female', 'homosexual', '$bio',
 		                'images/profiles/ammuse/avatar.jpg', '1', '18.9');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('160', 'constant', 'Olivia', 'Kuznecova', '28', 'female', 'homosexual', '$bio',
+		        VALUES ('160', 'constant', 'Olivia', 'Kuznecova', '1991-06-07', 'female', 'homosexual', '$bio',
 		                'images/profiles/constant/avatar.jpg', '1', '23.2');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('161', 'raptor', 'Juretta', 'Raptor', '26', 'female', 'homosexual', '$bio',
+		        VALUES ('161', 'raptor', 'Juretta', 'Raptor', '1992-06-07', 'female', 'homosexual', '$bio',
 		                'images/profiles/raptor/avatar.jpg', '1', '29.2'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('162', 'lillo', 'Anastasia', 'Sopko', '27', 'female', 'homosexual', '$bio',
+		        VALUES ('162', 'lillo', 'Anastasia', 'Sopko', '1991-06-07', 'female', 'homosexual', '$bio',
 		                'images/profiles/lillo/avatar.jpg', '1', '14.5'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('163', 'quma', 'Vera', 'Shneev', '32', 'female', 'homosexual', '$bio',
+		        VALUES ('163', 'quma', 'Vera', 'Shneev', '1986-06-07', 'female', 'homosexual', '$bio',
 		                'images/profiles/quma/avatar.jpg', '1', '27.5');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('164', 'shiny', 'Tatyana', 'Baranina', '19', 'female', 'homosexual', '$bio',
+		        VALUES ('164', 'shiny', 'Tatyana', 'Baranina', '2000-09-17', 'female', 'homosexual', '$bio',
 		                'images/profiles/shiny/avatar.jpg', '1', '10.2');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('165', 'bubble', 'Olha', 'Kupova', '46', 'female', 'homosexual', '$bio',
+		        VALUES ('165', 'bubble', 'Olha', 'Kupova', '1973-02-13', 'female', 'homosexual', '$bio',
 		                'images/profiles/bubble/avatar.jpg', '1', '11.1');
 /*bi men*/
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('166', 'corma', 'Andrew', 'Petrov', '25', 'male', 'bisexual', '$bio',
+		        VALUES ('166', 'corma', 'Andrew', 'Petrov', '1993-10-07', 'male', 'bisexual', '$bio',
 		                'images/profiles/corma/avatar.jpg', '1', '22.1');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('167', 'parabelum', 'Sergeii', 'Rudenko', '28', 'male', 'bisexual', '$bio',
+		        VALUES ('167', 'parabelum', 'Sergeii', 'Rudenko', '1991-06-07', 'male', 'bisexual', '$bio',
 		                'images/profiles/parabelum/avatar.jpg', '1', '14.5');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('168', 'kuzha', 'Ivan', 'Kuzha', '28', 'male', 'bisexual', '$bio',
+		        VALUES ('168', 'kuzha', 'Ivan', 'Kuzha', '1991-06-07', 'male', 'bisexual', '$bio',
 		                'images/profiles/kuzha/avatar.jpg', '1', '27.5');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('169', 'snowden', 'Snow', 'Man', '25', 'male', 'bisexual', '$bio',
+		        VALUES ('169', 'snowden', 'Snow', 'Man', '1993-06-07', 'male', 'bisexual', '$bio',
 		                'images/profiles/snowden/avatar.jpg', '1', '18.9');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('170', 'everest', 'Ivor', 'Kuznecov', '30', 'male', 'bisexual', '$bio',
+		        VALUES ('170', 'everest', 'Ivor', 'Kuznecov', '1988-06-07', 'male', 'bisexual', '$bio',
 		                'images/profiles/everest/avatar.jpg', '1', '23.2');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('171', 'rapt', 'Oleksii', 'Jurko', '26', 'male', 'bisexual', '$bio',
+		        VALUES ('171', 'rapt', 'Oleksii', 'Jurko', '1992-06-07', 'male', 'bisexual', '$bio',
 		                'images/profiles/rapt/avatar.jpg', '1', '29.2'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('172', 'hovard', 'Hovard', 'Shusev', '32', 'male', 'bisexual', '$bio',
+		        VALUES ('172', 'hovard', 'Hovard', 'Shusev', '1986-06-07', 'male', 'bisexual', '$bio',
 		                'images/profiles/hovard/avatar.jpg', '1', '14.5'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('173', 'harry', 'Harry', 'Prince', '22', 'male', 'bisexual', '$bio',
+		        VALUES ('173', 'harry', 'Harry', 'Prince', '1998-06-07', 'male', 'bisexual', '$bio',
 		                'images/profiles/harry/avatar.jpg', '1', '27.5');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('174', 'joom', 'Vitalii', 'Baranin', '33', 'male', 'bisexual', '$bio',
+		        VALUES ('174', 'joom', 'Vitalii', 'Baranin', '1986-06-07', 'male', 'bisexual', '$bio',
 		                'images/profiles/joom/avatar.jpg', '1', '10.2');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('175', 'bubba', 'Yura', 'Konopalcev', '34', 'male', 'bisexual', '$bio',
+		        VALUES ('175', 'bubba', 'Yura', 'Konopalcev', '1985-06-07', 'male', 'bisexual', '$bio',
 		                'images/profiles/bubba/avatar.jpg', '1', '11.1');
 /*bi women*/
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('176', 'bibba', 'Julia', 'Presnicka', '30', 'female', 'bisexual', '$bio',
+		        VALUES ('176', 'bibba', 'Julia', 'Presnicka', '1988-06-07', 'female', 'bisexual', '$bio',
 		                'images/profiles/bibba/avatar.jpg', '1', '22.1');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('177', 'jorra', 'Yana', 'Rudenko', '22', 'female', 'bisexual', '$bio',
+		        VALUES ('177', 'jorra', 'Yana', 'Rudenko', '1998-06-07', 'female', 'bisexual', '$bio',
 		                'images/profiles/jorra/avatar.jpg', '1', '14.5');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('178', 'komo', 'Anastasia', 'Ludenko', '25', 'female', 'bisexual', '$bio',
+		        VALUES ('178', 'komo', 'Anastasia', 'Ludenko', '1993-06-07', 'female', 'bisexual', '$bio',
 		                'images/profiles/komo/avatar.jpg', '1', '27.5');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('179', 'lerro', 'Lera', 'Gosmann', '31', 'female', 'bisexual', '$bio',
+		        VALUES ('179', 'lerro', 'Lera', 'Gosmann', '1987-06-07', 'female', 'bisexual', '$bio',
 		                'images/profiles/lerro/avatar.jpg', '1', '18.9');  
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('180', 'petra', 'Petra', 'Livadia', '28', 'female', 'bisexual', '$bio',
+		        VALUES ('180', 'petra', 'Petra', 'Livadia', '1991-06-07', 'female', 'bisexual', '$bio',
 		                'images/profiles/petra/avatar.jpg', '1', '23.2');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('181', 'rapira', 'Zarina', 'Star', '29', 'female', 'bisexual', '$bio',
+		        VALUES ('181', 'rapira', 'Zarina', 'Star', '1989-06-07', 'female', 'bisexual', '$bio',
 		                'images/profiles/rapira/avatar.jpg', '1', '29.2'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('182', 'poppy', 'Dariia', 'Jurkevich', '31', 'female', 'bisexual', '$bio',
+		        VALUES ('182', 'poppy', 'Dariia', 'Jurkevich', '1987-06-07', 'female', 'bisexual', '$bio',
 		                'images/profiles/poppy/avatar.jpg', '1', '14.5'); 
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('183', 'titta', 'Tatyana', 'Shom', '24', 'female', 'bisexual', '$bio',
+		        VALUES ('183', 'titta', 'Tatyana', 'Shom', '1996-06-07', 'female', 'bisexual', '$bio',
 		                'images/profiles/titta/avatar.jpg', '1', '27.5');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('184', 'lossy', 'Lara', 'Ivankov', '23', 'female', 'bisexual', '$bio',
+		        VALUES ('184', 'lossy', 'Lara', 'Ivankov', '1997-06-07', 'female', 'bisexual', '$bio',
 		                'images/profiles/lossy/avatar.jpg', '1', '10.2');   
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('185', 'himma', 'Ira', 'Korneev', '26', 'female', 'bisexual', '$bio',
+		        VALUES ('185', 'himma', 'Ira', 'Korneev', '1992-06-07', 'female', 'bisexual', '$bio',
 		                'images/profiles/himma/avatar.jpg', '1', '11.1');"
 			);
 	define('PROFILES', $profiles);

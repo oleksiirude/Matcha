@@ -5,6 +5,7 @@
     use App\Profile;
     use App\User;
     use App\Location;
+    use Carbon\Carbon;
     use Illuminate\Http\Request;
     
     class SearchController extends Controller {
@@ -70,7 +71,7 @@
             $profiles = TagController::findTagMatches($profiles, $this->profile->user_id);
             $profiles = SortController::sortByDefault($profiles);
             
-            return $this->addInfoAboutActivityAndLocation($profiles);
+            return $this->prepareCorrectProfileDataForView($profiles);
         }
         
         public function getMatchedProfilesForClassics() {
@@ -142,7 +143,7 @@
             return $clean_profiles;
         }
         
-        public function addInfoAboutActivityAndLocation($profiles) {
+        public function prepareCorrectProfileDataForView($profiles) {
             $i = 0;
             foreach ($profiles as $profile) {
                 $status = User::find($profile['user_id']);
@@ -160,6 +161,7 @@
                 else
                     $profile['allow'] = false;
                 $profile['rating'] = (string)$profile['rating'];
+                $profile['age'] = Carbon::parse($profile['age'])->age;
                 $profiles[$i] = $profile;
                 $i++;
             }

@@ -64,6 +64,7 @@
             $profile['liked_me'] = $this->checkIfLikedMe($aim, $auth);
             $profile['blocked'] = $this->checkIfBlocked($aim, $auth);
             $profile['connected'] = $this->checkIfConnected($aim, $auth);
+            $profile->age = Carbon::parse($profile->age)->age;
             
             return $profile;
         }
