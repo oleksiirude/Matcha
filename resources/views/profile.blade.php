@@ -112,6 +112,15 @@
                                                 <gender-component value="{{ $profile->gender }}" name="gender"></gender-component>
                                             </form>
                                         </div>
+
+                                        <p><b>Age</b>:
+                                            @if($profile->age)
+                                                {{ $profile->age }} years
+                                            @else
+                                                isn't specified
+                                            @endif
+                                        </p>
+
                                         <div>
                                             <form action="{{ route('set.age') }}" method="POST" id="age_form">
                                                 @csrf

@@ -1,17 +1,17 @@
 <?php
-
     namespace App\Http\Controllers;
     
     use Auth;
     use App\Profile;
     use App\User;
     use App\Location;
+    use Carbon\Carbon;
     use Illuminate\Http\Request;
-
-    class SuggestionController extends Controller {
+    
+    class SearchController extends Controller {
         
         public $profile;
-    
+        
         public function __construct()
         {
             $this->middleware(function ($request, $next) {
@@ -19,14 +19,14 @@
                 return $next($request);
             });
         }
-    
+        
         public function show() {
             $profiles = $this->getFineDistanceView(
-                    $this->findProfilesByBaseCriterias());
+                $this->findProfilesByBaseCriterias());
             
             return view('searching-profiles.suggestions', ['profiles' => $profiles]);
         }
-    
+        
         public function sort(Request $request) {
             $this->validateSortRequest($request->all());
             
@@ -36,10 +36,10 @@
                 $sorter = new SortController($profiles, $request->all());
                 $profiles = $this->getFineDistanceView($sorter->sortMain());
             }
-       
+            
             if ($request->get('sort') === 'age')
                 $profiles = $this->putWithoutAgeDown($profiles);
-            
+
 //          return response()->json(['result' => $profiles]);
             return view('searching-profiles.suggestions', ['profiles' => $profiles]);
         }
@@ -49,14 +49,14 @@
                 abort(419);
             
             if (!preg_match('/^age|distance|rating|interests$/', $request['sort'])
-                    || !preg_match('/^ascending|descending$/', $request['order']))
+                || !preg_match('/^ascending|descending$/', $request['order']))
                 abort(419);
         }
         
-        public function findProfilesByBaseCriterias() {
+        public function findProfilesByBaseCriterias($radius = null) {
             if (!$this->profile->preferences)
                 $this->profile->preferences = 'bisexual';
-    
+            
             if ($this->profile->preferences === 'heterosexual')
                 $profiles = $this->getMatchedProfilesForClassics();
             elseif ($this->profile->preferences === 'homosexual')
@@ -67,67 +67,67 @@
             if (!count($profiles))
                 return $profiles;
             
-            $profiles = LocationController::filterByDistance($profiles, $this->profile->user_id);
+            $profiles = LocationController::filterByDistance($profiles, $this->profile->user_id, $radius);
             $profiles = TagController::findTagMatches($profiles, $this->profile->user_id);
             $profiles = SortController::sortByDefault($profiles);
-           
-            return $this->addInfoAboutActivityAndLocation($profiles);
+            
+            return $this->prepareCorrectProfileDataForView($profiles);
         }
         
         public function getMatchedProfilesForClassics() {
             $profiles = Profile::where('gender', '!=', $this->profile->gender)
-                                    ->where('preferences', '!=', 'homosexual')
-                                    ->get();
+                ->where('preferences', '!=', 'homosexual')
+                ->get();
             
             return $this->removeBlockedProfiles($profiles);
         }
-    
+        
         public function getMatchedProfilesForHomosexuals() {
             $profiles = Profile::where('gender', $this->profile->gender)
-                                    ->where('user_id', '!=', $this->profile->user_id)
-                                    ->where('preferences', $this->profile->preferences)
-                                    ->get();
-    
+                ->where('user_id', '!=', $this->profile->user_id)
+                ->where('preferences', $this->profile->preferences)
+                ->get();
+            
             return $this->removeBlockedProfiles($profiles);
         }
-    
+        
         public function getMatchedProfilesForBisexuals() {
             $bisexuals = Profile::where('preferences', $this->profile->preferences)
-                                    ->where('user_id', '!=', $this->profile->user_id)
-                                    ->get();
+                ->where('user_id', '!=', $this->profile->user_id)
+                ->get();
             
             if ($this->profile->gender === 'male') {
                 $men = Profile::where('preferences', 'homosexual')
-                                    ->where('gender', 'male')
-                                    ->where('user_id', '!=', $this->profile->user_id)
-                                    ->get();
+                    ->where('gender', 'male')
+                    ->where('user_id', '!=', $this->profile->user_id)
+                    ->get();
                 $women = Profile::where('preferences', 'heterosexual')
-                                    ->where('gender', 'female')
-                                    ->get();
+                    ->where('gender', 'female')
+                    ->get();
             }
             else {
                 $men = Profile::where('preferences', 'heterosexual')
-                                    ->where('gender', 'male')
-                                    ->get();
+                    ->where('gender', 'male')
+                    ->get();
                 $women = Profile::where('preferences', 'homosexual')
-                                    ->where('gender', 'female')
-                                    ->where('user_id', '!=', $this->profile->user_id)
-                                    ->get();
+                    ->where('gender', 'female')
+                    ->where('user_id', '!=', $this->profile->user_id)
+                    ->get();
             }
-    
+            
             return $this->constructMatchedProfiles($bisexuals, $men, $women);
         }
         
         public function constructMatchedProfiles($bisexuals = null, $men = null, $women = null) {
             $profiles = collect();
-    
+            
             foreach ($bisexuals as $cell)
                 $profiles[] = $cell;
             foreach ($men as $cell)
                 $profiles[] = $cell;
             foreach ($women as $cell)
                 $profiles[] = $cell;
-    
+            
             return $this->removeBlockedProfiles($profiles);
         }
         
@@ -136,14 +136,14 @@
             
             foreach ($profiles as $profile) {
                 if (!$this->checkIfBlocked($profile->user_id, $this->profile->user_id)
-                                                            && $profile->avatar_uploaded)
+                    && $profile->avatar_uploaded)
                     $clean_profiles[] = $profile;
             }
             
             return $clean_profiles;
         }
         
-        public function addInfoAboutActivityAndLocation($profiles) {
+        public function prepareCorrectProfileDataForView($profiles) {
             $i = 0;
             foreach ($profiles as $profile) {
                 $status = User::find($profile['user_id']);
@@ -161,6 +161,7 @@
                 else
                     $profile['allow'] = false;
                 $profile['rating'] = (string)$profile['rating'];
+                $profile['age'] = Carbon::parse($profile['age'])->age;
                 $profiles[$i] = $profile;
                 $i++;
             }
@@ -169,6 +170,7 @@
         }
         
         public function getFineDistanceView($profiles) {
+            $profiles = $profiles->values()->all();
             $i = 0;
             foreach ($profiles as $profile) {
                 if ($profile['distance'] <= 10)
@@ -182,13 +184,12 @@
                 $profiles[$i] = $profile;
                 $i++;
             }
-            
             return $profiles;
         }
-    
+        
         protected function putWithoutAgeDown($profiles) {
             $box = collect();
-        
+            
             $i = 0;
             foreach ($profiles as $item) {
                 if (!$item['age']) {
@@ -197,13 +198,13 @@
                 }
                 $i++;
             }
-        
+            
             $i = 0;
             while ($i < count($box)) {
                 $profiles[] = $box[$i];
                 $i++;
             }
-        
+            
             return $profiles;
         }
     }

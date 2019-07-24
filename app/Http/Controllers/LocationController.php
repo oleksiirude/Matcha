@@ -9,7 +9,9 @@
 
     class LocationController extends Controller {
         
-        public static function filterByDistance($profiles, $id) {
+        public static function filterByDistance($profiles, $id, $radius = null) {
+            if (!$radius)
+                $radius = 300000; // default radius -> 30km
             $auth = Location::find($id);
             
             $nearby = collect();
@@ -24,8 +26,7 @@
                 
                 $distance = (int)$distance->getLength(new Haversine());
                 
-                // default search distance -> up to 10km
-                if ($distance <= 10000) {
+                if ($distance <= $radius) {
                     $profile['distance'] = $distance;
                     $nearby[] = $profile;
                 }
