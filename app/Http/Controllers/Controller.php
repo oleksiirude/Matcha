@@ -192,6 +192,6 @@
 
         public function ifAvatarUploaded() {
             $uploaded = Profile::find(Auth::id());
-            return ($uploaded->avatar_uploaded);
+            return $uploaded->avatar_uploaded;
         }
     }
