@@ -47,7 +47,13 @@
                 }
             },
             editPassword: function (name) {
-                document.getElementById('change_password_div').hidden = false;
+                if (document.getElementById('change_password_div').hidden == true)
+                   document.getElementById('change_password_div').hidden = false;
+                else {
+                    document.getElementById('change_password_div').hidden = true;
+                    document.getElementById(this.name + '_error_msg').innerHTML = '';
+                    document.getElementById(this.name + '_error_msg').hidden = true;
+                }
             },
             editInput: function (name) {
 

@@ -127,9 +127,13 @@
 
                             <p><b>Sexual preferences:</b> {{ $profile->preferences }}</p>
 
+                            <p><b>Age</b>:
                                 @if($profile->age)
-                                    <p><b>Age:</b> {{ $profile->age }}</p>
+                                    {{ $profile->age }} years
+                                @else
+                                    isn't specified
                                 @endif
+                            </p>
 
                             @if($profile->bio)
                                 <p><b>Bio:</b> {{ $profile->bio }}</p>

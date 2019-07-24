@@ -109,22 +109,22 @@
                                             @csrf
                                             @method('PUT')
 
-                                            <gender-component value="{{ $profile->gender }}" name="gender"></gender-component>
-                                        </form>
-                                    </div>
-                                    <div>
-                                        <form action="{{ route('set.age') }}" method="POST" id="age_form">
-                                            @csrf
-                                            @method('PUT')
+                                                <gender-component value="{{ $profile->gender }}" name="gender"></gender-component>
+                                            </form>
+                                        </div>
+                                        <div>
+                                            <form action="{{ route('set.age') }}" method="POST" id="date_form">
+                                                @csrf
+                                                @method('PUT')
 
-                                            <ed_in_lbl-component name="age" value="{{ $profile->age }}" label="Age:" id_btn="age_btn" url="/set/age"></ed_in_lbl-component>
-                                        </form>
-                                        <span id="age_error_msg" class="error_msg" hidden></span>
-                                    </div>
-                                    <div>
-                                        <form action="{{ route('set.preferences') }}" method="POST" id="preferences_form">
-                                            @csrf
-                                            @method('PUT')
+                                                <edit_age-component name="date" label="Date of birth:" id_btn="date_btn" url="{{ route('set.age') }}" value="{{ $profile->age }}"></edit_age-component>
+                                            </form>
+                                            <span id="date_error_msg" class="error_msg" hidden></span>
+                                        </div>
+                                        <div>
+                                            <form action="{{ route('set.preferences') }}" method="POST" id="preferences_form">
+                                                @csrf
+                                                @method('PUT')
 
                                             <preferences-component value="{{ $profile->preferences }}" name="preferences"></preferences-component>
                                         </form>
