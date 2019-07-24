@@ -21,19 +21,28 @@
         }
         
         public function show() {
-            $profiles = $this->getFineDistanceView(
-                $this->findProfilesByBaseCriterias());
+            $profiles = $this->findProfilesByBaseCriterias();
+            
+            $profiles = $this->prepareCorrectProfileDataForView(
+                $this->getFineDistanceView(
+                    SortController::sortByDefault($profiles))
+            );
             
             return view('searching-profiles.suggestions', ['profiles' => $profiles]);
         }
         
-        public function sort(Request $request) {
-            $this->validateSortRequest($request->all());
+        public function findFilterSort(Request $request) {
+            $params = $request->all();
             
-            $profiles = $this->findProfilesByBaseCriterias();
+            $this->validateRequest($params);
+            
+            $profiles = $this->findProfilesByBaseCriterias($params['distance_to'] * 1000);
+            
+            // MAKE FILTERING!
+            $profiles = FilterController::makeFiltering($profiles, $params);
             
             if (count($profiles)) {
-                $sorter = new SortController($profiles, $request->all());
+                $sorter = new SortController($profiles, $params);
                 $profiles = $this->getFineDistanceView($sorter->sortMain());
             }
             
@@ -44,13 +53,27 @@
             return view('searching-profiles.suggestions', ['profiles' => $profiles]);
         }
         
-        public function validateSortRequest($request) {
-            if (!isset($request['sort']) || !isset($request['order']))
-                abort(419);
+        public function validateRequest($params) {
+            $data = [
+                  0 => "/^age_from$/&/^[0-9]{1,3}$/",
+                  1 => "/^age_to$/&/^[0-9]{1,3}$/",
+                  2 => "/^rating_from$/&/^[0-9]{1,3}$/",
+                  3 => "/^rating_to$/&/^[0-9]{1,3}$/",
+                  4 => "/^distance_from$/&/^[0-9]{1,5}$/",
+                  5 => "/^distance_to$/&/^[0-9]{1,5}$/",
+                  6 => "/^interests_from$/&/^[0-9]{1,2}$/",
+                  7 => "/^interests_to$/&/^[0-9]{1,2}$/",
+                  8 => "/^sort$/&/^age|distance|rating|interests$/",
+                  9 => "/^order$/&/^ascending|descending$/"
+            ];
             
-            if (!preg_match('/^age|distance|rating|interests$/', $request['sort'])
-                || !preg_match('/^ascending|descending$/', $request['order']))
-                abort(419);
+            $i = 0;
+            foreach ($params as $title => $value) {
+                $regexps = explode('&', $data[$i]);
+                if (!preg_match($regexps[0], $title) || !preg_match($regexps[1], $value))
+                    abort(419);
+                $i++;
+            }
         }
         
         public function findProfilesByBaseCriterias($radius = null) {
@@ -69,9 +92,8 @@
             
             $profiles = LocationController::filterByDistance($profiles, $this->profile->user_id, $radius);
             $profiles = TagController::findTagMatches($profiles, $this->profile->user_id);
-            $profiles = SortController::sortByDefault($profiles);
             
-            return $this->prepareCorrectProfileDataForView($profiles);
+            return $profiles;
         }
         
         public function getMatchedProfilesForClassics() {
@@ -177,10 +199,8 @@
                     $profile['distance'] = 'right behind you!';
                 elseif ($profile['distance'] < 1000)
                     $profile['distance'] = 'about ' . $profile['distance'] . ' metres from you';
-                elseif ($profile['distance'] / 1000 === 1)
-                    $profile['distance'] = 'about ' . '1 km from you';
                 else
-                    $profile['distance'] = 'about ' . round($profile['distance'] / 1000) . ' km from you';
+                    $profile['distance'] =  round($profile['distance'] / 1000, 2) . ' km from you';
                 $profiles[$i] = $profile;
                 $i++;
             }

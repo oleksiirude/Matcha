@@ -73,7 +73,7 @@
     // SUGGESTIONS
     Route::group(['prefix' => '/suggestions', 'middleware' => 'verified'], function () {
         Route::get('/', 'SearchController@show')->name('suggestions');
-        Route::get('/sort', 'SearchController@sort')->name('sort');
+        Route::get('/research', 'SearchController@findFilterSort')->name('find.filter.sort');
         Route::get('/filter-age', 'FilterController@filterByAge')->name('filter.age');
         Route::get('/filter-rating', 'FilterController@filterByRating')->name('filter.rating');
         Route::get('/filter-distance', 'FilterController@filterBydistance')->name('filter.distance');
