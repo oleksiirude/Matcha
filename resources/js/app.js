@@ -37,6 +37,7 @@ Vue.component('tagsdelete-component', require('./components/profile/tags/Tagsdel
 Vue.component('tagsadd-component', require('./components/profile/tags/AddtagsComponent').default);
 Vue.component('gender-component', require('./components/profile/GenderComponent').default);
 Vue.component('preferences-component', require('./components/profile/PreferencesComponent').default);
+Vue.component('action-component', require('./components/users/ActionComponent').default);
 Vue.component('footer-component', require('./components/layots/FooterComponent').default);
 
 /**

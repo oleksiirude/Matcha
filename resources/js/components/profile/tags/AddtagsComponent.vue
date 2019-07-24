@@ -113,7 +113,7 @@
                             update_fill_profile(string.empty);
                             ul.appendChild(li);
                             li.onclick = function () {
-                                this.delete_tag(text)
+                                delete_tag(text)
                             };
                         } else if (string.result == false) {
 
