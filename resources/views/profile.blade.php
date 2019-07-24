@@ -131,40 +131,27 @@
                                             <span id="preferences_error_msg" class="error_msg" hidden></span>
                                         </div>
                                         <div>
-                                            <form>
-                                                <label for="">Country:</label>
-                                                <input type="text" id="" name="" value="{{ $profile->country }}" class="profiledata">
+                                            <form id="country_form">
+                                                <label for="country">Country:</label>
+                                                <input type="text" id="country" name="country" value="{{ $profile->country }}" class="profiledata">
                                             </form>
                                         </div>
                                         <div>
-                                            <form>
-                                                <label for="">City:</label>
-                                                <input type="text" id="" name="" value="{{ $profile->city }}" class="profiledata">
+                                            <form id="city_form">
+                                                <label for="city">City:</label>
+                                                <input type="text" id="city" name="city" value="{{ $profile->city }}" class="profiledata">
                                             </form>
                                         </div>
                                         <div>
-                                            <p id="interests_tags_title">Interests:</p>
+                                            <span id="interests_tags_title">Interests:</span>
+                                            <img src="{{asset('/images/service/plus.png')}}" onclick="show_element('add_interests_div', 'tag_error_msg')" title="add interests" alt="add interests" id="add_interests_img">
                                             <ul id="interests_tags" type="#">
                                             @foreach($profile->interests as $interest)
                                                     <tagsdelete-component value="{{ $interest->tag }}" csrf="{{ csrf_token() }}" url="{{ route('delete.tag', $interest->tag) }}" id_li="{{ $interest->tag }}_li" id_form="{{ $interest->tag }}_form"></tagsdelete-component>
                                             @endforeach
                                             </ul>
-                                            <img src="{{asset('/images/service/plus.png')}}" onclick="show_element('add_interests_div')" title="add interests" alt="add interests" id="add_interests_img">
-                                            <div id="add_interests_div" hidden>
-                                                <form action="{{ route('set.tag') }}" method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-
-                                                    <input type="text" name="tag">
-                                                    <button type="submit">add interest</button>
-                                                </form>
-                                                <form action="{{ route('find.tag.matches') }}" method="POST">
-                                                    @csrf
-
-                                                    <input type="text" name="piece">
-                                                    <button type="submit">find matches</button>
-                                                </form>
-                                            </div>
+                                            <tagsadd-component csrf="{{ csrf_token() }}" url="{{ route('set.tag') }}" urlmatch="{{ route('find.tag.matches') }}" name="tag"></tagsadd-component>
+                                            <span id="tag_error_msg" class="error_msg" hidden></span>
                                         </div>
                                         <div id="user_bio">
                                             <p>

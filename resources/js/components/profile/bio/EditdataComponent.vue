@@ -1,6 +1,6 @@
 <template>
         <div style="height: 250px;">
-                <textarea type="text" :name="name" placeholder="Tell about yourself, up to 500 symbols" class="profiledata" id="bio" @keyup="show_btn(name)"  @click="editInput(name)" maxlength="500">{{bio}}</textarea>
+                <textarea type="text" :name="name" placeholder="Tell about yourself, up to 500 symbols" class="profiledata" id="bio" @keyup="show_btn(name)"  @click="editInput(name)" maxlength="500" spellcheck="false">{{bio}}</textarea>
                 <img src="/images/service/edit.png" class="edit" @click="editInput(name)" id="bio_edit">
                 <br>
                 <button type="submit" hidden id="bio_btn" class="btn edit_submit" @click="save">Save</button>
@@ -54,6 +54,7 @@
                                                 document.getElementById(this.name + '_error_msg').hidden = true;
                                                 console.log('this.mutableValue', this.mutableValue);
                                                 update_fill_profile(string.empty);
+                                                document.getElementById(this.name).blur();
                                         } else if (string.result == false) {
                                                 document.getElementById(this.name).value = this.mutableValue;
                                                 document.getElementById(this.name + '_error_msg').hidden = false;
@@ -65,7 +66,7 @@
                                 }
                         };
                         xhr.send(form);
-                }
+                },
         }
     }
 </script>
