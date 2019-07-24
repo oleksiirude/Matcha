@@ -2017,6 +2017,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['value', 'name', 'id_btn', 'label', 'url'],
   data: function data() {
@@ -2025,6 +2029,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    show_birthday_input: function show_birthday_input() {
+      document.getElementById('fill_birthday').hidden = false;
+      document.getElementById(this.name).focus();
+    },
     editInput: function editInput(name) {
       var input = document.getElementById(name);
       input.focus();
@@ -38385,38 +38393,56 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("label", { attrs: { for: _vm.name } }, [_vm._v(_vm._s(_vm.label))]),
+    _c("label", { attrs: { for: "userage" } }, [_vm._v("Age:")]),
     _vm._v(" "),
     _c("input", {
       staticClass: "profiledata",
       attrs: {
-        type: "date",
-        name: _vm.name,
-        min: "1899-01-01",
-        max: "2002-01-01",
-        id: _vm.name,
-        placeholder: ""
+        type: "text",
+        name: "userage",
+        value: "",
+        id: "userage",
+        placeholder: "",
+        readonly: ""
       },
-      domProps: { value: _vm.value },
-      on: {
-        click: function($event) {
-          return _vm.editInput(_vm.name)
-        },
-        keyup: function($event) {
-          return _vm.show_btn(_vm.name)
-        }
-      }
+      on: { click: _vm.show_birthday_input }
     }),
+    _c("br"),
     _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn edit_submit",
-        attrs: { type: "submit", id: _vm.id_btn, hidden: "" },
-        on: { click: _vm.save }
-      },
-      [_vm._v("Save")]
-    )
+    _c("div", { attrs: { id: "fill_birthday", hidden: "" } }, [
+      _c("label", { attrs: { for: _vm.name } }, [_vm._v(_vm._s(_vm.label))]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "profiledata",
+        attrs: {
+          type: "date",
+          name: _vm.name,
+          min: "1899-01-01",
+          max: "2002-01-01",
+          id: _vm.name,
+          placeholder: ""
+        },
+        domProps: { value: _vm.value },
+        on: {
+          click: function($event) {
+            return _vm.editInput(_vm.name)
+          },
+          change: function($event) {
+            return _vm.show_btn(_vm.name)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn edit_submit",
+          attrs: { type: "submit", id: _vm.id_btn, hidden: "" },
+          on: { click: _vm.save }
+        },
+        [_vm._v("Save")]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -52495,8 +52521,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/matcha_start/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/matcha_start/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/dpiven/http/MyWebSite/Matcha/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/dpiven/http/MyWebSite/Matcha/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

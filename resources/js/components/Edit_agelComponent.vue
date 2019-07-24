@@ -1,8 +1,12 @@
 <template>
     <div>
-        <label :for="name">{{ label }}</label>
-        <input type="date" :name="name" min="1899-01-01" max="2002-01-01" class="profiledata" :value="value" @click="editInput(name)" :id="name" @keyup="show_btn(name)" placeholder="">
-        <button type="submit" class="btn edit_submit" :id="id_btn" hidden @click="save">Save</button>
+        <label for='userage'>Age:</label>
+        <input type="text" name="userage" class="profiledata" value="" @click="show_birthday_input" id="userage" placeholder="" readonly><br>
+        <div id="fill_birthday" hidden>
+            <label :for="name">{{ label }}</label>
+            <input type="date" :name="name" min="1899-01-01" max="2002-01-01" class="profiledata" :value="value" @click="editInput(name)" :id="name" @change="show_btn(name)" placeholder="">
+            <button type="submit" class="btn edit_submit" :id="id_btn" hidden @click="save">Save</button>
+        </div>
     </div>
 </template>
 
@@ -21,6 +25,10 @@
             }
         },
         methods: {
+            show_birthday_input: function () {
+                document.getElementById('fill_birthday').hidden = false;
+                document.getElementById(this.name).focus();
+            },
             editInput: function (name) {
 
                 let input = document.getElementById(name);
