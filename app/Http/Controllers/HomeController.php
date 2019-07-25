@@ -10,14 +10,14 @@
     use DateTime;
 
     class HomeController extends Controller {
-        public $model_profile;
-        public $model_user;
+        public $profile;
+        public $user;
     
         public function __construct()
         {
             $this->middleware(function ($request, $next) {
-                $this->model_profile = Profile::find(Auth::id());
-                $this->model_user = User::find(Auth::id());
+                $this->profile = Profile::find(Auth::id());
+                $this->user = User::find(Auth::id());
                 return $next($request);
             });
         }
@@ -41,7 +41,7 @@
             
             $name = ucfirst(strtolower($name));
             
-            $this->model_profile->update([
+            $this->profile->update([
                 'name' => $name
             ]);
             
@@ -58,7 +58,7 @@
             
             $surname = ucfirst(strtolower($surname));
             
-            $this->model_profile->update([
+            $this->profile->update([
                 'surname' => $surname
             ]);
             
@@ -73,27 +73,27 @@
                     'result' => false,
                     'error' => 'Invalid input']);
             
-            $rating = $this->model_profile->bio ? false : true;
+            $rating = $this->profile->bio ? false : true;
     
-            $this->model_profile->update([
+            $this->profile->update([
                 'bio' => $bio
             ]);
             
             if ($rating === true && $bio)
-                $this->increaseRating($this->model_profile);
+                $this->increaseRating($this->profile);
             
             return $this->returnJsonBox();
         }
         
         public function deleteBio(){
-            if (!$this->model_profile->bio)
+            if (!$this->profile->bio)
                 return response()->json([
                     'result' => false,
                     'error' => 'You do not have any bio to delete']);
     
-            $this->model_profile->bio = "";
-            $this->model_profile->save();
-            $this->model_profile->decrement('rating', 0.5);
+            $this->profile->bio = "";
+            $this->profile->save();
+            $this->profile->decrement('rating', 0.5);
     
             return $this->returnJsonBox();
         }
@@ -105,7 +105,7 @@
                 abort(419);
             
     
-            $this->model_profile->update([
+            $this->profile->update([
                 'gender' => $gender
             ]);
 
@@ -123,22 +123,22 @@
                     'error' => 'Invalid date of birth']);
             
         
-            $rating = $this->model_profile->age ? false : true;
+            $rating = $this->profile->age ? false : true;
     
-            $this->model_profile->update([
+            $this->profile->update([
                 'age' => $date
             ]);
         
             if ($rating === true)
-                $this->increaseRating($this->model_profile);
+                $this->increaseRating($this->profile);
     
-            $profile = Controller::getAttributesForAuthUserProfile();
+            $response = Controller::getAttributesForAuthUserProfile();
             
             return response()->json([
                 'result' => true,
                 'age' => $age,
-                'rating' => round($this->model_profile->rating, 1),
-                'empty' => $profile['totally_filled']
+                'rating' => round($this->profile->rating, 1),
+                'empty' => $response['totally_filled']
             ]);
         }
         
@@ -148,14 +148,14 @@
             if (!preg_match('/^homosexual|bisexual|heterosexual$/', $preferences))
                 abort(419);
         
-            $rating = $this->model_profile->preferences ? false : true;
+            $rating = $this->profile->preferences ? false : true;
     
-            $this->model_profile->update([
+            $this->profile->update([
                 'preferences' => $preferences
             ]);
         
             if ($rating === true)
-                $this->increaseRating($this->model_profile);
+                $this->increaseRating($this->profile);
     
             return $this->returnJsonBox();
         }
@@ -168,7 +168,7 @@
                     'result' => false,
                     'error' => 'Invalid input']);
             
-            if ($this->model_user->where('login', $new_login)->first())
+            if ($this->user->where('login', $new_login)->first())
                 return response()->json([
                     'result' => false,
                     'error' => 'This login is already taken']);
@@ -179,25 +179,25 @@
         }
         
         protected function renameAllStuff($new_login) {
-            $old_dir_name = public_path() . '/images/profiles/' . $this->model_user->login;
+            $old_dir_name = public_path() . '/images/profiles/' . $this->user->login;
             $new_dir_name = public_path() . '/images/profiles/' . $new_login;
             rename($old_dir_name, $new_dir_name);
     
             for ($i = 1; $i < 5; $i++) {
                 $photo = 'photo' . $i;
-                if ($this->model_profile->$photo) {
-                    $this->model_profile->$photo = str_replace($this->model_user->login,
+                if ($this->profile->$photo) {
+                    $this->profile->$photo = str_replace($this->user->login,
                                                                 $new_login,
-                                                                $this->model_profile->$photo);
+                                                                $this->profile->$photo);
                 }
             }
-            $this->model_profile->avatar = str_replace($this->model_user->login,
+            $this->profile->avatar = str_replace($this->user->login,
                                                         $new_login,
-                                                        $this->model_profile->avatar);
-            $this->model_profile->save();
+                                                        $this->profile->avatar);
+            $this->profile->save();
     
-            $this->model_user->update(['login' => $new_login]);
-            $this->model_profile->update(['login' => $new_login]);
+            $this->user->update(['login' => $new_login]);
+            $this->profile->update(['login' => $new_login]);
         }
         
         public function changeEmail(Request $request) {
@@ -209,17 +209,17 @@
                     'result' => false,
                     'error' => 'Invalid email']);
         
-            if ($this->model_user->where('email', $email)->first())
+            if ($this->user->where('email', $email)->first())
                 return response()->json([
                     'result' => false,
                     'error' => 'This email is already taken']);
             
-            if (!password_verify($password, $this->model_user->password))
+            if (!password_verify($password, $this->user->password))
                 return response()->json([
                     'result' => false,
                     'error' => 'Invalid password']);
     
-            $this->model_user->update([
+            $this->user->update([
                 'email' => $email
             ]);
             
@@ -241,12 +241,12 @@
                     'result' => false,
                     'error' => 'Passwords do not match']);
             
-            if (!password_verify($current_password, $this->model_user->password))
+            if (!password_verify($current_password, $this->user->password))
                 return response()->json([
                     'result' => false,
                     'error' => 'Invalid password']);
     
-            $this->model_user->update([
+            $this->user->update([
                 'password' => password_hash($new_password, PASSWORD_BCRYPT)
             ]);
             
@@ -254,12 +254,12 @@
         }
         
         protected function returnJsonBox() {
-            $profile = Controller::getAttributesForAuthUserProfile();
+            $response = Controller::getAttributesForAuthUserProfile();
     
             return response()->json([
                 'result' => true,
-                'rating' => round($this->model_profile->rating, 1),
-                'empty' => $profile['totally_filled']
+                'rating' => round($this->profile->rating, 1),
+                'empty' => $response['totally_filled']
             ]);
         }
     
