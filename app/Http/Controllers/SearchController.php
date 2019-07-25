@@ -5,7 +5,6 @@
     use App\Profile;
     use App\User;
     use App\Location;
-    use Carbon\Carbon;
     use Illuminate\Http\Request;
     
     class SearchController extends Controller {
@@ -22,13 +21,12 @@
         
         public function show() {
             $profiles = $this->findProfilesByBaseCriterias();
-            
             $profiles = $this->prepareCorrectProfileDataForView(
                 $this->getFineDistanceView(
                     SortController::sortByDefault($profiles))
             );
             
-            return view('searching-profiles.suggestions', ['profiles' => $profiles]);
+            return view('searching.searching', ['profiles' => $profiles]);
         }
         
         public function findFilterSort(Request $request) {
@@ -36,21 +34,27 @@
             
             $this->validateRequest($params);
             
-            $profiles = $this->findProfilesByBaseCriterias($params['distance_to'] * 1000);
+            $params['distance_from'] *= 1000;
+            $params['distance_to'] *= 1000;
+            $profiles = $this->findProfilesByBaseCriterias($params['distance_to']);
             
-            // MAKE FILTERING!
-            $profiles = FilterController::makeFiltering($profiles, $params);
+            // Filtering
+            $filter_params = array_chunk($params, 2);
+            $profiles = FilterController::makeFiltering($profiles,  $filter_params);
             
+            // Sorting
             if (count($profiles)) {
-                $sorter = new SortController($profiles, $params);
-                $profiles = $this->getFineDistanceView($sorter->sortMain());
+                $sort_params = array_chunk($params, 2, true)[4];
+                $sorter = new SortController($profiles,  $sort_params);
+                
+                $profiles = $sorter->sortMain();
+                $profiles = $this->putWithoutAgeDown($profiles);
+                $profiles = $this->prepareCorrectProfileDataForView($profiles);
+                $profiles = $this->getFineDistanceView($profiles);
             }
             
-            if ($request->get('sort') === 'age')
-                $profiles = $this->putWithoutAgeDown($profiles);
-
 //          return response()->json(['result' => $profiles]);
-            return view('searching-profiles.suggestions', ['profiles' => $profiles]);
+            return view('searching.searching', ['profiles' => $profiles]);
         }
         
         public function validateRequest($params) {
@@ -108,6 +112,8 @@
             $profiles = Profile::where('gender', $this->profile->gender)
                 ->where('user_id', '!=', $this->profile->user_id)
                 ->where('preferences', $this->profile->preferences)
+                ->orWhere('preferences', 'bisexual')
+                ->where('gender', $this->profile->gender)
                 ->get();
             
             return $this->removeBlockedProfiles($profiles);
@@ -183,7 +189,6 @@
                 else
                     $profile['allow'] = false;
                 $profile['rating'] = (string)$profile['rating'];
-                $profile['age'] = Carbon::parse($profile['age'])->age;
                 $profiles[$i] = $profile;
                 $i++;
             }
@@ -193,10 +198,12 @@
         
         public function getFineDistanceView($profiles) {
             $profiles = $profiles->values()->all();
+            
             $i = 0;
             foreach ($profiles as $profile) {
-                if ($profile['distance'] <= 10)
+                if ($profile['distance'] <= 10) {
                     $profile['distance'] = 'right behind you!';
+                }
                 elseif ($profile['distance'] < 1000)
                     $profile['distance'] = 'about ' . $profile['distance'] . ' metres from you';
                 else
@@ -204,6 +211,7 @@
                 $profiles[$i] = $profile;
                 $i++;
             }
+            
             return $profiles;
         }
         

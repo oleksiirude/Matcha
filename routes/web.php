@@ -70,19 +70,10 @@
         Route::post('/report/{id}/{login}', 'ReportController@makeReport')->name('report');
     });
     
-    // SUGGESTIONS
+    // SEARCHING
     Route::group(['prefix' => '/suggestions', 'middleware' => 'verified'], function () {
-        Route::get('/', 'SearchController@show')->name('suggestions');
+        Route::get('/', 'SearchController@show')->name('searching');
         Route::get('/research', 'SearchController@findFilterSort')->name('find.filter.sort');
-        Route::get('/filter-age', 'FilterController@filterByAge')->name('filter.age');
-        Route::get('/filter-rating', 'FilterController@filterByRating')->name('filter.rating');
-        Route::get('/filter-distance', 'FilterController@filterBydistance')->name('filter.distance');
-        Route::get('/filter-interests', 'FilterController@filterByInterests')->name('filter.interests');
-    });
-    
-    // ADVANCED RESEARCH
-    Route::group(['prefix' => '/research', 'middleware' => 'verified'], function () {
-        Route::get('/', 'ResearchController@show')->name('research');
     });
     
     // CHAT ROOM

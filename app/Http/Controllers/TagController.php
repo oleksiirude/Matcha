@@ -6,6 +6,7 @@
     use App\User;
     use App\Interest;
     use App\Profile;
+    use Carbon\Carbon;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Auth;
     
@@ -159,6 +160,7 @@
                 }
                 $profile['interests'] = $matches;
                 $profile['interests_matched'] = count($matches);
+                $profile['age'] = Carbon::parse($profile['age'])->age;
                 $collection[] = collect($profile);
             }
           
