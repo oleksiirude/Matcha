@@ -154,6 +154,7 @@
                                     <br>Please, try another search parameters
                                 </p>
                             @endif
+                            {{ $profiles->links() }}
                         </div>
                     </div>
                 </div>

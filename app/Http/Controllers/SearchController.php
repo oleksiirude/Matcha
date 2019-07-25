@@ -21,12 +21,12 @@
         
         public function show() {
             $profiles = $this->findProfilesByBaseCriterias();
-            $profiles = $this->prepareCorrectProfileDataForView(
+            $profiles = collect($this->prepareCorrectProfileDataForView(
                 $this->getFineDistanceView(
                     SortController::sortByDefault($profiles))
-            );
+            ));
             
-            return view('searching.searching', ['profiles' => $profiles]);
+            return view('searching.searching', ['profiles' => $profiles->paginate(10)]);
         }
         
         public function findFilterSort(Request $request) {
@@ -48,13 +48,18 @@
                 $sorter = new SortController($profiles,  $sort_params);
                 
                 $profiles = $sorter->sortMain();
-                $profiles = $this->putWithoutAgeDown($profiles);
-                $profiles = $this->prepareCorrectProfileDataForView($profiles);
-                $profiles = $this->getFineDistanceView($profiles);
+                $profiles = collect(
+                    $this->getFineDistanceView(
+                        $this->prepareCorrectProfileDataForView(
+                            $this->putWithoutAgeDown($profiles)
+                        )));
             }
             
+            $profiles = $profiles->paginate(10);
+            $profiles->setPath($request->fullUrl());
+            
 //          return response()->json(['result' => $profiles]);
-            return view('searching.searching', ['profiles' => $profiles]);
+            return view('searching.searching', ['profiles' =>  $profiles]);
         }
         
         public function validateRequest($params) {

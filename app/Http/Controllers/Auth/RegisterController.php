@@ -47,7 +47,7 @@
                 'login' => ['required', 'string', 'unique:users', 'regex:/^[a-zA-Z]{3,20}$/'],
                 // only lowercase letters, from 3 to 20
     
-                'email' => ['required', 'string', 'email', 'unique:users', 'regex:/^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,255}$/'],
+                'email' => ['required', 'string', 'email', 'unique:users'],
                 // classic email regexp
     
                 'name' => ['required', 'string', 'regex:/^[a-zA-Z]{2,20}$/'],
