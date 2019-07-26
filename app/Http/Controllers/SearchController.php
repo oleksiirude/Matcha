@@ -30,12 +30,9 @@
         }
         
         public function findFilterSort(Request $request) {
-            $params = $request->all();
+            $params = $this->validateRequest($request->all());
             
-            $this->validateRequest($params);
-            
-            $params['distance_from'] *= 1000;
-            $params['distance_to'] *= 1000;
+            // Find profiles
             $profiles = $this->findProfilesByBaseCriterias($params['distance_to']);
             
             // Filtering
@@ -43,23 +40,41 @@
             $profiles = FilterController::makeFiltering($profiles,  $filter_params);
             
             // Sorting
-            if (count($profiles)) {
-                $sort_params = array_chunk($params, 2, true)[4];
-                $sorter = new SortController($profiles,  $sort_params);
-                
-                $profiles = $sorter->sortMain();
-                $profiles = collect(
-                    $this->getFineDistanceView(
-                        $this->prepareCorrectProfileDataForView(
-                            $this->putWithoutAgeDown($profiles)
-                        )));
-            }
-            
-            $profiles = $profiles->paginate(10);
-            $profiles->setPath($request->fullUrl());
+            if (count($profiles))
+                $profiles = $this->sort($params, $profiles);
+            else
+                return view('searching.searching', ['profiles' =>  $profiles]);
+    
+            // Get paginate
+            $profiles = $this->getPaginate($profiles, $params, $request);
             
 //          return response()->json(['result' => $profiles]);
             return view('searching.searching', ['profiles' =>  $profiles]);
+        }
+        
+        public function sort($params, $profiles) {
+            $sort_params = array_chunk($params, 2, true)[4];
+            $sorter = new SortController($profiles,  $sort_params);
+    
+            $profiles = $sorter->sortMain();
+            
+            return collect(
+                $this->getFineDistanceView(
+                    $this->prepareCorrectProfileDataForView(
+                        $this->putWithoutAgeDown($profiles)
+                    )));
+        }
+        
+        public function getPaginate($profiles, $params, $request) {
+            if ($params['profiles_per_page'] === 'all')
+                $profiles_per_page = count($profiles);
+            else
+                $profiles_per_page = (int)$params['profiles_per_page'];
+    
+            $profiles = $profiles->paginate($profiles_per_page);
+            $profiles->setPath($request->root() . $request->getRequestUri());
+            
+            return $profiles;
         }
         
         public function validateRequest($params) {
@@ -73,7 +88,8 @@
                   6 => "/^interests_from$/&/^[0-9]{1,2}$/",
                   7 => "/^interests_to$/&/^[0-9]{1,2}$/",
                   8 => "/^sort$/&/^age|distance|rating|interests$/",
-                  9 => "/^order$/&/^ascending|descending$/"
+                  9 => "/^order$/&/^ascending|descending$/",
+                  10 => "/^profiles_per_page$/&/^5|10|20|all$/",
             ];
             
             $i = 0;
@@ -81,8 +97,15 @@
                 $regexps = explode('&', $data[$i]);
                 if (!preg_match($regexps[0], $title) || !preg_match($regexps[1], $value))
                     abort(419);
+                if ($i === 10)
+                    break;
                 $i++;
             }
+            
+            $params['distance_from'] *= 1000;
+            $params['distance_to'] *= 1000;
+            
+            return $params;
         }
         
         public function findProfilesByBaseCriterias($radius = null) {
@@ -154,12 +177,12 @@
         public function constructMatchedProfiles($bisexuals = null, $men = null, $women = null) {
             $profiles = collect();
             
-            foreach ($bisexuals as $cell)
-                $profiles[] = $cell;
-            foreach ($men as $cell)
-                $profiles[] = $cell;
-            foreach ($women as $cell)
-                $profiles[] = $cell;
+            foreach ($bisexuals as $user)
+                $profiles[] = $user;
+            foreach ($men as $user)
+                $profiles[] = $user;
+            foreach ($women as $user)
+                $profiles[] = $user;
             
             return $this->removeBlockedProfiles($profiles);
         }

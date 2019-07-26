@@ -2,7 +2,7 @@
 
     namespace App\Http\Controllers;
 
-    class FilterController extends SearchController {
+    class FilterController extends Controller {
         
         public static function makeFiltering($profiles, $filters) {
             $aim = [

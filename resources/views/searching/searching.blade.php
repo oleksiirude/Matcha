@@ -83,6 +83,17 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <b>Profiles per page:</b>
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <select class="form-control" name="profiles_per_page">
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="20">20</option>
+                                                <option value="all">all profiles at once</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col"></div>
                             </div>
@@ -92,7 +103,7 @@
                         <div class="card-body">
 
                             @if (count($profiles))
-
+                            {{ $profiles->links() }}
                                 @foreach($profiles as $profile)
                                     <div style="background-color: darkgrey">
                                         <p>
@@ -126,35 +137,35 @@
                                             @if ($profile['interests_matched'])
                                                 @if ($profile['interests_matched'] > 1)
                                                     Common interests with {{ $profile['name'] }}:
-                                        <ul>
-                                            @foreach($profile['interests'] as $interest)
-                                                <li>{{ $interest }}</li>
-                                            @endforeach
-                                        </ul>
-                                        @else
-                                            Common interest: {{ $profile['interests'][0] }}
-                                            @endif
-                                            @endif
-                                            </p>
-
-                                            <p>
-                                                {{ $profile['name'] }} is {{  $profile['distance'] }}
-                                            </p>
-
-                                            <p>
-                                                @if ($profile['last_activity'])
-                                                    <span style="color: #1e7e34">{{ $profile['last_activity'] }}</span>
+                                                    <ul>
+                                                        @foreach($profile['interests'] as $interest)
+                                                            <li>{{ $interest }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                @else
+                                                    Common interest: {{ $profile['interests'][0] }}
                                                 @endif
-                                            </p>
+                                            @endif
+                                        </p>
+
+                                        <p>
+                                        {{ $profile['name'] }} is {{  $profile['distance'] }}
+                                        </p>
+
+                                        <p>
+                                        @if ($profile['last_activity'])
+                                        <span style="color: #1e7e34">{{ $profile['last_activity'] }}</span>
+                                        @endif
+                                        </p>
                                     </div>
                                 @endforeach
+                                {{ $profiles->links() }}
                             @else
                                 <p>
                                     Unfortunately, we cannot find anyone matched you
                                     <br>Please, try another search parameters
                                 </p>
                             @endif
-                            {{ $profiles->links() }}
                         </div>
                     </div>
                 </div>

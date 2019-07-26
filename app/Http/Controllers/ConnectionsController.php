@@ -2,7 +2,6 @@
 
     namespace App\Http\Controllers;
     
-    use App\Profile;
     use App\User;
     use Auth;
     use App\Like;
