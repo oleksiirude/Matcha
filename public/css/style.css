@@ -21,47 +21,47 @@ input, textarea {
     color: rgba(68, 79, 87, 0.8);
 }
 
-input[type="checkbox"]:not(checked) {
-    position: absolute;
-    opacity: 0;
-}
-input[type="checkbox"]:not(checked) + label {
-    position: relative;
-    padding: 0 0 0 45px;
-}
+/*input[type="checkbox"]:not(checked) {*/
+/*    position: absolute;*/
+/*    opacity: 0;*/
+/*}*/
+/*input[type="checkbox"]:not(checked) + label {*/
+/*    position: relative;*/
+/*    padding: 0 0 0 45px;*/
+/*}*/
 
-input[type="checkbox"]:not(checked) + label:before {
-    content: '';
-    position: absolute;
-    /*top: -4px;*/
-    left: 0;
-    width: 35px;
-    height: 20px;
-    border-radius: 13px;
-    background: #CDD1DA;
-    box-shadow: inset 0 2px 3px rgba(0,0,0,.2);
-}
+/*input[type="checkbox"]:not(checked) + label:before {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    !*top: -4px;*!*/
+/*    left: 0;*/
+/*    width: 35px;*/
+/*    height: 20px;*/
+/*    border-radius: 13px;*/
+/*    background: #CDD1DA;*/
+/*    box-shadow: inset 0 2px 3px rgba(0,0,0,.2);*/
+/*}*/
 
-input[type="checkbox"]:not(checked) + label:after {
-    content: '';
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 15px;
-    height: 15px;
-    border-radius: 10px;
-    background: #FFF;
-    box-shadow: 0 2px 5px rgba(0,0,0,.3);
-    transition: all .2s;
-}
+/*input[type="checkbox"]:not(checked) + label:after {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    top: 2px;*/
+/*    left: 2px;*/
+/*    width: 15px;*/
+/*    height: 15px;*/
+/*    border-radius: 10px;*/
+/*    background: #FFF;*/
+/*    box-shadow: 0 2px 5px rgba(0,0,0,.3);*/
+/*    transition: all .2s;*/
+/*}*/
 
-input[type="checkbox"]:checked + label:before {
-    background: var(--main-color);
-}
+/*input[type="checkbox"]:checked + label:before {*/
+/*    background: var(--main-color);*/
+/*}*/
 
-input[type="checkbox"]:checked + label:after {
-    left: 19px;
-}
+/*input[type="checkbox"]:checked + label:after {*/
+/*    left: 19px;*/
+/*}*/
 
 
 p {
@@ -643,7 +643,7 @@ img {
 }
 .action_to_user  button:hover {
     opacity: 1;
-    filter: none;
+    filter: grayscale(50%);
 }
 .action_to_user .liked {
     opacity: 1;
@@ -653,9 +653,18 @@ img {
     opacity: 0.5;
     filter: none;
 }
-.action_to_user  button img {
+.action_to_user  button img,  .action_to_user  span img{
     width: 25px;
 
+}
+#fake_error_msg {
+    position: absolute;
+    margin-top: 30px;
+    margin-left: -30px;
+}
+#like_to_me, #love_notifications span {
+    text-align: center;
+    color: #FFAF7B;
 }
 
 

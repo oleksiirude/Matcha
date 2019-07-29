@@ -38,7 +38,9 @@ Vue.component('tagsadd-component', require('./components/profile/tags/AddtagsCom
 Vue.component('location-component', require('./components/profile/LocationComponent').default);
 Vue.component('gender-component', require('./components/profile/GenderComponent').default);
 Vue.component('preferences-component', require('./components/profile/PreferencesComponent').default);
-Vue.component('action-component', require('./components/users/ActionComponent').default);
+Vue.component('block-action-component', require('./components/users/BlockActionComponent').default);
+Vue.component('fake-action-component', require('./components/users/FakeActionComponent').default);
+Vue.component('like-action-component', require('./components/users/LikeActionComponent').default);
 Vue.component('footer-component', require('./components/layots/FooterComponent').default);
 
 /**
