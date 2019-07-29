@@ -1,18 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container" id="main_container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Chat between</div>
-                    <div class="card-header">{{ $profile->login . ' and ' . auth()->user()->login}}</div>
-
-                    <div class="card-body">
-                        <p>HERE WILL BE THE BEST CHATROOM EVER :D</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @foreach($history as $item)
+        <p>{{ $item->recipient }}</p>
+    @endforeach
+    <websocket-component opponent="{{ $profile->login }}"
+                         you="{{ auth()->user()->login }}"
+                         id_from="{{ auth()->user()->id }}"
+                         id_to="{{ $profile->user_id }}"
+                         history="{{ $history }}">
+    </websocket-component>
 @endsection

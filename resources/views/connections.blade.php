@@ -28,6 +28,17 @@
                                         <form action="{{ route('show.chat', $profile->login) }}" method="GET">
                                             <button type="submit">chat with {{ $profile->login }}</button>
                                         </form>
+                                        @else
+                                            <p>You blocked {{ $profile->login }}, Unblock?</p>
+                                            <form action="{{ route('unblock.user', [
+                                                    'id' => $profile->user_id,
+                                                    'login' => $profile->login
+                                                    ]) }}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+
+                                                <button type="submit">unblock {{ $profile->login }}</button>
+                                            </form>
                                         @endif
 
                                     <p></p>
