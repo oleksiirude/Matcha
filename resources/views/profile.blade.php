@@ -2,6 +2,8 @@
 
 @push('scripts')
     <script src="{{ asset('cropperjs/dist/cropper.min.js')}}" defer></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpslLLMvrUUPGWepKF3r-8g87FCEF2Qek&libraries=places"></script>
+    <script src="{{ asset('js/profile/geo.js')}}" defer></script>
     <script src="{{ asset('js/profile/profile.js')}}" defer></script>
 @endpush
 
@@ -130,17 +132,33 @@
                                             </form>
                                             <span id="preferences_error_msg" class="error_msg" hidden></span>
                                         </div>
+
+                                        @if ($profile->allow)
+                                            <div>
+                                                <form id="country_form">
+                                                    <label for="country">Country:</label>
+                                                    <input type="text" id="country" name="country" value="{{ $profile->country }}" class="profiledata">
+                                                </form>
+                                            </div>
+                                            <div>
+                                                <form id="city_form">
+                                                    <label for="city">City:</label>
+                                                    <input type="text" id="city" name="city" value="{{ $profile->city }}" class="profiledata">
+                                                </form>
+                                            </div>
+                                            <input type="checkbox" onchange="blockGeo()" id="block_geo" name="block_geo" value="" checked/>
+                                            <label for="block_geo" id="block_geo">Block geolocation</label>
+                                        @else
+                                            <div>
+                                                <form id="country_form">
+                                                    <label for="country">Location:</label>
+                                                    <input type="text" id="country" name="country" value="isn't specified" class="profiledata">
+                                                </form>
+                                            </div>
+                                        @endif
+
                                         <div>
-                                            <form id="country_form">
-                                                <label for="country">Country:</label>
-                                                <input type="text" id="country" name="country" value="{{ $profile->country }}" class="profiledata">
-                                            </form>
-                                        </div>
-                                        <div>
-                                            <form id="city_form">
-                                                <label for="city">City:</label>
-                                                <input type="text" id="city" name="city" value="{{ $profile->city }}" class="profiledata">
-                                            </form>
+                                            <location-component lat="{{ $profile->latitude }}" lng="{{ $profile->longitude }}" allow = "{{ $profile->allow }}"></location-component>
                                         </div>
                                         <div>
                                             <span id="interests_tags_title">Interests:</span>

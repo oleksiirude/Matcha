@@ -8,6 +8,9 @@ let code;
 let city;
 let allow;
 
+
+
+
 let tofillinputs = function(){
     document.getElementById('gps_latitude').setAttribute('value', latitude);
     document.getElementById('gps_longitude').setAttribute('value', longitude);
