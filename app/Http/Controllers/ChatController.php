@@ -2,6 +2,8 @@
     
     namespace App\Http\Controllers;
     
+    use Auth;
+    use App\ChatHistory;
     use App\Profile;
 
     class ChatController extends Controller {
@@ -12,7 +14,10 @@
             if (!$this->validateChat($profile))
                 return view('messages.smth-went-wrong');
             
-            return view('chatroom.chatroom', ['profile' => $profile]);
+            $history = ChatHistory::where('sender', Auth::id())
+                                    ->where('recipient', $profile->user_id)
+                                    ->get();
+            return view('chatroom.chatroom', ['profile' => $profile, 'history' => $history]);
         }
         
         protected function validateChat($profile) {

@@ -28,6 +28,7 @@
                 
                 if ($distance <= $radius) {
                     $profile['distance'] = $distance;
+                    $profile['rating'] = (string)$profile['rating'];
                     $nearby[] = $profile;
                 }
             }

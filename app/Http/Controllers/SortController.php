@@ -21,7 +21,7 @@
                 $params['direction'] = 'DESC';
             else
                 $params['direction'] = 'ASC';
-    
+            
             $sorted = $this->sortByParams($params);
             
             return $sorted;
@@ -30,7 +30,7 @@
         public function specifyParams() {
             if ($this->params['sort'] === 'interests') {
                 $params = [
-                    'first' => 'interests',
+                    'first' => 'interests_matched',
                     'second' => 'distance',
                     'third' => 'rating'
                 ];
@@ -38,15 +38,15 @@
                 $params = [
                     'first' => 'rating',
                     'second' => 'distance',
-                    'third' => 'interests'
+                    'third' => 'interests_matched'
                 ];
             } elseif ($this->params['sort'] === 'age') {
                 $params = [
                     'first' => 'age',
                     'second' => 'distance',
-                    'third' => 'interests'
+                    'third' => 'interests_matched'
                 ];
-            }else {
+            } else {
                 $params = [
                     'first' => 'distance',
                     'second' => 'matches',
@@ -62,11 +62,12 @@
                 $result = $this->sortByDesc($params);
             else
                 $result = $this->sortByAsc($params);
+            
             return $result;
         }
         
         public function sortByDesc($params) {
-            if ($params['first'] === 'interests' || $params['first'] === 'rating') {
+            if ($params['first'] === 'interests_matched' || $params['first'] === 'rating') {
                 return $this->profiles->sortByDesc($params['first'])
                     ->groupBy($params['first'])
                     ->map(function (Collection $profiles) use ($params) {
@@ -102,7 +103,7 @@
         }
         
         public function sortByAsc($params) {
-            if ($params['first'] === 'interests' || $params['first'] === 'rating') {
+            if ($params['first'] === 'interests_matched' || $params['first'] === 'rating') {
                 return $this->profiles->sortBy($params['first'])
                     ->groupBy($params['first'])
                     ->map(function (Collection $profiles) use ($params) {
@@ -141,7 +142,7 @@
             return $profiles->sortBy('distance')
                 ->groupBy('distance')
                 ->map(function (Collection $profiles) {
-                    return $profiles->sortByDesc('matches')
+                    return $profiles->sortByDesc('interests_matched')
                         ->groupBy('matches')
                         ->map(function (Collection $profiles) {
                             return $profiles->sortByDesc('rating');

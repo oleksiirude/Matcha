@@ -56,12 +56,8 @@
                                 </li>
                             @endif
                         @else
-                            <form id="suggestions-form" action="{{ route('suggestions') }}" method="GET">
-                                <button type="submit" class="btn btn-outline-secondary">Suggestions</button>
-                            </form>
-
-                            <form id="research-form" action="{{ route('research') }}" method="GET">
-                                <button type="submit" class="btn btn-outline-secondary">Advanced research</button>
+                            <form id="suggestions-form" action="{{ route('searching') }}" method="GET">
+                                <button type="submit" class="btn btn-outline-secondary">Search matches</button>
                             </form>
 
                             <li class="nav-item dropdown">

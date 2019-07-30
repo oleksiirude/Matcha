@@ -5,7 +5,6 @@
     use App\Profile;
     use App\User;
     use App\Location;
-    use Carbon\Carbon;
     use Illuminate\Http\Request;
     
     class SearchController extends Controller {
@@ -21,36 +20,92 @@
         }
         
         public function show() {
-            $profiles = $this->getFineDistanceView(
-                $this->findProfilesByBaseCriterias());
+            $profiles = $this->findProfilesByBaseCriterias();
+            $profiles = collect($this->prepareCorrectProfileDataForView(
+                $this->getFineDistanceView(
+                    SortController::sortByDefault($profiles))
+            ));
             
-            return view('searching-profiles.suggestions', ['profiles' => $profiles]);
+            return view('searching.searching', ['profiles' => $profiles->paginate(10)]);
         }
         
-        public function sort(Request $request) {
-            $this->validateSortRequest($request->all());
+        public function findFilterSort(Request $request) {
+            $params = $this->validateRequest($request->all());
             
-            $profiles = $this->findProfilesByBaseCriterias();
+            // Find profiles
+            $profiles = $this->findProfilesByBaseCriterias($params['distance_to']);
             
-            if (count($profiles)) {
-                $sorter = new SortController($profiles, $request->all());
-                $profiles = $this->getFineDistanceView($sorter->sortMain());
+            // Filtering
+            $filter_params = array_chunk($params, 2);
+            $profiles = FilterController::makeFiltering($profiles,  $filter_params);
+            
+            // Sorting
+            if (count($profiles))
+                $profiles = $this->sort($params, $profiles);
+            else
+                return view('searching.searching', ['profiles' =>  $profiles]);
+    
+            // Get paginate
+            $profiles = $this->getPaginate($profiles, $params, $request);
+            
+//          return response()->json(['result' => $profiles]);
+            return view('searching.searching', ['profiles' =>  $profiles]);
+        }
+        
+        public function sort($params, $profiles) {
+            $sort_params = array_chunk($params, 2, true)[4];
+            $sorter = new SortController($profiles,  $sort_params);
+    
+            $profiles = $sorter->sortMain();
+            
+            return collect(
+                $this->getFineDistanceView(
+                    $this->prepareCorrectProfileDataForView(
+                        $this->putWithoutAgeDown($profiles)
+                    )));
+        }
+        
+        public function getPaginate($profiles, $params, $request) {
+            if ($params['profiles_per_page'] === 'all')
+                $profiles_per_page = count($profiles);
+            else
+                $profiles_per_page = (int)$params['profiles_per_page'];
+    
+            $profiles = $profiles->paginate($profiles_per_page);
+            $profiles->setPath($request->root() . $request->getRequestUri());
+            
+            return $profiles;
+        }
+        
+        public function validateRequest($params) {
+            $data = [
+                  0 => "/^age_from$/&/^[0-9]{1,3}$/",
+                  1 => "/^age_to$/&/^[0-9]{1,3}$/",
+                  2 => "/^rating_from$/&/^[0-9]{1,3}$/",
+                  3 => "/^rating_to$/&/^[0-9]{1,3}$/",
+                  4 => "/^distance_from$/&/^[0-9]{1,5}$/",
+                  5 => "/^distance_to$/&/^[0-9]{1,5}$/",
+                  6 => "/^interests_from$/&/^[0-9]{1,2}$/",
+                  7 => "/^interests_to$/&/^[0-9]{1,2}$/",
+                  8 => "/^sort$/&/^age|distance|rating|interests$/",
+                  9 => "/^order$/&/^ascending|descending$/",
+                  10 => "/^profiles_per_page$/&/^5|10|20|all$/",
+            ];
+            
+            $i = 0;
+            foreach ($params as $title => $value) {
+                $regexps = explode('&', $data[$i]);
+                if (!preg_match($regexps[0], $title) || !preg_match($regexps[1], $value))
+                    abort(419);
+                if ($i === 10)
+                    break;
+                $i++;
             }
             
-            if ($request->get('sort') === 'age')
-                $profiles = $this->putWithoutAgeDown($profiles);
-
-//          return response()->json(['result' => $profiles]);
-            return view('searching-profiles.suggestions', ['profiles' => $profiles]);
-        }
-        
-        public function validateSortRequest($request) {
-            if (!isset($request['sort']) || !isset($request['order']))
-                abort(419);
+            $params['distance_from'] *= 1000;
+            $params['distance_to'] *= 1000;
             
-            if (!preg_match('/^age|distance|rating|interests$/', $request['sort'])
-                || !preg_match('/^ascending|descending$/', $request['order']))
-                abort(419);
+            return $params;
         }
         
         public function findProfilesByBaseCriterias($radius = null) {
@@ -69,9 +124,8 @@
             
             $profiles = LocationController::filterByDistance($profiles, $this->profile->user_id, $radius);
             $profiles = TagController::findTagMatches($profiles, $this->profile->user_id);
-            $profiles = SortController::sortByDefault($profiles);
             
-            return $this->prepareCorrectProfileDataForView($profiles);
+            return $profiles;
         }
         
         public function getMatchedProfilesForClassics() {
@@ -86,6 +140,8 @@
             $profiles = Profile::where('gender', $this->profile->gender)
                 ->where('user_id', '!=', $this->profile->user_id)
                 ->where('preferences', $this->profile->preferences)
+                ->orWhere('preferences', 'bisexual')
+                ->where('gender', $this->profile->gender)
                 ->get();
             
             return $this->removeBlockedProfiles($profiles);
@@ -121,12 +177,12 @@
         public function constructMatchedProfiles($bisexuals = null, $men = null, $women = null) {
             $profiles = collect();
             
-            foreach ($bisexuals as $cell)
-                $profiles[] = $cell;
-            foreach ($men as $cell)
-                $profiles[] = $cell;
-            foreach ($women as $cell)
-                $profiles[] = $cell;
+            foreach ($bisexuals as $user)
+                $profiles[] = $user;
+            foreach ($men as $user)
+                $profiles[] = $user;
+            foreach ($women as $user)
+                $profiles[] = $user;
             
             return $this->removeBlockedProfiles($profiles);
         }
@@ -161,7 +217,6 @@
                 else
                     $profile['allow'] = false;
                 $profile['rating'] = (string)$profile['rating'];
-                $profile['age'] = Carbon::parse($profile['age'])->age;
                 $profiles[$i] = $profile;
                 $i++;
             }
@@ -171,19 +226,20 @@
         
         public function getFineDistanceView($profiles) {
             $profiles = $profiles->values()->all();
+            
             $i = 0;
             foreach ($profiles as $profile) {
-                if ($profile['distance'] <= 10)
+                if ($profile['distance'] <= 10) {
                     $profile['distance'] = 'right behind you!';
+                }
                 elseif ($profile['distance'] < 1000)
                     $profile['distance'] = 'about ' . $profile['distance'] . ' metres from you';
-                elseif ($profile['distance'] / 1000 === 1)
-                    $profile['distance'] = 'about ' . '1 km from you';
                 else
-                    $profile['distance'] = 'about ' . round($profile['distance'] / 1000) . ' km from you';
+                    $profile['distance'] =  round($profile['distance'] / 1000, 2) . ' km from you';
                 $profiles[$i] = $profile;
                 $i++;
             }
+            
             return $profiles;
         }
         

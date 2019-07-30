@@ -17,6 +17,7 @@
     use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
     
     class Controller extends BaseController {
+        
         use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
         public function validateUser($id, $login) {
@@ -67,6 +68,8 @@
             $location = Location::where('user_id', $user->id)->first();
             $profile['country'] = $location->country;
             $profile['city'] = $location->city;
+            $profile['latitude'] = $location->latitude;
+            $profile['longitude'] = $location->longitude;
             $profile['allow'] = $location->allow;
     
             $interests = Interest::select('tag')->where('user_id', $user->id)->get();

@@ -6,6 +6,7 @@
     use App\User;
     use App\Interest;
     use App\Profile;
+    use Carbon\Carbon;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Auth;
     
@@ -141,36 +142,28 @@
         static public function findTagMatches($profiles, $id) {
             $auth = Interest::where('user_id', $id)->get();
             $auth_tags = $auth->pluck('tag');
-            
             $collection = collect();
             
             foreach ($profiles as $profile) {
                 $user = Interest::where('user_id', $profile->user_id)->get();
                 $user_tags = $user->pluck('tag');
                 
-                $i = 0; $j = 0; $matches = 0;
+                $i = 0; $j = 0; $matches = [];
                 while ($i < count($auth_tags)) {
                     while ($j < count($user_tags)) {
                         if ($auth_tags[$i] === $user_tags[$j])
-                            $matches++;
+                            $matches[] = $user_tags[$j];
                         $j++;
                     }
                     $j = 0;
                     $i++;
                 }
                 $profile['interests'] = $matches;
-                
-                if ($matches) {
-                    if ($matches > 1)
-                        $matches = $matches . ' common interests';
-                    else
-                        $matches = $matches . ' common interest';
-                }
-                
-                $profile['interests_matched'] = $matches;
+                $profile['interests_matched'] = count($matches);
+                $profile['age'] = Carbon::parse($profile['age'])->age;
                 $collection[] = collect($profile);
             }
-            
+          
             return $collection;
         }
         

@@ -2,7 +2,6 @@
 
     namespace App\Http\Controllers;
     
-    use App\Http\Controllers\Auth\RegisterController;
     use App\Profile;
     use Auth;
     use Illuminate\Http\Request;

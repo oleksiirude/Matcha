@@ -1694,7 +1694,7 @@
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
 		        VALUES ('179', 'lerro', 'Lera', 'Gosmann', '1987-06-07', 'female', 'bisexual', '$bio',
-		                'images/profiles/lerro/avatar.jpg', '1', '18.9');  
+		                'images/profiles/lerro/avatar.jpg', '1', '18.9');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, bio,
 		                    avatar, avatar_uploaded, rating)
