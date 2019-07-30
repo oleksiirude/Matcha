@@ -72,8 +72,12 @@
     
     // SUGGESTIONS
     Route::group(['prefix' => '/suggestions', 'middleware' => 'verified'], function () {
-        Route::get('/', 'SuggestionController@show')->name('suggestions');
-        Route::get('/sort', 'SuggestionController@sort')->name('sort');
+        Route::get('/', 'SearchController@show')->name('suggestions');
+        Route::get('/sort', 'SearchController@sort')->name('sort');
+        Route::get('/filter-age', 'FilterController@filterByAge')->name('filter.age');
+        Route::get('/filter-rating', 'FilterController@filterByRating')->name('filter.rating');
+        Route::get('/filter-distance', 'FilterController@filterBydistance')->name('filter.distance');
+        Route::get('/filter-interests', 'FilterController@filterByInterests')->name('filter.interests');
     });
     
     // ADVANCED RESEARCH
