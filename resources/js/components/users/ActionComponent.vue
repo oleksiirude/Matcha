@@ -1,12 +1,22 @@
 <template>
-    <form :action="urlcurrent" method="POST">
-        <input type="hidden" name="_token" :value="csrf">
-        <input type="hidden" name="_method" :value="methodcurrent">
-        <button type="submit" :class="btn_classcurrent" @click="make_action">
-            <img :src="imgsrc" :title="title" :alt="alt">
-<!--            {{ btn_name }}-->
-        </button>
-    </form>
+    <div>
+        <form :action="unurl" method="POST" hidden>
+            <input type="hidden" name="_token" :value="csrf">
+            <input type="hidden" name="_method" :value="unmethod">
+            <button type="submit" :class="" @click="make_action">
+                <img :src="imgsrc" title="unblock" alt="unblock">
+                <!--            {{ btn_name }}-->
+            </button>
+        </form>
+        <form :action="urlcurrent" method="POST" hidden>
+            <input type="hidden" name="_token" :value="csrf">
+            <input type="hidden" name="_method" :value="method">
+            <button type="submit" :class="btn_class" @click="make_action">
+                <img :src="imgsrc" :title="title" :alt="alt">
+    <!--            {{ btn_name }}-->
+            </button>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -28,11 +38,11 @@
         ],
         data: function () {
                 return {
-                    urlcurrent: this.url,
-                    methodcurrent: this.method,
-                    btn_classcurrent: this.btn_class,
-                    mutableUrl: this.url,
-                    mutableUnurl: this.unurl,
+                    // urlcurrent: this.url,
+                    // methodcurrent: this.method,
+                    // btn_classcurrent: this.btn_class,
+                    // mutableUrl: this.url,
+                    // mutableUnurl: this.unurl,
                 }
         },
         // data: function () {

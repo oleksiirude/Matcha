@@ -1769,7 +1769,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    if (this.value) {
+    if (this.value && this.value != 0) {
       this.mutableSpan = this.value + ' years';
     } else {
       this.mutableSpan = "isn't specified";
@@ -3072,15 +3072,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['action', 'unaction', 'value', 'method', 'url', 'unurl', 'unmethod', 'imgsrc', 'csrf', 'btn_class', 'title', 'alt'],
   data: function data() {
-    return {
-      urlcurrent: this.url,
-      methodcurrent: this.method,
-      btn_classcurrent: this.btn_class,
-      mutableUrl: this.url,
-      mutableUnurl: this.unurl
+    return {// urlcurrent: this.url,
+      // methodcurrent: this.method,
+      // btn_classcurrent: this.btn_class,
+      // mutableUrl: this.url,
+      // mutableUnurl: this.unurl,
     };
   },
   // data: function () {
@@ -39413,28 +39422,56 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("form", { attrs: { action: _vm.urlcurrent, method: "POST" } }, [
-    _c("input", {
-      attrs: { type: "hidden", name: "_token" },
-      domProps: { value: _vm.csrf }
-    }),
-    _vm._v(" "),
-    _c("input", {
-      attrs: { type: "hidden", name: "_method" },
-      domProps: { value: _vm.methodcurrent }
-    }),
+  return _c("div", [
+    _c("form", { attrs: { action: _vm.unurl, method: "POST", hidden: "" } }, [
+      _c("input", {
+        attrs: { type: "hidden", name: "_token" },
+        domProps: { value: _vm.csrf }
+      }),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "hidden", name: "_method" },
+        domProps: { value: _vm.unmethod }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        { attrs: { type: "submit" }, on: { click: _vm.make_action } },
+        [
+          _c("img", {
+            attrs: { src: _vm.imgsrc, title: "unblock", alt: "unblock" }
+          })
+        ]
+      )
+    ]),
     _vm._v(" "),
     _c(
-      "button",
-      {
-        class: _vm.btn_classcurrent,
-        attrs: { type: "submit" },
-        on: { click: _vm.make_action }
-      },
+      "form",
+      { attrs: { action: _vm.urlcurrent, method: "POST", hidden: "" } },
       [
-        _c("img", {
-          attrs: { src: _vm.imgsrc, title: _vm.title, alt: _vm.alt }
-        })
+        _c("input", {
+          attrs: { type: "hidden", name: "_token" },
+          domProps: { value: _vm.csrf }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "hidden", name: "_method" },
+          domProps: { value: _vm.method }
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            class: _vm.btn_class,
+            attrs: { type: "submit" },
+            on: { click: _vm.make_action }
+          },
+          [
+            _c("img", {
+              attrs: { src: _vm.imgsrc, title: _vm.title, alt: _vm.alt }
+            })
+          ]
+        )
       ]
     )
   ])
@@ -53031,8 +53068,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/dpiven/http/MyWebSite/Matcha/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/dpiven/http/MyWebSite/Matcha/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/matcha_start/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/matcha_start/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
