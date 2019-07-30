@@ -2,6 +2,7 @@
 
     namespace App\Console\Commands;
     
+    use Carbon\Carbon;
     use Illuminate\Console\Command;
     use Ratchet\Server\IoServer;
     use Ratchet\Http\HttpServer;
@@ -50,6 +51,7 @@
                 ),
                 8081
             );
+            echo 'Ratchet WS server has successfully started at ' . Carbon::now() .  PHP_EOL;
             $server->run();
         }
     }

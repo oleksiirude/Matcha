@@ -86,9 +86,13 @@ textarea::-webkit-input-placeholder { color: rgba(68, 79, 87, 0.4); }
 }
 
 /*main*/
-.row {
-    width: 100%;
-}
+
+/* !!! commented by olrudenk 30.08.19, because of chat styles !!! */
+
+/*.row {*/
+/*    width: 100%;*/
+/*}*/
+
 .py-4 {
 
 }

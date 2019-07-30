@@ -22,8 +22,6 @@
         }
         
         public function onOpen(ConnectionInterface $conn) {
-            $this->users->attach($conn);
-            
             $session = (new SessionManager(App::getInstance()))->driver();
             $cookies = explode(' ', $conn->httpRequest->getHeader('Cookie')[0]);
     
@@ -35,9 +33,11 @@
                 }
             }
             
-            if (!$decrypted_session)
-                echo 'matcha_session did not find!';
-            
+            if (!$decrypted_session) {
+                echo 'matcha_session did not find, connecting denied!' . PHP_EOL;
+            }
+    
+            $this->users->attach($conn);
             $session->setId($decrypted_session);
             $conn->session = $session;
             
