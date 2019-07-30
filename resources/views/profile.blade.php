@@ -2,6 +2,8 @@
 
 @push('scripts')
     <script src="{{ asset('cropperjs/dist/cropper.min.js')}}" defer></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpslLLMvrUUPGWepKF3r-8g87FCEF2Qek&libraries=places"></script>
+    <script src="{{ asset('js/profile/geo.js')}}" defer></script>
     <script src="{{ asset('js/profile/profile.js')}}" defer></script>
 @endpush
 
@@ -110,69 +112,71 @@
                                             @method('PUT')
 
                                                 <gender-component value="{{ $profile->gender }}" name="gender"></gender-component>
-                                            </form>
-                                        </div>
-                                        <div>
-                                            <form action="{{ route('set.age') }}" method="POST" id="date_form">
+                                        </form>
+                                    </div>
+                                    <div>
+                                        <form action="{{ route('set.age') }}" method="POST" id="date_form">
                                                 @csrf
                                                 @method('PUT')
 
                                                 <edit_age-component name="date" label="Date of birth:" id_btn="date_btn" url="{{ route('set.age') }}" value="{{ $profile->age }}"></edit_age-component>
-                                            </form>
-                                            <span id="date_error_msg" class="error_msg" hidden></span>
-                                        </div>
-                                        <div>
-                                            <form action="{{ route('set.preferences') }}" method="POST" id="preferences_form">
+                                        </form>
+                                        <span id="date_error_msg" class="error_msg" hidden></span>
+                                    </div>
+                                    <div>
+                                        <form action="{{ route('set.preferences') }}" method="POST" id="preferences_form">
                                                 @csrf
                                                 @method('PUT')
-
-                                            <preferences-component value="{{ $profile->preferences }}" name="preferences"></preferences-component>
+                                                <preferences-component value="{{ $profile->preferences }}" name="preferences"></preferences-component>
                                         </form>
                                         <span id="preferences_error_msg" class="error_msg" hidden></span>
                                     </div>
+
+                                    @if ($profile->allow)
+                                        <div>
+                                            <form id="country_form">
+                                                <label for="country">Country:</label>
+                                                <input type="text" id="country" name="country" value="{{ $profile->country }}" class="profiledata">
+                                            </form>
+                                        </div>
+                                        <div>
+                                            <form id="city_form">
+                                                <label for="city">City:</label>
+                                                <input type="text" id="city" name="city" value="{{ $profile->city }}" class="profiledata">
+                                            </form>
+                                        </div>
+                                        <input type="checkbox" onchange="blockGeo()" id="block_geo" name="block_geo" value="" checked/>
+                                        <label for="block_geo" id="block_geo">Block geolocation</label>
+                                    @else
+                                        <div>
+                                            <form id="country_form">
+                                                <label for="country">Location:</label>
+                                                <input type="text" id="country" name="country" value="isn't specified" class="profiledata">
+                                            </form>
+                                        </div>
+                                    @endif
+
                                     <div>
-                                        <form>
-                                            <label for="">Country:</label>
-                                            <input type="text" id="" name="" value="{{ $profile->country }}" class="profiledata">
-                                        </form>
+                                        <location-component lat="{{ $profile->latitude }}" lng="{{ $profile->longitude }}" allow = "{{ $profile->allow }}"></location-component>
                                     </div>
                                     <div>
-                                        <form>
-                                            <label for="">City:</label>
-                                            <input type="text" id="" name="" value="{{ $profile->city }}" class="profiledata">
-                                        </form>
-                                    </div>
-                                    <div>
-                                        <p id="interests_tags_title">Interests:</p>
+                                        <span id="interests_tags_title">Interests:</span>
+                                        <img src="{{asset('/images/service/plus.png')}}" onclick="show_element('add_interests_div', 'tag_error_msg')" title="add interests" alt="add interests" id="add_interests_img">
                                         <ul id="interests_tags" type="#">
                                             @foreach($profile->interests as $interest)
                                                 <tagsdelete-component value="{{ $interest->tag }}" csrf="{{ csrf_token() }}" url="{{ route('delete.tag', $interest->tag) }}" id_li="{{ $interest->tag }}_li" id_form="{{ $interest->tag }}_form"></tagsdelete-component>
                                             @endforeach
                                         </ul>
-                                        <img src="{{asset('/images/service/plus.png')}}" onclick="show_element('add_interests_div')" title="add interests" alt="add interests" id="add_interests_img">
-                                        <div id="add_interests_div" hidden>
-                                            <form action="{{ route('set.tag') }}" method="POST">
-                                                @csrf
-                                                @method('PUT')
-
-                                                <input type="text" name="tag">
-                                                <button type="submit">add interest</button>
-                                            </form>
-                                            <form action="{{ route('find.tag.matches') }}" method="POST">
-                                                @csrf
-
-                                                <input type="text" name="piece">
-                                                <button type="submit">find matches</button>
-                                            </form>
-                                        </div>
+                                        <tagsadd-component csrf="{{ csrf_token() }}" url="{{ route('set.tag') }}" urlmatch="{{ route('find.tag.matches') }}" name="tag"></tagsadd-component>
+                                        <span id="tag_error_msg" class="error_msg" hidden></span>
                                     </div>
                                     <div id="user_bio">
                                         <p>
-                                        <h2>About</h2>
+                                            <h2>About</h2>
                                         </p>
                                         <form action="{{ route('delete.bio') }}" method="POST" id="deletebio_form">
-                                            @csrf
-                                            @method('DELETE')
+                                                @csrf
+                                                @method('DELETE')
 
                                             <deletedefault-component name="deletebio" url="/delete/bio"></deletedefault-component>
                                         </form>
