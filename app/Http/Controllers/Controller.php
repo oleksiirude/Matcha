@@ -67,6 +67,8 @@
             $location = Location::where('user_id', $user->id)->first();
             $profile['country'] = $location->country;
             $profile['city'] = $location->city;
+            $profile['latitude'] = $location->latitude;
+            $profile['longitude'] = $location->longitude;
             $profile['allow'] = $location->allow;
     
             $interests = Interest::select('tag')->where('user_id', $user->id)->get();

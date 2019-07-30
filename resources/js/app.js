@@ -35,9 +35,12 @@ Vue.component('ed_email-component', require('./components/profile/EditemailCompo
 Vue.component('edit_password-component', require('./components/profile/EditpasswordComponent').default);
 Vue.component('tagsdelete-component', require('./components/profile/tags/TagsdeleteComponent').default);
 Vue.component('tagsadd-component', require('./components/profile/tags/AddtagsComponent').default);
+Vue.component('location-component', require('./components/profile/LocationComponent').default);
 Vue.component('gender-component', require('./components/profile/GenderComponent').default);
 Vue.component('preferences-component', require('./components/profile/PreferencesComponent').default);
-Vue.component('action-component', require('./components/users/ActionComponent').default);
+Vue.component('block-action-component', require('./components/users/BlockActionComponent').default);
+Vue.component('fake-action-component', require('./components/users/FakeActionComponent').default);
+Vue.component('like-action-component', require('./components/users/LikeActionComponent').default);
 Vue.component('footer-component', require('./components/layots/FooterComponent').default);
 
 /**
