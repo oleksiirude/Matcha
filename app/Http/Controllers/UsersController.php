@@ -55,8 +55,8 @@
             $profile['auth_user_avatar_uploaded'] = $this->ifAvatarUploaded();
             $profile['login'] = $user->login;
             $profile['country'] = $location->country;
-            $profile['allow'] = $location->allow;
             $profile['city'] = $location->city;
+            $profile['allow'] = $location->allow;
             $profile['interests'] = $interests;
             $profile['reported'] = $this->checkIfReported($auth, $aim);
             $profile['last_activity'] = $this->checkLastActivity($user);
@@ -64,6 +64,7 @@
             $profile['liked_me'] = $this->checkIfLikedMe($aim, $auth);
             $profile['blocked'] = $this->checkIfBlocked($aim, $auth);
             $profile['connected'] = $this->checkIfConnected($aim, $auth);
+            $profile->age = Carbon::parse($profile->age)->age;
             
             return $profile;
         }

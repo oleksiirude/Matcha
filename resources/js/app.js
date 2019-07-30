@@ -36,6 +36,7 @@ Vue.component('edit_password-component', require('./components/EditpasswordCompo
 Vue.component('tagsdelete-component', require('./components/TagsdeleteComponent').default);
 Vue.component('gender-component', require('./components/GenderComponent').default);
 Vue.component('preferences-component', require('./components/PreferencesComponent').default);
+Vue.component('websocket-component', require('./components/WebSocketComponent').default);
 Vue.component('footer-component', require('./components/FooterComponent').default);
 
 /**

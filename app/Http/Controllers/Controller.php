@@ -17,6 +17,7 @@
     use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
     
     class Controller extends BaseController {
+        
         use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
         public function validateUser($id, $login) {
@@ -71,6 +72,7 @@
     
             $interests = Interest::select('tag')->where('user_id', $user->id)->get();
             $profile['interests'] = $interests;
+            $profile->age = Carbon::parse($profile->age)->age;
             $profile['totally_filled'] = Controller::checkIfTotallyFilled($profile->getAttributes());
             
             return $profile;
@@ -191,6 +193,6 @@
 
         public function ifAvatarUploaded() {
             $uploaded = Profile::find(Auth::id());
-            return ($uploaded->avatar_uploaded);
+            return $uploaded->avatar_uploaded;
         }
     }
