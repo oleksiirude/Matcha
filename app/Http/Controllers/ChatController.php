@@ -14,13 +14,16 @@
             if (!$this->validateChat($profile))
                 return view('messages.smth-went-wrong');
             
-            $history = ChatHistory::where([
-                'sender' => Auth::id(),
-                'recipient' => $profile->user_id
-            ])->orWhere([
-                'sender' => $profile->user_id,
-                'recipient' => Auth::id()
-            ])->get();
+            $opponent = $profile->user_id;
+            
+            $history = ChatHistory::where(function ($query) use ($opponent) {
+                $query->where('sender', '=', Auth::id())
+                    ->where('recipient', '=', $opponent);
+            })
+                ->orWhere(function ($query) use ($opponent) {
+                    $query->where('sender', '=', $opponent)
+                        ->where('recipient', '=', Auth::id());
+                })->get();
             
             $profile->your_avatar = Profile::select('avatar')
                                     ->where('user_id', Auth::id())

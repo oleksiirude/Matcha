@@ -4,6 +4,7 @@
         <div class="row mt-5">
             <div class="col-md-6 offset-md-3 col-sm-6 offset-sm-3 col-12 comments-main pt-4 rounded">
                 <div id="chat">
+                    <p>It's beginning of your conversation with {{ opponent }}</p>
                 <ul class="p-0" v-for="item in mutableHistory">
 
                     <li v-if="item.sender.toString() === id_from">
@@ -38,7 +39,7 @@
                         <input id="textarea" type="text" class="form-control" placeholder="Type here..." />
                     </div>
                     <div class="col-md-3 col-sm-2 col-2 pl-0 text-center send-btn">
-                        <button id="send-msg" class="btn btn-primary">Send</button>
+                        <button id="send-msg" class="btn btn-primary" @click="sendMessage">Send</button>
                     </div>
                 </div>
             </div>
@@ -49,51 +50,27 @@
 <script>
     export default {
         mounted () {
+
             let from = this.id_from;
             let to = this.id_to;
-            let you = this.you;
             let opponent = this.opponent;
-            let your_avatar = this.your_avatar;
             let opponents_avatar = this.opponents_avatar;
 
-            let conn = new WebSocket('ws://localhost:8081');
+            let conn = new WebSocket('ws://localhost:8081/?from=' + from + '&to=' + to);
+            // let conn = new WebSocket('ws://localhost:8081/?from=user&to=user');
             conn.onopen = function() {
                 console.log("Connection established!");
             };
+
+            this.mutableConn = conn;
+
 
             conn.onmessage = function(e) {
                 let msg = JSON.parse(e.data);
                 addMessageFromUser(msg);
             };
 
-            let send = document.getElementById('send-msg');
-            if (send) {
-                send.addEventListener('click', sendMessage);
-            }
-
-            // automatically scroll to the newest message in the history
-            scrollToButtom();
-
-            function sendMessage() {
-                let textarea = document.getElementById('textarea');
-                let msg = textarea.value;
-
-                if (msg.length === 0 || msg.length > 500)
-                    return;
-
-                textarea.value = "";
-
-                let box = {
-                    'action': 'chat',
-                    'from': from,
-                    'to': to,
-                    'msg': msg
-                };
-                addMessageFromMe(msg);
-                conn.send(JSON.stringify(box));
-            }
-
-            function addMessageFromUser(msg) {
+            function addMessageFromUser (msg) {
                 let main_div = document.createElement('div');
                 main_div.className = 'row comments mb-2';
 
@@ -111,11 +88,11 @@
                 div_for_message.className = 'col-md-9 col-sm-9 col-9 comment rounded mb-2';
 
                 let h4 = document.createElement('h4');
-                h4.className = "m-0 float-left";
+                h4.className = "m-0 float-right";
                 h4.innerHTML = opponent;
 
                 let time_tag = document.createElement('time');
-                time_tag.className = 'text-grey ml-3 float-left';
+                time_tag.className = 'text-grey ml-3 float-right';
                 time_tag.innerHTML = new Date().toISOString().substr(0, 19).replace('T', ' ');
 
                 let p = document.createElement('p');
@@ -134,7 +111,52 @@
                 chat.scrollTop = chat.scrollHeight;
             }
 
-            function addMessageFromMe(msg) {
+            this.mutableConn = conn;
+
+            this.scrollToBottom();
+        },
+        data: function () {
+            return {
+                mutableHistory: JSON.parse(this.history),
+                mutableConn: '',
+            }
+        },
+        props : [
+            'opponent',
+            'you',
+            'id_from',
+            'id_to',
+            'history',
+            'opponents_avatar',
+            'your_avatar',
+        ],
+        methods : {
+            sendMessage: function () {
+                let textarea = document.getElementById('textarea');
+                let msg = textarea.value.trim().replace(/\s\s+/g, ' ');
+
+
+                if (msg.length === 0 || msg.length > 500)
+                    return;
+
+                textarea.value = "";
+
+                let box = {
+                    'action': 'chat',
+                    'from': this.id_from,
+                    'to': this.id_to,
+                    'msg': msg
+                };
+
+                this.addMessageFromMe(msg.replace(/&/g, "&amp;")
+                                         .replace(/</g, "&lt;")
+                                         .replace(/>/g, "&gt;")
+                                         .replace(/"/g, "&quot;")
+                                         .replace(/'/g, "&#039;"));
+                this.mutableConn.send(JSON.stringify(box));
+            },
+
+            addMessageFromMe: function (msg) {
                 let main_div = document.createElement('div');
                 main_div.className = 'row comments mb-2';
 
@@ -143,7 +165,7 @@
 
                 let avatar = document.createElement('img');
                 avatar.className = 'rounded-circle';
-                avatar.src = your_avatar;
+                avatar.src = this.your_avatar;
 
                 div_for_avatar.appendChild(avatar);
 
@@ -153,7 +175,7 @@
 
                 let h4 = document.createElement('h4');
                 h4.className = "m-0 float-left";
-                h4.innerHTML = you;
+                h4.innerHTML = this.you;
 
                 let time_tag = document.createElement('time');
                 time_tag.className = 'text-grey ml-3 float-left';
@@ -173,30 +195,12 @@
                 document.getElementById('chat').appendChild(ul.appendChild(li.appendChild(main_div)));
                 let chat = document.getElementById("chat");
                 chat.scrollTop = chat.scrollHeight;
-            }
+            },
 
-            function scrollToButtom() {
+            scrollToBottom: function () {
                 let chat = document.getElementById('chat');
                 chat.scrollTop = chat.scrollHeight;
             }
-
-        },
-        data: function () {
-            return {
-                mutableHistory: JSON.parse(this.history),
-            }
-        },
-        props : [
-            'opponent',
-            'you',
-            'id_from',
-            'id_to',
-            'history',
-            'opponents_avatar',
-            'your_avatar'
-        ],
-        methods : {
-
         }
     }
 </script>

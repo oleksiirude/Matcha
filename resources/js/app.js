@@ -41,7 +41,7 @@ Vue.component('preferences-component', require('./components/profile/Preferences
 Vue.component('block-action-component', require('./components/users/BlockActionComponent').default);
 Vue.component('fake-action-component', require('./components/users/FakeActionComponent').default);
 Vue.component('like-action-component', require('./components/users/LikeActionComponent').default);
-Vue.component('websocket-component', require('./components/WebSocketComponent').default);
+Vue.component('chat-component', require('./components/ChatComponent').default);
 Vue.component('footer-component', require('./components/layots/FooterComponent').default);
 
 /**

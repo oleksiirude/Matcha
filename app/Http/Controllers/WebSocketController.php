@@ -22,10 +22,10 @@
         }
         
         public function onOpen(ConnectionInterface $conn) {
-            var_dump($conn->resourceId);
             $session = (new SessionManager(App::getInstance()))->driver();
             $cookies = explode(' ', $conn->httpRequest->getHeader('Cookie')[0]);
     
+            // cookie validation
             $decrypted_session = null;
             foreach ($cookies as $cookie) {
                 if (explode('=', $cookie)[0] === config('session.cookie')) {
@@ -34,14 +34,27 @@
                 }
             }
             
+            // if validation fails - forbid connection
             if (!$decrypted_session) {
                 echo 'matcha_session did not find, connecting denied!' . PHP_EOL;
+                return ;
             }
-    
-            $this->users->attach($conn);
+            
             $session->setId($decrypted_session);
             $conn->session = $session;
+    
+            // validate GET params within WS URI, example: 'ws://localhost:8081/?from=10&to=22'
+            $privacy = $this->getParamsAndValidate($conn->httpRequest->getUri()->getQuery());
+    
+            // if validation fails - forbid connection
+            if (!$privacy) {
+                echo 'Bastard detected, connection abort' . PHP_EOL;
+                return ;
+            }
             
+            $conn->privacy = $privacy;
+            
+            $this->users->attach($conn);
             $this->connectionMessage($conn);
         }
         
@@ -56,24 +69,32 @@
             $sent = false; $connected = false;
             switch ($msg['action']) {
                 case 'chat': {
-                    // get all users id joined ws
+                    // listing all connections
                     foreach ($this->users as $user) {
                         $id = $user->session->get(Auth::getName());
-                        // check if id into users session is equal to id from client
+                        // check if id into user's session is equal to id from front-end
                         if ($id === (int)$msg['to']) {
+                            // check if 2 users have connection
                             $connected = $this->checkIfConnected($from_id, $msg['to']);
                             // if connection check failed - break down
                             if (!$connected) {
-                                break;
+                                continue;
                             }
-                            $user->send(json_encode($msg['msg']));
-                            // add message to db
-                            $this->addMessageToDB($from_id, $msg);
-                            $sent = $this->messageSend($from_id, $msg['to'], $msg['msg']);
-                            break;
+                            // check if sender's id is equal to opponent's id in user's privacy settings
+                            if ((int)$user->privacy['to'] === $from_id) {
+                                $user->send(json_encode($msg['msg']));
+                                
+                                $this->addMessageToDB($from_id, $msg, true);
+                                $this->messageSend($from_id, $msg['to'], $msg['msg']);
+                                $sent = true;
+                            }
                         }
                     }
-                    $connected = $this->checkIfConnected($from_id, $msg['to']);
+                    // if receiver isn't connected to ws server, but has connection with opponent -> only save message in db
+                    if (!$sent && $this->checkIfConnected($from_id, $msg['to'])) {
+                        $this->addMessageToDB($from_id, $msg, false);
+                        $connected = true;
+                    }
                     break;
                 }
                 case 'notification': {
@@ -81,9 +102,9 @@
                 }
             }
             if (!$sent && !$connected)
-                echo 'Message did not send because users is not connected!' . PHP_EOL;
+                echo "Message from id:$from_id to id:$msg[to] did not send because users aren't connected!" . PHP_EOL;
             if (!$sent && $connected)
-                echo 'Message did not send via ws, but stored in DB' . PHP_EOL;
+                echo "Message [$msg[msg]] from id:$from_id to id:$msg[to] did not send via ws, but stored in DB" . PHP_EOL;
 
         }
         
@@ -98,13 +119,34 @@
             $conn->close();
         }
         
-        public function addMessageToDB($from, $msg) {
+        public function addMessageToDB($from, $msg, $read) {
             ChatHistory::create([
                 'sender' => $from,
                 'recipient' => $msg['to'],
                 'message' => $msg['msg'],
+                'read' => $read,
                 'date' => Carbon::now()
             ]);
+        }
+        
+        protected function getParamsAndValidate($params) {
+            if (!$params)
+                return false;
+            $params = explode('&', $params);
+            
+            foreach ($params as $item) {
+                $result = explode('=', $item);
+                $privacy[$result[0]] = $result[1];
+            }
+           
+            if (preg_match('/^user$/', $privacy['from'])
+                    && preg_match('/^user$/', $privacy['to']))
+                return 'notification';
+            elseif (preg_match('/^[0-9]{1,}$/', $privacy['from'])
+                    && preg_match('/^[0-9]{1,}$/', $privacy['to']))
+                return $privacy;
+            else
+                return false;
         }
         
         public function connectionMessage($conn) {
@@ -115,6 +157,5 @@
     
         public function messageSend($from, $to, $msg) {
             echo "User[$from] has sent message[$msg] to user[$to]" . PHP_EOL;
-            return true;
         }
     }

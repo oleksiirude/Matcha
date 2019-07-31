@@ -674,6 +674,7 @@ img {
 }
 .comments .comment time, .comments .comment {
     font-weight: 300;
+    word-wrap: break-word;
 }
 .comments .comment p {
     font-size: 13px;
