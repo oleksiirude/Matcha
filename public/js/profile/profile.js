@@ -3,8 +3,52 @@ let canvas  = document.getElementById('canvas'),
     result = document.getElementById('result');
 // let cropper;
 
-let show_element = function(id) {
-    document.getElementById(id).hidden = false;
+let show_element = function(id, error) {
+    if (document.getElementById(id).hidden == true) {
+        document.getElementById(id).hidden = false;
+        document.getElementById(error).hidden = true;
+    }
+    else {
+        document.getElementById(id).hidden = true;
+        document.getElementById(error).hidden = true;
+    }
+};
+
+document.getElementById('fill_profile').addEventListener('click', function () {
+    if (document.getElementById('fill_profile').hidden == true)
+        document.getElementById('fill_profile').hidden = false;
+    else
+        document.getElementById('fill_profile').hidden = true;
+});
+
+let delete_tag =  function (tag) {
+    console.log('DELETE', tag);
+    let idform = tag + '_form';
+    let form = new FormData(document.getElementById(idform));
+    let XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
+    let xhr = new XHR();
+    xhr.responseType = 'json';
+    let url = '/delete/tag/' + tag;
+    xhr.open('POST', url, true);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState !== 4) {
+            return;
+        }
+        if (xhr.status === 200) {
+            let string = xhr.response;
+            if (string.result == true) {
+                document.getElementById(tag + '_li').remove();
+                update_raiting(string.rating);
+                update_fill_profile(string.empty);
+
+            } else if (string.result == false) {
+
+
+            }
+            console.log('res', string);
+        }
+    };
+    xhr.send(form);
 }
 
 let upload_crop_avatar = function() {
@@ -173,6 +217,7 @@ let update_fill_profile = function(text_fill) {
         div.hidden = true;
     }
     else {
+        document.getElementById('fill_profile').hidden = false;
         div.innerHTML = "";
         div.innerHTML = "&#9758; Hey! For more efficient search <b>you should</b>:";
         let ul = document.createElement('ul');
@@ -200,7 +245,6 @@ let update_fill_profile = function(text_fill) {
     console.log('_______________div', div, text_fill);
 
 };
-
 
 // let textarea = document.querySelector('textarea');
 //

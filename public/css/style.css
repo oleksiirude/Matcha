@@ -21,13 +21,59 @@ input, textarea {
     color: rgba(68, 79, 87, 0.8);
 }
 
+/*input[type="checkbox"]:not(checked) {*/
+/*    position: absolute;*/
+/*    opacity: 0;*/
+/*}*/
+/*input[type="checkbox"]:not(checked) + label {*/
+/*    position: relative;*/
+/*    padding: 0 0 0 45px;*/
+/*}*/
+
+/*input[type="checkbox"]:not(checked) + label:before {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    !*top: -4px;*!*/
+/*    left: 0;*/
+/*    width: 35px;*/
+/*    height: 20px;*/
+/*    border-radius: 13px;*/
+/*    background: #CDD1DA;*/
+/*    box-shadow: inset 0 2px 3px rgba(0,0,0,.2);*/
+/*}*/
+
+/*input[type="checkbox"]:not(checked) + label:after {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    top: 2px;*/
+/*    left: 2px;*/
+/*    width: 15px;*/
+/*    height: 15px;*/
+/*    border-radius: 10px;*/
+/*    background: #FFF;*/
+/*    box-shadow: 0 2px 5px rgba(0,0,0,.3);*/
+/*    transition: all .2s;*/
+/*}*/
+
+/*input[type="checkbox"]:checked + label:before {*/
+/*    background: var(--main-color);*/
+/*}*/
+
+/*input[type="checkbox"]:checked + label:after {*/
+/*    left: 19px;*/
+/*}*/
+
+
 p {
     margin-top: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 h2 {
     /*color: var(--main_one_color);*/
+}
+button:focus {
+    outline: none;
 }
 :focus {
     outline: #e6e6e6 auto 2px;
@@ -298,6 +344,7 @@ a:hover {
 }
 #interests_tags li:hover {
     color: rgba(68, 79, 87, 0.4);
+    text-decoration: line-through;
 }
 #add_interests_img {
     width: 30px;
@@ -310,13 +357,13 @@ a:hover {
     /*margin-top: 60px;*/
     width: calc(100% - 100px);
 }
-#change_password_title, #interests_tags_title, #age_title {
+#change_password_title, #interests_tags_title, #age_title, #change_geo_title {
     color: rgba(68, 79, 87, 0.4);
 }
 #user_age {
     color: rgba(68, 79, 87, 0.8);
 }
-#change_password_title:hover, #age_title:hover, #user_age:hover {
+#change_password_title:hover, #age_title:hover, #user_age:hover, #change_geo_title:hover {
     color: rgba(68, 79, 87, 0.8);
     cursor: pointer;
 }
@@ -438,6 +485,7 @@ a:hover {
     /*left: 350px;*/
     display: flex;
     margin-bottom: 20px;
+    font-size: 42px;
     /*position: relative;*/
     /*position: absolute;*/
     max-height: 140px;
@@ -446,7 +494,6 @@ a:hover {
     position: relative;
     /*z-index: 999;*/
     background-color: transparent;
-    font-size: 42px;
     font-weight: bold;
     /*left: -5%;*/
     /*top: -100px;*/
@@ -479,7 +526,7 @@ a:hover {
     text-align: center;
     color: darkred;
 }
-label {
+label, .title_data {
     color: rgba(68, 79, 87, 0.4);
 }
 #gender, #preferences {
@@ -662,4 +709,136 @@ img {
 }
 #opponents_block {
     background: #f2ffec;
+}
+/* end styles for chat*/
+
+/*other users profile*/
+.action_to_user {
+    width: 100%;
+    display: flex;
+    text-align: center;
+    margin-top: 20px;
+}
+.action_to_user  button{
+    border: none;
+    background-color: transparent;
+    color: rgba(68, 79, 87, 0.8);
+    opacity: 0.5;
+    filter: grayscale(100%);
+}
+.action_to_user  button:hover {
+    opacity: 1;
+    filter: grayscale(50%);
+}
+.action_to_user .liked {
+    opacity: 1;
+    filter: none;
+}
+.action_to_user .liked:hover {
+    opacity: 0.5;
+    filter: none;
+}
+.action_to_user  button img,  .action_to_user  span img{
+    width: 25px;
+
+}
+#fake_error_msg {
+    position: absolute;
+    margin-top: 30px;
+    margin-left: -30px;
+}
+#like_to_me, #love_notifications span {
+    text-align: center;
+    color: #FFAF7B;
+}
+
+
+/*geo*/
+
+#map {
+    height: 500px;
+    width: 100%;
+}
+
+/*#map div {*/
+/*    position: relative;*/
+/*    width: 500px;*/
+/*    height: 500px;*/
+/*}*/
+/*html, body {*/
+/*    height: 100%;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
+#description {
+    font-size: 15px;
+    font-weight: 300;
+}
+
+#infowindow-content .title {
+    font-weight: bold;
+}
+
+#infowindow-content {
+    display: none;
+}
+
+#map #infowindow-content {
+    display: inline;
+}
+
+.pac-card {
+    margin: 10px 10px 0 0;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+}
+
+#pac-container {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-right: 12px;
+}
+
+.pac-controls {
+    display: none;
+    padding: 5px 11px;
+}
+
+.pac-controls label {
+    font-size: 13px;
+    font-weight: 300;
+}
+
+#pac-input {
+    background-color: #fff;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 400px;
+}
+
+#pac-input:focus {
+    border-color: #4d90fe;
+}
+
+#title {
+    color: #fff;
+    background: var(--main-color-ob);
+    background: var(--main-color-ob1);
+    background: var(--main-color);
+    font-size: 25px;
+    font-weight: 500;
+    padding: 6px 12px;
+}
+
+#geo_form {
+    display: inline-block;
+    margin-bottom: 10px;
+>>>>>>> 2071b9a127bbedcfe61f1730f0f81e7805abddfb
 }
