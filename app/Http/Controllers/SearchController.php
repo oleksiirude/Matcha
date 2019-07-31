@@ -26,7 +26,7 @@
                     SortController::sortByDefault($profiles))
             ));
             
-            return view('searching.searching', ['profiles' => $profiles->paginate(10)]);
+            return view('searching.searching', ['profiles' => $profiles->paginate(12)]);
         }
         
         public function findFilterSort(Request $request) {

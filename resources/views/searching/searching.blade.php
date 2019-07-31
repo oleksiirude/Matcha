@@ -10,11 +10,11 @@
 @section('content')
     <div class="search_container" id="main_container">
         <div class="row">
-            <div class="">
+            <div class="" style="width: 100%">
 
-                <filter-component url="{{ route('find.filter.sort') }}"></filter-component>
+                <filter-component url="{{ route('find.filter.sort') }}" url_default="{{ route('searching') }}"></filter-component>
 
-                <div class="card">
+                <div class="card" class=" col-lg-9 col-md-9 col-sm-9 col-xs-9">
                     <div class="card-header">Profiles which you will probably like</div>
                     <div class="flex-center position-ref full-height">
                         <div class="card-body">
