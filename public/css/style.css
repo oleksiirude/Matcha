@@ -582,3 +582,84 @@ img {
 /*    color: #f00;*/
 /*    width: 300px;*/
 /*}*/
+
+/* styles for chat*/
+.comments-main{
+    background: #DDD;
+}
+.comment time, .comment:hover time {
+    -webkit-transition: .25s opacity linear;
+    transition: .25s opacity linear;
+}
+.comments-main ul li{
+    list-style: none;
+}
+.comments .comment {
+    padding: 5px 10px;
+    background: #FFF;
+    margin-left: 4%;
+    margin-right: 4%;
+}
+.comments .comment:hover time{
+    opacity: 1;
+    margin-right: 4%;
+}
+.comments .user-img img {
+    width: 50px;
+    height: 50px;
+}
+.comments .comment h4 {
+    display: inline-block;
+    font-size: 16px;
+}
+.comments .comment h4 a {
+    color: #404040;
+    text-decoration: none;
+}
+.comments .comment {
+    color: #545454;
+    font-size: .85rem;
+}
+.comments .comment time,.comments .comment ,.comments .comment {
+    font-size: .75rem;
+    opacity: 0;
+    margin-right: 4%;
+}
+.comments .comment time, .comments .comment {
+    font-weight: 300;
+}
+.comments .comment p {
+    font-size: 13px;
+}
+.comments .comment p {
+    color: black;
+    cursor: pointer;
+}
+.comments .comment {
+    opacity: 1;
+}
+.comments .comment:hover .comments .comment:hover {
+    opacity: 1;
+}
+.comment-box-main{
+    background: #A1A1A1;
+}
+@media (min-width: 320px) and (max-width: 480px) {
+    .comments .comment h4 {
+        font-size: 12px;
+    }
+    .comments .comment p{
+        font-size: 11px;
+    }
+    .comment-box-main .send-btn button{
+        margin-left: 5px;
+    }
+}
+#send-msg:active {
+    background-color: #00AF90;
+    box-shadow: 0 5px #666;
+    transform: translateY(2px);
+}
+#opponents_block {
+    background: #f2ffec;
+}

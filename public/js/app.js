@@ -2958,29 +2958,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var from = this.id_from;
     var to = this.id_to;
+    var you = this.you;
+    var opponent = this.opponent;
+    var your_avatar = this.your_avatar;
+    var opponents_avatar = this.opponents_avatar;
     var conn = new WebSocket('ws://localhost:8081');
 
     conn.onopen = function () {
@@ -2989,19 +2974,22 @@ __webpack_require__.r(__webpack_exports__);
 
     conn.onmessage = function (e) {
       var msg = JSON.parse(e.data);
-      console.log(msg);
+      addMessageFromUser(msg);
     };
 
     var send = document.getElementById('send-msg');
 
     if (send) {
       send.addEventListener('click', sendMessage);
-    }
+    } // automatically scroll to the newest message in the history
+
+
+    scrollToButtom();
 
     function sendMessage() {
       var textarea = document.getElementById('textarea');
       var msg = textarea.value;
-      if (msg.length === 0) return;
+      if (msg.length === 0 || msg.length > 500) return;
       textarea.value = "";
       var box = {
         'action': 'chat',
@@ -3009,7 +2997,75 @@ __webpack_require__.r(__webpack_exports__);
         'to': to,
         'msg': msg
       };
+      addMessageFromMe(msg);
       conn.send(JSON.stringify(box));
+    }
+
+    function addMessageFromUser(msg) {
+      var main_div = document.createElement('div');
+      main_div.className = 'row comments mb-2';
+      var div_for_avatar = document.createElement('div');
+      div_for_avatar.className = 'col-md-2 col-sm-2 col-3 text-center user-img';
+      var avatar = document.createElement('img');
+      avatar.className = 'rounded-circle';
+      avatar.src = opponents_avatar;
+      div_for_avatar.appendChild(avatar);
+      var div_for_message = document.createElement('div');
+      div_for_message.id = 'opponents_block';
+      div_for_message.className = 'col-md-9 col-sm-9 col-9 comment rounded mb-2';
+      var h4 = document.createElement('h4');
+      h4.className = "m-0 float-left";
+      h4.innerHTML = opponent;
+      var time_tag = document.createElement('time');
+      time_tag.className = 'text-grey ml-3 float-left';
+      time_tag.innerHTML = new Date().toISOString().substr(0, 19).replace('T', ' ');
+      var p = document.createElement('p');
+      p.className = 'mb-0 text-black';
+      p.innerHTML = msg;
+      div_for_message.append(h4, time_tag, document.createElement('br'), p);
+      main_div.append(div_for_message, div_for_avatar);
+      var ul = document.createElement('ul');
+      ul.className = 'p-0';
+      var li = document.createElement('li');
+      document.getElementById('chat').appendChild(ul.appendChild(li.appendChild(main_div)));
+      var chat = document.getElementById("chat");
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function addMessageFromMe(msg) {
+      var main_div = document.createElement('div');
+      main_div.className = 'row comments mb-2';
+      var div_for_avatar = document.createElement('div');
+      div_for_avatar.className = 'col-md-2 col-sm-2 col-3 text-center user-img';
+      var avatar = document.createElement('img');
+      avatar.className = 'rounded-circle';
+      avatar.src = your_avatar;
+      div_for_avatar.appendChild(avatar);
+      var div_for_message = document.createElement('div');
+      div_for_message.id = 'my_block';
+      div_for_message.className = 'col-md-9 col-sm-9 col-9 comment rounded mb-2';
+      var h4 = document.createElement('h4');
+      h4.className = "m-0 float-left";
+      h4.innerHTML = you;
+      var time_tag = document.createElement('time');
+      time_tag.className = 'text-grey ml-3 float-left';
+      time_tag.innerHTML = new Date().toISOString().substr(0, 19).replace('T', ' ');
+      var p = document.createElement('p');
+      p.className = 'mb-0 text-black';
+      p.innerHTML = msg;
+      div_for_message.append(h4, time_tag, document.createElement('br'), p);
+      main_div.append(div_for_avatar, div_for_message);
+      var ul = document.createElement('ul');
+      ul.className = 'p-0';
+      var li = document.createElement('li');
+      document.getElementById('chat').appendChild(ul.appendChild(li.appendChild(main_div)));
+      var chat = document.getElementById("chat");
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function scrollToButtom() {
+      var chat = document.getElementById('chat');
+      chat.scrollTop = chat.scrollHeight;
     }
   },
   data: function data() {
@@ -7480,7 +7536,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nbody[data-v-ffc090fe]{\n    font-family: 'Raleway', sans-serif;\n    background: #E9ECE9;\n}\n.comments-main[data-v-ffc090fe]{\n    background: #DDD;\n}\n.comment time[data-v-ffc090fe], .comment:hover time[data-v-ffc090fe] {\n    -webkit-transition: .25s opacity linear;\n    transition: .25s opacity linear;\n}\n.comments-main ul li[data-v-ffc090fe]{\n    list-style: none;\n}\n.comments .comment[data-v-ffc090fe] {\n    padding: 5px 10px;\n    background: #FFF;\n    margin-left: 4%;\n    margin-right: 4%;\n}\n.comments .comment:hover time[data-v-ffc090fe]{\n    opacity: 1;\n    margin-right: 4%;\n}\n.comments .user-img img[data-v-ffc090fe] {\n    width: 50px;\n    height: 50px;\n}\n.comments .comment h4[data-v-ffc090fe] {\n    display: inline-block;\n    font-size: 16px;\n}\n.comments .comment h4 a[data-v-ffc090fe] {\n    color: #404040;\n    text-decoration: none;\n}\n.comments .comment[data-v-ffc090fe] {\n    color: #545454;\n    font-size: .85rem;\n}\n.comments .comment time[data-v-ffc090fe],.comments .comment[data-v-ffc090fe],.comments .comment[data-v-ffc090fe] {\n    font-size: .75rem;\n    opacity: 0;\n    margin-right: 4%;\n}\n.comments .comment time[data-v-ffc090fe], .comments .comment[data-v-ffc090fe] {\n    font-weight: 300;\n}\n.comments .comment p[data-v-ffc090fe] {\n    font-size: 13px;\n}\n.comments .comment p[data-v-ffc090fe] {\n    color: black;\n    cursor: pointer;\n}\n.comments .comment[data-v-ffc090fe] {\n    opacity: 1;\n}\n.comments .comment:hover .comments .comment[data-v-ffc090fe]:hover {\n    opacity: 1;\n}\n.comment-box-main[data-v-ffc090fe]{\n    background: #A1A1A1;\n}\n@media (min-width: 320px) and (max-width: 480px) {\n.comments .comment h4[data-v-ffc090fe] {\n        font-size: 12px;\n}\n.comments .comment p[data-v-ffc090fe]{\n        font-size: 11px;\n}\n.comment-box-main .send-btn button[data-v-ffc090fe]{\n        margin-left: 5px;\n}\n}\n#btn-send[data-v-ffc090fe]:active {\n    background-color: #00AF90;\n    box-shadow: 0 5px #666;\n    -webkit-transform: translateY(2px);\n            transform: translateY(2px);\n}\n#opponents_block[data-v-ffc090fe] {\n    background: #f2ffec;\n}\n\n", ""]);
+exports.push([module.i, "\n#chat[data-v-ffc090fe]::-webkit-scrollbar { width: 0 !important\n}\n#chat[data-v-ffc090fe] {\n    overflow: -moz-scrollbars-none;\n    scrollbar-width: none;\n    overflow: auto;\n    max-height: 60vh;\n    overflow-x: hidden;\n}\n", ""]);
 
 // exports
 
@@ -39888,99 +39944,103 @@ var render = function() {
               "col-md-6 offset-md-3 col-sm-6 offset-sm-3 col-12 comments-main pt-4 rounded"
           },
           [
-            _vm._l(_vm.mutableHistory, function(item) {
-              return _c("ul", { staticClass: "p-0" }, [
-                item.sender.toString() === _vm.id_from
-                  ? _c("li", [
-                      _c("div", { staticClass: "row comments mb-2" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "col-md-2 col-sm-2 col-3 text-center user-img"
-                          },
-                          [
-                            _c("img", {
-                              staticClass: "rounded-circle",
-                              attrs: { src: _vm.your_avatar }
-                            })
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "col-md-9 col-sm-9 col-9 comment rounded mb-2",
-                            attrs: { id: "my_block" }
-                          },
-                          [
-                            _c("h4", { staticClass: "m-0 float-left" }, [
-                              _c("span", [_vm._v(_vm._s(_vm.you))])
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "time",
-                              { staticClass: "text-grey ml-3 float-left" },
-                              [_vm._v(_vm._s(item.date))]
-                            ),
-                            _c("br"),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "mb-0 text-black" }, [
-                              _vm._v(_vm._s(item.message))
-                            ])
-                          ]
-                        )
+            _c(
+              "div",
+              { attrs: { id: "chat" } },
+              _vm._l(_vm.mutableHistory, function(item) {
+                return _c("ul", { staticClass: "p-0" }, [
+                  item.sender.toString() === _vm.id_from
+                    ? _c("li", [
+                        _c("div", { staticClass: "row comments mb-2" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "col-md-2 col-sm-2 col-3 text-center user-img"
+                            },
+                            [
+                              _c("img", {
+                                staticClass: "rounded-circle",
+                                attrs: { src: _vm.your_avatar }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "col-md-9 col-sm-9 col-9 comment rounded mb-2",
+                              attrs: { id: "my_block" }
+                            },
+                            [
+                              _c("h4", { staticClass: "m-0 float-left" }, [
+                                _vm._v(_vm._s(_vm.you))
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "time",
+                                { staticClass: "text-grey ml-3 float-left" },
+                                [_vm._v(_vm._s(item.date))]
+                              ),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "mb-0 text-black" }, [
+                                _vm._v(_vm._s(item.message))
+                              ])
+                            ]
+                          )
+                        ])
                       ])
-                    ])
-                  : _c("li", [
-                      _c("div", { staticClass: "row comments mb-2" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "col-md-9 col-sm-9 col-9 comment rounded mb-2",
-                            attrs: { id: "opponents_block" }
-                          },
-                          [
-                            _c("h4", { staticClass: "m-0 float-right" }, [
-                              _c("span", [_vm._v(_vm._s(_vm.opponent))])
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "time",
-                              { staticClass: "text-grey ml-3 float-right" },
-                              [_vm._v(_vm._s(item.date))]
-                            ),
-                            _c("br"),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "mb-0 text-black" }, [
-                              _vm._v(_vm._s(item.message))
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "col-md-2 col-sm-2 col-3 text-center user-img"
-                          },
-                          [
-                            _c("img", {
-                              staticClass: "rounded-circle",
-                              attrs: { src: _vm.opponents_avatar }
-                            })
-                          ]
-                        )
+                    : _c("li", [
+                        _c("div", { staticClass: "row comments mb-2" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "col-md-9 col-sm-9 col-9 comment rounded mb-2",
+                              attrs: { id: "opponents_block" }
+                            },
+                            [
+                              _c("h4", { staticClass: "m-0 float-right" }, [
+                                _vm._v(_vm._s(_vm.opponent))
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "time",
+                                { staticClass: "text-grey ml-3 float-right" },
+                                [_vm._v(_vm._s(item.date))]
+                              ),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "mb-0 text-black" }, [
+                                _vm._v(_vm._s(item.message))
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "col-md-2 col-sm-2 col-3 text-center user-img"
+                            },
+                            [
+                              _c("img", {
+                                staticClass: "rounded-circle",
+                                attrs: { src: _vm.opponents_avatar }
+                              })
+                            ]
+                          )
+                        ])
                       ])
-                    ])
-              ])
-            }),
+                ])
+              }),
+              0
+            ),
             _vm._v(" "),
             _vm._m(0)
-          ],
-          2
+          ]
         )
       ])
     ]
@@ -39998,7 +40058,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "col-md-9 col-sm-9 col-9 pr-0 comment-box" }, [
           _c("input", {
             staticClass: "form-control",
-            attrs: { type: "text", placeholder: "Type here..." }
+            attrs: { id: "textarea", type: "text", placeholder: "Type here..." }
           })
         ]),
         _vm._v(" "),
@@ -40008,7 +40068,7 @@ var staticRenderFns = [
           [
             _c(
               "button",
-              { staticClass: "btn btn-primary", attrs: { id: "btn-send" } },
+              { staticClass: "btn btn-primary", attrs: { id: "send-msg" } },
               [_vm._v("Send")]
             )
           ]

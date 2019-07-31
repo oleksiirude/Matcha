@@ -22,6 +22,7 @@
         }
         
         public function onOpen(ConnectionInterface $conn) {
+            var_dump($conn->resourceId);
             $session = (new SessionManager(App::getInstance()))->driver();
             $cookies = explode(' ', $conn->httpRequest->getHeader('Cookie')[0]);
     
