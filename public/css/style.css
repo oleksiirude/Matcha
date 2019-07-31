@@ -757,3 +757,38 @@ img {
     display: inline-block;
     margin-bottom: 10px;
 }
+
+/*users*/
+.list_users {
+    text-align: left;
+    border: 1px solid #e6e6e6;
+    margin: 5px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    /*display: inline-block;*/
+}
+.list_users_avatar_div {
+    display: inline-block;
+}
+.list_users_avatar {
+    width:60px;
+    border-radius: 50%;
+}
+.list_users_info {
+    display: inline-block;
+    vertical-align: middle;
+}
+.list_users a {
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    color: rgba(68, 79, 87, 0.8);
+    font-weight: bold;
+}
+.list_users a:hover {
+    text-decoration: none;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+}
+.list_users_activity {
+    color: rgba(68, 79, 87, 0.3);
+}

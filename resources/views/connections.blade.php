@@ -9,11 +9,11 @@
                     <div class="card-body">
                         @if (count($profiles))
                             @foreach($profiles as $profile)
-                                <div style="background-color: darkgrey">
+                                <div class="list_users">
                                     <p>
                                         <a href="{{ route('show.certain.user', $profile->login) }}">
                                             <img src="{{ URL::asset($profile->avatar) }}"
-                                                 alt="{{ $profile->login }}'s avatar" style="width: 60px"
+                                                 alt="{{ $profile->login }}'s avatar" class="list_users_avatar"
                                                  title="{{ $profile->login }}">
                                         </a>
                                         {{ $profile->name }} {{ $profile->surname }} |
