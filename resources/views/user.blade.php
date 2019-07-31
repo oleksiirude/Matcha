@@ -15,12 +15,11 @@
                                                  <span id="connect_span" @if(!$profile->connected) hidden  @endif>
                                                         <img src="{{asset('images/service/connect.png')}}" title="You are connected with {{ $profile->login }}">
                                                  </span>
-                                                @if($profile->connected && !$profile->blocked)
-                                                    <form action="{{ route('show.chat', $profile->login) }}" method="GET">
 
-                                                        <button type="submit"><img src="{{asset('images/service/chat.png')}}" title="go chatting with {{ $profile->login }}"></button>
-                                                    </form>
-                                                @endif
+                                                <form action="{{ route('show.chat', $profile->login) }}" method="GET" id="chat_form" @if(!$profile->connected || $profile->blocked) hidden @endif>
+                                                    <button type="submit"><img src="{{asset('images/service/chat.png')}}" title="go chatting with {{ $profile->login }}"></button>
+                                                </form>
+
 
 
                                                 {{--Blocking block--}}
@@ -60,8 +59,8 @@
                                                                 'id' => $profile->user_id,
                                                                 'login' => $profile->login
                                                                 ]) }}"
-                                                                like_me="{{ $profile->liked_me }}"                unmethod="PUT" method="DELETE" csrf = {{csrf_token()}}
-                                                                imgsrc="{{asset('images/service/like.png')}}"
+                                                                liked_me="{{ $profile->liked_me }}"                unmethod="PUT" method="DELETE" csrf = {{csrf_token()}}
+                                                                imgsrc="{{asset('images/service/like.png')}}" user="{{ $profile->login }}"
                                                                                 @if($profile->liked)
                                                                                 show="unlike"
                                                                                 @else
@@ -71,9 +70,7 @@
                                                 @endif
                                             </div>
                                             <div id="love_notifications">
-                                            @if ($profile->liked_me && !$profile->connected)
-                                                <p id="like_to_me">&#x2661; {{ $profile->login }} liked you ;) &#x2661;</p>
-                                            @endif
+                                                <p id="like_to_me"   @if (!$profile->liked_me || $profile->connected) hidden @endif>&#x2661; {{ $profile->login }} liked you ;) &#x2661;</p>
                                             </div>
                                         </div>
                                         <div>

@@ -130,6 +130,12 @@ textarea::-webkit-input-placeholder { color: rgba(68, 79, 87, 0.4); }
     position: absolute;
     z-index: 99;
 }
+/*menu*/
+.dropdown-menu a img {
+    width: 20px;
+    margin-left: 5px;
+    /*display: none;*/
+}
 
 /*main*/
 
@@ -357,7 +363,7 @@ a:hover {
     /*margin-top: 60px;*/
     width: calc(100% - 100px);
 }
-#change_password_title, #interests_tags_title, #age_title, #change_geo_title {
+#change_password_title, #interests_tags_title, #age_title, #change_geo_title, .title {
     color: rgba(68, 79, 87, 0.4);
 }
 #user_age {
@@ -726,6 +732,10 @@ img {
     color: rgba(68, 79, 87, 0.8);
     opacity: 0.5;
     filter: grayscale(100%);
+    padding: 0;
+}
+.action_to_user  button, .action_to_user span {
+    margin-right: 10px;
 }
 .action_to_user  button:hover {
     opacity: 1;
@@ -751,6 +761,7 @@ img {
 #like_to_me, #love_notifications span {
     text-align: center;
     color: #FFAF7B;
+    transition: font-size 3s, color 2s;
 }
 
 
@@ -841,5 +852,80 @@ img {
 #geo_form {
     display: inline-block;
     margin-bottom: 10px;
->>>>>>> 2071b9a127bbedcfe61f1730f0f81e7805abddfb
+}
+
+/*users*/
+.list_users {
+    text-align: left;
+    border: 1px solid #e6e6e6;
+    margin: 5px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    height: calc(100% - 10px);
+    /*display: inline-block;*/
+}
+.list_users_avatar_div {
+    display: inline-block;
+}
+.list_users_avatar {
+    width:60px;
+    border-radius: 50%;
+}
+.list_users_info {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 5px;
+    width: calc(100% - 100px);
+
+}
+#search_matches_div .list_users_info{
+    width: calc(100% - 160px);
+}
+
+.list_users a {
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    color: rgba(68, 79, 87, 0.8);
+    font-weight: bold;
+}
+.list_users a:hover {
+    text-decoration: none;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+}
+.list_users_activity {
+    color: rgba(68, 79, 87, 0.3);
+}
+
+/*search*/
+.search_container{
+    padding: 20px;
+
+}
+.page-item.active .page-link {
+    background-color: #FFAF7B;
+    border-color: #FFAF7B;
+}
+.page-link:focus {
+    z-index: 2;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(255, 175, 123, 0.25);
+}
+/*filters*/
+#filters_block {
+    width:25%;
+    float: left;
+    margin-left: 20px;
+}
+.my_slider {
+    margin-top: 40px;
+}
+.noUi-tooltip {
+    display: none;
+}
+.noUi-active .noUi-tooltip {
+    display: block;
+}
+.div_range {
+    display: none;
 }

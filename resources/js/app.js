@@ -39,6 +39,8 @@ Vue.component('location-component', require('./components/profile/LocationCompon
 Vue.component('gender-component', require('./components/profile/GenderComponent').default);
 Vue.component('preferences-component', require('./components/profile/PreferencesComponent').default);
 Vue.component('block-action-component', require('./components/users/BlockActionComponent').default);
+Vue.component('filter-component', require('./components/filters/FilterComponent').default);
+Vue.component('unblock-action-component', require('./components/users_list/BlockActionComponent').default);
 Vue.component('fake-action-component', require('./components/users/FakeActionComponent').default);
 Vue.component('like-action-component', require('./components/users/LikeActionComponent').default);
 Vue.component('chat-component', require('./components/ChatComponent').default);

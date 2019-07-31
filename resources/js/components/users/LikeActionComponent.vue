@@ -23,7 +23,7 @@
     export default {
         mounted() {
             let id = this.show + '_form';
-            console.log('like_me', this.like_me);
+            console.log('like_me', this.liked_me);
             document.getElementById(id).hidden = false;
         },
         props: [
@@ -39,7 +39,8 @@
             'title',
             'alt',
             'show',
-            'like_me'
+            'liked_me',
+            'user'
 
         ],
         data: function () {
@@ -69,16 +70,28 @@
                         if (string.result == true) {
                             if (this.mutableShow == 'like')
                             {
-                                if (this.like_me == 1) {
+                                if (this.liked_me == 1) {
                                     document.getElementById('connect_span').hidden = false;
                                     if (document.getElementById('like_to_me')) {
+                                        document.getElementById('like_to_me').hidden = false;
                                         document.getElementById('like_to_me').innerHTML = "&#x2661; IT IS A MATCH! &#x2661;";
+                                        document.getElementById('like_to_me').style.fontSize='24px';
+                                        document.getElementById('like_to_me').style.color='#D76D77';
+                                        document.getElementById('like_to_me').style.fontWeight='bold';
+                                        if (document.getElementById('unblock_form').hidden == true)
+                                        {
+                                            document.getElementById('chat_form').hidden = false;
+                                        }
+
                                         let func = function () {
                                             document.getElementById('like_to_me').innerHTML = '';
                                             document.getElementById('like_to_me').hidden = true;
+                                            document.getElementById('like_to_me').style.fontSize='0.9rem';
+                                            document.getElementById('like_to_me').style.fontWeight='normal';
+                                            document.getElementById('like_to_me').style.color='#FFAF7B';
                                         };
 
-                                        setTimeout(func, 2000);
+                                        setTimeout(func, 1200);
                                     }
                                     else {
                                         let span = document.createElement('span');
@@ -90,7 +103,7 @@
                                             div.removeChild(span);
                                         };
 
-                                        setTimeout(func, 2000);
+                                        setTimeout(func, 1200);
                                     }
                                 }
                                 document.getElementById(this.mutableShow + '_form').hidden = true;
@@ -99,27 +112,21 @@
                             }
                             else
                             {
+                                if (this.liked_me == 1) {
+                                    if (document.getElementById('like_to_me')) {
+                                    document.getElementById('like_to_me').hidden = false;
+                                    document.getElementById('like_to_me').innerHTML = "&#x2661; "+ this.user +" liked you ;) &#x2661;";
+                                    }
+                                    else {
+
+                                    }
+                                }
+                                document.getElementById('chat_form').hidden = true;
                                 document.getElementById('connect_span').hidden = true;
                                 document.getElementById(this.mutableShow + '_form').hidden = true;
                                 this.mutableShow = 'like';
                                 document.getElementById(this.mutableShow + '_form').hidden = false;
                             }
-
-                            // if (this.unaction)
-                            // {
-                            //     this.urlcurrent = this.mutableUnurl;
-                            //     this.mutableUnurl = this.mutableUrl;
-                            //     this.mutableUrl = this.urlcurrent;
-                            //     if (this.methodcurrent == "PUT")
-                            //         this.methodcurrent = "DELETE";
-                            //     else
-                            //         this.methodcurrent = "PUT";
-                            //     if (this.btn_classcurrent == "liked")
-                            //         this.btn_classcurrent = "";
-                            //     else
-                            //         this.btn_classcurrent = "liked";
-                            // }
-
 
                         }
                         console.log('vue', string);

@@ -128,7 +128,7 @@
                                     <a class="dropdown-item" href="{{ route('connections') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('connections-form').submit();">
-                                        {{ __('Connections') }}
+                                        {{ __('Connections') }}  <img src="{{asset('images/service/connect.png')}}">
                                     </a>
 
                                     <form id="connections-form" action="{{ route('connections') }}" method="GET" style="display: none;"></form>
@@ -137,7 +137,7 @@
                                     <a class="dropdown-item" href="{{ route('blocked.users') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('blocked-users-form').submit();">
-                                        {{ __('Blocked profiles') }}
+                                        {{ __('Blocked profiles') }} <img src="{{asset('images/service/block_color.png')}}">
                                     </a>
 
                                     <form id="blocked-users-form" action="{{ route('blocked.users') }}" method="GET" style="display: none;"></form>
@@ -148,7 +148,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Logout') }}<img src="{{asset('images/service/logout.png')}}">
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

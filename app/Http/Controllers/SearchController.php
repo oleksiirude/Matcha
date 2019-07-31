@@ -26,7 +26,7 @@
                     SortController::sortByDefault($profiles))
             ));
             
-            return view('searching.searching', ['profiles' => $profiles->paginate(10)]);
+            return view('searching.searching', ['profiles' => $profiles->paginate(12)]);
         }
         
         public function findFilterSort(Request $request) {
@@ -89,7 +89,7 @@
                   7 => "/^interests_to$/&/^[0-9]{1,2}$/",
                   8 => "/^sort$/&/^age|distance|rating|interests$/",
                   9 => "/^order$/&/^ascending|descending$/",
-                  10 => "/^profiles_per_page$/&/^5|10|20|all$/",
+                  10 => "/^profiles_per_page$/&/^6|12|24|all$/",
             ];
             
             $i = 0;
