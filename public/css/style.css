@@ -665,6 +665,7 @@ img {
 #like_to_me, #love_notifications span {
     text-align: center;
     color: #FFAF7B;
+    transition: font-size 3s, color 2s;
 }
 
 

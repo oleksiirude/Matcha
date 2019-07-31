@@ -69,12 +69,16 @@
                         if (string.result == true) {
                             if (this.mutableShow == 'block')
                             {
+                                document.getElementById('chat_form').hidden = true;
                                 document.getElementById(this.mutableShow + '_form').hidden = true;
                                 this.mutableShow = 'unblock';
                                 document.getElementById(this.mutableShow + '_form').hidden = false;
                             }
                             else
                             {
+                                if (document.getElementById('connect_span').hidden == false) {
+                                    document.getElementById('chat_form').hidden = false;
+                                }
                                 document.getElementById(this.mutableShow + '_form').hidden = true;
                                 this.mutableShow = 'block';
                                 document.getElementById(this.mutableShow + '_form').hidden = false;

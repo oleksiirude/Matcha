@@ -3339,10 +3339,15 @@ __webpack_require__.r(__webpack_exports__);
 
           if (string.result == true) {
             if (_this.mutableShow == 'block') {
+              document.getElementById('chat_form').hidden = true;
               document.getElementById(_this.mutableShow + '_form').hidden = true;
               _this.mutableShow = 'unblock';
               document.getElementById(_this.mutableShow + '_form').hidden = false;
             } else {
+              if (document.getElementById('connect_span').hidden == false) {
+                document.getElementById('chat_form').hidden = false;
+              }
+
               document.getElementById(_this.mutableShow + '_form').hidden = true;
               _this.mutableShow = 'block';
               document.getElementById(_this.mutableShow + '_form').hidden = false;
@@ -3482,10 +3487,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var id = this.show + '_form';
-    console.log('like_me', this.like_me);
+    console.log('like_me', this.liked_me);
     document.getElementById(id).hidden = false;
   },
-  props: ['action', 'unaction', 'value', 'method', 'url', 'unurl', 'unmethod', 'imgsrc', 'csrf', 'title', 'alt', 'show', 'like_me'],
+  props: ['action', 'unaction', 'value', 'method', 'url', 'unurl', 'unmethod', 'imgsrc', 'csrf', 'title', 'alt', 'show', 'liked_me', 'user'],
   data: function data() {
     return {
       mutableShow: this.show
@@ -3516,18 +3521,29 @@ __webpack_require__.r(__webpack_exports__);
 
           if (string.result == true) {
             if (_this.mutableShow == 'like') {
-              if (_this.like_me == 1) {
+              if (_this.liked_me == 1) {
                 document.getElementById('connect_span').hidden = false;
 
                 if (document.getElementById('like_to_me')) {
+                  document.getElementById('like_to_me').hidden = false;
                   document.getElementById('like_to_me').innerHTML = "&#x2661; IT IS A MATCH! &#x2661;";
+                  document.getElementById('like_to_me').style.fontSize = '24px';
+                  document.getElementById('like_to_me').style.color = '#D76D77';
+                  document.getElementById('like_to_me').style.fontWeight = 'bold';
+
+                  if (document.getElementById('unblock_form').hidden == true) {
+                    document.getElementById('chat_form').hidden = false;
+                  }
 
                   var func = function func() {
                     document.getElementById('like_to_me').innerHTML = '';
                     document.getElementById('like_to_me').hidden = true;
+                    document.getElementById('like_to_me').style.fontSize = '0.9rem';
+                    document.getElementById('like_to_me').style.fontWeight = 'normal';
+                    document.getElementById('like_to_me').style.color = '#FFAF7B';
                   };
 
-                  setTimeout(func, 2000);
+                  setTimeout(func, 1200);
                 } else {
                   var span = document.createElement('span');
                   span.innerHTML = "&#x2661; IT IS A MATCH! &#x2661;";
@@ -3539,7 +3555,7 @@ __webpack_require__.r(__webpack_exports__);
                     div.removeChild(span);
                   };
 
-                  setTimeout(_func, 2000);
+                  setTimeout(_func, 1200);
                 }
               }
 
@@ -3547,25 +3563,19 @@ __webpack_require__.r(__webpack_exports__);
               _this.mutableShow = 'unlike';
               document.getElementById(_this.mutableShow + '_form').hidden = false;
             } else {
+              if (_this.liked_me == 1) {
+                if (document.getElementById('like_to_me')) {
+                  document.getElementById('like_to_me').hidden = false;
+                  document.getElementById('like_to_me').innerHTML = "&#x2661; " + _this.user + " liked you ;) &#x2661;";
+                } else {}
+              }
+
+              document.getElementById('chat_form').hidden = true;
               document.getElementById('connect_span').hidden = true;
               document.getElementById(_this.mutableShow + '_form').hidden = true;
               _this.mutableShow = 'like';
               document.getElementById(_this.mutableShow + '_form').hidden = false;
-            } // if (this.unaction)
-            // {
-            //     this.urlcurrent = this.mutableUnurl;
-            //     this.mutableUnurl = this.mutableUrl;
-            //     this.mutableUrl = this.urlcurrent;
-            //     if (this.methodcurrent == "PUT")
-            //         this.methodcurrent = "DELETE";
-            //     else
-            //         this.methodcurrent = "PUT";
-            //     if (this.btn_classcurrent == "liked")
-            //         this.btn_classcurrent = "";
-            //     else
-            //         this.btn_classcurrent = "liked";
-            // }
-
+            }
           }
 
           console.log('vue', string);
@@ -54139,8 +54149,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/matcha_start/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/matcha_start/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/dpiven/http/MyWebSite/Matcha/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/dpiven/http/MyWebSite/Matcha/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
