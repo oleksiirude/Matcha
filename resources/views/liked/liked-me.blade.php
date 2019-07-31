@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">Profiles liked me</div>
+                    <div class="card-header">Profiles, who liked me</div>
                     <div class="row card-body">
                         @if (count($profiles))
                             @foreach($profiles as $profile)
@@ -27,39 +27,44 @@
                                                         <span>{{ $profile->last_activity }}</span>
                                                     @endif
                                                 </div>
-                                                @if($profile->connected && !$profile->blocked)
-                                                     <span style="color: #1d643b; font-weight: bold">You are connected with {{ $profile->login }}</span>
+                                                <div id="action_to_user" class="action_to_user">
+                                                    @if($profile->connected && !$profile->blocked)
+                                                         <span style="color: #1d643b; font-weight: bold">
+                                                             <img src="{{asset('images/service/connect.png')}}" title="You are connected with {{ $profile->login }}">
+                                                         </span>
 
-                                                    <form action="{{ route('show.chat', $profile->login) }}" method="GET">
+                                                        <form action="{{ route('show.chat', $profile->login) }}" method="GET">
 
-                                                        <button type="submit">go chatting with {{ $profile->login }}</button>
-                                                    </form>
-                                                @endif
-
-                                                {{--Like block--}}
-                                                @if($profile->auth_user_avatar_uploaded)
-                                                    @if($profile->liked)
-                                                        <form action="{{ route('unlike.user', [
-                                                                    'id' => $profile->user_id,
-                                                                    'login' => $profile->login
-                                                                    ]) }}" method="POST">
-                                                            @method('DELETE')
-                                                            @csrf
-
-                                                            <button type="submit">unlike</button>
-                                                        </form>
-                                                    @else
-                                                        <form action="{{ route('like.user', [
-                                                                     'id' => $profile->user_id,
-                                                                     'login' => $profile->login
-                                                                     ]) }}" method="POST">
-                                                            @method('PUT')
-                                                            @csrf
-
-                                                            <button type="submit">like back</button>
+                                                            <button type="submit"><img src="{{asset('images/service/chat.png')}}" title="go chatting with {{ $profile->login }}"></button>
                                                         </form>
                                                     @endif
-                                                @endif
+
+                                                    {{--Like block--}}
+                                                    @if($profile->auth_user_avatar_uploaded)
+                                                        @if($profile->liked)
+                                                            <form action="{{ route('unlike.user', [
+                                                                        'id' => $profile->user_id,
+                                                                        'login' => $profile->login
+                                                                        ]) }}" method="POST">
+                                                                @method('DELETE')
+                                                                @csrf
+                                                                <button type="submit" class="liked">
+                                                                    <img src="{{asset('images/service/like.png')}}" title="unlike user" alt="unlike">
+                                                                </button>
+                                                            </form>
+                                                        @else
+                                                            <form action="{{ route('like.user', [
+                                                                         'id' => $profile->user_id,
+                                                                         'login' => $profile->login
+                                                                         ]) }}" method="POST">
+                                                                @method('PUT')
+                                                                @csrf
+
+                                                                <button type="submit"><img src="{{asset('images/service/like.png')}}" title="like back" alt="like back"></button>
+                                                            </form>
+                                                        @endif
+                                                    @endif
+                                                </div>
                                             </div>
                                         </a>
                                     </div>
