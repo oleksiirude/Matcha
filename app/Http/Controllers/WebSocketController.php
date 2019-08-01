@@ -7,6 +7,7 @@
     use Crypt;
     use Auth;
     use App\ChatHistory;
+    use App\Notification;
     use Illuminate\Session\SessionManager;
     use Ratchet\MessageComponentInterface;
     use Ratchet\ConnectionInterface;
@@ -36,7 +37,7 @@
             
             // if validation fails - forbid connection
             if (!$decrypted_session) {
-                echo 'matcha_session did not find, connecting denied!' . PHP_EOL;
+                echo 'matcha_session was not found, connecting denied!' . PHP_EOL;
                 return ;
             }
             
@@ -47,13 +48,12 @@
             $privacy = $this->getParamsAndValidate($conn->httpRequest->getUri()->getQuery());
     
             // if validation fails - forbid connection
-            if (!$privacy) {
+            if ($privacy === 'bastard') {
                 echo 'Bastard detected, connection abort' . PHP_EOL;
                 return ;
             }
             
             $conn->privacy = $privacy;
-            
             $this->users->attach($conn);
             $this->connectionMessage($conn);
         }
@@ -61,12 +61,15 @@
         public function onMessage(ConnectionInterface $from, $msg) {
             $from->session->start();
             $from_id = $from->session->get(Auth::getName());
-    
+            
             // decode json data into php array
             $msg = json_decode($msg, true);
             
+            if (!$this->checkBlockingAndConnection($from, $from_id, $msg))
+                return;
+            
             // act regarding to action
-            $sent = false; $connected = false;
+            $received = false;
             switch ($msg['action']) {
                 case 'chat': {
                     // listing all connections
@@ -75,55 +78,120 @@
                         // check if id into user's session is equal to id from front-end
                         if ($id === (int)$msg['to']) {
                             // check if 2 users have connection
-                            $connected = $this->checkIfConnected($from_id, $msg['to']);
                             // if connection check failed - break down
-                            if (!$connected) {
-                                continue;
+                            if (!$this->checkIfConnected($from_id, $msg['to'])) {
+                                $from->send(json_encode(['chat' => true, 'not-connected' => true, 'msg' => 'not-connected']));
+                                echo "User[$from_id] has no connection with user[$msg[to]]. Conversation aborted" . PHP_EOL;
+                                return;
                             }
+                            
                             // check if sender's id is equal to opponent's id in user's privacy settings
-                            if ((int)$user->privacy['to'] === $from_id) {
-                                $user->send(json_encode($msg['msg']));
-                                
-                                $this->addMessageToDB($from_id, $msg, true);
-                                $this->messageSend($from_id, $msg['to'], $msg['msg']);
-                                $sent = true;
-                            }
+                            // if user connected not in chat mode - user has privacy equal false, skip this user
+                            if ($user->privacy)
+                                if ((int)$user->privacy['to'] === $from_id) {
+                                    $user->send(json_encode(['chat' => true, 'msg' => $msg['msg']]));
+                                    $this->addMessageToDB($from_id, $msg, true);
+                                    $this->messageSend($from_id, $msg['to'], $msg['msg'], true);
+                                    $received = true;
+                                }
                         }
                     }
                     // if receiver isn't connected to ws server, but has connection with opponent -> only save message in db
-                    if (!$sent && $this->checkIfConnected($from_id, $msg['to'])) {
+                    if (!$received && $this->checkIfConnected($from_id, $msg['to'])) {
                         $this->addMessageToDB($from_id, $msg, false);
-                        $connected = true;
+                        $this->messageSend($from_id, $msg['to'], $msg['msg'], false);
                     }
                     break;
                 }
                 case 'notification': {
+                    // listing all connections
+                    foreach ($this->users as $user) {
+                        $id = $user->session->get(Auth::getName());
+                        
+                        // check if id into user's session is equal to id from front-end
+                        if ($id === (int)$msg['to']) {
+                        $user->send(json_encode(['chat' => false, 'msg' => $msg['msg']]));
+                        $this->addNotificationToDB($msg, $from_id, true);
+                        $this->notificationSend($from_id, $msg['to'], $msg['msg'], true);
+                        
+                        $received = true;
+                        }
+                    }
+                    if (!$received) {
+                        $this->addNotificationToDB($msg, $from_id, false);
+                        $this->notificationSend($from_id, $msg['to'], $msg['msg'], false);
+                    }
                     break;
                 }
             }
-            if (!$sent && !$connected)
-                echo "Message from id:$from_id to id:$msg[to] did not send because users aren't connected!" . PHP_EOL;
-            if (!$sent && $connected)
-                echo "Message [$msg[msg]] from id:$from_id to id:$msg[to] did not send via ws, but stored in DB" . PHP_EOL;
-
         }
         
         public function onClose(ConnectionInterface $conn) {
             $this->users->detach($conn);
             $conn->session->start();
             $id = $conn->session->get(Auth::getName());
-            echo "User with id:$id has left the server" . PHP_EOL;
+            echo "User[$id] has left the server" . PHP_EOL;
         }
         
         public function onError(ConnectionInterface $conn, \Exception $e) {
             $conn->close();
         }
         
-        public function addMessageToDB($from, $msg, $read) {
+        
+        protected function checkBlockingAndConnection($from, $from_id, $msg) {
+            
+            // if opponent blocked user, refuse conversation attempt
+            if ($this->checkIfBlocked($from_id, $msg['to'])) {
+                $from->send(json_encode(['chat' => true, 'blocked' => true, 'msg' => 'blocked']));
+                echo "User[$from_id] blocked by user[$msg[to]]. Action aborted" . PHP_EOL;
+                return false;
+            }
+    
+            // if opponent blocked user, refuse conversation attempt
+            // reverse usage of function checkIfBlocked - here we refuse opponent's conversation attempt
+            if ($this->checkIfBlocked($msg['to'], $from_id)) {
+                $from->send(json_encode(['chat' => true, 'blocked' => true, 'msg' => 'blocked']));
+                echo "User[$from_id] blocked by user[$msg[to]]. Action aborted" . PHP_EOL;
+                return false;
+            }
+    
+            // if connection check failed - break down
+            if (!$this->checkIfConnected($from_id, $msg['to']) && $msg['action'] === 'chat') {
+                $from->send(json_encode(['chat' => true, 'not-connected' => true, 'msg' => 'not-connected']));
+                echo "User[$from_id] has no connection with user[$msg[to]]. Conversation aborted" . PHP_EOL;
+                return false;
+            }
+            
+            return true;
+        }
+        
+        protected function addMessageToDB($from_id, $msg, $read) {
             ChatHistory::create([
-                'sender' => $from,
+                'sender' => $from_id,
                 'recipient' => $msg['to'],
                 'message' => $msg['msg'],
+                'read' => $read,
+                'date' => Carbon::now()
+            ]);
+        }
+    
+        protected function addNotificationToDB($msg, $from_id, $read) {
+            $array = explode(' ', $msg['msg']);
+    
+            if ($msg['chat'] === true)
+                $link = asset('chat/with/' . $array[0]);
+            else
+                $link = asset('users/' . $array[0]);
+            
+            $login = array_shift($array);
+            $text = implode(' ', $array);
+            
+            Notification::create([
+                'user_id' => $msg['to'],
+                'from_id' => $from_id,
+                'login' => $login,
+                'link' => $link,
+                'title' => ' ' . $text,
                 'read' => $read,
                 'date' => Carbon::now()
             ]);
@@ -141,21 +209,32 @@
            
             if (preg_match('/^user$/', $privacy['from'])
                     && preg_match('/^user$/', $privacy['to']))
-                return 'notification';
+                return false;
             elseif (preg_match('/^[0-9]{1,}$/', $privacy['from'])
                     && preg_match('/^[0-9]{1,}$/', $privacy['to']))
                 return $privacy;
             else
-                return false;
+                return 'bastard';
         }
         
-        public function connectionMessage($conn) {
+        // functions for logging into CLI
+        protected function connectionMessage($conn) {
             $conn->session->start();
             $id = $conn->session->get(Auth::getName());
-            echo "User with id:$id has connected to the server" . PHP_EOL;
+            echo "User[$id] has connected to the server" . PHP_EOL;
         }
     
-        public function messageSend($from, $to, $msg) {
-            echo "User[$from] has sent message[$msg] to user[$to]" . PHP_EOL;
+        protected function messageSend($from, $to, $msg, $boolean) {
+            if ($boolean)
+                echo "User[$from] has sent message[$msg] to user[$to] [msg received, saved in db]" . PHP_EOL;
+            else
+                echo "User[$from] has sent message[$msg] to user[$to] [msg NOT received, saved in db]" . PHP_EOL;
+        }
+        
+        protected function notificationSend($from, $to, $notification, $boolean) {
+            if ($boolean)
+                echo "User[$from] has sent notification[$notification] to user[$to] [notification received, saved in db]" . PHP_EOL;
+            else
+                echo "User[$from] has sent notification[$notification] to user[$to] [notification NOT received, saved in db]" . PHP_EOL;
         }
     }

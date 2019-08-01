@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+
+    <notification-component id_from="{{ auth()->user()->id }}"
+                            id_to="{{ $profile->user_id }}"
+                            title="{{ auth()->user()->login . ' has checked your profile' }}"
+                            chat="false">
+    </notification-component>
+
     <div class="profile_container" id="main_container">
         <div class="row justify-content-center">
             <div class="">
@@ -19,8 +26,6 @@
                                                 <form action="{{ route('show.chat', $profile->login) }}" method="GET" id="chat_form" @if(!$profile->connected || $profile->blocked) hidden @endif>
                                                     <button type="submit"><img src="{{asset('images/service/chat.png')}}" title="go chatting with {{ $profile->login }}"></button>
                                                 </form>
-
-
 
                                                 {{--Blocking block--}}
                                                         <block-action-component unurl="{{ route('block.user', [
@@ -121,9 +126,6 @@
                                         </div>
 
                                     </div>
-
-
-
 
 
                                 </div>

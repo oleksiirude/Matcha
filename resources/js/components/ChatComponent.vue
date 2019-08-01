@@ -39,7 +39,7 @@
                         <input id="textarea" type="text" class="form-control" placeholder="Type here..." />
                     </div>
                     <div class="col-md-3 col-sm-2 col-2 pl-0 text-center send-btn">
-                        <button id="send-msg" class="btn btn-primary" @click="sendMessage">Send</button>
+                        <button id="send-msg" class="btn btn-primary">Send</button>
                     </div>
                 </div>
             </div>
@@ -48,27 +48,117 @@
 </template>
 
 <script>
+
+    import moment from 'moment';
+
     export default {
         mounted () {
 
+            let you = this.you;
+            let your_avatar = this.your_avatar;
             let from = this.id_from;
             let to = this.id_to;
             let opponent = this.opponent;
             let opponents_avatar = this.opponents_avatar;
 
             let conn = new WebSocket('ws://localhost:8081/?from=' + from + '&to=' + to);
-            // let conn = new WebSocket('ws://localhost:8081/?from=user&to=user');
+
             conn.onopen = function() {
-                console.log("Connection established!");
+                document.getElementById('send-msg').addEventListener('click', sendMessage);
+                console.log("Connection established! Mode: [chat]");
             };
-
-            this.mutableConn = conn;
-
 
             conn.onmessage = function(e) {
                 let msg = JSON.parse(e.data);
-                addMessageFromUser(msg);
+
+                console.log(msg);
+
+                if (msg['chat'] === true) {
+                    if (msg['blocked'] === true && msg['msg'] === 'blocked') {
+                        document.getElementById('send-msg').removeEventListener('click', sendMessage);
+                        let chat = document.getElementById('chat');
+                        chat.removeChild(chat.lastChild);
+                        addBlockedMessage('conversation is no longer available because of blocking');
+                    }
+                    else if (msg['not-connected'] === true && msg['msg'] === 'not-connected') {
+                        document.getElementById('send-msg').removeEventListener('click', sendMessage);
+                        let chat = document.getElementById('chat');
+                        chat.removeChild(chat.lastChild);
+                        addBlockedMessage('you do not have connection anymore');
+                    }
+                    else
+                        addMessageFromUser(msg['msg']);
+                }
+                else if (msg['chat'] === false)
+                    console.log(msg['msg'])
             };
+
+            function sendMessage () {
+                let textarea = document.getElementById('textarea');
+                let msg = textarea.value.trim().replace(/\s\s+/g, ' ');
+
+                if (msg.length === 0 || msg.length > 500)
+                    return;
+
+                textarea.value = "";
+
+                let box = {
+                    'action': 'chat',
+                    'to': to,
+                    'msg': msg,
+                    'chat': true
+                };
+
+                addMessageFromMe(msg.replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;"));
+
+                conn.send(JSON.stringify(box));
+            }
+
+            function addMessageFromMe (msg) {
+                let main_div = document.createElement('div');
+                main_div.className = 'row comments mb-2';
+
+                let div_for_avatar = document.createElement('div');
+                div_for_avatar.className = 'col-md-2 col-sm-2 col-3 text-center user-img';
+
+                let avatar = document.createElement('img');
+                avatar.className = 'rounded-circle';
+                avatar.src = your_avatar;
+
+                div_for_avatar.appendChild(avatar);
+
+                let div_for_message = document.createElement('div');
+                div_for_message.id = 'my_block';
+                div_for_message.className = 'col-md-9 col-sm-9 col-9 comment rounded mb-2';
+
+                let h4 = document.createElement('h4');
+                h4.className = "m-0 float-left";
+                h4.innerHTML = you;
+
+                let time_tag = document.createElement('time');
+                time_tag.className = 'text-grey ml-3 float-left';
+                let now = new moment();
+                time_tag.innerHTML = now.format("HH:mm:ss");
+
+                let p = document.createElement('p');
+                p.className = 'mb-0 text-black';
+                p.innerHTML = msg;
+
+                div_for_message.append(h4, time_tag, document.createElement('br'), p);
+                main_div.append(div_for_avatar, div_for_message);
+
+                let ul = document.createElement('ul');
+                ul.className = 'p-0';
+                let li = document.createElement('li');
+
+                document.getElementById('chat').appendChild(ul.appendChild(li.appendChild(main_div)));
+                let chat = document.getElementById("chat");
+                chat.scrollTop = chat.scrollHeight;
+            }
 
             function addMessageFromUser (msg) {
                 let main_div = document.createElement('div');
@@ -93,7 +183,8 @@
 
                 let time_tag = document.createElement('time');
                 time_tag.className = 'text-grey ml-3 float-right';
-                time_tag.innerHTML = new Date().toISOString().substr(0, 19).replace('T', ' ');
+                let now = new moment();
+                time_tag.innerHTML = now.format("HH:mm:ss");
 
                 let p = document.createElement('p');
                 p.className = 'mb-0 text-black';
@@ -111,16 +202,40 @@
                 chat.scrollTop = chat.scrollHeight;
             }
 
-            this.mutableConn = conn;
+            function addBlockedMessage(msg) {
+                let main_div = document.createElement('div');
+                main_div.className = 'row comments mb-2';
+
+                let div_for_message = document.createElement('div');
+                div_for_message.id = 'opponents_block';
+                div_for_message.className = 'col-md-9 col-sm-9 col-9 comment rounded mb-2';
+                div_for_message.style.background = '#ff9393';
+
+                let p = document.createElement('p');
+                p.className = 'mb-0 text-black';
+                p.innerHTML = msg;
+
+                div_for_message.append(document.createElement('br'), p);
+                main_div.append(div_for_message);
+
+                let ul = document.createElement('ul');
+                ul.className = 'p-0';
+                let li = document.createElement('li');
+
+                document.getElementById('chat').appendChild(ul.appendChild(li.appendChild(main_div)));
+                let chat = document.getElementById("chat");
+                chat.scrollTop = chat.scrollHeight;
+            }
 
             this.scrollToBottom();
         },
+
         data: function () {
             return {
                 mutableHistory: JSON.parse(this.history),
-                mutableConn: '',
             }
         },
+
         props : [
             'opponent',
             'you',
@@ -130,78 +245,14 @@
             'opponents_avatar',
             'your_avatar',
         ],
+
         methods : {
-            sendMessage: function () {
-                let textarea = document.getElementById('textarea');
-                let msg = textarea.value.trim().replace(/\s\s+/g, ' ');
-
-
-                if (msg.length === 0 || msg.length > 500)
-                    return;
-
-                textarea.value = "";
-
-                let box = {
-                    'action': 'chat',
-                    'from': this.id_from,
-                    'to': this.id_to,
-                    'msg': msg
-                };
-
-                this.addMessageFromMe(msg.replace(/&/g, "&amp;")
-                                         .replace(/</g, "&lt;")
-                                         .replace(/>/g, "&gt;")
-                                         .replace(/"/g, "&quot;")
-                                         .replace(/'/g, "&#039;"));
-                this.mutableConn.send(JSON.stringify(box));
-            },
-
-            addMessageFromMe: function (msg) {
-                let main_div = document.createElement('div');
-                main_div.className = 'row comments mb-2';
-
-                let div_for_avatar = document.createElement('div');
-                div_for_avatar.className = 'col-md-2 col-sm-2 col-3 text-center user-img';
-
-                let avatar = document.createElement('img');
-                avatar.className = 'rounded-circle';
-                avatar.src = this.your_avatar;
-
-                div_for_avatar.appendChild(avatar);
-
-                let div_for_message = document.createElement('div');
-                div_for_message.id = 'my_block';
-                div_for_message.className = 'col-md-9 col-sm-9 col-9 comment rounded mb-2';
-
-                let h4 = document.createElement('h4');
-                h4.className = "m-0 float-left";
-                h4.innerHTML = this.you;
-
-                let time_tag = document.createElement('time');
-                time_tag.className = 'text-grey ml-3 float-left';
-                time_tag.innerHTML = new Date().toISOString().substr(0, 19).replace('T', ' ');
-
-                let p = document.createElement('p');
-                p.className = 'mb-0 text-black';
-                p.innerHTML = msg;
-
-                div_for_message.append(h4, time_tag, document.createElement('br'), p);
-                main_div.append(div_for_avatar, div_for_message);
-
-                let ul = document.createElement('ul');
-                ul.className = 'p-0';
-                let li = document.createElement('li');
-
-                document.getElementById('chat').appendChild(ul.appendChild(li.appendChild(main_div)));
-                let chat = document.getElementById("chat");
-                chat.scrollTop = chat.scrollHeight;
-            },
-
             scrollToBottom: function () {
                 let chat = document.getElementById('chat');
                 chat.scrollTop = chat.scrollHeight;
             }
         }
+
     }
 </script>
 

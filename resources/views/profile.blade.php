@@ -7,12 +7,14 @@
     <script src="{{ asset('js/profile/profile.js')}}" defer></script>
 @endpush
 
-
 @push('style')
     <link rel="stylesheet" href="{{ asset('cropperjs/dist/cropper.css')}}">
 @endpush
 
 @section('content')
+
+    <wsconnecting-component></wsconnecting-component>
+
     <div class="profile_container" id="main_container">
         <div class="row justify-content-center">
             <div class="">

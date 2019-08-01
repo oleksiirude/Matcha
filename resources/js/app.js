@@ -44,6 +44,8 @@ Vue.component('unblock-action-component', require('./components/users_list/Block
 Vue.component('fake-action-component', require('./components/users/FakeActionComponent').default);
 Vue.component('like-action-component', require('./components/users/LikeActionComponent').default);
 Vue.component('chat-component', require('./components/ChatComponent').default);
+Vue.component('notification-component', require('./components/NotificationComponent').default);
+Vue.component('wsconnecting-component', require('./components/WSConnectingComponent').default);
 Vue.component('footer-component', require('./components/layots/FooterComponent').default);
 
 /**
