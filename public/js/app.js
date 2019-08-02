@@ -3962,31 +3962,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    var id = this.show + '_form';
-    console.log('show', id);
-    document.getElementById(id).hidden = false;
+  mounted: function mounted() {// let id = this.show + '_form';
+    // // console.log('show', id);
+    // document.getElementById(id).hidden = false;
   },
-  props: ['action', 'unaction', 'value', 'method', 'url', 'unurl', 'unmethod', 'imgsrc', 'csrf', 'btn_class', 'title', 'alt', 'show'],
+  props: ['action', 'method', 'url', 'imgsrc', 'csrf'],
   data: function data() {
-    return {
-      mutableShow: this.show
+    return {// mutableShow: this.show,
     };
   },
   methods: {
     make_action: function make_action(e) {
-      var _this = this;
-
       e.preventDefault(); // console.log('TEST', e.path[2].action);
       // console.log('TEST', e.path);
 
@@ -4007,37 +3994,16 @@ __webpack_require__.r(__webpack_exports__);
           var string = xhr.response;
 
           if (string.result == true) {
-            if (_this.mutableShow == 'block') {
-              document.getElementById('chat_form').hidden = true;
-              document.getElementById(_this.mutableShow + '_form').hidden = true;
-              _this.mutableShow = 'unblock';
-              document.getElementById(_this.mutableShow + '_form').hidden = false;
-            } else {
-              if (document.getElementById('connect_span').hidden == false) {
-                document.getElementById('chat_form').hidden = false;
-              }
+            path[8].remove();
 
-              document.getElementById(_this.mutableShow + '_form').hidden = true;
-              _this.mutableShow = 'block';
-              document.getElementById(_this.mutableShow + '_form').hidden = false;
-            } // if (this.unaction)
-            // {
-            //     this.urlcurrent = this.mutableUnurl;
-            //     this.mutableUnurl = this.mutableUrl;
-            //     this.mutableUrl = this.urlcurrent;
-            //     if (this.methodcurrent == "PUT")
-            //         this.methodcurrent = "DELETE";
-            //     else
-            //         this.methodcurrent = "PUT";
-            //     if (this.btn_classcurrent == "liked")
-            //         this.btn_classcurrent = "";
-            //     else
-            //         this.btn_classcurrent = "liked";
-            // }
+            if (document.getElementsByClassName('list_users').length == 0) {
+              var span = document.createElement('span');
+              document.getElementById('card_body').appendChild(span);
+              span.innerHTML = 'You don\'t have any blocked profiles yet';
+            } // console.log('result', document.getElementsByClassName('list_users').length);
 
-          }
+          } // console.log('vue', string);
 
-          console.log('vue', string);
         }
       };
 
@@ -41936,47 +41902,7 @@ var render = function() {
   return _c("div", [
     _c(
       "form",
-      {
-        attrs: {
-          action: _vm.unurl,
-          method: "POST",
-          id: "block_form",
-          hidden: ""
-        }
-      },
-      [
-        _c("input", {
-          attrs: { type: "hidden", name: "_token" },
-          domProps: { value: _vm.csrf }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "hidden", name: "_method" },
-          domProps: { value: _vm.unmethod }
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          { attrs: { type: "submit" }, on: { click: _vm.make_action } },
-          [
-            _c("img", {
-              attrs: { src: _vm.imgsrc, title: "block user", alt: "block" }
-            })
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "form",
-      {
-        attrs: {
-          action: _vm.url,
-          method: "POST",
-          id: "unblock_form",
-          hidden: ""
-        }
-      },
+      { attrs: { action: _vm.url, method: "POST", id: "unblock_form" } },
       [
         _c("input", {
           attrs: { type: "hidden", name: "_token" },

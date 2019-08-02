@@ -1,19 +1,10 @@
 <template>
     <div>
-        <form :action="unurl" method="POST" id="block_form" hidden>
-            <input type="hidden" name="_token" :value="csrf">
-            <input type="hidden" name="_method" :value="unmethod">
-            <button type="submit" @click="make_action">
-                <img :src="imgsrc" title="block user" alt="block">
-                <!--            {{ btn_name }}-->
-            </button>
-        </form>
-        <form :action="url" method="POST" id="unblock_form" hidden>
+        <form :action="url" method="POST" id="unblock_form" >
             <input type="hidden" name="_token" :value="csrf">
             <input type="hidden" name="_method" :value="method">
             <button type="submit" class="liked" @click="make_action">
                 <img :src="imgsrc" title="unblock user" alt="unblock">
-    <!--            {{ btn_name }}-->
             </button>
         </form>
     </div>
@@ -22,29 +13,20 @@
 <script>
     export default {
         mounted() {
-            let id = this.show + '_form';
-            console.log('show', id);
-            document.getElementById(id).hidden = false;
+            // let id = this.show + '_form';
+            // // console.log('show', id);
+            // document.getElementById(id).hidden = false;
         },
         props: [
             'action',
-            'unaction',
-            'value',
             'method',
             'url',
-            'unurl',
-            'unmethod',
             'imgsrc',
             'csrf',
-            'btn_class',
-            'title',
-            'alt',
-            'show'
-
         ],
         data: function () {
             return {
-                mutableShow: this.show,
+                // mutableShow: this.show,
             }
         },
         methods: {
@@ -67,41 +49,15 @@
                     if (xhr.status === 200) {
                         let string = xhr.response;
                         if (string.result == true) {
-                            if (this.mutableShow == 'block')
-                            {
-                                document.getElementById('chat_form').hidden = true;
-                                document.getElementById(this.mutableShow + '_form').hidden = true;
-                                this.mutableShow = 'unblock';
-                                document.getElementById(this.mutableShow + '_form').hidden = false;
+                            path[8].remove();
+                            if (document.getElementsByClassName('list_users').length == 0) {
+                                let span = document.createElement('span');
+                                document.getElementById('card_body').appendChild(span);
+                                span.innerHTML = 'You don\'t have any blocked profiles yet';
                             }
-                            else
-                            {
-                                if (document.getElementById('connect_span').hidden == false) {
-                                    document.getElementById('chat_form').hidden = false;
-                                }
-                                document.getElementById(this.mutableShow + '_form').hidden = true;
-                                this.mutableShow = 'block';
-                                document.getElementById(this.mutableShow + '_form').hidden = false;
-                            }
-
-                            // if (this.unaction)
-                            // {
-                            //     this.urlcurrent = this.mutableUnurl;
-                            //     this.mutableUnurl = this.mutableUrl;
-                            //     this.mutableUrl = this.urlcurrent;
-                            //     if (this.methodcurrent == "PUT")
-                            //         this.methodcurrent = "DELETE";
-                            //     else
-                            //         this.methodcurrent = "PUT";
-                            //     if (this.btn_classcurrent == "liked")
-                            //         this.btn_classcurrent = "";
-                            //     else
-                            //         this.btn_classcurrent = "liked";
-                            // }
-
-
+                            // console.log('result', document.getElementsByClassName('list_users').length);
                         }
-                        console.log('vue', string);
+                        // console.log('vue', string);
                     }
                 }
                 xhr.send(form);

@@ -26,6 +26,18 @@
                                                     <span>{{ $profile->last_activity }}</span>
                                                 @endif
                                                 </div>
+                                                <div id="action_to_user" class="action_to_user">
+                                                    @if($profile->connected && !$profile->blocked)
+                                                        <span style="color: #1d643b; font-weight: bold">
+                                                            <img src="{{asset('images/service/connect.png')}}" title="You are connected with {{ $profile->login }}">
+                                                        </span>
+
+                                                        <form action="{{ route('show.chat', $profile->login) }}" method="GET">
+
+                                                            <button type="submit"><img src="{{asset('images/service/chat.png')}}" title="go chatting with {{ $profile->login }}"></button>
+                                                        </form>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </a>
                                     </div>

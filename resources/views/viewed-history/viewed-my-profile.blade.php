@@ -33,13 +33,14 @@
                                                 @endif
                                                </div>
                                                 Visited your profile: {{ $profile->visited }}
+                                                <div id="action_to_user" class="action_to_user">
+                                                    <form action="{{ route('delete.viewed.me.profile', $profile->user->user_id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
 
-                                                <form action="{{ route('delete.viewed.me.profile', $profile->user->user_id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-
-                                                    <button type="submit">delete from history</button>
-                                                </form>
+                                                        <button type="submit" title="delete from history"><img src="{{asset('images/service/trash_50px.png')}}"></button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </a>
                                     </div>
