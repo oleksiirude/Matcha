@@ -127,9 +127,7 @@
             Location::create([
                 'user_id' => $id->id,
                 'country' => $data['gps_country'],
-                'region' => $data['gps_region'],
                 'city' => $data['gps_city'],
-                'gps_code' => $data['gps_code'],
                 'latitude' => $data['gps_latitude'],
                 'longitude' => $data['gps_longitude'],
                 'allow' => $allow
@@ -145,9 +143,7 @@
     
         protected function validateLocation($data) {
             if (!isset($data['gps_country'])
-                || !isset($data['gps_region'])
                 || !isset($data['gps_city'])
-                || !isset($data['gps_code'])
                 || !isset($data['gps_latitude'])
                 || !isset($data['gps_longitude']))
                 return false;

@@ -1751,7 +1751,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    console.log(window.location.pathname);
     var you = this.you;
     var your_avatar = this.your_avatar;
     var from = this.id_from;

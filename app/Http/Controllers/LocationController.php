@@ -1,11 +1,13 @@
 <?php
 
     namespace App\Http\Controllers;
-    
+
+    use Auth;
     use App\Location;
     use Location\Line;
     use Location\Coordinate;
     use Location\Distance\Haversine;
+    use Illuminate\Http\Request;
 
     class LocationController extends Controller {
         
@@ -34,5 +36,25 @@
             }
             
             return $nearby;
+        }
+        
+        public function turnOffLocation() {
+            Location::where('user_id', Auth::id())->update(['allow' => false]);
+        }
+        
+        public function changeLocation(Request $request) {
+            $data = json_decode($request->json()->all(), true);
+            
+            if (count($data) < 4)
+                return ;
+    
+            Location::where('user_id', Auth::id())
+                        ->update([
+                            'country' => $data['country'],
+                            'city' => $data['city'],
+                            'latitude' => $data['latitude'],
+                            'longitude' => $data['longitude'],
+                            'allow' => true
+                        ]);
         }
     }

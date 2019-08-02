@@ -36,6 +36,7 @@
         Route::delete('/tag/{tag}', 'TagController@deleteTag')->name('delete.tag');
         Route::delete('/viewed/profile/{id}', 'VisitController@deleteViewedProfile')->name('delete.viewed.profile');
         Route::delete('/viewed/me/profile/{id}', 'VisitController@deleteViewedMeProfile')->name('delete.viewed.me.profile');
+        Route::delete('/location', 'LocationController@turnOffLocation')->name('turn.off.location');
     });
 
     // SET
@@ -54,6 +55,7 @@
         Route::put('/login', 'HomeController@changeLogin')->name('change.login');
         Route::put('/email', 'HomeController@changeEmail')->name('change.email');
         Route::put('/password', 'HomeController@changePassword')->name('change.password');
+        Route::put('/location', 'LocationController@changeLocation')->name('change.location');
     });
 
     // FINDING

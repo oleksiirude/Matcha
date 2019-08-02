@@ -53,7 +53,6 @@
 
     export default {
         mounted () {
-            console.log(window.location.pathname);
 
             let you = this.you;
             let your_avatar = this.your_avatar;
