@@ -1,6 +1,7 @@
 let canvas  = document.getElementById('canvas'),
     context = canvas.getContext("2d"),
     result = document.getElementById('result');
+let i = 0;
 // let cropper;
 
 let show_element = function(id, error) {
@@ -78,7 +79,10 @@ let upload_crop_avatar = function() {
         if (xhr.status === 200) {
             let string = xhr.response;
             if (string.result == true) {
-                document.getElementById('avatar').src = string.path;
+                console.log('string', string.path);
+                document.getElementById('avatar').src = string.path + '?ver=' + i;
+                i++;
+                console.log('string2', document.getElementById('avatar').src);
                 document.getElementById('avatar_errormsg').innerHTML = '';
                 document.getElementById('delete_btn').hidden = false;
                 update_raiting(string.rating);
