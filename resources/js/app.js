@@ -41,6 +41,7 @@ Vue.component('preferences-component', require('./components/profile/Preferences
 Vue.component('block-action-component', require('./components/users/BlockActionComponent').default);
 Vue.component('filter-component', require('./components/filters/FilterComponent').default);
 Vue.component('unblock-action-component', require('./components/users_list/BlockActionComponent').default);
+Vue.component('delete-action-component', require('./components/users_list/DeleteActionComponent').default);
 Vue.component('fake-action-component', require('./components/users/FakeActionComponent').default);
 Vue.component('like-action-component', require('./components/users/LikeActionComponent').default);
 Vue.component('chat-component', require('./components/ChatComponent').default);

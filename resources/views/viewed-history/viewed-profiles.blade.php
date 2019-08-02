@@ -6,7 +6,7 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">My viewed profiles</div>
-                    <div class="row card-body">
+                    <div class="row card-body" id="card_body">
                         @if (count($profiles))
                             @foreach($profiles as $profile)
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -35,12 +35,9 @@
                                                 </div>
                                                 Visited by you: {{ $profile->visited }}
                                                 <div id="action_to_user" class="action_to_user">
-                                                    <form action="{{ route('delete.viewed.profile', $profile->user->user_id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-
-                                                        <button type="submit" title="delete from history"><img src="{{asset('images/service/trash_50px.png')}}"></button>
-                                                    </form>
+                                                    <delete-action-component csrf = "{{csrf_token()}}" url = "{{ route('delete.viewed.profile', $profile->user->user_id) }}"
+                                                                             method = "DELETE" imgsrc="{{asset('images/service/trash_50px.png')}}"
+                                                    text="You haven't viewed any profiles yet"></delete-action-component>
                                                 </div>
                                                 <p></p>
                                             </div>
