@@ -10,7 +10,7 @@
                                 <div class="card-body">
                                     <div id="left_card">
                                         <div id="div_useravatar">
-                                            <img src="{{ URL::asset($profile->avatar) }}" alt="avatar" id="user_avatar" title='{{ $profile->login . "'s " }}avatar'>
+                                            <img src="{{ URL::asset($profile->avatar) }}" alt="avatar" id="user_avatar" class="usr_photo" title='{{ $profile->login . "'s " }}avatar'>
                                             <div id="action_to_user" class="action_to_user">
                                                  <span id="connect_span" @if(!$profile->connected) hidden  @endif>
                                                         <img src="{{asset('images/service/connect.png')}}" title="You are connected with {{ $profile->login }}">
@@ -122,10 +122,6 @@
 
                                     </div>
 
-
-
-
-
                                 </div>
                                 <div class="container">
                                     <div class="row usr_gallery">
@@ -155,6 +151,7 @@
                                         @endif
                                     </div>
                                 </div>
+                                <slider-component></slider-component>
                             </div>
                         </div>
                     </div>

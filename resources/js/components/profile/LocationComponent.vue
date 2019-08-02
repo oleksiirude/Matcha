@@ -118,6 +118,7 @@
                         map.setCenter(place.geometry.location);
                         map.setZoom(17);
                     }
+                    geocode(place.geometry.location.lat(), place.geometry.location.lng());
                     console.log('(place.geometry.location', place.geometry.location.lat(), place.geometry.location.lng());
                     document.getElementById('geo_form').hidden = false;
                     marker.setPosition(place.geometry.location);

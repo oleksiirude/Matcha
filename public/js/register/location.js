@@ -24,8 +24,8 @@ let tofillinputs = function(){
 
 
 let geocode = function(ltt, lng) {
-    latitude = 50.428266;
-    longitude = 30.525979;
+    latitude = ltt;
+    longitude = lng;
 //     const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCpslLLMvrUUPGWepKF3r-8g87FCEF2Qek&latlng='+latitude+','+longitude+'&language=en');
 console.log('response', latitude, longitude);
 
