@@ -3174,6 +3174,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   // props: [
   //     // 'croppedImage',
@@ -41392,6 +41393,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { attrs: { id: "parent_popup" } }, [
+      _c("div", { attrs: { id: "popup" } }),
+      _vm._v(" "),
       _c("div", { attrs: { id: "crop_div", hidden: "" } }, [
         _c("p", [
           _c(

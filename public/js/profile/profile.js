@@ -106,6 +106,7 @@ let crop_prepare = function() {
     let file = document.getElementById("avatar_input").files[0];
     document.getElementById('crop_div').hidden = false;
     document.getElementById('parent_popup').style.display='block';
+
     let reader = new FileReader();
     reader.onload = function (evt) {
         let img = new Image();
@@ -127,7 +128,7 @@ let crop_prepare = function() {
                 document.getElementById('parent_popup').style.display='none';
                 document.getElementById('avatar_input').value = '';
             });
-            document.getElementById('parent_popup').addEventListener('click', function (e) {
+            document.getElementById('popup').addEventListener('click', function (e) {
                 if (e.target !== this)
                     return;
                 document.getElementById('crop_div').hidden = true;
