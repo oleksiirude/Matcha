@@ -44,7 +44,9 @@
         },
         data: function () {
             return {
-                // globalmap: this.map,
+                mutableLtt: '',
+                mutableLng: '',
+                mutableJson: ''
                 // markers : []
             }
         },
@@ -68,7 +70,46 @@
                 }
             },
 
+            // geocode: function(ltt, lng) {
+            //     latitude = ltt;
+            //     longitude = lng;
+            //     console.log('response', latitude, longitude);
+            //
+            //     let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCpslLLMvrUUPGWepKF3r-8g87FCEF2Qek&latlng='+latitude+','+longitude+'&language=en';
+            //     // $.ajaxSetup({async: false});
+            //     $.ajax({
+            //         url: GEOCODING,
+            //         dataType: 'json',
+            //         async: false,
+            //         success: function(location) {
+            //             console.log(location['plus_code']['compound_code']);
+            //             let add= location['plus_code']['compound_code'];
+            //             let  value=add.split(",");
+            //             let count=value.length;
+            //             country=value[count-1];
+            //             if (count == 2)
+            //             {
+            //                 let city_code=value[count-2].split(" ");
+            //                 code = city_code.shift();
+            //                 city = city_code.join(' ');
+            //                 state=city;
+            //             }
+            //             else {
+            //                 state=value[count-2];
+            //                 let city_code=value[count-3].split(" ");
+            //                 code = city_code.shift();
+            //                 city = city_code.join(' ');
+            //             }
+            //             console.log('country', country);
+            //             console.log('state', state);
+            //             console.log('city', city);
+            //             console.log('code', code);
+            //         }
+            //     });
+            // },
+
             initMap: function () {
+                let self = this;
                 let card = document.getElementById('pac-card');
                 let input = document.getElementById('pac-input');
                 let infowindowContent = document.getElementById('infowindow-content');
@@ -118,7 +159,10 @@
                         map.setCenter(place.geometry.location);
                         map.setZoom(17);
                     }
-                    geocode(place.geometry.location.lat(), place.geometry.location.lng());
+                    console.log('geocode', geocode(place.geometry.location.lat(), place.geometry.location.lng()));
+                    self.mutableLtt = place.geometry.location.lat();
+                    self.mutableLng = place.geometry.location.lng();
+                    self.mutableJson = geocode(place.geometry.location.lat(), place.geometry.location.lng());
                     console.log('(place.geometry.location', place.geometry.location.lat(), place.geometry.location.lng());
                     document.getElementById('geo_form').hidden = false;
                     marker.setPosition(place.geometry.location);
@@ -140,8 +184,9 @@
                 });
 
             },
-            save: function () {
-
+            save: function (e) {
+                console.log('SAVE', this.mutableLtt, this.mutableLng, this.mutableJson);
+                e.preventDefault();
             }
         }
     }

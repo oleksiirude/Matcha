@@ -2764,8 +2764,11 @@ __webpack_require__.r(__webpack_exports__);
     // this.initMap();
   },
   data: function data() {
-    return {// globalmap: this.map,
-      // markers : []
+    return {
+      mutableLtt: '',
+      mutableLng: '',
+      mutableJson: '' // markers : []
+
     };
   },
   props: ['lat', 'lng', 'allow'],
@@ -2780,7 +2783,45 @@ __webpack_require__.r(__webpack_exports__);
         document.getElementById('geolocation_div').hidden = true;
       }
     },
+    // geocode: function(ltt, lng) {
+    //     latitude = ltt;
+    //     longitude = lng;
+    //     console.log('response', latitude, longitude);
+    //
+    //     let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCpslLLMvrUUPGWepKF3r-8g87FCEF2Qek&latlng='+latitude+','+longitude+'&language=en';
+    //     // $.ajaxSetup({async: false});
+    //     $.ajax({
+    //         url: GEOCODING,
+    //         dataType: 'json',
+    //         async: false,
+    //         success: function(location) {
+    //             console.log(location['plus_code']['compound_code']);
+    //             let add= location['plus_code']['compound_code'];
+    //             let  value=add.split(",");
+    //             let count=value.length;
+    //             country=value[count-1];
+    //             if (count == 2)
+    //             {
+    //                 let city_code=value[count-2].split(" ");
+    //                 code = city_code.shift();
+    //                 city = city_code.join(' ');
+    //                 state=city;
+    //             }
+    //             else {
+    //                 state=value[count-2];
+    //                 let city_code=value[count-3].split(" ");
+    //                 code = city_code.shift();
+    //                 city = city_code.join(' ');
+    //             }
+    //             console.log('country', country);
+    //             console.log('state', state);
+    //             console.log('city', city);
+    //             console.log('code', code);
+    //         }
+    //     });
+    // },
     initMap: function initMap() {
+      var self = this;
       var card = document.getElementById('pac-card');
       var input = document.getElementById('pac-input');
       var infowindowContent = document.getElementById('infowindow-content');
@@ -2833,7 +2874,10 @@ __webpack_require__.r(__webpack_exports__);
           map.setZoom(17);
         }
 
-        geocode(place.geometry.location.lat(), place.geometry.location.lng());
+        console.log('geocode', geocode(place.geometry.location.lat(), place.geometry.location.lng()));
+        self.mutableLtt = place.geometry.location.lat();
+        self.mutableLng = place.geometry.location.lng();
+        self.mutableJson = geocode(place.geometry.location.lat(), place.geometry.location.lng());
         console.log('(place.geometry.location', place.geometry.location.lat(), place.geometry.location.lng());
         document.getElementById('geo_form').hidden = false;
         marker.setPosition(place.geometry.location);
@@ -2850,7 +2894,10 @@ __webpack_require__.r(__webpack_exports__);
         infowindow.open(map, marker);
       });
     },
-    save: function save() {}
+    save: function save(e) {
+      console.log('SAVE', this.mutableLtt, this.mutableLng, this.mutableJson);
+      e.preventDefault();
+    }
   }
 });
 

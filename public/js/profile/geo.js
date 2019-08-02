@@ -51,4 +51,12 @@ let geocode = function(ltt, lng) {
             console.log('code', code);
         }
     });
+    let location = {
+        country: country,
+        city: city,
+        latitude: ltt,
+        longitude: lng,
+    };
+    let json = JSON.stringify(location);
+    return (json);
 };
