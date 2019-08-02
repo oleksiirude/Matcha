@@ -13,7 +13,7 @@
 
 @section('content')
 
-    <wsconnecting-component></wsconnecting-component>
+    <wsconnecting-component></wsconnecting-component> {{-- connecting to ratchet websocket server --}}
 
     <div class="profile_container" id="main_container">
         <div class="row justify-content-center">

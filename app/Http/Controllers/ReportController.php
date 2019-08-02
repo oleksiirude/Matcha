@@ -10,12 +10,16 @@
 
         public function makeReport($id, $login) {
             Controller::validateUser($id, $login);
-
-            Report::create([
+    
+            if (!Report::where([
                 'user' => Auth::id(),
-                'reported' => $id,
-                'date' => Carbon::now()
-            ]);
+                'reported' => $id
+            ])->first())
+                Report::create([
+                    'user' => Auth::id(),
+                    'reported' => $id,
+                    'date' => Carbon::now()
+                ]);
 
             return response()->json(['result' => true]);
         }

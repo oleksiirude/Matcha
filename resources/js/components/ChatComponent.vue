@@ -53,6 +53,7 @@
 
     export default {
         mounted () {
+            console.log(window.location.pathname);
 
             let you = this.you;
             let your_avatar = this.your_avatar;
@@ -105,6 +106,7 @@
                 let box = {
                     'action': 'chat',
                     'to': to,
+                    'login': you,
                     'msg': msg,
                     'chat': true
                 };

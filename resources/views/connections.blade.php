@@ -1,6 +1,9 @@
 @extends ('layouts.app')
 
 @section('content')
+
+    <wsconnecting-component></wsconnecting-component> {{-- connecting to ratchet websocket server --}}
+
     <div class="container" id="main_container">
         <div class="row justify-content-center">
             <div class="col-md-8">

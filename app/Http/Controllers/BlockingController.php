@@ -22,12 +22,16 @@
         
         public function blockUser($id, $login) {
             Controller::validateUser($id, $login);
-            
-            Ban::create([
+    
+            if (!Ban::where([
                 'user' => Auth::id(),
-                'banned' => $id,
-                'date' => Carbon::now()
-            ]);
+                'banned' => $id
+            ])->first())
+                Ban::create([
+                    'user' => Auth::id(),
+                    'banned' => $id,
+                    'date' => Carbon::now()
+                ]);
     
             return response()->json(['result' => true]);
         }

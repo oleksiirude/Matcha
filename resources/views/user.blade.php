@@ -2,10 +2,8 @@
 
 @section('content')
 
-    <notification-component id_from="{{ auth()->user()->id }}"
-                            id_to="{{ $profile->user_id }}"
-                            title="{{ auth()->user()->login . ' has checked your profile' }}"
-                            chat="false">
+    <notification-component id_to="{{ $profile->user_id }}"
+                            login="{{ auth()->user()->login }}">
     </notification-component>
 
     <div class="profile_container" id="main_container">

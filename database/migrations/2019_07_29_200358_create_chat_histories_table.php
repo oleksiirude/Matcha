@@ -17,7 +17,6 @@ class CreateChatHistoriesTable extends Migration
             $table->bigInteger('sender');
             $table->bigInteger('recipient');
             $table->text('message');
-            $table->boolean('read')->default(false);
             $table->timestamp('date');
         });
     }

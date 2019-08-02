@@ -1,13 +1,17 @@
 @extends('layouts.app')
+
 @push('scripts')
     <script src="{{ asset('nouislider/distribute/nouislider.js')}}"></script>
 @endpush
 
-
 @push('style')
     <link rel="stylesheet" type="text/css" href="{{ asset('nouislider/distribute/nouislider.css')}}" />
 @endpush
+
 @section('content')
+
+    <wsconnecting-component></wsconnecting-component> {{-- connecting to ratchet websocket server --}}
+
     <div class="search_container" id="main_container">
         <div class="row">
             <div class="" style="width: 100%">

@@ -1751,6 +1751,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
+    console.log(window.location.pathname);
     var you = this.you;
     var your_avatar = this.your_avatar;
     var from = this.id_from;
@@ -1794,6 +1795,7 @@ __webpack_require__.r(__webpack_exports__);
       var box = {
         'action': 'chat',
         'to': to,
+        'login': you,
         'msg': msg,
         'chat': true
       };
@@ -1918,20 +1920,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    var from = this.id_from;
     var to = this.id_to;
-    var title = this.title;
-    var chat = this.chat;
-    console.log('from: ' + from, 'to: ' + to, 'title: ' + title, 'chat: ' + chat);
+    var login = this.login;
     var conn = new WebSocket('ws://localhost:8081/?from=user&to=user');
 
     conn.onopen = function () {
       console.log("Connection established! Mode: [notification]");
       var box = {
         'action': 'notification',
+        'aim': 'checked',
         'to': to,
-        'msg': title,
-        'chat': chat // boolean (for creating valid link in db -> function addNotificationToDB())
+        'login': login,
+        'chat': false // for creating valid link in db -> function addNotificationToDB()
 
       };
       conn.send(JSON.stringify(box));
@@ -1941,8 +1941,49 @@ __webpack_require__.r(__webpack_exports__);
       var msg = JSON.parse(e.data);
       console.log(msg['msg']);
     };
+
+    var like_form = document.getElementById('like_form');
+    if (like_form) like_form.addEventListener('click', onLike);
+    var unlike_form = document.getElementById('unlike_form');
+    if (unlike_form) unlike_form.addEventListener('click', onUnLike);
+
+    function onLike() {
+      var unlike_form = document.getElementById('unlike_form');
+
+      if (unlike_form) {
+        unlike_form.addEventListener('click', onUnLike);
+        like_form.removeEventListener('click', onLike);
+        var box = {
+          'action': 'notification',
+          'aim': 'like',
+          'to': to,
+          'login': login,
+          'chat': false // for creating valid link in db -> function addNotificationToDB()
+
+        };
+        conn.send(JSON.stringify(box));
+      }
+    }
+
+    function onUnLike() {
+      var like_form = document.getElementById('like_form');
+
+      if (like_form) {
+        like_form.addEventListener('click', onLike);
+        unlike_form.removeEventListener('click', onUnLike);
+        var box = {
+          'action': 'notification',
+          'aim': 'unlike',
+          'to': to,
+          'login': login,
+          'chat': false // boolean (for creating valid link in db -> function addNotificationToDB())
+
+        };
+        conn.send(JSON.stringify(box));
+      }
+    }
   },
-  props: ['id_from', 'id_to', 'title', 'chat']
+  props: ['id_to', 'login']
 });
 
 /***/ }),

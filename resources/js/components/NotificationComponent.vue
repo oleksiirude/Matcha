@@ -5,12 +5,8 @@
 <script>
     export default {
         mounted () {
-            let from = this.id_from;
             let to = this.id_to;
-            let title = this.title;
-            let chat = this.chat;
-
-            console.log('from: '+from, 'to: '+to, 'title: '+title, 'chat: '+chat);
+            let login = this.login;
 
             let conn = new WebSocket('ws://localhost:8081/?from=user&to=user');
 
@@ -19,9 +15,10 @@
 
                 let box = {
                     'action': 'notification',
+                    'aim': 'checked',
                     'to': to,
-                    'msg': title,
-                    'chat': chat // boolean (for creating valid link in db -> function addNotificationToDB())
+                    'login': login,
+                    'chat': false // for creating valid link in db -> function addNotificationToDB()
                 };
 
                 conn.send(JSON.stringify(box));
@@ -33,12 +30,54 @@
                 console.log(msg['msg']);
             };
 
+            let like_form = document.getElementById('like_form');
+            if (like_form)
+                like_form.addEventListener('click', onLike);
+
+            let unlike_form = document.getElementById('unlike_form');
+            if (unlike_form)
+                unlike_form.addEventListener('click', onUnLike);
+
+            function onLike() {
+                let unlike_form = document.getElementById('unlike_form');
+                if (unlike_form) {
+                    unlike_form.addEventListener('click', onUnLike);
+                    like_form.removeEventListener('click', onLike);
+
+                    let box = {
+                        'action': 'notification',
+                        'aim': 'like',
+                        'to': to,
+                        'login': login,
+                        'chat': false // for creating valid link in db -> function addNotificationToDB()
+                    };
+
+                    conn.send(JSON.stringify(box));
+                }
+            }
+
+            function onUnLike() {
+                let like_form = document.getElementById('like_form');
+                if (like_form) {
+                    like_form.addEventListener('click', onLike);
+                    unlike_form.removeEventListener('click', onUnLike);
+
+                    let box = {
+                        'action': 'notification',
+                        'aim': 'unlike',
+                        'to': to,
+                        'login': login,
+                        'chat': false // boolean (for creating valid link in db -> function addNotificationToDB())
+                    };
+
+                    conn.send(JSON.stringify(box));
+                }
+            }
+
         },
         props : [
-            'id_from',
             'id_to',
-            'title',
-            'chat'
+            'login',
         ],
     }
 </script>

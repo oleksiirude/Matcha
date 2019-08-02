@@ -17,6 +17,8 @@
         Route::get('/liked-by-me', 'LikeController@showLikedByMeProfiles')->name('liked.by.me');
         Route::get('/liked-me', 'LikeController@showLikedMeProfiles')->name('liked.me');
         Route::get('/connections', 'ConnectionsController@showConnections')->name('connections');
+        Route::post('/get/notifications', 'NotificationController@getNotifications')->name('notifications');
+        Route::post('/get/notifications/count', 'NotificationController@getNumberOfUnreadNotifications')->name('notifications.count');
     });
 
     // UPLOADING

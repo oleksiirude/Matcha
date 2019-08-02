@@ -58,21 +58,21 @@
             return false;
         }
     
-//        public function checkDoubleCheckProfileNotification($user, $from) {
-//            if (Notification::where([
-//                'user_id' => (int)$user,
-//                'from_id' => $from,
-//                'title' => ' has checked your profile',
-//            ])->first()) {
-//                Notification::where([
-//                    'user_id' => $user,
-//                    'from_id' => $from,
-//                    'title' => ' has checked your profile',
-//                ])->update(['date' => Carbon::now()]);
-//                return true;
-//            }
-//            return false;
-//        }
+        public function ifAlreadyPresentInNotifications($user, $from) {
+            if (Notification::where([
+                'user_id' => $user,
+                'from_id' => $from,
+                'title' => ' has checked your profile',
+            ])->first()) {
+                    Notification::where([
+                        'user_id' => $user,
+                        'from_id' => $from,
+                        'title' => ' has checked your profile',
+                    ])->update(['date' => Carbon::now()]);
+                    return true;
+            }
+            return false;
+        }
         
         public static function getAttributesForAuthUserProfile() {
             $user = User::find(Auth::id());
