@@ -1,5 +1,6 @@
 <template>
     <div id="parent_popup">
+        <div id="popup"></div>
         <div id="crop_div" hidden>
             <p>
                 <button id="btnCrop" class="btn btn-primary">&#x2704; Crop and download</button>

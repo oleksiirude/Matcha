@@ -1,14 +1,26 @@
 let canvas  = document.getElementById('canvas'),
     context = canvas.getContext("2d"),
     result = document.getElementById('result');
+let i = 0;
 // let cropper;
 
 let show_element = function(id, error) {
     if (document.getElementById(id).hidden == true) {
         document.getElementById(id).hidden = false;
         document.getElementById(error).hidden = true;
+        if (id == 'add_interests_div')
+        {
+            let input = document.getElementById('tag');
+            input.focus();
+        }
     }
     else {
+        if (id == 'add_interests_div')
+        {
+            let input = document.getElementById('tag');
+            input.value = "";
+            $('#huge_list').empty();
+        }
         document.getElementById(id).hidden = true;
         document.getElementById(error).hidden = true;
     }
@@ -67,7 +79,10 @@ let upload_crop_avatar = function() {
         if (xhr.status === 200) {
             let string = xhr.response;
             if (string.result == true) {
-                document.getElementById('avatar').src = string.path;
+                console.log('string', string.path);
+                document.getElementById('avatar').src = string.path + '?ver=' + i;
+                i++;
+                console.log('string2', document.getElementById('avatar').src);
                 document.getElementById('avatar_errormsg').innerHTML = '';
                 document.getElementById('delete_btn').hidden = false;
                 update_raiting(string.rating);
@@ -91,6 +106,7 @@ let crop_prepare = function() {
     let file = document.getElementById("avatar_input").files[0];
     document.getElementById('crop_div').hidden = false;
     document.getElementById('parent_popup').style.display='block';
+
     let reader = new FileReader();
     reader.onload = function (evt) {
         let img = new Image();
@@ -112,7 +128,7 @@ let crop_prepare = function() {
                 document.getElementById('parent_popup').style.display='none';
                 document.getElementById('avatar_input').value = '';
             });
-            document.getElementById('parent_popup').addEventListener('click', function (e) {
+            document.getElementById('popup').addEventListener('click', function (e) {
                 if (e.target !== this)
                     return;
                 document.getElementById('crop_div').hidden = true;

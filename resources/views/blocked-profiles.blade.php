@@ -9,7 +9,7 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">Blocked profiles</div>
-                    <div class="row card-body">
+                    <div class="row card-body" id="card_body">
                         @if (count($profiles))
                             @foreach($profiles as $profile)
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -23,15 +23,19 @@
                                             <div class="list_users_info">
                                                 {{ $profile->user->name }} {{ $profile->user->surname }}
                                                 <div id="action_to_user" class="action_to_user">
-                                                    <form action="{{ route('unblock.user', [
+{{--                                                    <form action="{{ route('unblock.user', [--}}
+{{--                                                                    'id' => $profile->user->user_id,--}}
+{{--                                                                    'login' => $profile->user->login--}}
+{{--                                                                    ]) }}" method="POST">--}}
+{{--                                                            @csrf--}}
+{{--                                                            @method('DELETE')--}}
+                                                        <unblock-action-component csrf = "{{csrf_token()}}" url = "{{ route('unblock.user', [
                                                                     'id' => $profile->user->user_id,
                                                                     'login' => $profile->user->login
-                                                                    ]) }}" method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                        <unblock-action-component></unblock-action-component>
-                                                        <button type="submit" class="liked"><img src="{{asset('images/service/block_color.png')}}" title="unblock {{ $profile->login }}" alt="unblock"></button>
-                                                    </form>
+                                                                    ]) }}" method = "DELETE" imgsrc="{{asset('images/service/block_color.png')}}">
+                                                        </unblock-action-component>
+{{--                                                        <button type="submit" class="liked"><img src="{{asset('images/service/block_color.png')}}" title="unblock {{ $profile->login }}" alt="unblock"></button>--}}
+{{--                                                    </form>--}}
                                                 </div>
                                             </div>
                                         </a>

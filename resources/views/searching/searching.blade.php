@@ -19,6 +19,7 @@
                 <filter-component url="{{ route('find.filter.sort') }}" url_default="{{ route('searching') }}"></filter-component>
 
                 <div class="card" class=" col-lg-9 col-md-9 col-sm-9 col-xs-9">
+{{--                    <div id="page-preloader"><span class="spinner" id="spinner"></span></div>--}}
                     <div class="card-header">Profiles which you will probably like</div>
                     <div class="flex-center position-ref full-height">
                         <div class="card-body">

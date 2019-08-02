@@ -3,7 +3,7 @@
         <form :action="url" method="POST" id="unblock_form" >
             <input type="hidden" name="_token" :value="csrf">
             <input type="hidden" name="_method" :value="method">
-            <button type="submit" class="liked" @click="make_action">
+            <button type="submit" @click="make_action">
                 <img :src="imgsrc" title="unblock user" alt="unblock">
             </button>
         </form>
@@ -23,6 +23,7 @@
             'url',
             'imgsrc',
             'csrf',
+            'text'
         ],
         data: function () {
             return {
@@ -49,11 +50,12 @@
                     if (xhr.status === 200) {
                         let string = xhr.response;
                         if (string.result == true) {
+                            // console.log('vue', path['.div.col-lg-6.col-md-6.col-sm-6.col-xs-12']);
                             path[8].remove();
                             if (document.getElementsByClassName('list_users').length == 0) {
                                 let span = document.createElement('span');
                                 document.getElementById('card_body').appendChild(span);
-                                span.innerHTML = 'You don\'t have any blocked profiles yet';
+                                span.innerHTML = this.text;
                             }
                             // console.log('result', document.getElementsByClassName('list_users').length);
                         }
