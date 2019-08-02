@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/index.js') }}" defer></script>
     @stack('scripts')
 
     <!-- Fonts -->
@@ -26,6 +27,7 @@
     @stack('style')
 </head>
 <body>
+    <div id="page-preloader"><span class="spinner" id="spinner"></span></div>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">

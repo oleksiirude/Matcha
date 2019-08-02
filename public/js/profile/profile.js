@@ -7,8 +7,19 @@ let show_element = function(id, error) {
     if (document.getElementById(id).hidden == true) {
         document.getElementById(id).hidden = false;
         document.getElementById(error).hidden = true;
+        if (id == 'add_interests_div')
+        {
+            let input = document.getElementById('tag');
+            input.focus();
+        }
     }
     else {
+        if (id == 'add_interests_div')
+        {
+            let input = document.getElementById('tag');
+            input.value = "";
+            $('#huge_list').empty();
+        }
         document.getElementById(id).hidden = true;
         document.getElementById(error).hidden = true;
     }

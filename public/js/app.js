@@ -3437,6 +3437,7 @@ __webpack_require__.r(__webpack_exports__);
     find_match: function find_match(event) {
       var input = event.target;
       var huge_list = document.getElementById('huge_list');
+      $('#huge_list').empty();
       var min_characters = 2;
       console.log('input.value.length', input.value.length);
       document.getElementById('piece').value = input.value;
@@ -3446,6 +3447,7 @@ __webpack_require__.r(__webpack_exports__);
       xhr.responseType = 'json';
 
       if (input.value.length < min_characters) {
+        $('#huge_list').empty();
         return;
       } else {
         document.getElementById(this.name + '_btn').hidden = false;
@@ -3460,9 +3462,11 @@ __webpack_require__.r(__webpack_exports__);
               var response = string.matches;
               huge_list.innerHTML = "";
               response.forEach(function (item) {
+                console.log('test keyup');
                 var option = document.createElement('option');
                 option.value = item;
                 huge_list.appendChild(option);
+                console.log('test keyup', option);
               });
             }
           }
@@ -38973,7 +38977,7 @@ Popper.placements = placements;
 Popper.Defaults = Defaults;
 
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
-//# sourceMappingURL=popper.js.map
+
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
@@ -41571,7 +41575,8 @@ var render = function() {
           type: "text",
           name: _vm.name,
           id: _vm.name,
-          list: "huge_list"
+          list: "huge_list",
+          autocomplete: "off"
         },
         on: { keyup: _vm.find_match }
       }),
