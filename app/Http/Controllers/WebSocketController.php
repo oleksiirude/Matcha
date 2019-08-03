@@ -61,6 +61,11 @@
         public function onMessage(ConnectionInterface $from, $msg) {
             $from->session->start();
             $from_id = $from->session->get(Auth::getName()); // receiving users id from session
+    
+            var_dump('start');
+            // update users online status in Cache Facade
+            $this->updateUsersOnlineStatus($from_id);
+            var_dump('end');
             
             // decode json data into php array
             $msg = json_decode($msg, true);
@@ -85,7 +90,7 @@
                                 return;
                             }
                             // check if sender's id is equal to opponent's id in user's privacy settings
-                            // if user connected not in chat mode - user has privacy equal false, skip this user
+                            // if user connected not in chat mode - user has privacy equal false, go to else condition
                             if ($user->privacy) {
                                 if ((int)$user->privacy['to'] === $from_id) {
                                     $user->send(json_encode(['chat' => true, 'msg' => $msg['msg']]));
@@ -93,9 +98,17 @@
                                     $this->messageSendPrintInCLI($from_id, $msg['to'], $msg['msg'], true);
                                     $received = true;
                                 }
-                            }
-                            else {
+                                else {
+                                    // if user have connection with sender and now not in chat with him, but with other user
+                                    // send notification to user with 'chat => false' setting (so message won't get into foreign chat)
+                                    $this->sendMessageNotificationToUser($user, $msg, $from_id);
+                                    $received = true;
+                                }
+                            } else {
+                                // if user have connection with sender, but now it's connection doesn't have privacy
+                                // send notification to user with 'chat => false' setting
                                 $this->sendMessageNotificationToUser($user, $msg, $from_id);
+                                $received = true;
                             }
                         }
                     }
@@ -226,7 +239,7 @@
         
         protected function sendNotificationToUser($user, $msg, $notification, $from_id) {
             $user->send(json_encode(['chat' => false, 'msg' => $msg['login'] . $notification]));
-            $this->addNotificationToDB($msg, $notification, $from_id, true);
+            // $this->addNotificationToDB($msg, $notification, $from_id, true);
             $this->notificationSendPrintInCLI($from_id, $msg['to'], 'message', true);
             
             return true;
@@ -234,8 +247,8 @@
     
         protected function sendMessageNotificationToUser($user, $msg, $from_id) {
             $user->send(json_encode(['chat' => false, 'msg' => $msg['login'] . ' has sent you message']));
-            $this->addNotificationToDB($msg, ' has sent you message', $from_id, false);
-            $this->notificationSendPrintInCLI($from_id, $msg['to'], 'message', false);
+            // $this->addNotificationToDB($msg, ' has sent you message', $from_id, true);
+            $this->notificationSendPrintInCLI($from_id, $msg['to'], 'message', true);
         
             return true;
         }

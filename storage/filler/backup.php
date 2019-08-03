@@ -2097,25 +2097,25 @@
 /*bi women*/
 
 		INSERT INTO locations(user_id, country, city, latitude, longitude, allow)
-		        VALUES ('176', 'Ukraine', 'Kyiv city', 'Kyiv', '50.48121363', '30.60035706', '1');
+		        VALUES ('176', 'Ukraine', 'Kyiv', '50.48121363', '30.60035706', '1');
 		INSERT INTO locations(user_id, country, city, latitude, longitude, allow)
-		        VALUES ('177', 'Ukraine', 'Kyiv city', 'Kyiv', '50.46569993', '30.63228607', '1');
+		        VALUES ('177', 'Ukraine', 'Kyiv', '50.46569993', '30.63228607', '1');
 		INSERT INTO locations(user_id, country, city, latitude, longitude, allow)
-		        VALUES ('178', 'Ukraine', 'Kyiv city', 'Kyiv', '50.43728137', '30.62301636', '1');
+		        VALUES ('178', 'Ukraine', 'Kyiv', '50.43728137', '30.62301636', '1');
 		INSERT INTO locations(user_id, country, city, latitude, longitude, allow)
-		        VALUES ('179', 'Ukraine', 'Kyiv city', 'Kyiv', '50.41584686', '30.63743591', '1');      
+		        VALUES ('179', 'Ukraine', 'Kyiv', '50.41584686', '30.63743591', '1');      
 		INSERT INTO locations(user_id, country, city, latitude, longitude, allow)
-		        VALUES ('180', 'Ukraine', 'Kyiv city', 'Kyiv', '50.42000329', '30.53203583', '1');
+		        VALUES ('180', 'Ukraine', 'Kyiv', '50.42000329', '30.53203583', '1');
 		INSERT INTO locations(user_id, country, city, latitude, longitude, allow)
-		        VALUES ('181', 'Ukraine', 'Kyiv city', 'Kyiv', '50.40884573', '30.62335968', '1');
+		        VALUES ('181', 'Ukraine', 'Kyiv', '50.40884573', '30.62335968', '1');
 		INSERT INTO locations(user_id, country, city, latitude, longitude, allow)
-		        VALUES ('182', 'Ukraine', 'Kyiv city', 'Kyiv', '50.39396491', '30.63400269', '1');
+		        VALUES ('182', 'Ukraine', 'Kyiv', '50.39396491', '30.63400269', '1');
 		INSERT INTO locations(user_id, country, city, latitude, longitude, allow)
-		        VALUES ('183', 'Ukraine', 'Kyiv city', 'Kyiv', '50.43159561', '30.47779083', '1');
+		        VALUES ('183', 'Ukraine', 'Kyiv', '50.43159561', '30.47779083', '1');
 		INSERT INTO locations(user_id, country, city, latitude, longitude, allow)
-		        VALUES ('184', 'Ukraine', 'Kyiv city', 'Kyiv', '50.40600123', '30.48568726', '1');
+		        VALUES ('184', 'Ukraine', 'Kyiv', '50.40600123', '30.48568726', '1');
 		INSERT INTO locations(user_id, country, city, latitude, longitude, allow)
-		        VALUES ('185', 'Ukraine', 'Kyiv city', 'Kyiv', '50.46329594', '30.46714783', '1');"
+		        VALUES ('185', 'Ukraine', 'Kyiv', '50.46329594', '30.46714783', '1');"
 	);
 	define('LOCATIONS', $locations);
 

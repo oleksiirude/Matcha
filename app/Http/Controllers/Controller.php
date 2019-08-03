@@ -11,6 +11,7 @@
     use App\Report;
     use App\User;
     use App\Notification;
+    use Cache;
     use Carbon\Carbon;
     use Illuminate\Foundation\Bus\DispatchesJobs;
     use Illuminate\Routing\Controller as BaseController;
@@ -213,5 +214,13 @@
         public function ifAvatarUploaded() {
             $uploaded = Profile::find(Auth::id());
             return $uploaded->avatar_uploaded;
+        }
+        
+        public function updateUsersOnlineStatus($id) {
+            if (!Cache::has('user-is-online-' . $id)) {
+                User::find($id)->update(['last_activity' => Carbon::now()]);
+                $expiresAt = Carbon::now()->addMinutes(1);
+                Cache::put('user-is-online-' . $id, true, $expiresAt);
+            }
         }
     }

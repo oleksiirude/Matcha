@@ -36,7 +36,7 @@
 
                 <div class="row comment-box-main p-3 rounded-bottom">
                     <div class="col-md-9 col-sm-9 col-9 pr-0 comment-box">
-                        <input id="textarea" type="text" class="form-control" placeholder="Type here..." />
+                        <input id="textarea" type="text" class="form-control" placeholder="Type here..."  autocomplete="off"/>
                     </div>
                     <div class="col-md-3 col-sm-2 col-2 pl-0 text-center send-btn">
                         <button id="send-msg" class="btn btn-primary">Send</button>

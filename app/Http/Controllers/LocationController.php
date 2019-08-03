@@ -13,7 +13,7 @@
         
         public static function filterByDistance($profiles, $id, $radius = null) {
             if (!$radius)
-                $radius = 300000; // default radius -> 30km
+                $radius = 300000; // default radius is 30km
             $auth = Location::find($id);
             
             $nearby = collect();
@@ -41,13 +41,13 @@
         public function turnOffLocation() {
             Location::where('user_id', Auth::id())->update(['allow' => false]);
         }
-        
+
         public function changeLocation(Request $request) {
             $data = json_decode($request->json()->all(), true);
-            
+
             if (count($data) < 4)
                 return ;
-    
+
             Location::where('user_id', Auth::id())
                         ->update([
                             'country' => $data['country'],

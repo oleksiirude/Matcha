@@ -17,7 +17,7 @@ class CreateLocationsTable extends Migration
             $table->bigInteger('user_id');
             $table->string('country');
             $table->string('city');
-            $table->decimal('latitude', 10, 7);
+            $table->decimal('latitude', 18, 15);
             $table->decimal('longitude', 18, 15);
             $table->boolean('allow');
         });
