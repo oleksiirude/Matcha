@@ -233,7 +233,7 @@
                     $profile['distance'] = 'right behind you!';
                 }
                 elseif ($profile['distance'] < 1000)
-                    $profile['distance'] = 'about ' . $profile['distance'] . ' metres from you';
+                    $profile['distance'] = $profile['distance'] . ' metres from you';
                 else
                     $profile['distance'] =  round($profile['distance'] / 1000, 2) . ' km from you';
                 $profiles[$i] = $profile;

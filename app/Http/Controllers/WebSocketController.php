@@ -61,11 +61,9 @@
         public function onMessage(ConnectionInterface $from, $msg) {
             $from->session->start();
             $from_id = $from->session->get(Auth::getName()); // receiving users id from session
-    
-            var_dump('start');
-            // update users online status in Cache Facade
+            
+            // update users online status in cache and db
             $this->updateUsersOnlineStatus($from_id);
-            var_dump('end');
             
             // decode json data into php array
             $msg = json_decode($msg, true);
@@ -102,12 +100,14 @@
                                     // if user have connection with sender and now not in chat with him, but with other user
                                     // send notification to user with 'chat => false' setting (so message won't get into foreign chat)
                                     $this->sendMessageNotificationToUser($user, $msg, $from_id);
+                                    $this->addMessageToDB($from_id, $msg);
                                     $received = true;
                                 }
                             } else {
                                 // if user have connection with sender, but now it's connection doesn't have privacy
                                 // send notification to user with 'chat => false' setting
                                 $this->sendMessageNotificationToUser($user, $msg, $from_id);
+                                $this->addMessageToDB($from_id, $msg);
                                 $received = true;
                             }
                         }
@@ -115,7 +115,7 @@
                     // if receiver isn't connected to ws server, but has connection with opponent -> only save message in db
                     if (!$received && $this->checkIfConnected($from_id, $msg['to'])) {
                         $this->addMessageToDB($from_id, $msg);
-                        $this->addNotificationToDB($msg, ' has sent you message', $from_id, false);
+                        $this->addNotificationMessageToDB($msg, ' has sent you message', $from_id);
                         $this->messageSendPrintInCLI($from_id, $msg['to'], $msg['msg'], false);
                     }
                     break;
@@ -151,6 +151,15 @@
                     }
                     if (!$received)
                         $this->handleNotificationIfOffline($msg, $notification, $from_id);
+                    break;
+                }
+                case 'status': {
+                    $status = $this->checkLastActivity(User::find($msg['to']));
+                    
+                    if ($status === 'online')
+                        $status = 'is online';
+                    $from->send(json_encode(['chat' => true, 'status' => true, 'data' => $status]));
+                    break;
                 }
             }
         }
@@ -239,7 +248,6 @@
         
         protected function sendNotificationToUser($user, $msg, $notification, $from_id) {
             $user->send(json_encode(['chat' => false, 'msg' => $msg['login'] . $notification]));
-            // $this->addNotificationToDB($msg, $notification, $from_id, true);
             $this->notificationSendPrintInCLI($from_id, $msg['to'], 'message', true);
             
             return true;
@@ -247,56 +255,79 @@
     
         protected function sendMessageNotificationToUser($user, $msg, $from_id) {
             $user->send(json_encode(['chat' => false, 'msg' => $msg['login'] . ' has sent you message']));
-            // $this->addNotificationToDB($msg, ' has sent you message', $from_id, true);
             $this->notificationSendPrintInCLI($from_id, $msg['to'], 'message', true);
         
             return true;
         }
         
         protected function handleNotificationIfOffline($msg, $notification, $from_id) {
-            // save data to db only if users id is valid
+            // save data to db only if user's id is valid
             if (User::where('id', $msg['to'])->first())
                 switch ($msg['aim']) {
                     case 'like': {
                         if ($this->checkIfLikedMe($msg['to'], $from_id))
-                            $this->addNotificationToDbIfNotRead($msg, $notification, $from_id);
+                            $this->addNotificationToDb($msg, $notification, $from_id);
                         else
-                            $this->addNotificationToDbIfNotRead($msg, $notification, $from_id);
+                            $this->addNotificationToDb($msg, $notification, $from_id);
                         break;
                     }
                     case 'unlike': {
                         if ($this->checkIfConnected($from_id, $msg['to']))
-                            $this->addNotificationToDbIfNotRead($msg, $notification, $from_id);
+                            $this->addNotificationToDb($msg, $notification, $from_id);
                         break;
                     }
                     case 'checked': {
                         if (!$this->ifAlreadyPresentInNotifications($msg['to'], $from_id))
-                            $this->addNotificationToDbIfNotRead($msg, $notification, $from_id);
+                            $this->addNotificationToDb($msg, $notification, $from_id);
                         break;
                     }
                 }
         }
-    
-        protected function addNotificationToDbIfNotRead($msg, $notification, $from_id) {
-            $this->addNotificationToDB($msg, $notification, $from_id, false);
-            $this->notificationSendPrintInCLI($from_id, $msg['to'], $msg['aim'], false);
-        }
-    
-        protected function addNotificationToDB($msg, $text, $from_id, $read) {
-            if ($msg['chat'] === true)
-                $link = asset('chat/with/' . $msg['login']);
-            else
-                $link = asset('users/' . $msg['login']);
         
+        protected function addNotificationToDB($msg, $text, $from_id) {
+           $link = asset('users/' . $msg['login']);
+            
             Notification::create([
                 'user_id' => $msg['to'],
                 'from_id' => $from_id,
                 'login' => $msg['login'],
                 'link' => $link,
                 'title' => $text,
-                'read' => $read,
                 'date' => Carbon::now()
-            ]);
+                ]);
+        }
+    
+        protected function addNotificationMessageToDB($msg, $text, $from_id) {
+            $link = asset('chat/with/' . $msg['login']);
+      
+            if (Notification::where([
+                    'user_id' => $msg['to'],
+                    'login' => $msg['login'],
+                    'message' => true
+                ])->first()) {
+                $row = Notification::where([
+                    'user_id' => $msg['to'],
+                    'login' => $msg['login'],
+                    'message' => true])->first();
+    
+                $row->update(['date' => Carbon::now()]);
+                
+                $row->where([
+                    'user_id' => $msg['to'],
+                    'login' => $msg['login'],
+                    'message' => true])
+                    ->increment('counter', 1);
+            }
+            else
+                Notification::create([
+                    'user_id' => $msg['to'],
+                    'from_id' => $from_id,
+                    'login' => $msg['login'],
+                    'link' => $link,
+                    'title' => $text,
+                    'message' => true,
+                    'date' => Carbon::now()
+                ]);
         }
         
         // functions for logging into CLI

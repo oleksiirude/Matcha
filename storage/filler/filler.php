@@ -21,7 +21,8 @@
 		TRUNCATE TABLE bans;
 		TRUNCATE TABLE visits;
 		TRUNCATE TABLE chat_histories;
-		TRUNCATE TABLE notifications;	
+		TRUNCATE TABLE notifications;
+		TRUNCATE TABLE jobs;	
 	");
 	
 	foreach (USERS as $query => $insert)

@@ -1,6 +1,7 @@
 <template>
     <div class="container" id="main_container">
-        <h3 class="text-center"><span class="badge badge-secondary">Private chat with {{ opponent }}</span></h3>
+        <h3 class="text-center">Private chat with <a id="link" style="text-decoration: none; color: rgba(39, 39, 39, 0.8)">{{ opponent }}</a></h3>
+        <h4 class="text-center"><span id="status" class="badge badge-secondary"></span></h4>
         <div class="row mt-5">
             <div class="col-md-6 offset-md-3 col-sm-6 offset-sm-3 col-12 comments-main pt-4 rounded">
                 <div id="chat">
@@ -61,17 +62,48 @@
             let opponent = this.opponent;
             let opponents_avatar = this.opponents_avatar;
 
+            let link = window.location.protocol + '//' + window.location.host + '/' + 'users/' + opponent;
+            let set_link = document.getElementById('link');
+            set_link.setAttribute('href', link);
+
+            // get connection to web-socket server (in server side we use ratchet)
             let conn = new WebSocket('ws://localhost:8081/?from=' + from + '&to=' + to);
 
             conn.onopen = function() {
                 document.getElementById('send-msg').addEventListener('click', sendMessage);
+
+                let textarea = document.getElementById('textarea');
+                textarea.addEventListener("keyup", (event) => {
+                    if (event.keyCode === 13) {
+                        event.preventDefault();
+                        document.getElementById("send-msg").click();
+                    }
+                });
                 console.log("Connection established! Mode: [chat]");
+
+                let box = {
+                    'action': 'status',
+                    'to': to,
+                };
+
+                conn.send(JSON.stringify(box));
             };
+
+            // check opponent's status (every 10 sec)
+            setInterval(() => {
+
+                let box = {
+                    'action': 'status',
+                    'to': to,
+                };
+
+                conn.send(JSON.stringify(box));
+            }, 10000);
 
             conn.onmessage = function(e) {
                 let msg = JSON.parse(e.data);
 
-                console.log(msg);
+                // console.log(msg['data']);
 
                 if (msg['chat'] === true) {
                     if (msg['blocked'] === true && msg['msg'] === 'blocked') {
@@ -85,6 +117,10 @@
                         let chat = document.getElementById('chat');
                         chat.removeChild(chat.lastChild);
                         addBlockedMessage('you do not have connection anymore');
+                    }
+                    else if (msg['status'] === true) {
+                        let status = document.getElementById('status');
+                        status.innerHTML = opponent + ' ' + msg['data'];
                     }
                     else
                         addMessageFromUser(msg['msg']);
@@ -266,4 +302,10 @@
         max-height: 60vh;
         overflow-x: hidden;
     }
+
+    /*@media screen and (max-width: 420px) {*/
+    /*    .rounded-circle { width: 300px; height: 310px; }*/
+
+    /*}*/
+
 </style>

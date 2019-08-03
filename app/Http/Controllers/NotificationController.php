@@ -7,26 +7,30 @@
 
     class NotificationController extends Controller {
         
-        public function getNumberOfUnreadNotifications() {
-            $unread = Notification::where([
+        public function countNotifications() {
+            $nb = Notification::where([
                 'user_id' => Auth::id(),
-                'read' => false
             ])->get()->count();
             
-            return response()->json(['count' => $unread]);
+            return response()->json(['count' => $nb]);
         }
         
         public function getNotifications() {
-            $notifications = Notification::select('login', 'link', 'title', 'read', 'date')
-                                            ->where('user_id', Auth::id())
-                                            ->get();
+            $notifications = Notification::select('login', 'link', 'title', 'message', 'counter', 'date')
+                                            ->where('user_id', Auth::id())->get();
             
-            Notification::where([
-                'user_id' => Auth::id(),
-                'read' => false
-                ])->update(['read' => true]);
+            $i = 0;
+            foreach ($notifications as $notification) {
+                if ($notification->message && $notification->counter > 1) {
+                    $notification->title = 'you have ' . $notification->counter . ' messages from ';
+                    $notifications[$i] = $notification;
+                }
+                $i++;
+            }
+            
+            Notification::destroy(Auth::id());
     
-            return response()->json(['count' => $notifications]);
+            return response()->json(['notifications' => $notifications]);
         }
     }
  

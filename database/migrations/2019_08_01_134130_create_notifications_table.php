@@ -19,7 +19,8 @@ class CreateNotificationsTable extends Migration
             $table->string('login');
             $table->string('link');
             $table->string('title');
-            $table->boolean('read')->default(false);
+            $table->boolean('message')->default(false);
+            $table->integer('counter')->default(1);
             $table->timestamp('date');
         });
     }

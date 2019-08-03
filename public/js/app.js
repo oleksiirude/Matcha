@@ -1748,6 +1748,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -1757,16 +1758,40 @@ __webpack_require__.r(__webpack_exports__);
     var to = this.id_to;
     var opponent = this.opponent;
     var opponents_avatar = this.opponents_avatar;
+    var link = window.location.protocol + '//' + window.location.host + '/' + 'users/' + opponent;
+    var set_link = document.getElementById('link');
+    set_link.setAttribute('href', link); // get connection to web-socket server (in server side we use ratchet)
+
     var conn = new WebSocket('ws://localhost:8081/?from=' + from + '&to=' + to);
 
     conn.onopen = function () {
       document.getElementById('send-msg').addEventListener('click', sendMessage);
+      var textarea = document.getElementById('textarea');
+      textarea.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          document.getElementById("send-msg").click();
+        }
+      });
       console.log("Connection established! Mode: [chat]");
-    };
+      var box = {
+        'action': 'status',
+        'to': to
+      };
+      conn.send(JSON.stringify(box));
+    }; // check opponent's status (every 10 sec)
+
+
+    setInterval(function () {
+      var box = {
+        'action': 'status',
+        'to': to
+      };
+      conn.send(JSON.stringify(box));
+    }, 10000);
 
     conn.onmessage = function (e) {
-      var msg = JSON.parse(e.data);
-      console.log(msg);
+      var msg = JSON.parse(e.data); // console.log(msg['data']);
 
       if (msg['chat'] === true) {
         if (msg['blocked'] === true && msg['msg'] === 'blocked') {
@@ -1782,6 +1807,9 @@ __webpack_require__.r(__webpack_exports__);
           _chat.removeChild(_chat.lastChild);
 
           addBlockedMessage('you do not have connection anymore');
+        } else if (msg['status'] === true) {
+          var status = document.getElementById('status');
+          status.innerHTML = opponent + ' ' + msg['data'];
         } else addMessageFromUser(msg['msg']);
       } else if (msg['chat'] === false) console.log(msg['msg']);
     };
@@ -8862,7 +8890,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#chat[data-v-80d584ac]::-webkit-scrollbar { width: 0 !important\n}\n#chat[data-v-80d584ac] {\n    overflow: -moz-scrollbars-none;\n    scrollbar-width: none;\n    overflow: auto;\n    max-height: 60vh;\n    overflow-x: hidden;\n}\n", ""]);
+exports.push([module.i, "\n#chat[data-v-80d584ac]::-webkit-scrollbar { width: 0 !important\n}\n#chat[data-v-80d584ac] {\n    overflow: -moz-scrollbars-none;\n    scrollbar-width: none;\n    overflow: auto;\n    max-height: 60vh;\n    overflow-x: hidden;\n}\n\n/*@media screen and (max-width: 420px) {*/\n/*    .rounded-circle { width: 300px; height: 310px; }*/\n\n/*}*/\n\n", ""]);
 
 // exports
 
@@ -58052,10 +58080,21 @@ var render = function() {
     { staticClass: "container", attrs: { id: "main_container" } },
     [
       _c("h3", { staticClass: "text-center" }, [
-        _c("span", { staticClass: "badge badge-secondary" }, [
-          _vm._v("Private chat with " + _vm._s(_vm.opponent))
-        ])
+        _vm._v("Private chat with "),
+        _c(
+          "a",
+          {
+            staticStyle: {
+              "text-decoration": "none",
+              color: "rgba(39, 39, 39, 0.8)"
+            },
+            attrs: { id: "link" }
+          },
+          [_vm._v(_vm._s(_vm.opponent))]
+        )
       ]),
+      _vm._v(" "),
+      _vm._m(0),
       _vm._v(" "),
       _c("div", { staticClass: "row mt-5" }, [
         _c(
@@ -58169,7 +58208,7 @@ var render = function() {
               2
             ),
             _vm._v(" "),
-            _vm._m(0)
+            _vm._m(1)
           ]
         )
       ])
@@ -58177,6 +58216,17 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "text-center" }, [
+      _c("span", {
+        staticClass: "badge badge-secondary",
+        attrs: { id: "status" }
+      })
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

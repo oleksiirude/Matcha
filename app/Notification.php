@@ -12,7 +12,8 @@
             'login',
             'link',
             'title',
-            'read',
+            'message',
+            'counter',
             'date'
         ];
     
