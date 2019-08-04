@@ -69,21 +69,23 @@
                                 </div>
                                 <div id="right_card" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                     <div id="usr_name_div">
+                                        <div id="usr_name">
                                         <form action="{{ route('change.name') }}" method="POST" id="name_form">
                                             @csrf
                                             @method('PUT')
 
-                                            <editinput-component value="{{ $profile->name }}" name="name" id_btn="name_btn" url="{{ route('change.name') }}"></editinput-component>
+                                            <editinput-component value="{{ $profile->name }}" name="name" id_btn="name_btn"  id_btn_cancel="name_btn_cancel" url="{{ route('change.name') }}"></editinput-component>
                                         </form>
                                         <form action="{{ route('change.surname') }}" method="POST" id="surname_form">
                                             @csrf
                                             @method('PUT')
 
                                             <div>
-                                                <editinput-component value="{{ $profile->surname }}"  name="surname" id_btn="surname_btn" url="{{ route('change.surname') }}"></editinput-component>
+                                                <editinput-component value="{{ $profile->surname }}"  name="surname" id_btn="surname_btn" id_btn_cancel="surname_btn_cancel" url="{{ route('change.surname') }}"></editinput-component>
                                             </div>
                                         </form>
-                                        <span id="name_error_msg" class="error_msg"></span>
+                                        </div>
+                                        <span id="name_error_msg" class="error_msg" hidden></span>
                                     </div>
                                     <div>
                                         <form action="{{ route('change.login') }}" method="POST" id="login_form">

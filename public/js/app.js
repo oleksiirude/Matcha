@@ -2625,8 +2625,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['value', 'name', 'id_btn', 'url'],
+  props: ['value', 'name', 'id_btn', 'id_btn_cancel', 'url'],
   data: function data() {
     return {
       mutableValue: this.value
@@ -2639,6 +2642,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     show_btn: function show_btn(name) {
       document.getElementById(name + '_btn').hidden = false;
+      document.getElementById(name + '_btn_cancel').hidden = false;
     },
     save: function save(e) {
       var _this = this;
@@ -2664,9 +2668,12 @@ __webpack_require__.r(__webpack_exports__);
           if (string.result == true) {
             _this.mutableValue = document.getElementById(_this.name).value;
             document.getElementById(_this.name + '_btn').hidden = true;
+            document.getElementById(_this.name + '_btn_cancel').hidden = true;
             document.getElementById('name_error_msg').innerHTML = '';
+            document.getElementById('name_error_msg').hidden = true;
           } else if (string.result == false) {
             document.getElementById(_this.name).value = _this.mutableValue;
+            document.getElementById('name_error_msg').hidden = false;
             document.getElementById('name_error_msg').innerHTML = string.error;
             console.log('error');
           }
@@ -2676,6 +2683,13 @@ __webpack_require__.r(__webpack_exports__);
       };
 
       xhr.send(form);
+    },
+    cancel: function cancel() {
+      document.getElementById(this.name).value = this.mutableValue;
+      document.getElementById(this.name + '_btn').hidden = true;
+      document.getElementById(this.name + '_btn_cancel').hidden = true;
+      document.getElementById('name_error_msg').innerHTML = '';
+      document.getElementById('name_error_msg').hidden = true;
     }
   }
 });
@@ -58941,15 +58955,27 @@ var render = function() {
       }
     }),
     _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn edit_submit",
-        attrs: { type: "submit", id: _vm.id_btn, hidden: "" },
-        on: { click: _vm.save }
-      },
-      [_vm._v("Save")]
-    )
+    _c("div", { staticClass: "usr_name_btn_div" }, [
+      _c(
+        "button",
+        {
+          staticClass: "usr_name_btn",
+          attrs: { type: "submit", id: _vm.id_btn, hidden: "" },
+          on: { click: _vm.save }
+        },
+        [_vm._v("Save")]
+      ),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          staticClass: "usr_name_btn",
+          attrs: { id: _vm.id_btn_cancel, hidden: "" },
+          on: { click: _vm.cancel }
+        },
+        [_vm._v("Cancel")]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
