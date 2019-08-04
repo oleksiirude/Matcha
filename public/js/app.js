@@ -1697,8 +1697,8 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -1819,7 +1819,7 @@ __webpack_require__.r(__webpack_exports__);
       h4.innerHTML = you;
       var time_tag = document.createElement('time');
       time_tag.className = 'text-grey ml-3 float-left';
-      var now = new moment__WEBPACK_IMPORTED_MODULE_0___default.a();
+      var now = new moment__WEBPACK_IMPORTED_MODULE_1___default.a();
       time_tag.innerHTML = now.format("HH:mm:ss");
       var p = document.createElement('p');
       p.className = 'mb-0 text-black';
@@ -1851,7 +1851,7 @@ __webpack_require__.r(__webpack_exports__);
       h4.innerHTML = opponent;
       var time_tag = document.createElement('time');
       time_tag.className = 'text-grey ml-3 float-right';
-      var now = new moment__WEBPACK_IMPORTED_MODULE_0___default.a();
+      var now = new moment__WEBPACK_IMPORTED_MODULE_1___default.a();
       time_tag.innerHTML = now.format("HH:mm:ss");
       var p = document.createElement('p');
       p.className = 'mb-0 text-black';
@@ -2708,7 +2708,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['value', 'name', 'id_btn', 'label', 'url'],
+  props: ['src', 'value', 'name', 'id_btn', 'label', 'url'],
   data: function data() {
     return {
       mutableValue: this.value
@@ -2914,21 +2914,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    console.log('lat', this.lat, this.lng, this.allow); // let map;
-    // global.initMap = this.initMap();
-    // this.initMap();
+    console.log('lat', this.lat, this.lng, this.allow);
   },
   data: function data() {
     return {
+      mutableAllow: this.allow,
       mutableLtt: '',
       mutableLng: '',
-      mutableJson: '' // markers : []
-
+      currentLtt: this.lat,
+      currentLng: this.lng,
+      mutableJson: ''
     };
   },
-  props: ['lat', 'lng', 'allow'],
+  props: ['src', 'lat', 'lng', 'allow', 'url', 'csrf', 'urloff'],
   methods: {
     editGeo: function editGeo() {
       if (document.getElementById('geolocation_div').hidden == true) {
@@ -2940,53 +2949,18 @@ __webpack_require__.r(__webpack_exports__);
         document.getElementById('geolocation_div').hidden = true;
       }
     },
-    // geocode: function(ltt, lng) {
-    //     latitude = ltt;
-    //     longitude = lng;
-    //     console.log('response', latitude, longitude);
-    //
-    //     let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCpslLLMvrUUPGWepKF3r-8g87FCEF2Qek&latlng='+latitude+','+longitude+'&language=en';
-    //     // $.ajaxSetup({async: false});
-    //     $.ajax({
-    //         url: GEOCODING,
-    //         dataType: 'json',
-    //         async: false,
-    //         success: function(location) {
-    //             console.log(location['plus_code']['compound_code']);
-    //             let add= location['plus_code']['compound_code'];
-    //             let  value=add.split(",");
-    //             let count=value.length;
-    //             country=value[count-1];
-    //             if (count == 2)
-    //             {
-    //                 let city_code=value[count-2].split(" ");
-    //                 code = city_code.shift();
-    //                 city = city_code.join(' ');
-    //                 state=city;
-    //             }
-    //             else {
-    //                 state=value[count-2];
-    //                 let city_code=value[count-3].split(" ");
-    //                 code = city_code.shift();
-    //                 city = city_code.join(' ');
-    //             }
-    //             console.log('country', country);
-    //             console.log('state', state);
-    //             console.log('city', city);
-    //             console.log('code', code);
-    //         }
-    //     });
-    // },
     initMap: function initMap() {
+      // console.log('new init', this.currentLtt, this.currentLng);
       var self = this;
       var card = document.getElementById('pac-card');
       var input = document.getElementById('pac-input');
       var infowindowContent = document.getElementById('infowindow-content');
       var map = new google.maps.Map(document.getElementById('map'), {
         center: {
-          lat: this.lat * 1,
-          lng: this.lng * 1
+          lat: this.currentLtt * 1,
+          lng: this.currentLng * 1
         },
+        // center: {lat: this.lat * 1, lng: this.lng * 1},
         zoom: 13
       });
       var marker;
@@ -2995,8 +2969,9 @@ __webpack_require__.r(__webpack_exports__);
         mapTypeControl: true
       });
 
-      if (this.allow == 1) {
-        var latlng = new google.maps.LatLng(this.lat, this.lng);
+      if (this.mutableAllow == 1) {
+        var latlng = new google.maps.LatLng(this.currentLtt * 1, this.currentLng * 1); // let latlng = new google.maps.LatLng(this.lat * 1, this.lng * 1);
+
         marker = new google.maps.Marker({
           position: latlng,
           map: map
@@ -3031,11 +3006,10 @@ __webpack_require__.r(__webpack_exports__);
           map.setZoom(17);
         }
 
-        console.log('geocode', geocode(place.geometry.location.lat(), place.geometry.location.lng()));
         self.mutableLtt = place.geometry.location.lat();
         self.mutableLng = place.geometry.location.lng();
-        self.mutableJson = geocode(place.geometry.location.lat(), place.geometry.location.lng());
-        console.log('(place.geometry.location', place.geometry.location.lat(), place.geometry.location.lng());
+        self.mutableJson = geocode(place.geometry.location.lat(), place.geometry.location.lng(), self.csrf); // console.log('(place.geometry.location', place);
+
         document.getElementById('geo_form').hidden = false;
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
@@ -3052,8 +3026,64 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     save: function save(e) {
+      var locate = this.mutableJson;
+      var self = this;
       console.log('SAVE', this.mutableLtt, this.mutableLng, this.mutableJson);
       e.preventDefault();
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': this.csrf
+        }
+      });
+      jQuery.ajax({
+        url: this.url,
+        method: 'PUT',
+        data: JSON.stringify(this.mutableJson),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function success(result) {
+          if (result == true) {
+            document.getElementById('city_form').hidden = false;
+            document.getElementById('block_div').hidden = false;
+            document.getElementById('country').value = locate['country'];
+            document.getElementById('city').value = locate['city'];
+            document.getElementById('pac-input').value = '';
+            document.getElementById('geo_form').hidden = true;
+            document.getElementById('geolocation_div').hidden = true; // self.curentLtt = self.mutableLtt;
+            // self.curentLng = self.mutableLng;
+            // console.log('location', self.curentLtt, self.mutableLtt);
+            // console.log('location', locate['city'], locate['country']);
+          } // console.log('location result', result);
+
+        }
+      });
+      this.currentLtt = this.mutableLtt;
+      this.currentLng = this.mutableLng;
+      this.mutableAllow = 1;
+    },
+    blockGeo: function blockGeo() {
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': this.csrf
+        }
+      });
+      jQuery.ajax({
+        url: this.urloff,
+        method: 'DELETE',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function success(result) {
+          if (result == true) {
+            document.getElementById('city').value = '';
+            document.getElementById('city_form').hidden = true;
+            document.getElementById('block_div').hidden = true;
+            document.getElementById('country').value = "isn't specified";
+          }
+
+          console.log('off result', result);
+        }
+      });
+      this.mutableAllow = 0;
     }
   }
 });
@@ -3148,7 +3178,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name', 'url'],
+  props: ['name', 'url', 'src'],
   methods: {
     deletesmth: function deletesmth(e) {
       var _this = this;
@@ -3213,7 +3243,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name', 'bio'],
+  props: ['name', 'bio', 'src'],
   data: function data() {
     return {
       mutableValue: this.bio
@@ -56959,7 +56989,7 @@ Popper.placements = placements;
 Popper.Defaults = Defaults;
 
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
-
+//# sourceMappingURL=popper.js.map
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
@@ -58865,7 +58895,12 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("input", {
-        attrs: { type: "password", name: "password", id: "password" }
+        attrs: {
+          type: "password",
+          name: "password",
+          id: "password",
+          autocomplete: "off"
+        }
       })
     ])
   }
@@ -58951,7 +58986,7 @@ var render = function() {
         _c("img", {
           staticClass: "edit",
           staticStyle: { float: "none" },
-          attrs: { src: "/images/service/edit.png", id: "" }
+          attrs: { src: _vm.src, id: "" }
         })
       ]
     ),
@@ -58965,7 +59000,8 @@ var render = function() {
         attrs: {
           type: "password",
           name: "current_password",
-          id: "current_password"
+          id: "current_password",
+          autocomplete: "off"
         }
       }),
       _c("br"),
@@ -58975,7 +59011,12 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("input", {
-        attrs: { type: "password", name: "new_password", id: "new_password" },
+        attrs: {
+          type: "password",
+          name: "new_password",
+          id: "new_password",
+          autocomplete: "off"
+        },
         on: {
           keyup: function($event) {
             return _vm.check()
@@ -58992,7 +59033,8 @@ var render = function() {
         attrs: {
           type: "password",
           name: "new_password_confirm",
-          id: "new_password_confirm"
+          id: "new_password_confirm",
+          autocomplete: "off"
         },
         on: {
           keyup: function($event) {
@@ -59014,7 +59056,11 @@ var render = function() {
       _vm._v(" "),
       _c("input", {
         staticClass: "btn edit_submit cancel_submit",
-        attrs: { id: "password_btn_cancel", value: "Cancel" },
+        attrs: {
+          id: "password_btn_cancel",
+          value: "Cancel",
+          autocomplete: "off"
+        },
         on: {
           click: function($event) {
             return _vm.cancel()
@@ -59097,6 +59143,46 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _vm.allow === "1"
+      ? _c("div", { attrs: { id: "block_div" } }, [
+          _c("input", {
+            attrs: {
+              type: "checkbox",
+              id: "block_geo",
+              name: "block_geo",
+              value: ""
+            },
+            on: {
+              change: function($event) {
+                return _vm.blockGeo()
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "block_geo", id: "block_geo" } }, [
+            _vm._v("Block geolocation")
+          ])
+        ])
+      : _c("div", { attrs: { hidden: "", id: "block_div" } }, [
+          _c("input", {
+            attrs: {
+              type: "checkbox",
+              id: "block_geo",
+              name: "block_geo",
+              value: ""
+            },
+            on: {
+              change: function($event) {
+                return _vm.blockGeo()
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "block_geo", id: "block_geo" } }, [
+            _vm._v("Block geolocation")
+          ])
+        ]),
+    _vm._v(" "),
     _c(
       "span",
       { attrs: { id: "change_geo_title" }, on: { click: _vm.editGeo } },
@@ -59105,7 +59191,7 @@ var render = function() {
         _c("img", {
           staticClass: "edit",
           staticStyle: { float: "none" },
-          attrs: { src: "/images/service/edit.png", id: "" }
+          attrs: { src: _vm.src, id: "" }
         })
       ]
     ),
@@ -59292,12 +59378,7 @@ var render = function() {
       },
       on: { click: _vm.deletesmth }
     },
-    [
-      _c("img", {
-        staticClass: "edit cancel",
-        attrs: { src: "/images/service/trash_50px.png" }
-      })
-    ]
+    [_c("img", { staticClass: "edit cancel", attrs: { src: _vm.src } })]
   )
 }
 var staticRenderFns = []
@@ -59349,7 +59430,7 @@ var render = function() {
     _vm._v(" "),
     _c("img", {
       staticClass: "edit",
-      attrs: { src: "/images/service/edit.png", id: "bio_edit" },
+      attrs: { src: _vm.src, id: "bio_edit" },
       on: {
         click: function($event) {
           return _vm.editInput(_vm.name)
@@ -75597,8 +75678,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/olrudenk/mamp/apache2/htdocs/Matcha/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/olrudenk/mamp/apache2/htdocs/Matcha/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/matcha_start/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/matcha_start/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

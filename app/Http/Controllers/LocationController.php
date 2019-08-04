@@ -40,14 +40,14 @@
         
         public function turnOffLocation() {
             Location::where('user_id', Auth::id())->update(['allow' => false]);
+            return 'true';
         }
         
         public function changeLocation(Request $request) {
-            $data = json_decode($request->json()->all(), true);
-            
+            $data = $request->json()->all();
             if (count($data) < 4)
-                return ;
-    
+                return 'false';
+
             Location::where('user_id', Auth::id())
                         ->update([
                             'country' => $data['country'],
@@ -56,5 +56,6 @@
                             'longitude' => $data['longitude'],
                             'allow' => true
                         ]);
+            return 'true';
         }
     }

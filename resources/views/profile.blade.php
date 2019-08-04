@@ -97,7 +97,7 @@
                                     <div>
                                         <form action="{{ route('change.password') }}" method="POST" id="password_form">
                                             @csrf
-                                            <edit_password-component name="password" id_btn="password_btn" url="{{ route('change.password') }}"></edit_password-component>
+                                            <edit_password-component src="{{asset('/images/service/edit.png')}}" name="password" id_btn="password_btn" url="{{ route('change.password') }}"></edit_password-component>
                                         </form>
                                         <span id="password_error_msg" class="error_msg" hidden></span>
                                     </div>
@@ -147,19 +147,21 @@
                                                 <input type="text" id="city" name="city" value="{{ $profile->city }}" class="profiledata">
                                             </form>
                                         </div>
-                                        <input type="checkbox" onchange="blockGeo()" id="block_geo" name="block_geo" value="" checked/>
-                                        <label for="block_geo" id="block_geo">Block geolocation</label>
                                     @else
                                         <div>
                                             <form id="country_form">
                                                 <label for="country">Location:</label>
                                                 <input type="text" id="country" name="country" value="isn't specified" class="profiledata">
                                             </form>
+                                            <form id="city_form" hidden>
+                                                <label for="city">City:</label>
+                                                <input type="text" id="city" name="city" value="" class="profiledata">
+                                            </form>
                                         </div>
                                     @endif
 
                                     <div>
-                                        <location-component lat="{{ $profile->latitude }}" lng="{{ $profile->longitude }}" allow = "{{ $profile->allow }}"></location-component>
+                                        <location-component src="{{asset('/images/service/edit.png')}}" csrf="{{ csrf_token() }}" lat="{{ $profile->latitude }}" lng="{{ $profile->longitude }}" allow = "{{ $profile->allow }}" url="{{ route('change.location') }}" urloff="{{ route('turn.off.location') }}"></location-component>
                                     </div>
                                     <div>
                                         <span id="interests_tags_title">Interests:</span>
@@ -180,13 +182,13 @@
                                                 @csrf
                                                 @method('DELETE')
 
-                                            <deletedefault-component name="deletebio" url="/delete/bio"></deletedefault-component>
+                                            <deletedefault-component name="deletebio" url="/delete/bio" src="{{asset('/images/service/trash_50px.png')}}"></deletedefault-component>
                                         </form>
                                         <form action="{{ route('set.bio') }}" method="POST" id="bio_form">
                                             @csrf
                                             @method('PUT')
 
-                                            <editdata-component name="bio" bio="{{ $profile->bio }}"></editdata-component>
+                                            <editdata-component name="bio" bio="{{ $profile->bio }}" src="{{asset('/images/service/edit.png')}}"></editdata-component>
                                         </form>
                                         <span id="bio_error_msg" class="error_msg" hidden></span>
                                     </div>

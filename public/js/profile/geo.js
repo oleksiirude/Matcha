@@ -1,29 +1,26 @@
-// var input = document.getElementById('pac-input');
-// var autocomplete = new google.maps.places.Autocomplete(input);
-//     //, options);
-//  result = autocomplete.getPlace();
-// console.log(result); // take a look at this result object
-// console.log(result.address_components); // a result has multiple address components
-//
-// for(var i = 0; i < result.address_components.length; i += 1) {
-//     var addressObj = result.address_components[i];
-//     for(var j = 0; j < addressObj.types.length; j += 1) {
-//         if (addressObj.types[j] === 'country') {
-//             console.log(addressObj.types[j]); // confirm that this is 'country'
-//             console.log(addressObj.long_name); // confirm that this is the country name
-//         }
-//     }
-// }
-let geocode = function(ltt, lng) {
-    latitude = ltt;
-    longitude = lng;
+let geocode = function(ltt, lng, csrf) {
+    let latitude = ltt;
+    let longitude = lng;
+    let code;
+    let city;
+    let country;
 //     const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCpslLLMvrUUPGWepKF3r-8g87FCEF2Qek&latlng='+latitude+','+longitude+'&language=en');
-    console.log('response', latitude, longitude);
+    console.log('response', latitude, longitude, csrf);
 
     let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCpslLLMvrUUPGWepKF3r-8g87FCEF2Qek&latlng='+latitude+','+longitude+'&language=en';
     // $.ajaxSetup({async: false});
+    $.ajaxSetup({
+        // headers: {
+        //     // "Access-Control-Request-Headers": ''
+        // }
+        headers: {
+            // "Allow-Control-Allow-Origin": "*",
+            // 'X-CSRF-TOKEN': csrf
+        }
+    });
     $.ajax({
         url: GEOCODING,
+        type: 'GET',
         dataType: 'json',
         async: false,
         success: function(location) {
@@ -37,7 +34,7 @@ let geocode = function(ltt, lng) {
                 let city_code=value[count-2].split(" ");
                 code = city_code.shift();
                 city = city_code.join(' ');
-                state=city;
+                state = city;
             }
             else {
                 state=value[count-2];
@@ -45,10 +42,10 @@ let geocode = function(ltt, lng) {
                 code = city_code.shift();
                 city = city_code.join(' ');
             }
-            console.log('country', country);
-            console.log('state', state);
-            console.log('city', city);
-            console.log('code', code);
+            // console.log('country', country);
+            // console.log('state', state);
+            // console.log('city', city);
+            // console.log('code', code);
         }
     });
     let location = {
@@ -57,6 +54,6 @@ let geocode = function(ltt, lng) {
         latitude: ltt,
         longitude: lng,
     };
-    let json = JSON.stringify(location);
+    let json = location;
     return (json);
 };

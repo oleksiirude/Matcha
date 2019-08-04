@@ -1,15 +1,15 @@
 <template>
     <div>
-        <span id="change_password_title" @click="editPassword">Change password <img src="/images/service/edit.png" class="edit" style="float: none"  id=""></span>
+        <span id="change_password_title" @click="editPassword">Change password <img :src=src class="edit" style="float: none"  id=""></span>
         <div id="change_password_div" hidden>
             <label for="current_password">Current password:</label>
-            <input type="password" name="current_password" id="current_password"><br>
+            <input type="password" name="current_password" id="current_password" autocomplete="off"><br>
             <label for="new_password">New password:</label>
-            <input type="password" name="new_password" id = "new_password" @keyup='check();'><br>
+            <input type="password" name="new_password" id = "new_password" @keyup='check();' autocomplete="off"><br>
             <label for="new_password_confirm">Confirm new password:</label>
-            <input type="password" name="new_password_confirm" id="new_password_confirm" @keyup='check();'><br>
+            <input type="password" name="new_password_confirm" id="new_password_confirm" @keyup='check();' autocomplete="off"><br>
             <button type="submit" class="btn edit_submit disabled" :id="id_btn" @click="save">change password</button>
-            <input class="btn edit_submit cancel_submit" id="password_btn_cancel" @click="cancel()" value="Cancel">
+            <input class="btn edit_submit cancel_submit" id="password_btn_cancel" @click="cancel()" value="Cancel" autocomplete="off">
         </div>
     </div>
 </template>
@@ -17,6 +17,7 @@
 <script>
     export default {
         props: [
+            'src',
             'value',
             'name',
             'id_btn',
