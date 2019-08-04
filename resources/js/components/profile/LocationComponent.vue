@@ -181,6 +181,8 @@
                             document.getElementById('pac-input').value = '';
                             document.getElementById('geo_form').hidden = true;
                             document.getElementById('geolocation_div').hidden = true;
+                            // update_raiting(string.rating);
+                            // update_fill_profile(string.empty);
                             // self.curentLtt = self.mutableLtt;
                             // self.curentLng = self.mutableLng;
                             // console.log('location', self.curentLtt, self.mutableLtt);
@@ -215,6 +217,8 @@
                         console.log('off result', result);
                     }});
                 this.mutableAllow = 0;
+                // update_raiting(string.rating);
+                // update_fill_profile(string.empty);
             }
         }
     }

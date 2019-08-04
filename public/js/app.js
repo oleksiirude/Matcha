@@ -3083,7 +3083,9 @@ __webpack_require__.r(__webpack_exports__);
             document.getElementById('city').value = locate['city'];
             document.getElementById('pac-input').value = '';
             document.getElementById('geo_form').hidden = true;
-            document.getElementById('geolocation_div').hidden = true; // self.curentLtt = self.mutableLtt;
+            document.getElementById('geolocation_div').hidden = true; // update_raiting(string.rating);
+            // update_fill_profile(string.empty);
+            // self.curentLtt = self.mutableLtt;
             // self.curentLng = self.mutableLng;
             // console.log('location', self.curentLtt, self.mutableLtt);
             // console.log('location', locate['city'], locate['country']);
@@ -3117,7 +3119,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log('off result', result);
         }
       });
-      this.mutableAllow = 0;
+      this.mutableAllow = 0; // update_raiting(string.rating);
+      // update_fill_profile(string.empty);
     }
   }
 });
@@ -3279,7 +3282,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name', 'bio', 'src'],
+  props: ['name', 'bio', 'src', 'url'],
   data: function data() {
     return {
       mutableValue: this.bio
@@ -3305,7 +3308,7 @@ __webpack_require__.r(__webpack_exports__);
       var XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
       var xhr = new XHR();
       xhr.responseType = 'json';
-      var url = '/set/' + this.name;
+      var url = this.url;
       xhr.open('POST', url, true);
 
       xhr.onreadystatechange = function () {
@@ -3615,7 +3618,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['photovalue', 'inputid', 'labelid'],
+  props: ['photovalue', 'inputid', 'labelid', 'url'],
   methods: {
     downloadusrphoto: function downloadusrphoto() {
       var _this = this;
@@ -3632,7 +3635,7 @@ __webpack_require__.r(__webpack_exports__);
         var XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
         var xhr = new XHR();
         xhr.responseType = 'json';
-        xhr.open('POST', '/upload/photo', true);
+        xhr.open('POST', this.url, true);
         console.log('res', xhr, formData);
 
         xhr.onreadystatechange = function () {

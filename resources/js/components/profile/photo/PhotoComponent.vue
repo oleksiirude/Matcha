@@ -11,7 +11,8 @@
         props: [
             'photovalue',
             'inputid',
-            'labelid'
+            'labelid',
+            'url'
         ],
         methods: {
             downloadusrphoto : function () {
@@ -28,7 +29,7 @@
                     let XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
                     let xhr = new XHR();
                     xhr.responseType = 'json';
-                    xhr.open('POST', '/upload/photo', true);
+                    xhr.open('POST', this.url, true);
                     console.log('res', xhr, formData);
                     xhr.onreadystatechange = () => {
                         if (xhr.readyState !== 4) {

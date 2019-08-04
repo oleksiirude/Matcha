@@ -41,7 +41,10 @@ input, textarea {
     background: white;
     z-index: 100500;
 }
-
+.row {
+     margin-right: 0px;
+     margin-left: 0px;
+}
 /*#page-preloader .spinner {*/
 /*    width: 100px;*/
 /*    height: 100px;*/
@@ -384,13 +387,20 @@ a:hover {
 #password_form {
     margin-bottom: 0.5rem;
 }
+.marker {
+    width: 80px;
+}
+
 #fill_profile {
-    background: white;
+    background: #fdfdbe;
     position: fixed;
     right: 20px;
     padding: 10px;
     box-shadow: 5px 5px 8px rgba(74, 50, 60, 0.3);
     z-index: 100;
+}
+#fill_profile_body {
+    margin-top: 10px;
 }
 #fill_profile ul {
     text-align: left;

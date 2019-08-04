@@ -20,21 +20,24 @@
             <div class="">
                 <div class="card-body">
                     <div id="fill_profile">
-                        @if ($profile->totally_filled) &#9758; Hey! For more efficient search <b>you should</b>:
-                        <ul>
-                            @if (isset($profile->totally_filled['upload']))
-                                @foreach($profile->totally_filled['upload'] as $upload)
-                                    <li>upload {{ $upload }}</li>
-                                @endforeach
-                            @endif
+                        <img src="{{asset('/images/service/marker.png')}}" class="marker">
+                        <div id="fill_profile_body">
+                            @if ($profile->totally_filled) &#9758; Hey! For more efficient search <b>you should</b>:
+                                <ul>
+                                    @if (isset($profile->totally_filled['upload']))
+                                        @foreach($profile->totally_filled['upload'] as $upload)
+                                            <li>upload {{ $upload }}</li>
+                                        @endforeach
+                                    @endif
 
-                            @if (isset($profile->totally_filled['fill']))
-                                @foreach($profile->totally_filled['fill'] as $fill)
-                                    <li>fill {{ $fill }}</li>
-                                @endforeach
+                                    @if (isset($profile->totally_filled['fill']))
+                                        @foreach($profile->totally_filled['fill'] as $fill)
+                                            <li>fill {{ $fill }}</li>
+                                        @endforeach
+                                    @endif
+                                </ul>
                             @endif
-                        </ul>
-                        @endif
+                        </div>
                     </div>
 
                     <form enctype="multipart/form-data" method="POST" action="{{ route('upload.avatar') }}">
@@ -184,13 +187,13 @@
                                                 @csrf
                                                 @method('DELETE')
 
-                                            <deletedefault-component name="deletebio" url="/delete/bio" src="{{asset('/images/service/trash_50px.png')}}"></deletedefault-component>
+                                            <deletedefault-component name="deletebio" src="{{asset('/images/service/trash_50px.png')}}" url="{{ route('delete.bio') }}"></deletedefault-component>
                                         </form>
                                         <form action="{{ route('set.bio') }}" method="POST" id="bio_form">
                                             @csrf
                                             @method('PUT')
 
-                                            <editdata-component name="bio" bio="{{ $profile->bio }}" src="{{asset('/images/service/edit.png')}}"></editdata-component>
+                                            <editdata-component name="bio" bio="{{ $profile->bio }}" src="{{asset('/images/service/edit.png')}}" url="{{ route('set.bio') }}"></editdata-component>
                                         </form>
                                         <span id="bio_error_msg" class="error_msg" hidden></span>
                                     </div>
@@ -204,7 +207,7 @@
                                         <img src="{{ asset($profile->photo1) }}" alt="photo1" class="usr_photo" id="img1" onclick="choose_file('photo1_label')" @if ( $profile->photo1  == null) hidden @endif>
                                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}" id="photo1_form">
                                             @csrf
-                                            <photo-component photovalue="1" inputid="photo1" labelid="photo1_label"></photo-component>
+                                            <photo-component photovalue="1" inputid="photo1" labelid="photo1_label" url="{{ route('upload.photo') }}"></photo-component>
                                         </form>
                                         <form action="{{ route('delete.photo', 1) }}" method="POST" class="profile_delete_form" id="deletephoto_form1" @if ( $profile->photo1  == null) hidden @endif>
                                             @csrf
@@ -218,7 +221,7 @@
                                         <img src="{{ asset($profile->photo2) }}" alt="photo2" class="usr_photo" id="img2" onclick="choose_file('photo2_label')" @if ( $profile->photo2  == null) hidden @endif>
                                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}" id="photo2_form">
                                             @csrf
-                                            <photo-component photovalue="2" inputid="photo2" labelid="photo2_label"></photo-component>
+                                            <photo-component photovalue="2" inputid="photo2" labelid="photo2_label" url="{{ route('upload.photo') }}"></photo-component>
                                         </form>
                                         <form action="{{ route('delete.photo', 2) }}" method="POST" class="profile_delete_form" id="deletephoto_form2" @if ( $profile->photo2  == null) hidden @endif>
                                             @csrf
@@ -232,7 +235,7 @@
                                         <img src="{{ asset($profile->photo3) }}" alt="photo3" class="usr_photo" id="img3" onclick="choose_file('photo3_label')"  @if ( $profile->photo3  == null) hidden @endif>
                                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}" id="photo3_form">
                                             @csrf
-                                            <photo-component photovalue="3" inputid="photo3" labelid="photo3_label"></photo-component>
+                                            <photo-component photovalue="3" inputid="photo3" labelid="photo3_label" url="{{ route('upload.photo') }}"></photo-component>
                                         </form>
                                         <form action="{{ route('delete.photo', 3) }}" method="POST" class="profile_delete_form" id="deletephoto_form3" @if ( $profile->photo3  == null) hidden @endif>
                                             @csrf
@@ -246,7 +249,7 @@
                                         <img src="{{ asset($profile->photo4) }}" alt="photo4" class="usr_photo" id="img4" onclick="choose_file('photo4_label')"  @if ( $profile->photo4  == null) hidden @endif>
                                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}" id="photo4_form">
                                             @csrf
-                                            <photo-component photovalue="4" inputid="photo4" labelid="photo4_label"></photo-component>
+                                            <photo-component photovalue="4" inputid="photo4" labelid="photo4_label" url="{{ route('upload.photo') }}"></photo-component>
                                         </form>
                                         <form action="{{ route('delete.photo', 4) }}" method="POST" class="profile_delete_form" id="deletephoto_form4" @if ( $profile->photo4  == null) hidden @endif>
                                             @csrf

@@ -12,7 +12,8 @@
         props: [
                 'name',
                 'bio',
-                'src'
+                'src',
+                'url'
         ],
             data: function () {
                     return {
@@ -37,7 +38,7 @@
                         let XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
                         let xhr = new XHR();
                         xhr.responseType = 'json';
-                        let url = '/set/' + this.name;
+                        let url = this.url;
                         xhr.open('POST', url, true);
                         xhr.onreadystatechange = () => {
                                 if (xhr.readyState !== 4) {
