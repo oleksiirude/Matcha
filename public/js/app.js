@@ -2342,6 +2342,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['value', 'name', 'id_btn', 'label', 'url'],
   data: function data() {
@@ -2444,8 +2446,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['value', 'name', 'id_btn', 'label', 'url'],
+  props: ['value', 'name', 'id_btn', 'id_btn_cancel', 'label', 'url'],
   data: function data() {
     return {
       mutableValue: this.value
@@ -2458,6 +2463,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     show_btn: function show_btn(name) {
       document.getElementById(name + '_btn').hidden = false;
+      document.getElementById(name + '_btn_cancel').hidden = false;
     },
     save: function save(e) {
       var _this = this;
@@ -2482,6 +2488,7 @@ __webpack_require__.r(__webpack_exports__);
           if (string.result == true) {
             _this.mutableValue = document.getElementById(_this.name).value;
             document.getElementById(_this.name + '_btn').hidden = true;
+            document.getElementById(_this.name + '_btn_cancel').hidden = true;
             document.getElementById(_this.name + '_error_msg').innerHTML = '';
             document.getElementById(_this.name + '_error_msg').hidden = true;
 
@@ -2510,6 +2517,13 @@ __webpack_require__.r(__webpack_exports__);
       };
 
       xhr.send(form);
+    },
+    cancel: function cancel() {
+      document.getElementById(this.name).value = this.mutableValue;
+      document.getElementById(this.name + '_btn').hidden = true;
+      document.getElementById(this.name + '_btn_cancel').hidden = true;
+      document.getElementById('login_error_msg').innerHTML = '';
+      document.getElementById('login_error_msg').hidden = true;
     }
   }
 });
@@ -2525,6 +2539,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -2721,6 +2737,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['src', 'value', 'name', 'id_btn', 'label', 'url'],
   data: function data() {
@@ -2836,8 +2854,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name', 'value'],
+  props: ['name', 'value', 'url'],
   mounted: function mounted() {
     console.log('test', this.value);
     document.getElementById(this.name).value = this.value;
@@ -2852,7 +2872,7 @@ __webpack_require__.r(__webpack_exports__);
       var XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
       var xhr = new XHR();
       xhr.responseType = 'json';
-      var url = '/change/' + this.name;
+      var url = this.url;
       xhr.open('POST', url, true);
 
       xhr.onreadystatechange = function () {
@@ -3126,8 +3146,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name', 'value'],
+  props: ['name', 'value', 'url'],
   mounted: function mounted() {
     console.log('test', this.value);
     document.getElementById(this.name).value = this.value;
@@ -3142,7 +3164,7 @@ __webpack_require__.r(__webpack_exports__);
       var XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
       var xhr = new XHR();
       xhr.responseType = 'json';
-      var url = '/set/' + this.name;
+      var url = this.url;
       xhr.open('POST', url, true);
 
       xhr.onreadystatechange = function () {
@@ -58773,15 +58795,17 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn edit_submit",
-          attrs: { type: "submit", id: _vm.id_btn, hidden: "" },
-          on: { click: _vm.save }
-        },
-        [_vm._v("Save")]
-      )
+      _c("div", { staticClass: "usr_name_btn_div" }, [
+        _c(
+          "button",
+          {
+            staticClass: "usr_name_btn",
+            attrs: { type: "submit", id: _vm.id_btn, hidden: "" },
+            on: { click: _vm.save }
+          },
+          [_vm._v("Save")]
+        )
+      ])
     ])
   ])
 }
@@ -58824,15 +58848,27 @@ var render = function() {
       }
     }),
     _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn edit_submit",
-        attrs: { type: "submit", id: _vm.id_btn, hidden: "" },
-        on: { click: _vm.save }
-      },
-      [_vm._v("Save")]
-    )
+    _c("div", { staticClass: "usr_name_btn_div" }, [
+      _c(
+        "button",
+        {
+          staticClass: "usr_name_btn",
+          attrs: { type: "submit", id: _vm.id_btn, hidden: "" },
+          on: { click: _vm.save }
+        },
+        [_vm._v("Save")]
+      ),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          staticClass: "usr_name_btn",
+          attrs: { id: _vm.id_btn_cancel, hidden: "" },
+          on: { click: _vm.cancel }
+        },
+        [_vm._v("Cancel")]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -58873,29 +58909,30 @@ var render = function() {
         }
       }
     }),
-    _c("br"),
     _vm._v(" "),
     _vm._m(0),
     _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn edit_submit",
-        attrs: { type: "submit", id: _vm.id_btn, hidden: "" },
-        on: { click: _vm.save }
-      },
-      [_vm._v("Save")]
-    ),
-    _vm._v(" "),
-    _c("input", {
-      staticClass: "btn edit_submit cancel_submit",
-      attrs: { id: "email_btn_cancel", hidden: "", value: "Cancel" },
-      on: {
-        click: function($event) {
-          return _vm.cancel(_vm.name)
+    _c("div", { staticClass: "usr_name_btn_div" }, [
+      _c(
+        "button",
+        {
+          staticClass: "usr_name_btn",
+          attrs: { type: "submit", id: _vm.id_btn, hidden: "" },
+          on: { click: _vm.save }
+        },
+        [_vm._v("Save")]
+      ),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "usr_name_btn",
+        attrs: { id: "email_btn_cancel", hidden: "", value: "Cancel" },
+        on: {
+          click: function($event) {
+            return _vm.cancel(_vm.name)
+          }
         }
-      }
-    })
+      })
+    ])
   ])
 }
 var staticRenderFns = [
@@ -59070,29 +59107,31 @@ var render = function() {
       }),
       _c("br"),
       _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn edit_submit disabled",
-          attrs: { type: "submit", id: _vm.id_btn },
-          on: { click: _vm.save }
-        },
-        [_vm._v("change password")]
-      ),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "btn edit_submit cancel_submit",
-        attrs: {
-          id: "password_btn_cancel",
-          value: "Cancel",
-          autocomplete: "off"
-        },
-        on: {
-          click: function($event) {
-            return _vm.cancel()
+      _c("div", { staticClass: "usr_name_btn_div" }, [
+        _c(
+          "button",
+          {
+            staticClass: "usr_name_btn",
+            attrs: { type: "submit", id: _vm.id_btn },
+            on: { click: _vm.save }
+          },
+          [_vm._v("Change password")]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "usr_name_btn",
+          attrs: {
+            id: "password_btn_cancel",
+            value: "Cancel",
+            autocomplete: "off"
+          },
+          on: {
+            click: function($event) {
+              return _vm.cancel()
+            }
           }
-        }
-      })
+        })
+      ])
     ])
   ])
 }
@@ -59135,15 +59174,17 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn edit_submit",
-        attrs: { type: "submit", hidden: "", id: "gender_btn" },
-        on: { click: _vm.change_gender }
-      },
-      [_vm._v("Save")]
-    )
+    _c("div", { staticClass: "usr_name_btn_div" }, [
+      _c(
+        "button",
+        {
+          staticClass: "usr_name_btn",
+          attrs: { type: "submit", hidden: "", id: "gender_btn" },
+          on: { click: _vm.change_gender }
+        },
+        [_vm._v("Save")]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -59359,15 +59400,17 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn edit_submit",
-        attrs: { type: "submit", hidden: "", id: "preferences_btn" },
-        on: { click: _vm.change_gender }
-      },
-      [_vm._v("Save")]
-    )
+    _c("div", { staticClass: "usr_name_btn_div" }, [
+      _c(
+        "button",
+        {
+          staticClass: "usr_name_btn",
+          attrs: { type: "submit", hidden: "", id: "preferences_btn" },
+          on: { click: _vm.change_gender }
+        },
+        [_vm._v("Save")]
+      )
+    ])
   ])
 }
 var staticRenderFns = []

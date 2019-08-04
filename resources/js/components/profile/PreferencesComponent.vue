@@ -7,7 +7,9 @@
             <option value="bisexual">bisexual</option>
             <option value="heterosexual">heterosexual</option>
         </select>
-        <button type="submit" class="btn edit_submit" hidden @click="change_gender" id="preferences_btn">Save</button>
+        <div class="usr_name_btn_div">
+            <button type="submit" class="usr_name_btn" hidden @click="change_gender" id="preferences_btn">Save</button>
+        </div>
     </div>
 </template>
 
@@ -16,6 +18,7 @@
         props: [
             'name',
             'value',
+            'url'
         ],
         mounted () {
             console.log('test', this.value);
@@ -29,7 +32,7 @@
                 let XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
                 let xhr = new XHR();
                 xhr.responseType = 'json';
-                let url = '/set/' + this.name;
+                let url = this.url;
                 xhr.open('POST', url, true);
                 xhr.onreadystatechange = () => {
                     if (xhr.readyState !== 4) {

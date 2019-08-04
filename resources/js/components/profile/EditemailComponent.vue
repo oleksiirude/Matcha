@@ -1,13 +1,15 @@
 <template>
     <div>
         <label :for="name">{{ label }}</label>
-        <input type="email" :name="name" class="profiledata" :value="value" @click="editInput(name)" :id="name" @keyup="show_btn(name)" placeholder=""><br>
+        <input type="email" :name="name" class="profiledata" :value="value" @click="editInput(name)" :id="name" @keyup="show_btn(name)" placeholder="">
         <div id="email_confirm_pass" hidden>
             <label for="password">Your password to confirm changes</label>
             <input type="password" name="password" id="password" autocomplete="off">
         </div>
-        <button type="submit" class="btn edit_submit" :id="id_btn" hidden @click="save">Save</button>
-        <input class="btn edit_submit cancel_submit" id="email_btn_cancel" hidden @click="cancel(name)" value="Cancel">
+        <div class="usr_name_btn_div">
+            <button type="submit" class="usr_name_btn" :id="id_btn" hidden @click="save">Save</button>
+            <input class="usr_name_btn" id="email_btn_cancel" hidden @click="cancel(name)" value="Cancel">
+        </div>
     </div>
 </template>
 

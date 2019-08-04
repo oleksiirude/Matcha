@@ -8,8 +8,10 @@
             <input type="password" name="new_password" id = "new_password" @keyup='check();' autocomplete="off"><br>
             <label for="new_password_confirm">Confirm new password:</label>
             <input type="password" name="new_password_confirm" id="new_password_confirm" @keyup='check();' autocomplete="off"><br>
-            <button type="submit" class="btn edit_submit disabled" :id="id_btn" @click="save">change password</button>
-            <input class="btn edit_submit cancel_submit" id="password_btn_cancel" @click="cancel()" value="Cancel" autocomplete="off">
+            <div class="usr_name_btn_div">
+                <button type="submit" class="usr_name_btn" :id="id_btn" @click="save">Change password</button>
+                <input class="usr_name_btn" id="password_btn_cancel" @click="cancel()" value="Cancel" autocomplete="off">
+            </div>
         </div>
     </div>
 </template>

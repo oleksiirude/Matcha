@@ -92,7 +92,7 @@
                                             @csrf
                                             @method('PUT')
 
-                                            <ed_in_lbl-component name="login" value="{{ $profile->login }}" label="Login:" id_btn="login_btn" url="/change/login"></ed_in_lbl-component>
+                                            <ed_in_lbl-component name="login" value="{{ $profile->login }}" label="Login:" id_btn="login_btn" id_btn_cancel="login_btn_cancel" url="{{ route('change.login') }}"></ed_in_lbl-component>
                                         </form>
                                         <span id="login_error_msg" class="error_msg" hidden></span>
                                     </div>
@@ -115,7 +115,7 @@
                                             @csrf
                                             @method('PUT')
 
-                                                <gender-component value="{{ $profile->gender }}" name="gender"></gender-component>
+                                                <gender-component value="{{ $profile->gender }}" name="gender" url="{{ route('change.gender') }}"></gender-component>
                                         </form>
                                     </div>
                                     <div>
@@ -131,7 +131,7 @@
                                         <form action="{{ route('set.preferences') }}" method="POST" id="preferences_form">
                                                 @csrf
                                                 @method('PUT')
-                                                <preferences-component value="{{ $profile->preferences }}" name="preferences"></preferences-component>
+                                                <preferences-component value="{{ $profile->preferences }}" name="preferences" url="{{ route('set.preferences') }}"></preferences-component>
                                         </form>
                                         <span id="preferences_error_msg" class="error_msg" hidden></span>
                                     </div>
@@ -140,13 +140,13 @@
                                         <div>
                                             <form id="country_form">
                                                 <label for="country">Country:</label>
-                                                <input type="text" id="country" name="country" value="{{ $profile->country }}" class="profiledata">
+                                                <input type="text" id="country" name="country" value="{{ $profile->country }}" class="profiledata" readonly>
                                             </form>
                                         </div>
                                         <div>
                                             <form id="city_form">
                                                 <label for="city">City:</label>
-                                                <input type="text" id="city" name="city" value="{{ $profile->city }}" class="profiledata">
+                                                <input type="text" id="city" name="city" value="{{ $profile->city }}" class="profiledata" readonly>
                                             </form>
                                         </div>
                                     @else
