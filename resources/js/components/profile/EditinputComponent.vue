@@ -10,7 +10,8 @@
         props: [
             'value',
             'name',
-            'id_btn'
+            'id_btn',
+            'url'
         ],
         data: function () {
             return {
@@ -33,7 +34,7 @@
                 let XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
                 let xhr = new XHR();
                 xhr.responseType = 'json';
-                let url = '/change/' + this.name;
+                let url = this.url;
                 xhr.open('POST', url, true);
                 xhr.onreadystatechange = () => {
                     if (xhr.readyState !== 4) {

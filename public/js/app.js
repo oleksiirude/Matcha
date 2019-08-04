@@ -2626,7 +2626,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['value', 'name', 'id_btn'],
+  props: ['value', 'name', 'id_btn', 'url'],
   data: function data() {
     return {
       mutableValue: this.value
@@ -2649,7 +2649,7 @@ __webpack_require__.r(__webpack_exports__);
       var XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
       var xhr = new XHR();
       xhr.responseType = 'json';
-      var url = '/change/' + this.name;
+      var url = this.url;
       xhr.open('POST', url, true);
 
       xhr.onreadystatechange = function () {

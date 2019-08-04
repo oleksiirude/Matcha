@@ -43,9 +43,9 @@
 
                     <div class="card_profile">
                         <div class="white_div">
-                            <div class="card-body">
+                            <div class="card-body row">
                                 <crop-component></crop-component>
-                                <div id="left_card">
+                                <div id="left_card" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                     <div id="div_useravatar">
                                         <img src="{{ asset($profile->avatar) }}" alt="avatar" id="avatar" title='download avatar' onclick="choose_file('avatar_label')">
                                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.avatar') }}" id="useravatar_form">
@@ -67,20 +67,20 @@
                                         </progress>
                                     </div>
                                 </div>
-                                <div id="right_card">
+                                <div id="right_card" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                     <div id="usr_name_div">
                                         <form action="{{ route('change.name') }}" method="POST" id="name_form">
                                             @csrf
                                             @method('PUT')
 
-                                            <editinput-component value="{{ $profile->name }}" name="name" id_btn="name_btn"></editinput-component>
+                                            <editinput-component value="{{ $profile->name }}" name="name" id_btn="name_btn" url="{{ route('change.name') }}"></editinput-component>
                                         </form>
                                         <form action="{{ route('change.surname') }}" method="POST" id="surname_form">
                                             @csrf
                                             @method('PUT')
 
                                             <div>
-                                                <editinput-component value="{{ $profile->surname }}"  name="surname" id_btn="surname_btn"></editinput-component>
+                                                <editinput-component value="{{ $profile->surname }}"  name="surname" id_btn="surname_btn" url="{{ route('change.surname') }}"></editinput-component>
                                             </div>
                                         </form>
                                         <span id="name_error_msg" class="error_msg"></span>
