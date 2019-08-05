@@ -1752,6 +1752,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
+    var self = this;
     var you = this.you;
     var your_avatar = this.your_avatar;
     var from = this.id_from;
@@ -1810,7 +1811,7 @@ __webpack_require__.r(__webpack_exports__);
         } else if (msg['status'] === true) {
           var status = document.getElementById('status');
           status.innerHTML = opponent + ' ' + msg['data'];
-        } else addMessageFromUser(msg['msg']);
+        } else addMessageFromUser(self.escapeHTML(msg['msg']));
       } else if (msg['chat'] === false) console.log(msg['msg']);
     };
 
@@ -1826,7 +1827,7 @@ __webpack_require__.r(__webpack_exports__);
         'msg': msg,
         'chat': true
       };
-      addMessageFromMe(msg.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;"));
+      addMessageFromMe(self.escapeHTML(msg));
       conn.send(JSON.stringify(box));
     }
 
@@ -1926,6 +1927,9 @@ __webpack_require__.r(__webpack_exports__);
     scrollToBottom: function scrollToBottom() {
       var chat = document.getElementById('chat');
       chat.scrollTop = chat.scrollHeight;
+    },
+    escapeHTML: function escapeHTML(msg) {
+      return msg.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
   }
 });
@@ -8890,7 +8894,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#chat[data-v-80d584ac]::-webkit-scrollbar { width: 0 !important\n}\n#chat[data-v-80d584ac] {\n    overflow: -moz-scrollbars-none;\n    scrollbar-width: none;\n    overflow: auto;\n    max-height: 60vh;\n    overflow-x: hidden;\n}\n\n/*@media screen and (max-width: 420px) {*/\n/*    .rounded-circle { width: 300px; height: 310px; }*/\n\n/*}*/\n\n", ""]);
+exports.push([module.i, "\n#chat[data-v-80d584ac]::-webkit-scrollbar { width: 0 !important\n}\n#chat[data-v-80d584ac] {\n    overflow: -moz-scrollbars-none;\n    scrollbar-width: none;\n    overflow: auto;\n    max-height: 60vh;\n    overflow-x: hidden;\n}\n\n", ""]);
 
 // exports
 

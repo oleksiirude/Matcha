@@ -20,7 +20,8 @@ class CreateProfilesTable extends Migration
             $table->string('surname');
             $table->date('age')->nullable();
             $table->string('gender', 6)->nullable();
-            $table->string('preferences', 12)->nullable();
+            $table->string('preferences', 12)->default('bisexual');
+            $table->boolean('preferences_specified')->default(false);
             $table->string('bio', 500)->nullable();
             $table->string('avatar')->default('images/service/default_avatar.png');
             $table->boolean('avatar_uploaded')->default(false);

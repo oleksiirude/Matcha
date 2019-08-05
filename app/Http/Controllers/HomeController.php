@@ -151,7 +151,8 @@
             $rating = $this->profile->preferences ? false : true;
     
             $this->profile->update([
-                'preferences' => $preferences
+                'preferences' => $preferences,
+                'preferences_specified' => true
             ]);
         
             if ($rating === true)

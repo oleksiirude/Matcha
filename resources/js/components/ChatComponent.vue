@@ -54,7 +54,7 @@
 
     export default {
         mounted () {
-
+            let self = this;
             let you = this.you;
             let your_avatar = this.your_avatar;
             let from = this.id_from;
@@ -123,7 +123,7 @@
                         status.innerHTML = opponent + ' ' + msg['data'];
                     }
                     else
-                        addMessageFromUser(msg['msg']);
+                        addMessageFromUser(self.escapeHTML(msg['msg']));
                 }
                 else if (msg['chat'] === false)
                     console.log(msg['msg'])
@@ -146,11 +146,7 @@
                     'chat': true
                 };
 
-                addMessageFromMe(msg.replace(/&/g, "&amp;")
-                    .replace(/</g, "&lt;")
-                    .replace(/>/g, "&gt;")
-                    .replace(/"/g, "&quot;")
-                    .replace(/'/g, "&#039;"));
+                addMessageFromMe(self.escapeHTML(msg));
 
                 conn.send(JSON.stringify(box));
             }
@@ -287,6 +283,13 @@
             scrollToBottom: function () {
                 let chat = document.getElementById('chat');
                 chat.scrollTop = chat.scrollHeight;
+            },
+            escapeHTML: function (msg) {
+                return msg.replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
             }
         }
 
@@ -302,10 +305,5 @@
         max-height: 60vh;
         overflow-x: hidden;
     }
-
-    /*@media screen and (max-width: 420px) {*/
-    /*    .rounded-circle { width: 300px; height: 310px; }*/
-
-    /*}*/
 
 </style>

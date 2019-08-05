@@ -67,7 +67,7 @@
             $location = Location::where('user_id', Auth::id())->first();
     
             $profile = Profile::where('user_id', Auth::id())->first();
-            if (!(int)$location->allow === 1)
+            if (!$location->allow)
                 $profile->increment('rating', 0.5);
             
             $location->update([
@@ -77,7 +77,7 @@
                 'longitude' => $data['longitude'],
                 'allow' => true
             ]);
-    
+            
             $response = Controller::getAttributesForAuthUserProfile();
     
             return response()->json([
@@ -94,8 +94,12 @@
                 abort(419);
             
             $key = 'AIzaSyCpslLLMvrUUPGWepKF3r-8g87FCEF2Qek';
-            $params = "https://maps.googleapis.com/maps/api/geocode/json?key=$key&latlng=$data[latitude],$data[longitude]&language=en";
-            $data = json_decode(file_get_contents($params));
+            $uri = "https://maps.googleapis.com/maps/api/geocode/json?key=$key&latlng=$data[latitude],$data[longitude]&language=en";
+            
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $uri);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $data = json_decode(curl_exec($ch));
             
             if (isset($data->plus_code->compound_code)) {
                 $add = $data->plus_code->compound_code;
