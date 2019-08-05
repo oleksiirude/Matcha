@@ -3,10 +3,10 @@
 	require_once('data.php');
 
 //	define('DSN', 'mysql:host=127.0.0.1;dbname=matcha;port=3306;charset=utf8mb4');
-	define('DSN', 'mysql:host=localhost;dbname=db_matcha;unix_socket=/Applications/MAMP/tmp/mysql/mysql.sock;charset=utf8mb4');
-//    define('DSN', 'mysql:host=127.0.0.1;dbname=matcha;');
+//	define('DSN', 'mysql:host=localhost;dbname=db_matcha;unix_socket=/Applications/MAMP/tmp/mysql/mysql.sock;charset=utf8mb4');
+    define('DSN', 'mysql:host=127.0.0.1;dbname=db_matcha;');
 	define('USERNAME', 'root');
-	define('PASSWORD', 'root');
+	define('PASSWORD', 'Trofimov2015');
 
 	$connection = new PDO(DSN, USERNAME, PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 	

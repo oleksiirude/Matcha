@@ -355,6 +355,14 @@ a:hover {
     color: var(--main_one_color);
 }
 
+/*register*/
+#register_form #gender {
+    border: 1px solid #ced4da;
+}
+#register_form #email {
+    width: 100%;
+}
+
 /*profile*/
 .card_profile {
     padding-left: 20px;

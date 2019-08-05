@@ -1697,8 +1697,8 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -1819,7 +1819,7 @@ __webpack_require__.r(__webpack_exports__);
       h4.innerHTML = you;
       var time_tag = document.createElement('time');
       time_tag.className = 'text-grey ml-3 float-left';
-      var now = new moment__WEBPACK_IMPORTED_MODULE_1___default.a();
+      var now = new moment__WEBPACK_IMPORTED_MODULE_0___default.a();
       time_tag.innerHTML = now.format("HH:mm:ss");
       var p = document.createElement('p');
       p.className = 'mb-0 text-black';
@@ -1851,7 +1851,7 @@ __webpack_require__.r(__webpack_exports__);
       h4.innerHTML = opponent;
       var time_tag = document.createElement('time');
       time_tag.className = 'text-grey ml-3 float-right';
-      var now = new moment__WEBPACK_IMPORTED_MODULE_1___default.a();
+      var now = new moment__WEBPACK_IMPORTED_MODULE_0___default.a();
       time_tag.innerHTML = now.format("HH:mm:ss");
       var p = document.createElement('p');
       p.className = 'mb-0 text-black';
@@ -2152,6 +2152,12 @@ __webpack_require__.r(__webpack_exports__);
           return parseInt(value);
         }
       },
+      // pips: {
+      //     mode: 'positions',
+      //     values: [0, 50, 100],
+      //     density: 4,
+      //     stepped: true
+      // },
       range: {
         'min': 18,
         'max': 55
@@ -2233,22 +2239,47 @@ __webpack_require__.r(__webpack_exports__);
 
     var age_data = ageSlider.noUiSlider.get();
     document.getElementById('age_from').value = age_data[0];
-    document.getElementById('age_to').value = age_data[1];
+
+    if (age_data[1] == 55) {
+      var current_slider = document.getElementById('age_slider');
+      current_slider.getElementsByClassName('noUi-tooltip')[1].innerHTML = '55+';
+      document.getElementById('age_to').value = '120';
+    } else document.getElementById('age_to').value = age_data[1];
+
     var rating_data = ratingSlider.noUiSlider.get();
     document.getElementById('rating_from').value = rating_data[0];
     document.getElementById('rating_to').value = rating_data[1];
     var distance_data = distanceSlider.noUiSlider.get(); // console.log('GET', distance_data);
 
     document.getElementById('distance_from').value = distance_data[0];
-    document.getElementById('distance_to').value = distance_data[1];
+
+    if (distance_data[1] == 100) {
+      var _current_slider = document.getElementById('distance_slider');
+
+      _current_slider.getElementsByClassName('noUi-tooltip')[1].innerHTML = '100+';
+      document.getElementById('distance_to').value = '12000';
+    } else document.getElementById('distance_to').value = distance_data[1];
+
     var interests_data = interestsSlider.noUiSlider.get();
     document.getElementById('interests_from').value = interests_data[0];
     document.getElementById('interests_to').value = interests_data[1];
-    ageSlider.noUiSlider.on('change.one', function () {
-      var from_to = ageSlider.noUiSlider.get(); // console.log(ageSlider.noUiSlider.get());
-
+    ageSlider.noUiSlider.on('change.one', function (e) {
+      var from_to = ageSlider.noUiSlider.get();
+      console.log('form-to', from_to);
       document.getElementById('age_from').value = from_to[0];
-      document.getElementById('age_to').value = from_to[1];
+
+      if (from_to[1] == 55) {
+        var _current_slider2 = document.getElementById('age_slider');
+
+        var current_tooltip = _current_slider2.getElementsByClassName('noUi-handle-upper')[0]; // current_tooltip.attributes['aria-valuetext'] = '55+';
+
+
+        _current_slider2.getElementsByClassName('noUi-tooltip')[1].innerHTML = '55+';
+        document.getElementById('age_to').value = '120';
+        console.log('55++++', from_to, document.getElementById('age_to').value);
+      } else {
+        document.getElementById('age_to').value = from_to[1];
+      }
     });
     ratingSlider.noUiSlider.on('change.one', function () {
       var from_to = ratingSlider.noUiSlider.get();
@@ -2258,7 +2289,13 @@ __webpack_require__.r(__webpack_exports__);
     distanceSlider.noUiSlider.on('change.one', function () {
       var from_to = distanceSlider.noUiSlider.get();
       document.getElementById('distance_from').value = from_to[0];
-      document.getElementById('distance_to').value = from_to[1];
+
+      if (from_to[1] == 100) {
+        var _current_slider3 = document.getElementById('distance_slider');
+
+        _current_slider3.getElementsByClassName('noUi-tooltip')[1].innerHTML = '100+';
+        document.getElementById('distance_to').value = '12000';
+      } else document.getElementById('distance_to').value = from_to[1];
     });
     interestsSlider.noUiSlider.on('change.one', function () {
       var from_to = interestsSlider.noUiSlider.get();
@@ -57028,7 +57065,7 @@ Popper.placements = placements;
 Popper.Defaults = Defaults;
 
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
-//# sourceMappingURL=popper.js.map
+
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
@@ -58392,7 +58429,7 @@ var staticRenderFns = [
                 id: "age_from",
                 type: "range",
                 min: "18",
-                max: "55",
+                max: "120",
                 value: "0",
                 step: "1",
                 onsubmit: "return false",
@@ -58412,7 +58449,7 @@ var staticRenderFns = [
                 id: "age_to",
                 type: "range",
                 min: "18",
-                max: "55",
+                max: "120",
                 value: "55",
                 step: "1",
                 onsubmit: "return false",
@@ -58496,7 +58533,7 @@ var staticRenderFns = [
                 id: "distance_from",
                 type: "range",
                 min: "0",
-                max: "500",
+                max: "12000",
                 value: "0",
                 step: "1",
                 onsubmit: "return false",
@@ -58517,7 +58554,7 @@ var staticRenderFns = [
                 id: "distance_to",
                 type: "range",
                 min: "0",
-                max: "500",
+                max: "12000",
                 value: "30",
                 step: "1",
                 onsubmit: "return false",
@@ -75750,8 +75787,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/matcha_start/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/matcha_start/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/dpiven/http/MyWebSite/Matcha/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/dpiven/http/MyWebSite/Matcha/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
