@@ -3238,10 +3238,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name', 'value', 'url'],
+  props: ['name', 'value', 'url', 'allow'],
   mounted: function mounted() {
-    console.log('test', this.value);
-    document.getElementById(this.name).value = this.value;
+    console.log('test', this.allow);
+    if (this.allow == 1) document.getElementById(this.name).value = this.value;else document.getElementById(this.name).value = 'choose sexual preferences';
   },
   methods: {
     change_gender: function change_gender(e) {
