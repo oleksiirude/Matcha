@@ -25,7 +25,6 @@
         public function onOpen(ConnectionInterface $conn) {
             $session = (new SessionManager(App::getInstance()))->driver();
             $cookies = explode(' ', $conn->httpRequest->getHeader('Cookie')[0]);
-    
             // cookie validation
             $decrypted_session = null;
             foreach ($cookies as $cookie) {
@@ -34,7 +33,6 @@
                     break;
                 }
             }
-            
             // if validation fails - forbid connection
             if (!$decrypted_session) {
                 echo 'matcha_session was not found, connecting denied!' . PHP_EOL;
@@ -125,7 +123,6 @@
                     // listing all connections
                     foreach ($this->users as $user) {
                         $id = $user->session->get(Auth::getName());
-                        
                         // check if id into user's session is equal to id from front-end
                         if ($id === (int)$msg['to']) {
                             switch ($msg['aim']) {
@@ -183,7 +180,6 @@
                 echo "User[$from_id] blocked by user[$msg[to]]. Action aborted" . PHP_EOL;
                 return false;
             }
-    
             // if opponent blocked user, refuse conversation attempt
             // reverse usage of function checkIfBlocked - here we refuse opponent's conversation attempt
             if ($this->checkIfBlocked($msg['to'], $from_id)) {
@@ -191,11 +187,10 @@
                 echo "User[$from_id] blocked by user[$msg[to]]. Action aborted" . PHP_EOL;
                 return false;
             }
-    
             // if connection check failed - break down
             if (!$this->checkIfConnected($from_id, $msg['to']) && $msg['action'] === 'chat') {
                 $from->send(json_encode(['chat' => true, 'not-connected' => true, 'msg' => 'not-connected']));
-                echo "User[$from_id] has no connection with user[$msg[to]]. Conversation aborted" . PHP_EOL;
+                echo "User[$msg[to]] has no connection with user[$from_id]. Conversation aborted" . PHP_EOL;
                 return false;
             }
             

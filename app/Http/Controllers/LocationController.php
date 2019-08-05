@@ -2,6 +2,7 @@
 
     namespace App\Http\Controllers;
 
+    use App\Profile;
     use Auth;
     use App\Location;
     use Location\Line;
@@ -40,21 +41,80 @@
         
         public function turnOffLocation() {
             Location::where('user_id', Auth::id())->update(['allow' => false]);
+            
+            $profile = Profile::where('user_id', Auth::id())->first();
+            $profile->decrement('rating', 0.5);
+    
+            $response = Controller::getAttributesForAuthUserProfile();
+    
+            return response()->json([
+                'result' => true,
+                'rating' => round($profile->rating, 1),
+                'empty' => $response['totally_filled']
+            ]);
         }
 
         public function changeLocation(Request $request) {
-            $data = json_decode($request->json()->all(), true);
+            $data = $request->json()->all();
+            $box = $this->parseDataAndGetNewLocation($data);
+            
+            if (!$box)
+                response()->json([
+                    'result' => false,
+                    'error' => 'Invalid location'
+                ]);
 
-            if (count($data) < 4)
-                return ;
-
-            Location::where('user_id', Auth::id())
-                        ->update([
-                            'country' => $data['country'],
-                            'city' => $data['city'],
-                            'latitude' => $data['latitude'],
-                            'longitude' => $data['longitude'],
-                            'allow' => true
-                        ]);
+            $location = Location::where('user_id', Auth::id())->first();
+    
+            $profile = Profile::where('user_id', Auth::id())->first();
+            if (!(int)$location->allow === 1)
+                $profile->increment('rating', 0.5);
+            
+            $location->update([
+                'country' => $box['country'],
+                'city' => $box['city'],
+                'latitude' => $data['latitude'],
+                'longitude' => $data['longitude'],
+                'allow' => true
+            ]);
+    
+            $response = Controller::getAttributesForAuthUserProfile();
+    
+            return response()->json([
+                'result' => true,
+                'city' => $box['city'],
+                'country' => $box['country'],
+                'rating' => round($profile->rating, 1),
+                'empty' => $response['totally_filled']
+            ]);
+        }
+        
+        protected function parseDataAndGetNewLocation($data) {
+            if (!isset($data['latitude']) || !isset($data['longitude']))
+                abort(419);
+            
+            $key = 'AIzaSyCpslLLMvrUUPGWepKF3r-8g87FCEF2Qek';
+            $params = "https://maps.googleapis.com/maps/api/geocode/json?key=$key&latlng=$data[latitude],$data[longitude]&language=en";
+            $data = json_decode(file_get_contents($params));
+            
+            if (isset($data->plus_code->compound_code)) {
+                $add = $data->plus_code->compound_code;
+                $value = explode(',', $add);
+                $count = count($value);
+                $country = str_replace(' ', '', $value[$count - 1]);
+                if ($count === 2) {
+                    $city_code = explode(' ', $value[$count - 2]);
+                    array_shift($city_code);
+                    $city = implode(' ', $city_code);
+                }
+                else {
+                    $city_code = explode(' ', $value[$count - 3]);
+                    array_shift($city_code);
+                    $city = implode(' ', $city_code);
+                }
+                return ['city' => $city, 'country' => $country];
+            }
+            else
+                return false;
         }
     }
