@@ -1,7 +1,10 @@
 <template>
     <div>
         <input type="text" :name="name" class="name profiledata" :value="value" @click="editInput(name)" :id="name" @keyup="show_btn(name)">
-        <button type="submit" class="btn edit_submit" :id="id_btn" hidden @click="save">Save</button>
+        <div class="usr_name_btn_div">
+            <button type="submit" class="usr_name_btn" :id="id_btn" hidden @click="save">Save</button>
+            <span class="usr_name_btn" :id="id_btn_cancel" hidden @click="cancel">Cancel</span>
+        </div>
     </div>
 </template>
 
@@ -10,7 +13,9 @@
         props: [
             'value',
             'name',
-            'id_btn'
+            'id_btn',
+            'id_btn_cancel',
+            'url'
         ],
         data: function () {
             return {
@@ -25,6 +30,8 @@
             },
             show_btn: function(name) {
                 document.getElementById(name + '_btn').hidden = false;
+                document.getElementById(name + '_btn_cancel').hidden = false;
+
             },
             save: function (e) {
                 e.preventDefault();
@@ -33,7 +40,7 @@
                 let XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
                 let xhr = new XHR();
                 xhr.responseType = 'json';
-                let url = '/change/' + this.name;
+                let url = this.url;
                 xhr.open('POST', url, true);
                 xhr.onreadystatechange = () => {
                     if (xhr.readyState !== 4) {
@@ -45,9 +52,12 @@
                         if (string.result == true) {
                             this.mutableValue = document.getElementById(this.name).value;
                             document.getElementById(this.name + '_btn').hidden = true;
+                            document.getElementById(this.name + '_btn_cancel').hidden = true;
                             document.getElementById('name_error_msg').innerHTML = '';
+                            document.getElementById('name_error_msg').hidden = true;
                         } else if (string.result == false) {
                             document.getElementById(this.name).value = this.mutableValue;
+                            document.getElementById('name_error_msg').hidden = false;
                             document.getElementById('name_error_msg').innerHTML = string.error;
                             console.log('error');
 
@@ -56,6 +66,13 @@
                     }
                 };
                 xhr.send(form);
+            },
+            cancel: function() {
+                document.getElementById(this.name).value = this.mutableValue;
+                document.getElementById(this.name + '_btn').hidden = true;
+                document.getElementById(this.name + '_btn_cancel').hidden = true;
+                document.getElementById('name_error_msg').innerHTML = '';
+                document.getElementById('name_error_msg').hidden = true;
             }
         }
     }

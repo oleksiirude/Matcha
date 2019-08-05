@@ -79,7 +79,7 @@
                                         <a class="dropdown-item" href="{{ route('profile') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('profile-form').submit();">
-                                            {{ __('My profile') }}
+                                            {{ __('My profile') }}<img src="{{asset('images/service/profile.png')}}" class="dropdown-item_img">
                                         </a>
 
                                         <form id="profile-form" action="{{ route('profile') }}" method="GET" style="display: none;">
@@ -90,7 +90,7 @@
                                         <a class="dropdown-item" href="{{ route('show.all.users') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('show-all-users-form').submit();">
-                                            {{ __('Show all users') }}
+                                            {{ __('Show all users') }}<img src="{{asset('images/service/users.png')}}" class="dropdown-item_img">
                                         </a>
 
                                         <form id="show-all-users-form" action="{{ route('show.all.users') }}" method="GET" style="display: none;">
@@ -101,7 +101,7 @@
                                         <a class="dropdown-item" href="{{ route('viewed.profiles') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('viewed-profiles-form').submit();">
-                                            {{ __('Viewed profiles') }}
+                                            {{ __('Viewed profiles') }}<img src="{{asset('images/service/history.png')}}" class="dropdown-item_img">
                                         </a>
 
                                         <form id="viewed-profiles-form" action="{{ route('viewed.profiles') }}" method="GET" style="display: none;"></form>
@@ -110,7 +110,7 @@
                                         <a class="dropdown-item" href="{{ route('viewed.my.profile') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('viewed-my-profile-form').submit();">
-                                            {{ __('Viewed my profile') }}
+                                            {{ __('Viewed my profile') }}<img src="{{asset('images/service/eye.png')}}" class="dropdown-item_img">
                                         </a>
 
                                         <form id="viewed-my-profile-form" action="{{ route('viewed.my.profile') }}" method="GET" style="display: none;"></form>
@@ -119,7 +119,7 @@
                                         <a class="dropdown-item" href="{{ route('liked.by.me') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('liked-by-me-form').submit();">
-                                            {{ __('Liked by me') }}
+                                            {{ __('Liked by me') }} <img src="{{asset('images/service/like.png')}}" class="dropdown-item_img">
                                         </a>
 
                                         <form id="liked-by-me-form" action="{{ route('liked.by.me') }}" method="GET" style="display: none;"></form>
@@ -128,7 +128,7 @@
                                         <a class="dropdown-item" href="{{ route('liked.me') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('liked-me-form').submit();">
-                                            {{ __('Liked my profile') }}
+                                            {{ __('Liked my profile') }}<img src="{{asset('images/service/like_to_me_2.png')}}" class="dropdown-item_img">
                                         </a>
 
                                         <form id="liked-me-form" action="{{ route('liked.me') }}" method="GET" style="display: none;"></form>
@@ -137,7 +137,7 @@
                                         <a class="dropdown-item" href="{{ route('connections') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('connections-form').submit();">
-                                            {{ __('Connections') }}  <img src="{{asset('images/service/connect.png')}}">
+                                            {{ __('Connections') }}  <img src="{{asset('images/service/connect.png')}}" class="dropdown-item_img">
                                         </a>
 
                                         <form id="connections-form" action="{{ route('connections') }}" method="GET" style="display: none;"></form>
@@ -146,7 +146,7 @@
                                         <a class="dropdown-item" href="{{ route('blocked.users') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('blocked-users-form').submit();">
-                                            {{ __('Blocked profiles') }} <img src="{{asset('images/service/block_color.png')}}">
+                                            {{ __('Blocked profiles') }} <img src="{{asset('images/service/block_color.png')}}" class="dropdown-item_img">
                                         </a>
 
                                         <form id="blocked-users-form" action="{{ route('blocked.users') }}" method="GET" style="display: none;"></form>

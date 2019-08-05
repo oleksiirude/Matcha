@@ -227,17 +227,18 @@ let update_raiting = function (raiting) {
 
 let update_fill_profile = function(text_fill) {
     let div = document.getElementById('fill_profile');
+    let div_body = document.getElementById('fill_profile_body');
     if (text_fill == false)
     {
-        div.innerHTML = "";
+        div_body.innerHTML = "";
         div.hidden = true;
     }
     else {
         document.getElementById('fill_profile').hidden = false;
-        div.innerHTML = "";
-        div.innerHTML = "&#9758; Hey! For more efficient search <b>you should</b>:";
+        div_body.innerHTML = "";
+        div_body.innerHTML = "&#9758; Hey! For more efficient search <b>you should</b>:";
         let ul = document.createElement('ul');
-        div.appendChild(ul);
+        div_body.appendChild(ul);
         if (text_fill.upload) {
             console.log('text_fill.upload', text_fill.upload);
             text_fill.upload.forEach(function(item, i, arr) {

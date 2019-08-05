@@ -20,21 +20,24 @@
             <div class="">
                 <div class="card-body">
                     <div id="fill_profile">
-                        @if ($profile->totally_filled) &#9758; Hey! For more efficient search <b>you should</b>:
-                        <ul>
-                            @if (isset($profile->totally_filled['upload']))
-                                @foreach($profile->totally_filled['upload'] as $upload)
-                                    <li>upload {{ $upload }}</li>
-                                @endforeach
-                            @endif
+                        <img src="{{asset('/images/service/marker.png')}}" class="marker">
+                        <div id="fill_profile_body">
+                            @if ($profile->totally_filled) &#9758; Hey! For more efficient search <b>you should</b>:
+                                <ul>
+                                    @if (isset($profile->totally_filled['upload']))
+                                        @foreach($profile->totally_filled['upload'] as $upload)
+                                            <li>upload {{ $upload }}</li>
+                                        @endforeach
+                                    @endif
 
-                            @if (isset($profile->totally_filled['fill']))
-                                @foreach($profile->totally_filled['fill'] as $fill)
-                                    <li>fill {{ $fill }}</li>
-                                @endforeach
+                                    @if (isset($profile->totally_filled['fill']))
+                                        @foreach($profile->totally_filled['fill'] as $fill)
+                                            <li>fill {{ $fill }}</li>
+                                        @endforeach
+                                    @endif
+                                </ul>
                             @endif
-                        </ul>
-                        @endif
+                        </div>
                     </div>
 
                     <form enctype="multipart/form-data" method="POST" action="{{ route('upload.avatar') }}">
@@ -43,9 +46,9 @@
 
                     <div class="card_profile">
                         <div class="white_div">
-                            <div class="card-body">
+                            <div class="card-body row">
                                 <crop-component></crop-component>
-                                <div id="left_card">
+                                <div id="left_card" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                     <div id="div_useravatar">
                                         <img src="{{ asset($profile->avatar) }}" alt="avatar" id="avatar" title='download avatar' onclick="choose_file('avatar_label')">
                                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.avatar') }}" id="useravatar_form">
@@ -57,7 +60,7 @@
                                             @csrf
                                             @method('DELETE')
 
-                                            <deletebtn-component srcavatar="{{ asset('images/service/del.png') }}" idbtn="delete_btn"></deletebtn-component>
+                                            <deletebtn-component srcavatar="{{ asset('images/service/del.png') }}" idbtn="delete_btn" url="{{ route('delete.avatar') }}"></deletebtn-component>
                                         </form>
                                         <span id="avatar_errormsg"></span>
                                     </div>
@@ -67,37 +70,39 @@
                                         </progress>
                                     </div>
                                 </div>
-                                <div id="right_card">
+                                <div id="right_card" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                     <div id="usr_name_div">
+                                        <div id="usr_name">
                                         <form action="{{ route('change.name') }}" method="POST" id="name_form">
                                             @csrf
                                             @method('PUT')
 
-                                            <editinput-component value="{{ $profile->name }}" name="name" id_btn="name_btn"></editinput-component>
+                                            <editinput-component value="{{ $profile->name }}" name="name" id_btn="name_btn"  id_btn_cancel="name_btn_cancel" url="{{ route('change.name') }}"></editinput-component>
                                         </form>
                                         <form action="{{ route('change.surname') }}" method="POST" id="surname_form">
                                             @csrf
                                             @method('PUT')
 
                                             <div>
-                                                <editinput-component value="{{ $profile->surname }}"  name="surname" id_btn="surname_btn"></editinput-component>
+                                                <editinput-component value="{{ $profile->surname }}"  name="surname" id_btn="surname_btn" id_btn_cancel="surname_btn_cancel" url="{{ route('change.surname') }}"></editinput-component>
                                             </div>
                                         </form>
-                                        <span id="name_error_msg" class="error_msg"></span>
+                                        </div>
+                                        <span id="name_error_msg" class="error_msg" hidden></span>
                                     </div>
                                     <div>
                                         <form action="{{ route('change.login') }}" method="POST" id="login_form">
                                             @csrf
                                             @method('PUT')
 
-                                            <ed_in_lbl-component name="login" value="{{ $profile->login }}" label="Login:" id_btn="login_btn" url="/change/login"></ed_in_lbl-component>
+                                            <ed_in_lbl-component name="login" value="{{ $profile->login }}" label="Login:" id_btn="login_btn" id_btn_cancel="login_btn_cancel" url="{{ route('change.login') }}"></ed_in_lbl-component>
                                         </form>
                                         <span id="login_error_msg" class="error_msg" hidden></span>
                                     </div>
                                     <div>
                                         <form action="{{ route('change.password') }}" method="POST" id="password_form">
                                             @csrf
-                                            <edit_password-component name="password" id_btn="password_btn" url="{{ route('change.password') }}"></edit_password-component>
+                                            <edit_password-component src="{{asset('/images/service/edit.png')}}" name="password" id_btn="password_btn" url="{{ route('change.password') }}"></edit_password-component>
                                         </form>
                                         <span id="password_error_msg" class="error_msg" hidden></span>
                                     </div>
@@ -113,7 +118,7 @@
                                             @csrf
                                             @method('PUT')
 
-                                                <gender-component value="{{ $profile->gender }}" name="gender"></gender-component>
+                                                <gender-component value="{{ $profile->gender }}" name="gender" url="{{ route('change.gender') }}"></gender-component>
                                         </form>
                                     </div>
                                     <div>
@@ -129,7 +134,7 @@
                                         <form action="{{ route('set.preferences') }}" method="POST" id="preferences_form">
                                                 @csrf
                                                 @method('PUT')
-                                                <preferences-component value="{{ $profile->preferences }}" name="preferences"></preferences-component>
+                                                <preferences-component value="{{ $profile->preferences }}" name="preferences" url="{{ route('set.preferences') }}"></preferences-component>
                                         </form>
                                         <span id="preferences_error_msg" class="error_msg" hidden></span>
                                     </div>
@@ -138,28 +143,30 @@
                                         <div>
                                             <form id="country_form">
                                                 <label for="country">Country:</label>
-                                                <input type="text" id="country" name="country" value="{{ $profile->country }}" class="profiledata">
+                                                <input type="text" id="country" name="country" value="{{ $profile->country }}" class="profiledata" readonly>
                                             </form>
                                         </div>
                                         <div>
                                             <form id="city_form">
                                                 <label for="city">City:</label>
-                                                <input type="text" id="city" name="city" value="{{ $profile->city }}" class="profiledata">
+                                                <input type="text" id="city" name="city" value="{{ $profile->city }}" class="profiledata" readonly>
                                             </form>
                                         </div>
-                                        <input type="checkbox" onchange="blockGeo()" id="block_geo" name="block_geo" value="" checked/>
-                                        <label for="block_geo" id="block_geo">Block geolocation</label>
                                     @else
                                         <div>
                                             <form id="country_form">
                                                 <label for="country">Location:</label>
                                                 <input type="text" id="country" name="country" value="isn't specified" class="profiledata">
                                             </form>
+                                            <form id="city_form" hidden>
+                                                <label for="city">City:</label>
+                                                <input type="text" id="city" name="city" value="" class="profiledata">
+                                            </form>
                                         </div>
                                     @endif
 
                                     <div>
-                                        <location-component lat="{{ $profile->latitude }}" lng="{{ $profile->longitude }}" allow = "{{ $profile->allow }}"></location-component>
+                                        <location-component src="{{asset('/images/service/edit.png')}}" csrf="{{ csrf_token() }}" lat="{{ $profile->latitude }}" lng="{{ $profile->longitude }}" allow = "{{ $profile->allow }}" url="{{ route('change.location') }}" urloff="{{ route('turn.off.location') }}"></location-component>
                                     </div>
                                     <div>
                                         <span id="interests_tags_title">Interests:</span>
@@ -180,13 +187,13 @@
                                                 @csrf
                                                 @method('DELETE')
 
-                                            <deletedefault-component name="deletebio" url="/delete/bio"></deletedefault-component>
+                                            <deletedefault-component name="deletebio" src="{{asset('/images/service/trash_50px.png')}}" url="{{ route('delete.bio') }}"></deletedefault-component>
                                         </form>
                                         <form action="{{ route('set.bio') }}" method="POST" id="bio_form">
                                             @csrf
                                             @method('PUT')
 
-                                            <editdata-component name="bio" bio="{{ $profile->bio }}"></editdata-component>
+                                            <editdata-component name="bio" bio="{{ $profile->bio }}" src="{{asset('/images/service/edit.png')}}" url="{{ route('set.bio') }}"></editdata-component>
                                         </form>
                                         <span id="bio_error_msg" class="error_msg" hidden></span>
                                     </div>
@@ -200,7 +207,7 @@
                                         <img src="{{ asset($profile->photo1) }}" alt="photo1" class="usr_photo" id="img1" onclick="choose_file('photo1_label')" @if ( $profile->photo1  == null) hidden @endif>
                                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}" id="photo1_form">
                                             @csrf
-                                            <photo-component photovalue="1" inputid="photo1" labelid="photo1_label"></photo-component>
+                                            <photo-component photovalue="1" inputid="photo1" labelid="photo1_label" url="{{ route('upload.photo') }}"></photo-component>
                                         </form>
                                         <form action="{{ route('delete.photo', 1) }}" method="POST" class="profile_delete_form" id="deletephoto_form1" @if ( $profile->photo1  == null) hidden @endif>
                                             @csrf
@@ -214,7 +221,7 @@
                                         <img src="{{ asset($profile->photo2) }}" alt="photo2" class="usr_photo" id="img2" onclick="choose_file('photo2_label')" @if ( $profile->photo2  == null) hidden @endif>
                                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}" id="photo2_form">
                                             @csrf
-                                            <photo-component photovalue="2" inputid="photo2" labelid="photo2_label"></photo-component>
+                                            <photo-component photovalue="2" inputid="photo2" labelid="photo2_label" url="{{ route('upload.photo') }}"></photo-component>
                                         </form>
                                         <form action="{{ route('delete.photo', 2) }}" method="POST" class="profile_delete_form" id="deletephoto_form2" @if ( $profile->photo2  == null) hidden @endif>
                                             @csrf
@@ -228,7 +235,7 @@
                                         <img src="{{ asset($profile->photo3) }}" alt="photo3" class="usr_photo" id="img3" onclick="choose_file('photo3_label')"  @if ( $profile->photo3  == null) hidden @endif>
                                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}" id="photo3_form">
                                             @csrf
-                                            <photo-component photovalue="3" inputid="photo3" labelid="photo3_label"></photo-component>
+                                            <photo-component photovalue="3" inputid="photo3" labelid="photo3_label" url="{{ route('upload.photo') }}"></photo-component>
                                         </form>
                                         <form action="{{ route('delete.photo', 3) }}" method="POST" class="profile_delete_form" id="deletephoto_form3" @if ( $profile->photo3  == null) hidden @endif>
                                             @csrf
@@ -242,7 +249,7 @@
                                         <img src="{{ asset($profile->photo4) }}" alt="photo4" class="usr_photo" id="img4" onclick="choose_file('photo4_label')"  @if ( $profile->photo4  == null) hidden @endif>
                                         <form enctype="multipart/form-data" method="POST" action="{{ route('upload.photo') }}" id="photo4_form">
                                             @csrf
-                                            <photo-component photovalue="4" inputid="photo4" labelid="photo4_label"></photo-component>
+                                            <photo-component photovalue="4" inputid="photo4" labelid="photo4_label" url="{{ route('upload.photo') }}"></photo-component>
                                         </form>
                                         <form action="{{ route('delete.photo', 4) }}" method="POST" class="profile_delete_form" id="deletephoto_form4" @if ( $profile->photo4  == null) hidden @endif>
                                             @csrf
