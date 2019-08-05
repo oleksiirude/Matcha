@@ -2184,6 +2184,12 @@ __webpack_require__.r(__webpack_exports__);
           return parseInt(value);
         }
       },
+      // pips: {
+      //     mode: 'positions',
+      //     values: [0, 50, 100],
+      //     density: 4,
+      //     stepped: true
+      // },
       range: {
         'min': 18,
         'max': 55
@@ -2265,22 +2271,47 @@ __webpack_require__.r(__webpack_exports__);
 
     var age_data = ageSlider.noUiSlider.get();
     document.getElementById('age_from').value = age_data[0];
-    document.getElementById('age_to').value = age_data[1];
+
+    if (age_data[1] == 55) {
+      var current_slider = document.getElementById('age_slider');
+      current_slider.getElementsByClassName('noUi-tooltip')[1].innerHTML = '55+';
+      document.getElementById('age_to').value = '120';
+    } else document.getElementById('age_to').value = age_data[1];
+
     var rating_data = ratingSlider.noUiSlider.get();
     document.getElementById('rating_from').value = rating_data[0];
     document.getElementById('rating_to').value = rating_data[1];
     var distance_data = distanceSlider.noUiSlider.get(); // console.log('GET', distance_data);
 
     document.getElementById('distance_from').value = distance_data[0];
-    document.getElementById('distance_to').value = distance_data[1];
+
+    if (distance_data[1] == 100) {
+      var _current_slider = document.getElementById('distance_slider');
+
+      _current_slider.getElementsByClassName('noUi-tooltip')[1].innerHTML = '100+';
+      document.getElementById('distance_to').value = '12000';
+    } else document.getElementById('distance_to').value = distance_data[1];
+
     var interests_data = interestsSlider.noUiSlider.get();
     document.getElementById('interests_from').value = interests_data[0];
     document.getElementById('interests_to').value = interests_data[1];
-    ageSlider.noUiSlider.on('change.one', function () {
-      var from_to = ageSlider.noUiSlider.get(); // console.log(ageSlider.noUiSlider.get());
-
+    ageSlider.noUiSlider.on('change.one', function (e) {
+      var from_to = ageSlider.noUiSlider.get();
+      console.log('form-to', from_to);
       document.getElementById('age_from').value = from_to[0];
-      document.getElementById('age_to').value = from_to[1];
+
+      if (from_to[1] == 55) {
+        var _current_slider2 = document.getElementById('age_slider');
+
+        var current_tooltip = _current_slider2.getElementsByClassName('noUi-handle-upper')[0]; // current_tooltip.attributes['aria-valuetext'] = '55+';
+
+
+        _current_slider2.getElementsByClassName('noUi-tooltip')[1].innerHTML = '55+';
+        document.getElementById('age_to').value = '120';
+        console.log('55++++', from_to, document.getElementById('age_to').value);
+      } else {
+        document.getElementById('age_to').value = from_to[1];
+      }
     });
     ratingSlider.noUiSlider.on('change.one', function () {
       var from_to = ratingSlider.noUiSlider.get();
@@ -2290,7 +2321,13 @@ __webpack_require__.r(__webpack_exports__);
     distanceSlider.noUiSlider.on('change.one', function () {
       var from_to = distanceSlider.noUiSlider.get();
       document.getElementById('distance_from').value = from_to[0];
-      document.getElementById('distance_to').value = from_to[1];
+
+      if (from_to[1] == 100) {
+        var _current_slider3 = document.getElementById('distance_slider');
+
+        _current_slider3.getElementsByClassName('noUi-tooltip')[1].innerHTML = '100+';
+        document.getElementById('distance_to').value = '12000';
+      } else document.getElementById('distance_to').value = from_to[1];
     });
     interestsSlider.noUiSlider.on('change.one', function () {
       var from_to = interestsSlider.noUiSlider.get();
@@ -2359,6 +2396,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -2476,8 +2515,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['value', 'name', 'id_btn', 'label', 'url'],
+  props: ['value', 'name', 'id_btn', 'id_btn_cancel', 'label', 'url'],
   data: function data() {
     return {
       mutableValue: this.value
@@ -2490,6 +2532,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     show_btn: function show_btn(name) {
       document.getElementById(name + '_btn').hidden = false;
+      document.getElementById(name + '_btn_cancel').hidden = false;
     },
     save: function save(e) {
       var _this = this;
@@ -2514,6 +2557,7 @@ __webpack_require__.r(__webpack_exports__);
           if (string.result == true) {
             _this.mutableValue = document.getElementById(_this.name).value;
             document.getElementById(_this.name + '_btn').hidden = true;
+            document.getElementById(_this.name + '_btn_cancel').hidden = true;
             document.getElementById(_this.name + '_error_msg').innerHTML = '';
             document.getElementById(_this.name + '_error_msg').hidden = true;
 
@@ -2542,6 +2586,13 @@ __webpack_require__.r(__webpack_exports__);
       };
 
       xhr.send(form);
+    },
+    cancel: function cancel() {
+      document.getElementById(this.name).value = this.mutableValue;
+      document.getElementById(this.name + '_btn').hidden = true;
+      document.getElementById(this.name + '_btn_cancel').hidden = true;
+      document.getElementById('login_error_msg').innerHTML = '';
+      document.getElementById('login_error_msg').hidden = true;
     }
   }
 });
@@ -2557,6 +2608,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -2657,8 +2710,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['value', 'name', 'id_btn'],
+  props: ['value', 'name', 'id_btn', 'id_btn_cancel', 'url'],
   data: function data() {
     return {
       mutableValue: this.value
@@ -2671,6 +2727,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     show_btn: function show_btn(name) {
       document.getElementById(name + '_btn').hidden = false;
+      document.getElementById(name + '_btn_cancel').hidden = false;
     },
     save: function save(e) {
       var _this = this;
@@ -2681,7 +2738,7 @@ __webpack_require__.r(__webpack_exports__);
       var XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
       var xhr = new XHR();
       xhr.responseType = 'json';
-      var url = '/change/' + this.name;
+      var url = this.url;
       xhr.open('POST', url, true);
 
       xhr.onreadystatechange = function () {
@@ -2696,9 +2753,12 @@ __webpack_require__.r(__webpack_exports__);
           if (string.result == true) {
             _this.mutableValue = document.getElementById(_this.name).value;
             document.getElementById(_this.name + '_btn').hidden = true;
+            document.getElementById(_this.name + '_btn_cancel').hidden = true;
             document.getElementById('name_error_msg').innerHTML = '';
+            document.getElementById('name_error_msg').hidden = true;
           } else if (string.result == false) {
             document.getElementById(_this.name).value = _this.mutableValue;
+            document.getElementById('name_error_msg').hidden = false;
             document.getElementById('name_error_msg').innerHTML = string.error;
             console.log('error');
           }
@@ -2708,6 +2768,13 @@ __webpack_require__.r(__webpack_exports__);
       };
 
       xhr.send(form);
+    },
+    cancel: function cancel() {
+      document.getElementById(this.name).value = this.mutableValue;
+      document.getElementById(this.name + '_btn').hidden = true;
+      document.getElementById(this.name + '_btn_cancel').hidden = true;
+      document.getElementById('name_error_msg').innerHTML = '';
+      document.getElementById('name_error_msg').hidden = true;
     }
   }
 });
@@ -2739,8 +2806,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['value', 'name', 'id_btn', 'label', 'url'],
+  props: ['src', 'value', 'name', 'id_btn', 'label', 'url'],
   data: function data() {
     return {
       mutableValue: this.value
@@ -2854,8 +2923,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name', 'value'],
+  props: ['name', 'value', 'url'],
   mounted: function mounted() {
     console.log('test', this.value);
     document.getElementById(this.name).value = this.value;
@@ -2870,7 +2941,7 @@ __webpack_require__.r(__webpack_exports__);
       var XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
       var xhr = new XHR();
       xhr.responseType = 'json';
-      var url = '/change/' + this.name;
+      var url = this.url;
       xhr.open('POST', url, true);
 
       xhr.onreadystatechange = function () {
@@ -2946,21 +3017,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    console.log('lat', this.lat, this.lng, this.allow); // let map;
-    // global.initMap = this.initMap();
-    // this.initMap();
+    console.log('lat', this.lat, this.lng, this.allow);
   },
   data: function data() {
     return {
+      mutableAllow: this.allow,
       mutableLtt: '',
       mutableLng: '',
-      mutableJson: '' // markers : []
-
+      currentLtt: this.lat,
+      currentLng: this.lng,
+      mutableJson: ''
     };
   },
-  props: ['lat', 'lng', 'allow'],
+  props: ['src', 'lat', 'lng', 'allow', 'url', 'csrf', 'urloff'],
   methods: {
     editGeo: function editGeo() {
       if (document.getElementById('geolocation_div').hidden == true) {
@@ -2972,53 +3052,18 @@ __webpack_require__.r(__webpack_exports__);
         document.getElementById('geolocation_div').hidden = true;
       }
     },
-    // geocode: function(ltt, lng) {
-    //     latitude = ltt;
-    //     longitude = lng;
-    //     console.log('response', latitude, longitude);
-    //
-    //     let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCpslLLMvrUUPGWepKF3r-8g87FCEF2Qek&latlng='+latitude+','+longitude+'&language=en';
-    //     // $.ajaxSetup({async: false});
-    //     $.ajax({
-    //         url: GEOCODING,
-    //         dataType: 'json',
-    //         async: false,
-    //         success: function(location) {
-    //             console.log(location['plus_code']['compound_code']);
-    //             let add= location['plus_code']['compound_code'];
-    //             let  value=add.split(",");
-    //             let count=value.length;
-    //             country=value[count-1];
-    //             if (count == 2)
-    //             {
-    //                 let city_code=value[count-2].split(" ");
-    //                 code = city_code.shift();
-    //                 city = city_code.join(' ');
-    //                 state=city;
-    //             }
-    //             else {
-    //                 state=value[count-2];
-    //                 let city_code=value[count-3].split(" ");
-    //                 code = city_code.shift();
-    //                 city = city_code.join(' ');
-    //             }
-    //             console.log('country', country);
-    //             console.log('state', state);
-    //             console.log('city', city);
-    //             console.log('code', code);
-    //         }
-    //     });
-    // },
     initMap: function initMap() {
+      // console.log('new init', this.currentLtt, this.currentLng);
       var self = this;
       var card = document.getElementById('pac-card');
       var input = document.getElementById('pac-input');
       var infowindowContent = document.getElementById('infowindow-content');
       var map = new google.maps.Map(document.getElementById('map'), {
         center: {
-          lat: this.lat * 1,
-          lng: this.lng * 1
+          lat: this.currentLtt * 1,
+          lng: this.currentLng * 1
         },
+        // center: {lat: this.lat * 1, lng: this.lng * 1},
         zoom: 13
       });
       var marker;
@@ -3027,8 +3072,9 @@ __webpack_require__.r(__webpack_exports__);
         mapTypeControl: true
       });
 
-      if (this.allow == 1) {
-        var latlng = new google.maps.LatLng(this.lat, this.lng);
+      if (this.mutableAllow == 1) {
+        var latlng = new google.maps.LatLng(this.currentLtt * 1, this.currentLng * 1); // let latlng = new google.maps.LatLng(this.lat * 1, this.lng * 1);
+
         marker = new google.maps.Marker({
           position: latlng,
           map: map
@@ -3063,11 +3109,14 @@ __webpack_require__.r(__webpack_exports__);
           map.setZoom(17);
         }
 
-        console.log('geocode', geocode(place.geometry.location.lat(), place.geometry.location.lng()));
         self.mutableLtt = place.geometry.location.lat();
         self.mutableLng = place.geometry.location.lng();
-        self.mutableJson = geocode(place.geometry.location.lat(), place.geometry.location.lng());
-        console.log('(place.geometry.location', place.geometry.location.lat(), place.geometry.location.lng());
+        self.mutableJson = {
+          latitude: self.mutableLtt,
+          longitude: self.mutableLng
+        }; // self.mutableJson = geocode(place.geometry.location.lat(), place.geometry.location.lng(), self.csrf);
+
+        console.log('(place.geometry.location', place);
         document.getElementById('geo_form').hidden = false;
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
@@ -3084,8 +3133,80 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     save: function save(e) {
-      console.log('SAVE', this.mutableLtt, this.mutableLng, this.mutableJson);
+      var locate = JSON.stringify(this.mutableJson);
+      var self = this;
+      console.log('SAVE', locate);
       e.preventDefault();
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': this.csrf
+        }
+      });
+      jQuery.ajax({
+        url: this.url,
+        method: 'PUT',
+        data: locate,
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        responseType: 'json',
+        success: function success(result) {
+          if (result.result == true) {
+            document.getElementById('city_form').hidden = false;
+            document.getElementById('block_div').hidden = false;
+            document.getElementById('block_geo').checked = false;
+            console.log('document.getElementById(\'block_geo\')', document.getElementById('block_geo'));
+            document.getElementById('country_label').innerHTML = 'Country:';
+            document.getElementById('country').value = result.country;
+            document.getElementById('city').value = result.city;
+            document.getElementById('pac-input').value = '';
+            document.getElementById('geo_form').hidden = true;
+            document.getElementById('geolocation_div').hidden = true;
+            update_raiting(result.rating);
+            update_fill_profile(result.empty); // self.curentLtt = self.mutableLtt;
+            // self.curentLng = self.mutableLng;
+            // console.log('location', self.curentLtt, self.mutableLtt);
+            // console.log('location', locate['city'], locate['country']);
+          }
+
+          console.log('location result', result);
+        }
+      }); // console.log('location ', );
+
+      this.currentLtt = this.mutableLtt;
+      this.currentLng = this.mutableLng;
+      this.mutableAllow = 1;
+    },
+    blockGeo: function blockGeo() {
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': this.csrf
+        }
+      });
+      jQuery.ajax({
+        url: this.urloff,
+        method: 'DELETE',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        responseType: 'json',
+        success: function success(result) {
+          if (result.result == true) {
+            document.getElementById('city').value = '';
+            document.getElementById('city_form').hidden = true;
+            document.getElementById('block_div').hidden = true;
+            document.getElementById('country_label').innerHTML = 'Location:';
+            document.getElementById('country').value = "isn't specified";
+            document.getElementById('pac-input').value = '';
+            document.getElementById('geo_form').hidden = true;
+            document.getElementById('geolocation_div').hidden = true;
+            update_raiting(result.rating);
+            update_fill_profile(result.empty);
+            console.log('off result OK', result);
+          }
+
+          console.log('off result', result);
+        }
+      });
+      this.mutableAllow = 0; //
     }
   }
 });
@@ -3114,8 +3235,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name', 'value'],
+  props: ['name', 'value', 'url'],
   mounted: function mounted() {
     console.log('test', this.value);
     document.getElementById(this.name).value = this.value;
@@ -3130,7 +3253,7 @@ __webpack_require__.r(__webpack_exports__);
       var XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
       var xhr = new XHR();
       xhr.responseType = 'json';
-      var url = '/set/' + this.name;
+      var url = this.url;
       xhr.open('POST', url, true);
 
       xhr.onreadystatechange = function () {
@@ -3180,7 +3303,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name', 'url'],
+  props: ['name', 'url', 'src'],
   methods: {
     deletesmth: function deletesmth(e) {
       var _this = this;
@@ -3245,7 +3368,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name', 'bio'],
+  props: ['name', 'bio', 'src', 'url'],
   data: function data() {
     return {
       mutableValue: this.bio
@@ -3271,7 +3394,7 @@ __webpack_require__.r(__webpack_exports__);
       var XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
       var xhr = new XHR();
       xhr.responseType = 'json';
-      var url = '/set/' + this.name;
+      var url = this.url;
       xhr.open('POST', url, true);
 
       xhr.onreadystatechange = function () {
@@ -3446,7 +3569,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['srcavatar', 'idbtn'],
+  props: ['srcavatar', 'idbtn', 'url'],
   mounted: function mounted() {
     this.update();
   },
@@ -3462,7 +3585,7 @@ __webpack_require__.r(__webpack_exports__);
       var XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
       var xhr = new XHR();
       xhr.responseType = 'json';
-      xhr.open('POST', '/delete/avatar', true);
+      xhr.open('POST', this.url, true);
 
       xhr.onreadystatechange = function () {
         if (xhr.readyState !== 4) {
@@ -3581,7 +3704,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['photovalue', 'inputid', 'labelid'],
+  props: ['photovalue', 'inputid', 'labelid', 'url'],
   methods: {
     downloadusrphoto: function downloadusrphoto() {
       var _this = this;
@@ -3598,7 +3721,7 @@ __webpack_require__.r(__webpack_exports__);
         var XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
         var xhr = new XHR();
         xhr.responseType = 'json';
-        xhr.open('POST', '/upload/photo', true);
+        xhr.open('POST', this.url, true);
         console.log('res', xhr, formData);
 
         xhr.onreadystatechange = function () {
@@ -58338,7 +58461,7 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: " col-lg-3 col-md-3 col-sm-3 col-xs-3",
+      staticClass: "col-lg-3 col-md-3 col-sm-6 col-xs-6",
       attrs: { id: "filters_block" }
     },
     [
@@ -58382,7 +58505,7 @@ var staticRenderFns = [
                 id: "age_from",
                 type: "range",
                 min: "18",
-                max: "55",
+                max: "120",
                 value: "0",
                 step: "1",
                 onsubmit: "return false",
@@ -58402,7 +58525,7 @@ var staticRenderFns = [
                 id: "age_to",
                 type: "range",
                 min: "18",
-                max: "55",
+                max: "120",
                 value: "55",
                 step: "1",
                 onsubmit: "return false",
@@ -58473,7 +58596,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-xs-12" }, [
         _c("div", { staticClass: "card-body" }, [
-          _vm._v("\n                    Distance:\n                    "),
+          _vm._v("\n                    Distance, km:\n                    "),
           _c("div", {
             staticClass: "my_slider",
             attrs: { id: "distance_slider" }
@@ -58486,7 +58609,7 @@ var staticRenderFns = [
                 id: "distance_from",
                 type: "range",
                 min: "0",
-                max: "500",
+                max: "12000",
                 value: "0",
                 step: "1",
                 onsubmit: "return false",
@@ -58507,7 +58630,7 @@ var staticRenderFns = [
                 id: "distance_to",
                 type: "range",
                 min: "0",
-                max: "500",
+                max: "12000",
                 value: "30",
                 step: "1",
                 onsubmit: "return false",
@@ -58788,15 +58911,17 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn edit_submit",
-          attrs: { type: "submit", id: _vm.id_btn, hidden: "" },
-          on: { click: _vm.save }
-        },
-        [_vm._v("Save")]
-      )
+      _c("div", { staticClass: "usr_name_btn_div" }, [
+        _c(
+          "button",
+          {
+            staticClass: "usr_name_btn",
+            attrs: { type: "submit", id: _vm.id_btn, hidden: "" },
+            on: { click: _vm.save }
+          },
+          [_vm._v("Save")]
+        )
+      ])
     ])
   ])
 }
@@ -58839,15 +58964,27 @@ var render = function() {
       }
     }),
     _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn edit_submit",
-        attrs: { type: "submit", id: _vm.id_btn, hidden: "" },
-        on: { click: _vm.save }
-      },
-      [_vm._v("Save")]
-    )
+    _c("div", { staticClass: "usr_name_btn_div" }, [
+      _c(
+        "button",
+        {
+          staticClass: "usr_name_btn",
+          attrs: { type: "submit", id: _vm.id_btn, hidden: "" },
+          on: { click: _vm.save }
+        },
+        [_vm._v("Save")]
+      ),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          staticClass: "usr_name_btn",
+          attrs: { id: _vm.id_btn_cancel, hidden: "" },
+          on: { click: _vm.cancel }
+        },
+        [_vm._v("Cancel")]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -58888,29 +59025,30 @@ var render = function() {
         }
       }
     }),
-    _c("br"),
     _vm._v(" "),
     _vm._m(0),
     _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn edit_submit",
-        attrs: { type: "submit", id: _vm.id_btn, hidden: "" },
-        on: { click: _vm.save }
-      },
-      [_vm._v("Save")]
-    ),
-    _vm._v(" "),
-    _c("input", {
-      staticClass: "btn edit_submit cancel_submit",
-      attrs: { id: "email_btn_cancel", hidden: "", value: "Cancel" },
-      on: {
-        click: function($event) {
-          return _vm.cancel(_vm.name)
+    _c("div", { staticClass: "usr_name_btn_div" }, [
+      _c(
+        "button",
+        {
+          staticClass: "usr_name_btn",
+          attrs: { type: "submit", id: _vm.id_btn, hidden: "" },
+          on: { click: _vm.save }
+        },
+        [_vm._v("Save")]
+      ),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "usr_name_btn",
+        attrs: { id: "email_btn_cancel", hidden: "", value: "Cancel" },
+        on: {
+          click: function($event) {
+            return _vm.cancel(_vm.name)
+          }
         }
-      }
-    })
+      })
+    ])
   ])
 }
 var staticRenderFns = [
@@ -58924,7 +59062,12 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("input", {
-        attrs: { type: "password", name: "password", id: "password" }
+        attrs: {
+          type: "password",
+          name: "password",
+          id: "password",
+          autocomplete: "off"
+        }
       })
     ])
   }
@@ -58965,15 +59108,27 @@ var render = function() {
       }
     }),
     _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn edit_submit",
-        attrs: { type: "submit", id: _vm.id_btn, hidden: "" },
-        on: { click: _vm.save }
-      },
-      [_vm._v("Save")]
-    )
+    _c("div", { staticClass: "usr_name_btn_div" }, [
+      _c(
+        "button",
+        {
+          staticClass: "usr_name_btn",
+          attrs: { type: "submit", id: _vm.id_btn, hidden: "" },
+          on: { click: _vm.save }
+        },
+        [_vm._v("Save")]
+      ),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          staticClass: "usr_name_btn",
+          attrs: { id: _vm.id_btn_cancel, hidden: "" },
+          on: { click: _vm.cancel }
+        },
+        [_vm._v("Cancel")]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -59010,7 +59165,7 @@ var render = function() {
         _c("img", {
           staticClass: "edit",
           staticStyle: { float: "none" },
-          attrs: { src: "/images/service/edit.png", id: "" }
+          attrs: { src: _vm.src, id: "" }
         })
       ]
     ),
@@ -59024,7 +59179,8 @@ var render = function() {
         attrs: {
           type: "password",
           name: "current_password",
-          id: "current_password"
+          id: "current_password",
+          autocomplete: "off"
         }
       }),
       _c("br"),
@@ -59034,7 +59190,12 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("input", {
-        attrs: { type: "password", name: "new_password", id: "new_password" },
+        attrs: {
+          type: "password",
+          name: "new_password",
+          id: "new_password",
+          autocomplete: "off"
+        },
         on: {
           keyup: function($event) {
             return _vm.check()
@@ -59051,7 +59212,8 @@ var render = function() {
         attrs: {
           type: "password",
           name: "new_password_confirm",
-          id: "new_password_confirm"
+          id: "new_password_confirm",
+          autocomplete: "off"
         },
         on: {
           keyup: function($event) {
@@ -59061,25 +59223,31 @@ var render = function() {
       }),
       _c("br"),
       _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn edit_submit disabled",
-          attrs: { type: "submit", id: _vm.id_btn },
-          on: { click: _vm.save }
-        },
-        [_vm._v("change password")]
-      ),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "btn edit_submit cancel_submit",
-        attrs: { id: "password_btn_cancel", value: "Cancel" },
-        on: {
-          click: function($event) {
-            return _vm.cancel()
+      _c("div", { staticClass: "usr_name_btn_div" }, [
+        _c(
+          "button",
+          {
+            staticClass: "usr_name_btn",
+            attrs: { type: "submit", id: _vm.id_btn },
+            on: { click: _vm.save }
+          },
+          [_vm._v("Change password")]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "usr_name_btn",
+          attrs: {
+            id: "password_btn_cancel",
+            value: "Cancel",
+            autocomplete: "off"
+          },
+          on: {
+            click: function($event) {
+              return _vm.cancel()
+            }
           }
-        }
-      })
+        })
+      ])
     ])
   ])
 }
@@ -59122,15 +59290,17 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn edit_submit",
-        attrs: { type: "submit", hidden: "", id: "gender_btn" },
-        on: { click: _vm.change_gender }
-      },
-      [_vm._v("Save")]
-    )
+    _c("div", { staticClass: "usr_name_btn_div" }, [
+      _c(
+        "button",
+        {
+          staticClass: "usr_name_btn",
+          attrs: { type: "submit", hidden: "", id: "gender_btn" },
+          on: { click: _vm.change_gender }
+        },
+        [_vm._v("Save")]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -59156,6 +59326,46 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _vm.allow === "1"
+      ? _c("div", { attrs: { id: "block_div" } }, [
+          _c("input", {
+            attrs: {
+              type: "checkbox",
+              id: "block_geo",
+              name: "block_geo",
+              value: ""
+            },
+            on: {
+              change: function($event) {
+                return _vm.blockGeo()
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "block_geo", id: "block_geo" } }, [
+            _vm._v("Block geolocation")
+          ])
+        ])
+      : _c("div", { attrs: { hidden: "", id: "block_div" } }, [
+          _c("input", {
+            attrs: {
+              type: "checkbox",
+              id: "block_geo",
+              name: "block_geo",
+              value: ""
+            },
+            on: {
+              change: function($event) {
+                return _vm.blockGeo()
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "block_geo", id: "block_geo" } }, [
+            _vm._v("Block geolocation")
+          ])
+        ]),
+    _vm._v(" "),
     _c(
       "span",
       { attrs: { id: "change_geo_title" }, on: { click: _vm.editGeo } },
@@ -59164,7 +59374,7 @@ var render = function() {
         _c("img", {
           staticClass: "edit",
           staticStyle: { float: "none" },
-          attrs: { src: "/images/service/edit.png", id: "" }
+          attrs: { src: _vm.src, id: "" }
         })
       ]
     ),
@@ -59306,15 +59516,17 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn edit_submit",
-        attrs: { type: "submit", hidden: "", id: "preferences_btn" },
-        on: { click: _vm.change_gender }
-      },
-      [_vm._v("Save")]
-    )
+    _c("div", { staticClass: "usr_name_btn_div" }, [
+      _c(
+        "button",
+        {
+          staticClass: "usr_name_btn",
+          attrs: { type: "submit", hidden: "", id: "preferences_btn" },
+          on: { click: _vm.change_gender }
+        },
+        [_vm._v("Save")]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -59351,12 +59563,7 @@ var render = function() {
       },
       on: { click: _vm.deletesmth }
     },
-    [
-      _c("img", {
-        staticClass: "edit cancel",
-        attrs: { src: "/images/service/trash_50px.png" }
-      })
-    ]
+    [_c("img", { staticClass: "edit cancel", attrs: { src: _vm.src } })]
   )
 }
 var staticRenderFns = []
@@ -59408,7 +59615,7 @@ var render = function() {
     _vm._v(" "),
     _c("img", {
       staticClass: "edit",
-      attrs: { src: "/images/service/edit.png", id: "bio_edit" },
+      attrs: { src: _vm.src, id: "bio_edit" },
       on: {
         click: function($event) {
           return _vm.editInput(_vm.name)

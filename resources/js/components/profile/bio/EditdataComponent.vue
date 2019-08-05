@@ -1,7 +1,7 @@
 <template>
         <div style="height: 250px;">
                 <textarea type="text" :name="name" placeholder="Tell about yourself, up to 500 symbols" class="profiledata" id="bio" @keyup="show_btn(name)"  @click="editInput(name)" maxlength="500" spellcheck="false">{{bio}}</textarea>
-                <img src="/images/service/edit.png" class="edit" @click="editInput(name)" id="bio_edit">
+                <img :src="src" class="edit" @click="editInput(name)" id="bio_edit">
                 <br>
                 <button type="submit" hidden id="bio_btn" class="btn edit_submit" @click="save">Save</button>
         </div>
@@ -12,6 +12,8 @@
         props: [
                 'name',
                 'bio',
+                'src',
+                'url'
         ],
             data: function () {
                     return {
@@ -36,7 +38,7 @@
                         let XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
                         let xhr = new XHR();
                         xhr.responseType = 'json';
-                        let url = '/set/' + this.name;
+                        let url = this.url;
                         xhr.open('POST', url, true);
                         xhr.onreadystatechange = () => {
                                 if (xhr.readyState !== 4) {

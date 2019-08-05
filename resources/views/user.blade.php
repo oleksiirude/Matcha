@@ -12,8 +12,8 @@
                     <div class="card-body">
                         <div class="card_profile">
                             <div class="white_div">
-                                <div class="card-body">
-                                    <div id="left_card">
+                                <div class="card-body row">
+                                    <div id="left_card" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                         <div id="div_useravatar">
                                             <img src="{{ URL::asset($profile->avatar) }}" alt="avatar" id="user_avatar" class="usr_photo" title='{{ $profile->login . "'s " }}avatar'>
                                             <div id="action_to_user" class="action_to_user">
@@ -92,7 +92,7 @@
 
 
 
-                                    <div id="right_card">
+                                    <div id="right_card" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                         <div id="usr_name_div">
                                             {{ $profile->name }} {{ $profile->surname }}
                                         </div>

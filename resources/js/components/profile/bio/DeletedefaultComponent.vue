@@ -1,6 +1,6 @@
 <template>
     <button type="submit" id="deletebio_btn" class="delete_btn" title="delete bio" @click="deletesmth" hidden>
-        <img src="/images/service/trash_50px.png" class="edit cancel">
+        <img :src="src" class="edit cancel">
     </button>
 </template>
 
@@ -8,7 +8,8 @@
     export default {
         props: [
             'name',
-            'url'
+            'url',
+            'src'
         ],
         methods: {
             deletesmth : function (e) {

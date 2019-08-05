@@ -8,7 +8,8 @@
     export default {
         props: [
             'srcavatar',
-            'idbtn'
+            'idbtn',
+            'url'
         ],
         mounted () {
           this.update();
@@ -25,7 +26,7 @@
                 let XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
                 let xhr = new XHR();
                 xhr.responseType = 'json';
-                xhr.open('POST', '/delete/avatar', true);
+                xhr.open('POST', this.url, true);
                 xhr.onreadystatechange = () => {
                     if (xhr.readyState !== 4) {
                         return;
