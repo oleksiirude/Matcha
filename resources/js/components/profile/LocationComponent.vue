@@ -133,8 +133,12 @@
                     }
                     self.mutableLtt = place.geometry.location.lat();
                     self.mutableLng = place.geometry.location.lng();
-                    self.mutableJson = geocode(place.geometry.location.lat(), place.geometry.location.lng(), self.csrf);
-                    // console.log('(place.geometry.location', place);
+                    self.mutableJson = {
+                            latitude: self.mutableLtt,
+                            longitude: self.mutableLng,
+                        };
+                    // self.mutableJson = geocode(place.geometry.location.lat(), place.geometry.location.lng(), self.csrf);
+                    console.log('(place.geometry.location', place);
                     document.getElementById('geo_form').hidden = false;
                     marker.setPosition(place.geometry.location);
                     marker.setVisible(true);
@@ -176,8 +180,8 @@
                         {
                             document.getElementById('city_form').hidden = false;
                             document.getElementById('block_div').hidden = false;
-                            document.getElementById('country').value = locate['country'];
-                            document.getElementById('city').value = locate['city'];
+                            // document.getElementById('country').value = locate['country'];
+                            // document.getElementById('city').value = locate['city'];
                             document.getElementById('pac-input').value = '';
                             document.getElementById('geo_form').hidden = true;
                             document.getElementById('geolocation_div').hidden = true;

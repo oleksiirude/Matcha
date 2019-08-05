@@ -45,6 +45,22 @@ input, textarea {
      margin-right: 0px;
      margin-left: 0px;
 }
+.pagination {
+    font-size: 12px;
+}
+.page-link {
+    padding: 1vw 1.25vw;
+    color: rgb(74, 50, 60);
+    background-color: #fff;
+}
+.page-link:hover {
+    z-index: 2;
+    color: #D76D77;
+    text-decoration: none;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
 /*#page-preloader .spinner {*/
 /*    width: 100px;*/
 /*    height: 100px;*/
@@ -400,14 +416,15 @@ a:hover {
 }
 
 #fill_profile {
-    top: 120px;
+    top: 110px;
     max-width: 350px;
     background: #fdfdbe;
-    position: fixed;
+    position: absolute;
     right: 20px;
     padding: 10px;
     box-shadow: 5px 5px 8px rgba(74, 50, 60, 0.3);
     z-index: 100;
+    cursor: pointer;
 }
 #fill_profile_body {
     margin-top: 0px;
@@ -490,7 +507,7 @@ a:hover {
 .profile_delete_form {
     text-align: right;
     position: relative;
-    width: 100%;
+    display: inline-block;
     top:-30px;
 }
 
@@ -572,7 +589,7 @@ a:hover {
     /*left: 350px;*/
     /*display: flex;*/
     margin-bottom: 20px;
-    font-size: 3vw;
+    font-size:2.5vw;
     /*position: relative;*/
     /*position: absolute;*/
     /*max-height: 140px;*/
@@ -984,6 +1001,10 @@ img {
     width:60px;
     border-radius: 50%;
 }
+.search_users_avatar_div .list_users_avatar {
+    width: 95%;
+}
+
 .list_users_info {
     display: inline-block;
     vertical-align: middle;
@@ -992,9 +1013,13 @@ img {
 
 }
 #search_matches_div .list_users_info{
-    width: calc(100% - 160px);
+    width: 100%;
+    /*width: calc(100% - 160px);*/
 }
-
+.search_users_avatar_div .list_users_info {
+    padding: 0;
+    width: auto;
+}
 .list_users a {
     padding: 10px;
     width: 100%;
@@ -1006,6 +1031,10 @@ img {
 .list_users a:hover {
     text-decoration: none;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+}
+
+#search_matches_div a {
+    display: flex;
 }
 .list_users_activity {
     color: rgba(68, 79, 87, 0.3);
@@ -1027,9 +1056,9 @@ img {
 }
 /*filters*/
 #filters_block {
-    width:25%;
+    /*width:25%;*/
     float: left;
-    margin-left: 20px;
+    margin-bottom: 20px;
 }
 .my_slider {
     margin-top: 40px;
@@ -1042,4 +1071,32 @@ img {
 }
 .div_range {
     display: none;
+}
+
+
+@media only screen and (max-width: 960px), only screen and (max-device-width: 900px) {
+    .card-body {
+        padding: 1rem;
+    }
+    .card_profile {
+        padding-left: 0px;
+    }
+    .white_div {
+        width: auto;
+    }
+    #fill_profile {
+        font-size: 12px;
+        max-width: 160px;
+        right: 5px;
+        padding: 5px;
+    }
+    #usr_name_div {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+}
+@media only screen and (max-width: 800px), only screen and (max-device-width: 310px) {
+    .white_div {
+        width: auto;
+    }
 }

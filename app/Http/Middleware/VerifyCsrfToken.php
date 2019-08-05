@@ -21,6 +21,5 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         //
         'maps.googleapis.com/*',
-        'api/*'
     ];
 }

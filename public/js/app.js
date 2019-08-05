@@ -3079,8 +3079,12 @@ __webpack_require__.r(__webpack_exports__);
 
         self.mutableLtt = place.geometry.location.lat();
         self.mutableLng = place.geometry.location.lng();
-        self.mutableJson = geocode(place.geometry.location.lat(), place.geometry.location.lng(), self.csrf); // console.log('(place.geometry.location', place);
+        self.mutableJson = {
+          latitude: self.mutableLtt,
+          longitude: self.mutableLng
+        }; // self.mutableJson = geocode(place.geometry.location.lat(), place.geometry.location.lng(), self.csrf);
 
+        console.log('(place.geometry.location', place);
         document.getElementById('geo_form').hidden = false;
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
@@ -3115,9 +3119,9 @@ __webpack_require__.r(__webpack_exports__);
         success: function success(result) {
           if (result == true) {
             document.getElementById('city_form').hidden = false;
-            document.getElementById('block_div').hidden = false;
-            document.getElementById('country').value = locate['country'];
-            document.getElementById('city').value = locate['city'];
+            document.getElementById('block_div').hidden = false; // document.getElementById('country').value = locate['country'];
+            // document.getElementById('city').value = locate['city'];
+
             document.getElementById('pac-input').value = '';
             document.getElementById('geo_form').hidden = true;
             document.getElementById('geolocation_div').hidden = true; // update_raiting(string.rating);
@@ -58385,7 +58389,7 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: " col-lg-3 col-md-3 col-sm-3 col-xs-3",
+      staticClass: "col-lg-3 col-md-3 col-sm-6 col-xs-6",
       attrs: { id: "filters_block" }
     },
     [
@@ -58520,7 +58524,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-xs-12" }, [
         _c("div", { staticClass: "card-body" }, [
-          _vm._v("\n                    Distance:\n                    "),
+          _vm._v("\n                    Distance, km:\n                    "),
           _c("div", {
             staticClass: "my_slider",
             attrs: { id: "distance_slider" }
