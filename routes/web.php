@@ -8,8 +8,7 @@
 
     // PROFILE
     Route::group(['prefix' => '/profile', 'middleware' => 'verified'], function () {
-        Route::get('/', 'LocationController@changeLocation')->name('profile');
-//        Route::get('/', 'HomeController@show')->name('profile');
+        Route::get('/', 'HomeController@show')->name('profile');
         Route::get('/info', 'HomeController@show')->middleware('filled_profile');
         Route::get('/viewed/profiles', 'HomeController@showViewedProfiles')->name('viewed.profiles');
         Route::get('/viewed/profiles', 'VisitController@showViewedProfiles')->name('viewed.profiles');
