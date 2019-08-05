@@ -392,6 +392,8 @@ a:hover {
 }
 
 #fill_profile {
+    top: 120px;
+    max-width: 350px;
     background: #fdfdbe;
     position: fixed;
     right: 20px;
@@ -400,7 +402,7 @@ a:hover {
     z-index: 100;
 }
 #fill_profile_body {
-    margin-top: 10px;
+    margin-top: 0px;
 }
 #fill_profile ul {
     text-align: left;

@@ -3483,7 +3483,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['srcavatar', 'idbtn'],
+  props: ['srcavatar', 'idbtn', 'url'],
   mounted: function mounted() {
     this.update();
   },
@@ -3499,7 +3499,7 @@ __webpack_require__.r(__webpack_exports__);
       var XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
       var xhr = new XHR();
       xhr.responseType = 'json';
-      xhr.open('POST', '/delete/avatar', true);
+      xhr.open('POST', this.url, true);
 
       xhr.onreadystatechange = function () {
         if (xhr.readyState !== 4) {

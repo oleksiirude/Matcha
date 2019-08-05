@@ -60,7 +60,7 @@
                                             @csrf
                                             @method('DELETE')
 
-                                            <deletebtn-component srcavatar="{{ asset('images/service/del.png') }}" idbtn="delete_btn"></deletebtn-component>
+                                            <deletebtn-component srcavatar="{{ asset('images/service/del.png') }}" idbtn="delete_btn" url="{{ route('delete.avatar') }}"></deletebtn-component>
                                         </form>
                                         <span id="avatar_errormsg"></span>
                                     </div>
