@@ -142,7 +142,7 @@
                                     @if ($profile->allow)
                                         <div>
                                             <form id="country_form">
-                                                <label for="country">Country:</label>
+                                                <label for="country" id="country_label">Country:</label>
                                                 <input type="text" id="country" name="country" value="{{ $profile->country }}" class="profiledata" readonly>
                                             </form>
                                         </div>
@@ -155,7 +155,7 @@
                                     @else
                                         <div>
                                             <form id="country_form">
-                                                <label for="country">Location:</label>
+                                                <label for="country" id="country_label">Location:</label>
                                                 <input type="text" id="country" name="country" value="isn't specified" class="profiledata">
                                             </form>
                                             <form id="city_form" hidden>

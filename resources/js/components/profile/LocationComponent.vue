@@ -160,9 +160,9 @@
 
             },
             save: function (e) {
-                let locate = this.mutableJson;
+                let locate = JSON.stringify(this.mutableJson);
                 let self = this;
-                console.log('SAVE', this.mutableLtt, this.mutableLng, this.mutableJson);
+                console.log('SAVE', locate);
                 e.preventDefault();
                 $.ajaxSetup({
                     headers: {
@@ -172,28 +172,33 @@
                 jQuery.ajax({
                     url: this.url,
                     method: 'PUT',
-                    data: JSON.stringify(this.mutableJson),
+                    data: locate,
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
+                    responseType: 'json',
                     success: function(result){
-                        if (result == true)
+                        if (result.result == true)
                         {
                             document.getElementById('city_form').hidden = false;
                             document.getElementById('block_div').hidden = false;
-                            // document.getElementById('country').value = locate['country'];
-                            // document.getElementById('city').value = locate['city'];
+                            document.getElementById('block_geo').checked = false;
+                            console.log('document.getElementById(\'block_geo\')', document.getElementById('block_geo'));
+                            document.getElementById('country_label').innerHTML = 'Country:';
+                            document.getElementById('country').value = result.country;
+                            document.getElementById('city').value = result.city;
                             document.getElementById('pac-input').value = '';
                             document.getElementById('geo_form').hidden = true;
                             document.getElementById('geolocation_div').hidden = true;
-                            // update_raiting(string.rating);
-                            // update_fill_profile(string.empty);
+                            update_raiting(result.rating);
+                            update_fill_profile(result.empty);
                             // self.curentLtt = self.mutableLtt;
                             // self.curentLng = self.mutableLng;
                             // console.log('location', self.curentLtt, self.mutableLtt);
                             // console.log('location', locate['city'], locate['country']);
                         }
-                        // console.log('location result', result);
+                        console.log('location result', result);
                     }});
+                // console.log('location ', );
                 this.currentLtt = this.mutableLtt;
                 this.currentLng = this.mutableLng;
                 this.mutableAllow = 1;
@@ -209,20 +214,26 @@
                     method: 'DELETE',
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
+                    responseType: 'json',
                     success: function(result){
-                        if (result == true)
+                        if (result.result == true)
                         {
                             document.getElementById('city').value = '';
                             document.getElementById('city_form').hidden = true;
                             document.getElementById('block_div').hidden = true;
+                            document.getElementById('country_label').innerHTML = 'Location:'
                             document.getElementById('country').value = "isn't specified";
-
+                            document.getElementById('pac-input').value = '';
+                            document.getElementById('geo_form').hidden = true;
+                            document.getElementById('geolocation_div').hidden = true;
+                            update_raiting(result.rating);
+                            update_fill_profile(result.empty);
+                            console.log('off result OK', result);
                         }
                         console.log('off result', result);
                     }});
                 this.mutableAllow = 0;
-                // update_raiting(string.rating);
-                // update_fill_profile(string.empty);
+                //
             }
         }
     }

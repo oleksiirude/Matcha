@@ -3129,9 +3129,9 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     save: function save(e) {
-      var locate = this.mutableJson;
+      var locate = JSON.stringify(this.mutableJson);
       var self = this;
-      console.log('SAVE', this.mutableLtt, this.mutableLng, this.mutableJson);
+      console.log('SAVE', locate);
       e.preventDefault();
       $.ajaxSetup({
         headers: {
@@ -3141,27 +3141,33 @@ __webpack_require__.r(__webpack_exports__);
       jQuery.ajax({
         url: this.url,
         method: 'PUT',
-        data: JSON.stringify(this.mutableJson),
+        data: locate,
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
+        responseType: 'json',
         success: function success(result) {
-          if (result == true) {
+          if (result.result == true) {
             document.getElementById('city_form').hidden = false;
-            document.getElementById('block_div').hidden = false; // document.getElementById('country').value = locate['country'];
-            // document.getElementById('city').value = locate['city'];
-
+            document.getElementById('block_div').hidden = false;
+            document.getElementById('block_geo').checked = false;
+            console.log('document.getElementById(\'block_geo\')', document.getElementById('block_geo'));
+            document.getElementById('country_label').innerHTML = 'Country:';
+            document.getElementById('country').value = result.country;
+            document.getElementById('city').value = result.city;
             document.getElementById('pac-input').value = '';
             document.getElementById('geo_form').hidden = true;
-            document.getElementById('geolocation_div').hidden = true; // update_raiting(string.rating);
-            // update_fill_profile(string.empty);
-            // self.curentLtt = self.mutableLtt;
+            document.getElementById('geolocation_div').hidden = true;
+            update_raiting(result.rating);
+            update_fill_profile(result.empty); // self.curentLtt = self.mutableLtt;
             // self.curentLng = self.mutableLng;
             // console.log('location', self.curentLtt, self.mutableLtt);
             // console.log('location', locate['city'], locate['country']);
-          } // console.log('location result', result);
+          }
 
+          console.log('location result', result);
         }
-      });
+      }); // console.log('location ', );
+
       this.currentLtt = this.mutableLtt;
       this.currentLng = this.mutableLng;
       this.mutableAllow = 1;
@@ -3177,19 +3183,26 @@ __webpack_require__.r(__webpack_exports__);
         method: 'DELETE',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
+        responseType: 'json',
         success: function success(result) {
-          if (result == true) {
+          if (result.result == true) {
             document.getElementById('city').value = '';
             document.getElementById('city_form').hidden = true;
             document.getElementById('block_div').hidden = true;
+            document.getElementById('country_label').innerHTML = 'Location:';
             document.getElementById('country').value = "isn't specified";
+            document.getElementById('pac-input').value = '';
+            document.getElementById('geo_form').hidden = true;
+            document.getElementById('geolocation_div').hidden = true;
+            update_raiting(result.rating);
+            update_fill_profile(result.empty);
+            console.log('off result OK', result);
           }
 
           console.log('off result', result);
         }
       });
-      this.mutableAllow = 0; // update_raiting(string.rating);
-      // update_fill_profile(string.empty);
+      this.mutableAllow = 0; //
     }
   }
 });
@@ -9038,7 +9051,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#photo_slide[data-v-61ab08e4] {\n    display: -webkit-box;\n    display: flex;\n    background-color: white;\n    position: fixed;\n    width: 50%;\n    top:15%;\n    left:15%;\n    z-index:999;\n    height: 500px;\n    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);\n}\n.slider_photo[data-v-61ab08e4] {\n    max-width: 90%;\n    max-height:90%;\n    margin: auto;\n}\n.close_btn[data-v-61ab08e4] {\n    position: absolute;\n    right: 0px;\n    background-color: white;\n    border: none;\n    color: rgba(68, 79, 87, 0.8);\n}\n.close_btn[data-v-61ab08e4]:hover {\n    font-weight: bolder;\n    color: rgba(68, 79, 87, 1);\n}\n.p_n[data-v-61ab08e4] {\n    position: absolute;\n    top: 45%;\n    font-size: 40px;\n    margin: 10px;\n}\n.p_n[data-v-61ab08e4]:hover {\n    cursor: pointer;\n}\n.prev[data-v-61ab08e4] {\n}\n.next[data-v-61ab08e4] {\n    right:0px;\n}\n", ""]);
+exports.push([module.i, "\n#photo_slide[data-v-61ab08e4] {\n    display: flex;\n    background-color: white;\n    position: fixed;\n    width: 50%;\n    top:15%;\n    left:15%;\n    z-index:999;\n    height: 500px;\n    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);\n}\n.slider_photo[data-v-61ab08e4] {\n    max-width: 90%;\n    max-height:90%;\n    margin: auto;\n}\n.close_btn[data-v-61ab08e4] {\n    position: absolute;\n    right: 0px;\n    background-color: white;\n    border: none;\n    color: rgba(68, 79, 87, 0.8);\n}\n.close_btn[data-v-61ab08e4]:hover {\n    font-weight: bolder;\n    color: rgba(68, 79, 87, 1);\n}\n.p_n[data-v-61ab08e4] {\n    position: absolute;\n    top: 45%;\n    font-size: 40px;\n    margin: 10px;\n}\n.p_n[data-v-61ab08e4]:hover {\n    cursor: pointer;\n}\n.prev[data-v-61ab08e4] {\n}\n.next[data-v-61ab08e4] {\n    right:0px;\n}\n", ""]);
 
 // exports
 
@@ -57097,7 +57110,7 @@ Popper.placements = placements;
 Popper.Defaults = Defaults;
 
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
-//# sourceMappingURL=popper.js.map
+
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
