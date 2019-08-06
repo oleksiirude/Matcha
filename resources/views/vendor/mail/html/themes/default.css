@@ -111,9 +111,9 @@ img {
 /* Header */
 
 .header {
-    background: var(--main-color-ob);
-    background: var(--main-color-ob1);
-    background: var(--main-color);
+    background: rgb(74, 50, 60);
+    background: -webkit-linear-gradient(to right, #FFAF7B, #D76D77, rgb(74, 50, 60));
+    background: linear-gradient(to right, #FFAF7B, #D76D77, rgb(74, 50, 60));
     padding: 25px 0;
     text-align: center;
 }
@@ -164,9 +164,9 @@ img {
 /* Footer */
 
 .footer {
-    background: var(--main-color-ob);
-    background: var(--main-color-ob1);
-    background: var(--main-color);
+    background: rgb(74, 50, 60);
+    background: -webkit-linear-gradient(to right, #FFAF7B, #D76D77, rgb(74, 50, 60));
+    background: linear-gradient(to right, #FFAF7B, #D76D77, rgb(74, 50, 60));
     margin: 0 auto;
     padding: 0;
     text-align: center;
@@ -233,9 +233,9 @@ img {
 
 .button-blue,
 .button-primary {
-    background: var(--main-color-ob);
-    background: var(--main-color-ob1);
-    background: var(--main-color);
+    background: rgb(74, 50, 60);
+    background: -webkit-linear-gradient(to right, #FFAF7B, #D76D77, rgb(74, 50, 60));
+    background: linear-gradient(to right, #FFAF7B, #D76D77, rgb(74, 50, 60));
     padding: 8px 20px 8px 20px;
 }
 
