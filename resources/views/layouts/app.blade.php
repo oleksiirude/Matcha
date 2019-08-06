@@ -86,17 +86,6 @@
                                             @csrf
                                         </form>
 
-                                        {{--Show all users--}}
-                                        <a class="dropdown-item" href="{{ route('show.all.users') }}"
-                                           onclick="event.preventDefault();
-                                                         document.getElementById('show-all-users-form').submit();">
-                                            {{ __('Show all users') }}<img src="{{asset('images/service/users.png')}}" class="dropdown-item_img">
-                                        </a>
-
-                                        <form id="show-all-users-form" action="{{ route('show.all.users') }}" method="GET" style="display: none;">
-                                            @csrf
-                                        </form>
-
                                         {{--Viewed profiles--}}
                                         <a class="dropdown-item" href="{{ route('viewed.profiles') }}"
                                            onclick="event.preventDefault();

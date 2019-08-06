@@ -108,6 +108,16 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+
+                                {{--       Requirements       --}}
+                                <div class="card-body">
+                                    <ul style="margin-left: 2px; padding-left: 2px">Requirements for password, at least:
+                                        <li style="display: table;">- 1 special symbol like <b>!@#$%^&*()_+-</b></li>
+                                        <li style="display: table;">- 1 lowercase, 1 uppercase</li>
+                                        <li style="display: table;">- min total length is 8 symbols</li>
+                                    </ul>
+                                </div>
+
                             </div>
                         </div>
 

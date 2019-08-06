@@ -16,7 +16,6 @@ body {
     /*background-color: white;*/
 }
 
-
 input, textarea {
     color: rgba(68, 79, 87, 0.8);
 }
@@ -32,6 +31,10 @@ input, textarea {
 /*    background: white;*/
 /*    z-index: 100500;*/
 /*}*/
+
+a:hover {
+    outline: none;
+}
 #page-preloader {
     position: fixed;
     left: 0;
@@ -47,6 +50,7 @@ input, textarea {
 }
 .pagination {
     font-size: 12px;
+    justify-content: center;
 }
 .page-link {
     padding: 1vw 1.25vw;
@@ -260,7 +264,7 @@ textarea::-webkit-input-placeholder { color: rgba(68, 79, 87, 0.4); }
 
 footer {
     width: 100%;
-    height: 80px;
+    height: 40px;
     color: #fff;
     background: var(--main-color-ob);
     background: var(--main-color-ob1);
@@ -270,6 +274,7 @@ footer {
 .copyright {
     padding-right: 20px;
     padding-top: 10px;
+    opacity: 0.5;
 }
 
 

@@ -48,7 +48,7 @@
 
                             @endforeach
                         @else
-                            <p>You haven't liked any profile yet</p>
+                            <p style="margin: auto;">You haven't liked any profile yet</p>
                         @endif
                     </div>
                 </div>

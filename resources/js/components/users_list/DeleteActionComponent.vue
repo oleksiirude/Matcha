@@ -4,7 +4,7 @@
             <input type="hidden" name="_token" :value="csrf">
             <input type="hidden" name="_method" :value="method">
             <button type="submit" @click="make_action">
-                <img :src="imgsrc" title="unblock user" alt="unblock">
+                <img :src="imgsrc" title="delete from history" alt="delete from history">
             </button>
         </form>
     </div>

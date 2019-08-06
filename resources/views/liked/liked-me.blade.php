@@ -8,7 +8,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">Profiles, who liked me</div>
+                    <div class="card-header">Profiles liked me</div>
                     <div class="row card-body">
                         @if (count($profiles))
                             @foreach($profiles as $profile)
@@ -41,32 +41,6 @@
                                                             <button type="submit"><img src="{{asset('images/service/chat.png')}}" title="go chatting with {{ $profile->login }}"></button>
                                                         </form>
                                                     @endif
-
-{{--                                                    --}}{{--Like block--}}
-{{--                                                    @if($profile->auth_user_avatar_uploaded)--}}
-{{--                                                        @if($profile->liked)--}}
-{{--                                                            <form action="{{ route('unlike.user', [--}}
-{{--                                                                        'id' => $profile->user_id,--}}
-{{--                                                                        'login' => $profile->login--}}
-{{--                                                                        ]) }}" method="POST">--}}
-{{--                                                                @method('DELETE')--}}
-{{--                                                                @csrf--}}
-{{--                                                                <button type="submit" class="liked">--}}
-{{--                                                                    <img src="{{asset('images/service/like.png')}}" title="unlike user" alt="unlike">--}}
-{{--                                                                </button>--}}
-{{--                                                            </form>--}}
-{{--                                                        @else--}}
-{{--                                                            <form action="{{ route('like.user', [--}}
-{{--                                                                         'id' => $profile->user_id,--}}
-{{--                                                                         'login' => $profile->login--}}
-{{--                                                                         ]) }}" method="POST">--}}
-{{--                                                                @method('PUT')--}}
-{{--                                                                @csrf--}}
-
-{{--                                                                <button type="submit"><img src="{{asset('images/service/like.png')}}" title="like back" alt="like back"></button>--}}
-{{--                                                            </form>--}}
-{{--                                                        @endif--}}
-{{--                                                    @endif--}}
                                                 </div>
                                             </div>
                                         </a>
@@ -74,7 +48,7 @@
                                 </div>
                             @endforeach
                         @else
-                            <p>Nobody hasn't liked your profile yet</p>
+                            <p style="margin: auto;">Nobody hasn't liked your profile yet</p>
                         @endif
                     </div>
                 </div>

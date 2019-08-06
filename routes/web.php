@@ -10,7 +10,6 @@
     Route::group(['prefix' => '/profile', 'middleware' => 'verified'], function () {
         Route::get('/', 'HomeController@show')->name('profile');
         Route::get('/info', 'HomeController@show')->middleware('filled_profile');
-        Route::get('/viewed/profiles', 'HomeController@showViewedProfiles')->name('viewed.profiles');
         Route::get('/viewed/profiles', 'VisitController@showViewedProfiles')->name('viewed.profiles');
         Route::get('/viewed/my-profile', 'VisitController@showUsersViewedMyProfile')->name('viewed.my.profile');
         Route::get('/blocked/users', 'BlockingController@showBlockedProfiles')->name('blocked.users');
@@ -65,7 +64,6 @@
 
     // USERS
     Route::group(['prefix' => '/users', 'middleware' => 'verified'], function () {
-        Route::get('/', 'UsersController@show')->name('show.all.users');
         Route::get('/{login}', 'UsersController@showUser')->name('show.certain.user')->middleware('blocked');
         Route::put('/block/{id}/{login}', 'BlockingController@blockUser')->name('block.user');
         Route::delete('/unblock/{id}/{login}', 'BlockingController@unblockUser')->name('unblock.user');
@@ -85,6 +83,7 @@
         Route::get('/{login}', 'ChatController@showChat')->name('show.chat');
     });
 
+    // REGISTRATION SUCCESS
     Route::get('/result', function () {
         return view('auth/successlink');
     });

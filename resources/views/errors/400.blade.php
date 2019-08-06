@@ -7,8 +7,7 @@
                 <div class="card">
                     <div class="card-header">400 | Bad Request</div>
                     <div class="row card-body justify-content-center">
-                        <p>Your request isn't valid</p>
-                        <p>Please, try again</p>
+                        <p>Unfortunately, your request isn't valid</p>
                     </div>
                     <div class="row card-body justify-content-center">
                         <a href="/" class="btn edit_submit" style="color: whitesmoke" role="button" aria-pressed="true">main page</a>

@@ -59,7 +59,7 @@
                 'gender' => ['required', 'string', 'regex:/^male|female$/'],
     
                 'password' => ['required', 'string', 'confirmed', 'regex:/^(?=.*[A-Z]{1,})(?=.*[!@#$%^&*()_+-]{1,})(?=.*[0-9]{1,})(?=.*[a-z]{1,}).{8,}$/'],
-                // at least: 1 special symbol, 1 lowercase, 1 uppercase, min length - 8 symbols
+                // at least: 1 special symbol like !@#$%^&*()_+-, 1 lowercase, 1 uppercase, min length - 8 symbols
             ]);
         }
     

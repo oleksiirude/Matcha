@@ -10,25 +10,6 @@
     use Carbon\Carbon;
 
     class UsersController extends Controller {
-    
-        public function show() {
-            $users = User::select()
-                ->whereNotNull('email_verified_at')
-                ->where('id', '!=', 1)
-                ->get();
-        
-            foreach ($users as $user) {
-                if (!$user->isOnline()) {
-                    $now = Carbon::now();
-                    $last = Carbon::parse($user->last_activity);
-                    $diff = $now->diffInMinutes($last, true);
-                    $time = substr(explode(' ', $user->last_activity)[1], 0, 5);
-                    $user->last_activity = $this->getFineActivityView($diff, $last, $time);
-                }
-                $data[] = $user;
-            }
-            return view('users', ['users' => $users]);
-        }
         
         public function showUser($login) {
             $user = User::where('login', $login)->first();

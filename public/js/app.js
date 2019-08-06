@@ -60385,7 +60385,11 @@ var render = function() {
           { attrs: { type: "submit" }, on: { click: _vm.make_action } },
           [
             _c("img", {
-              attrs: { src: _vm.imgsrc, title: "unblock user", alt: "unblock" }
+              attrs: {
+                src: _vm.imgsrc,
+                title: "delete from history",
+                alt: "delete from history"
+              }
             })
           ]
         )

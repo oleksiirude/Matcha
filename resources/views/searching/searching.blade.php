@@ -92,7 +92,7 @@
                                 {{ $profiles->links() }}
                             </div>
                             @else
-                                <p>
+                                <p style="margin: auto;">
                                     Unfortunately, we cannot find anyone matched you
                                     <br>Please, try another search parameters
                                 </p>

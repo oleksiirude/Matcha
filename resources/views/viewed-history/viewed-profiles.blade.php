@@ -8,7 +8,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">My viewed profiles</div>
+                    <div class="card-header">Profiles that I viewed</div>
                     <div class="row card-body" id="card_body">
                         @if (count($profiles))
                             @foreach($profiles as $profile)
@@ -49,7 +49,7 @@
                                 </div>
                             @endforeach
                         @else
-                            <p>You haven't viewed any profiles yet</p>
+                            <p style="margin: auto;">You haven't viewed any profiles yet</p>
                         @endif
                     </div>
                 </div>

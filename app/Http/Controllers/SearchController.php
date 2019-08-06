@@ -119,9 +119,8 @@
             
             if (!count($profiles))
                 return $profiles;
-            
+          
             $profiles = LocationController::filterByDistance($profiles, $this->profile->user_id, $radius);
-           
             $profiles = TagController::findTagMatches($profiles, $this->profile->user_id);
             
             return $profiles;
