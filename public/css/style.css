@@ -652,7 +652,7 @@ a:hover {
 #name_form input, #surname_form input {
     width:100%;
     background-color: transparent;
-    letter-spacing: 1.5vw;
+    /*letter-spacing: 1.5vw;*/
     font-weight: bold;
     /*text-shadow: #e6e6e6 1px 1px 0, #e6e6e6 1px 1px 0,*/
     /*#e6e6e6 1px 1px 1px, #e6e6e6 2px 2px 1px,*/

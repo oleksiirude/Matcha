@@ -245,7 +245,7 @@
         
         protected function putWithoutAgeDown($profiles) {
             $box = collect();
-            
+
             $i = 0;
             foreach ($profiles as $item) {
                 if (!$item['age']) {
@@ -254,7 +254,7 @@
                 }
                 $i++;
             }
-            
+
             $i = 0;
             while ($i < count($box)) {
                 $profiles[] = $box[$i];

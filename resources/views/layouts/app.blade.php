@@ -66,7 +66,7 @@
 
                                 <form id="notifications-form" action="{{ route('notifications') }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="btn btn-outline-secondary">Notifications</button>
+                                    <count-notifications-component></count-notifications-component>
                                 </form>
 
                                 <li class="nav-item dropdown">

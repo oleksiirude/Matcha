@@ -134,7 +134,7 @@
                                         <form action="{{ route('set.preferences') }}" method="POST" id="preferences_form">
                                                 @csrf
                                                 @method('PUT')
-                                                <preferences-component value="{{ $profile->preferences }}" name="preferences" url="{{ route('set.preferences') }}"></preferences-component>
+                                                <preferences-component value="{{ $profile->preferences }}" allow="{{ $profile->preferences_specified }}" name="preferences" url="{{ route('set.preferences') }}"></preferences-component>
                                         </form>
                                         <span id="preferences_error_msg" class="error_msg" hidden></span>
                                     </div>
