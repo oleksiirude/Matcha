@@ -66,7 +66,7 @@
 
                                 <form id="notifications-form" action="{{ route('notifications') }}" method="POST">
                                     @csrf
-                                    <count-notifications-component></count-notifications-component>
+                                    <count-notifications-component url="{{ route('notifications.count') }}" csrf="{{ csrf_token() }}"></count-notifications-component>
                                 </form>
 
                                 <li class="nav-item dropdown">
