@@ -66,7 +66,7 @@
 
                                 <form id="notifications-form" action="{{ route('notifications') }}" method="POST">
                                     @csrf
-                                    <count-notifications-component></count-notifications-component>
+                                    <count-notifications-component url="{{ route('notifications.count') }}" read_url="{{ route('notifications') }}" csrf="{{ csrf_token() }}"></count-notifications-component>
                                 </form>
 
                                 <li class="nav-item dropdown">
@@ -180,7 +180,10 @@
                 </div>
             </div>
         </nav>
-
+        <div id="drop_up_notifications">
+            <span id="clear_all" hidden onclick="clear_all()">Clear all</span>
+            <div id="drop_up_notifications_body"></div>
+        </div>
         <main class="py-4">
             @yield('content')
         </main>

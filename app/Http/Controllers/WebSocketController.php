@@ -240,7 +240,7 @@
             
             return $result;
         }
-        
+
         protected function sendNotificationToUser($user, $msg, $notification, $from_id) {
             $user->send(json_encode([
                 'chat' => false,
@@ -249,10 +249,10 @@
                 'link' => asset('users/' . $msg['login'])
             ]));
             $this->notificationSendPrintInCLI($from_id, $msg['to'], 'message', true);
-            
+
             return true;
         }
-    
+
         protected function sendMessageNotificationToUser($user, $msg, $from_id) {
             $user->send(json_encode([
                 'chat' => false,
@@ -261,7 +261,7 @@
                 'link' => asset('chat/with/' . $msg['login'])
             ]));
             $this->notificationSendPrintInCLI($from_id, $msg['to'], 'message', true);
-        
+
             return true;
         }
         
