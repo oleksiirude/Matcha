@@ -18,11 +18,15 @@
         props: [
             'name',
             'value',
-            'url'
+            'url',
+            'allow'
         ],
         mounted () {
-            console.log('test', this.value);
-            document.getElementById(this.name).value = this.value;
+            console.log('test', this.allow);
+            if (this.allow == 1)
+                document.getElementById(this.name).value = this.value;
+            else
+                document.getElementById(this.name).value = 'choose sexual preferences';
         },
         methods: {
             change_gender: function (e) {

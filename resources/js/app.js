@@ -48,6 +48,7 @@ Vue.component('like-action-component', require('./components/users/LikeActionCom
 Vue.component('chat-component', require('./components/ChatComponent').default);
 Vue.component('notification-component', require('./components/NotificationComponent').default);
 Vue.component('wsconnecting-component', require('./components/WSConnectingComponent').default);
+Vue.component('count-notifications-component', require('./components/layots/CountNotificationsComponent').default);
 Vue.component('footer-component', require('./components/layots/FooterComponent').default);
 
 /**
