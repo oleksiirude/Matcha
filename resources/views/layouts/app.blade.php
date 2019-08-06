@@ -191,7 +191,10 @@
                 </div>
             </div>
         </nav>
-        <div id="drop_up_notifications"></div>
+        <div id="drop_up_notifications">
+            <span id="clear_all" hidden onclick="clear_all()">Clear all</span>
+            <div id="drop_up_notifications_body"></div>
+        </div>
         <main class="py-4">
             @yield('content')
         </main>

@@ -10,7 +10,26 @@ let clear_msg = function (e) {
     let current_div = path[1];
     current_div.remove();
     console.log('CLEAR', e);
+    let childs = Array.from(document.getElementById('drop_up_notifications_body').children);
+    if (childs && childs.length <= 1)
+    {
+        document.getElementById('clear_all').hidden = true;
+    }
 }
+
+let clear_all = function() {
+    let childs = Array.from(document.getElementById('drop_up_notifications_body').children);
+    if (childs && childs.length > 0)
+    {
+        childs.forEach(function(item, i, arr) {
+            item.remove();
+            }
+        );
+        document.getElementById('clear_all').hidden = true;
+    }
+    console.log('clear.ALL', childs);
+}
+
 $('document').ready(function() {
     console.log('HEIGHT', $(document).height(), $(window).height());
     if ($(document).height() - $(window).height() < 80)

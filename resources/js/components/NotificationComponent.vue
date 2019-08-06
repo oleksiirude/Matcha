@@ -80,7 +80,7 @@
         ],
         methods: {
             show_notification: function (msg) {
-                let div = document.getElementById('drop_up_notifications');
+                let div = document.getElementById('drop_up_notifications_body');
                 let mini_div = document.createElement('div');
                 mini_div.style.display = "none";
                 div.insertBefore(mini_div, div.firstElementChild);
@@ -94,6 +94,7 @@
                     });
                 }
                 $(mini_div).fadeIn(1000);
+                document.getElementById('clear_all').hidden = false;
             }
         }
     }

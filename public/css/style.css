@@ -1091,7 +1091,7 @@ img {
     margin-bottom: 10px;
     margin-right: 10px;
 }
-#drop_up_notifications div {
+#drop_up_notifications_body div {
     margin-top: 10px;
     padding: 10px 30px 10px 30px;
     background-color: #ffaf7bd4;
@@ -1120,6 +1120,15 @@ img {
 .stop {
     position: relative;
     z-index: 101;
+}
+#clear_all {
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+}
+#clear_all:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 /* CHAT */
