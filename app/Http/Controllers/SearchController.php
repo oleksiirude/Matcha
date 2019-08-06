@@ -38,13 +38,14 @@
             // Filtering
             $filter_params = array_chunk($params, 2);
             $profiles = FilterController::makeFiltering($profiles,  $filter_params);
-            
+          
             // Sorting
             if (count($profiles))
                 $profiles = $this->sort($params, $profiles);
             else
                 return view('searching.searching', ['profiles' =>  $profiles]);
     
+            
             // Get paginate
             $profiles = $this->getPaginate($profiles, $params, $request);
             
@@ -55,7 +56,7 @@
         public function sort($params, $profiles) {
             $sort_params = array_chunk($params, 2, true)[4];
             $sorter = new SortController($profiles,  $sort_params);
-    
+           
             $profiles = $sorter->sortMain();
             
             return collect(
@@ -96,7 +97,7 @@
             foreach ($params as $title => $value) {
                 $regexps = explode('&', $data[$i]);
                 if (!preg_match($regexps[0], $title) || !preg_match($regexps[1], $value))
-                    abort(419);
+                    abort(400);
                 if ($i === 10)
                     break;
                 $i++;
@@ -109,9 +110,6 @@
         }
         
         public function findProfilesByBaseCriterias($radius = null) {
-            if (!$this->profile->preferences)
-                $this->profile->preferences = 'bisexual';
-            
             if ($this->profile->preferences === 'heterosexual')
                 $profiles = $this->getMatchedProfilesForClassics();
             elseif ($this->profile->preferences === 'homosexual')
@@ -123,6 +121,7 @@
                 return $profiles;
             
             $profiles = LocationController::filterByDistance($profiles, $this->profile->user_id, $radius);
+           
             $profiles = TagController::findTagMatches($profiles, $this->profile->user_id);
             
             return $profiles;
@@ -200,6 +199,8 @@
         }
         
         public function prepareCorrectProfileDataForView($profiles) {
+            $profiles_prepared = collect();
+            
             $i = 0;
             foreach ($profiles as $profile) {
                 $status = User::find($profile['user_id']);
@@ -217,11 +218,11 @@
                 else
                     $profile['allow'] = false;
                 $profile['rating'] = (string)$profile['rating'];
-                $profiles[$i] = $profile;
+                $profiles_prepared[] = $profile;
                 $i++;
             }
-            
-            return $profiles;
+          
+            return $profiles_prepared;
         }
         
         public function getFineDistanceView($profiles) {

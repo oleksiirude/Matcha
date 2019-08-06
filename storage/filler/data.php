@@ -1283,7 +1283,7 @@
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, preferences_specified, bio,
 		                    avatar, avatar_uploaded, rating)
-		        VALUES ('98', 'confident', 'Victoria', 'Lotchuk', '1990-06-07', 'female', 'heterosexual', preferences_specified, '$bio',
+		        VALUES ('98', 'confident', 'Victoria', 'Lotchuk', '1990-06-07', 'female', 'heterosexual', '1', '$bio',
 		                'images/profiles/confident/avatar.jpg', '1', '17.5');
 
 		INSERT INTO profiles(user_id, login, name, surname, age, gender, preferences, preferences_specified, bio,

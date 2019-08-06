@@ -16,7 +16,7 @@
         public static function filterByDistance($profiles, $id, $radius = null)
         {
             if (!$radius)
-                $radius = 300000; // default radius is 30km
+                $radius = 30000; // default radius is 30km
             $auth = Location::find($id);
 
             $nearby = collect();
@@ -37,7 +37,7 @@
                     $nearby[] = $profile;
                 }
             }
-
+           
             return $nearby;
         }
 
@@ -93,10 +93,9 @@
             ]);
         }
 
-        protected function parseDataAndGetNewLocation($data)
-        {
+        protected function parseDataAndGetNewLocation($data) {
             if (!isset($data['latitude']) || !isset($data['longitude']))
-                abort(419);
+                abort(400);
 
             $key = 'AIzaSyCpslLLMvrUUPGWepKF3r-8g87FCEF2Qek';
 

@@ -120,11 +120,9 @@
                         </div>
                         <span id='message_error'></span><br>
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary disabled" id="register_button">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
+                            <button type="submit" class="btn btn-primary disabled" id="register_button">
+                                {{ __('Register') }}
+                            </button>
                         </div>
                     </form>
                 </div>

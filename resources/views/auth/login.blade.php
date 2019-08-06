@@ -25,12 +25,10 @@
                                 </div>
 
                                 @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
+                                    <div class="alert alert-danger" id="alert_message">
                                             @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
+                                            <p>{{ $error }}</p>
                                             @endforeach
-                                        </ul>
                                     </div>
                                 @endif
 

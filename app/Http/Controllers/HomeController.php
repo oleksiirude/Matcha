@@ -102,7 +102,7 @@
             $gender = $request->get('gender');
             
             if (!preg_match('/^male|female$/', $gender))
-                abort(419);
+                abort(400);
             
     
             $this->profile->update([
@@ -146,7 +146,7 @@
             $preferences = $request->get('preferences');
         
             if (!preg_match('/^homosexual|bisexual|heterosexual$/', $preferences))
-                abort(419);
+                abort(400);
         
             $rating = $this->profile->preferences ? false : true;
     

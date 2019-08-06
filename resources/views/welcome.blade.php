@@ -99,7 +99,7 @@
         </header>
         <div class="flex-center position-ref" id="main_container_formain">
             <div class="content">
-                <div class="title m-b-md mainTitle">
+                <div class="title m-b-md mainTitle" id="mainTitle">
                     <span>Match. Chat. Date.</span>
                 </div>
             </div>

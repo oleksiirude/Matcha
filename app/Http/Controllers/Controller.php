@@ -29,7 +29,7 @@
             ])->get();
             
             if (!count($result))
-                abort(419);
+                abort(400);
         }
         
         public function checkIfBlocked($banned, $user) {

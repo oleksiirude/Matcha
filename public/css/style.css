@@ -236,12 +236,13 @@ textarea::-webkit-input-placeholder { color: rgba(68, 79, 87, 0.4); }
     min-height: 100vh;
 }
 
-.mainTitle {
+.mainTitle, #mainTitle {
     color: white;
     opacity: 0.5;
 }
 .result_msg {
-    font-size: 1.5rem;
+    font-size: 1.0rem;
+    margin: auto;
 }
 
 /*footer*/
@@ -375,6 +376,9 @@ a:hover {
 }
 #register_form #email {
     width: 100%;
+}
+#register_button {
+    margin: auto;
 }
 
 /*profile*/
@@ -764,7 +768,13 @@ img {
         /*filter: blur(5px);*/
 }
 
-/* styles for chat*/
+/* alert messages */
+#alert_message {
+    margin: 6px auto;
+    padding: 6px;
+}
+
+/* styles for chat */
 .comments-main{
     background: #DDD;
 }
@@ -1071,7 +1081,6 @@ img {
 }
 
 /* CHAT */
-
 @media screen and (max-width: 420px) {
     . {
         width: 300px;
@@ -1081,7 +1090,6 @@ img {
         width: 310px;
     }
 }
-
 
 @media only screen and (max-width: 960px), only screen and (max-device-width: 900px) {
     .card-body {

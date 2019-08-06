@@ -19,6 +19,7 @@
             'age',
             'gender',
             'preferences',
+            'preferences_specified',
             'bio',
             'avatar',
             'avatar_uploaded',
