@@ -2355,35 +2355,112 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': this.csrf
-      }
-    });
-    jQuery.ajax({
-      url: this.url,
-      method: 'POST',
-      contentType: 'application/json; charset=utf-8',
-      responseType: 'json',
-      success: function success(result) {
-        var res = result.count;
+    this.count_notifications();
+    document.getElementById('popup_notification').addEventListener('click', function (e) {
+      if (e.target !== this) return;
+      document.getElementById('unread_notifications').hidden = true;
+      document.getElementById('parent_popup_notification').style.display = 'none';
+      var msg = document.getElementById('msg_div').children;
 
-        if (res != 0) {
-          document.getElementById('counter').hidden = false;
-          document.getElementById('counter').innerHTML = res;
-        } else {
-          document.getElementById('counter').innerHTML = '';
-          document.getElementById('counter').hidden = true;
-        }
+      if (msg.length != 0) {
+        msg[0].remove();
+      } // console.log(document.getElementById('msg_div').children);
 
-        console.log('count result', result.count);
-      }
     });
   },
-  props: ['url', 'csrf'],
-  methods: {}
+  props: ['url', 'csrf', 'read_url'],
+  methods: {
+    count_notifications: function count_notifications() {
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': this.csrf
+        }
+      });
+      jQuery.ajax({
+        url: this.url,
+        method: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        responseType: 'json',
+        success: function success(result) {
+          var res = result.count;
+
+          if (res != 0) {
+            document.getElementById('counter').hidden = false;
+            document.getElementById('counter').innerHTML = res;
+          } else {
+            document.getElementById('counter').innerHTML = '';
+            document.getElementById('counter').hidden = true;
+          } // console.log('count result', result.count);
+
+        }
+      });
+    },
+    read_notifications: function read_notifications(e) {
+      e.preventDefault();
+      var div = document.getElementById('unread_notifications');
+      document.getElementById('parent_popup_notification').style.display = 'block';
+      var self = this;
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': this.csrf
+        }
+      });
+      jQuery.ajax({
+        url: this.read_url,
+        method: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        responseType: 'json',
+        success: function success(result) {
+          var notifications = result.notifications;
+
+          if (notifications.length != 0) {
+            document.getElementById('unread_notifications_title').innerHTML = "Your unread notifications"; // console.log('notifications', notifications);
+
+            div.hidden = false;
+            var msg_div = document.getElementById('msg_div'); // div.appendChild(msg_div);
+
+            var ul = document.createElement('ul');
+            msg_div.appendChild(ul);
+            notifications.forEach(function (item, i, arr) {
+              var li = document.createElement('li');
+              ul.appendChild(li);
+              li.innerHTML = '<a href="' + item.link + '" target=\"_blank\">' + item.login + '</a> ' + item.title; // alert( i + ": " + item + " (массив:" + arr + ")" );
+            });
+            self.count_notifications();
+          } else {
+            div.hidden = false;
+            document.getElementById('unread_notifications_title').innerHTML = "You don't have unread messages";
+            console.log('NULL notifications', notifications);
+          }
+
+          console.log('count result', notifications);
+        }
+      });
+    },
+    close: function close() {
+      document.getElementById('unread_notifications').hidden = true;
+      document.getElementById('parent_popup_notification').style.display = 'none'; // console.log(document.getElementById('msg_div').children);
+
+      var msg = document.getElementById('msg_div').children;
+
+      if (msg.length != 0) {
+        msg[0].remove();
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -9104,7 +9181,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#counter[data-v-0698616c] {\n    display:inline-block;\n    position: relative;\n    bottom: 10px;\n    width: 23px;\n    height: 23px;\n    box-sizing: border-box;\n    padding: 1px 2px;\n    font-weight: 17px;\n    line-height: 21px;\n    color: #fff;\n    text-align: center;\n    background: #FFAF7B;\n    border-radius: 12px;\n}\n", ""]);
+exports.push([module.i, "\n.close_btn[data-v-0698616c] {\n    position: absolute;\n    right: 0px;\n    top:0px;\n    background-color: white;\n    border: none;\n    color: rgba(68, 79, 87, 0.8);\n}\n.close_btn[data-v-0698616c]:hover {\n    font-weight: bolder;\n    color: rgba(68, 79, 87, 1);\n}\n#counter[data-v-0698616c] {\n    display:inline-block;\n    position: relative;\n    bottom: 10px;\n    width: 23px;\n    height: 23px;\n    box-sizing: border-box;\n    padding: 1px 2px;\n    font-weight: bold;\n    line-height: 21px;\n    color: #fff;\n    text-align: center;\n    background: #FFAF7B;\n    border-radius: 12px;\n}\n#unread_notifications[data-v-0698616c] {\n    padding: 20px;\n    background-color: white;\n    position: fixed;\n    width: 40%;\n    top:15%;\n    right:15%;\n    z-index:999;\n    border-radius: 20px;\n    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);\n}\n#parent_popup_notification[data-v-0698616c] {\n    display: none;\n    height: 100%;\n    /*opacity: 0.9;*/\n    position: fixed;\n    width: 100%;\n    z-index: 9999;\n    top: 0;\n    left: 0;\n}\n#popup_notification[data-v-0698616c] {\n    background-color: grey;\n    opacity: 0.7;\n    height: 100%;\n    width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -58911,23 +58988,49 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
+  return _c("div", [
+    _c(
       "button",
-      { staticClass: "btn btn-outline-secondary", attrs: { type: "submit" } },
+      {
+        staticClass: "btn btn-outline-secondary",
+        attrs: { type: "submit" },
+        on: {
+          click: function($event) {
+            return _vm.read_notifications($event)
+          }
+        }
+      },
       [
-        _vm._v("\n    Notifications\n    "),
+        _vm._v("\n        Notifications\n        "),
         _c("span", { attrs: { id: "counter" } })
       ]
-    )
-  }
-]
+    ),
+    _vm._v(" "),
+    _c("div", { attrs: { id: "parent_popup_notification" } }, [
+      _c("div", { attrs: { id: "popup_notification" } }),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "unread_notifications", hidden: "" } }, [
+        _c("input", {
+          staticClass: "close_btn",
+          attrs: {
+            type: "button",
+            id: "btnClose_notifications",
+            value: "X",
+            title: "close"
+          },
+          on: { click: _vm.close }
+        }),
+        _vm._v(" "),
+        _c("h2", { attrs: { id: "unread_notifications_title" } }, [
+          _vm._v("Your unread notifications")
+        ]),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "msg_div" } })
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

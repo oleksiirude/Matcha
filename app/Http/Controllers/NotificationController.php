@@ -22,7 +22,7 @@
             $i = 0;
             foreach ($notifications as $notification) {
                 if ($notification->message && $notification->counter > 1) {
-                    $notification->title = 'you have ' . $notification->counter . ' messages from ';
+                    $notification->title = 'sent you ' . $notification->counter . ' messages';
                     $notifications[$i] = $notification;
                 }
                 $i++;
