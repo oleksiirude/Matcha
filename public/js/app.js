@@ -1812,7 +1812,9 @@ __webpack_require__.r(__webpack_exports__);
           var status = document.getElementById('status');
           status.innerHTML = opponent + ' ' + msg['data'];
         } else addMessageFromUser(self.escapeHTML(msg['msg']));
-      } else if (msg['chat'] === false) console.log(msg['msg']);
+      } else if (msg['chat'] === false) {
+        self.show_notification(msg);
+      }
     };
 
     function sendMessage() {
@@ -1930,6 +1932,22 @@ __webpack_require__.r(__webpack_exports__);
     },
     escapeHTML: function escapeHTML(msg) {
       return msg.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    },
+    show_notification: function show_notification(msg) {
+      var div = document.getElementById('drop_up_notifications');
+      var mini_div = document.createElement('div');
+      mini_div.style.display = "none";
+      div.insertBefore(mini_div, div.firstElementChild);
+      mini_div.innerHTML = '<span class="close_span" title="close" onclick="clear_msg(event)">x</span><a href="' + msg['link'] + '" target="_blank">' + msg['login'] + '</a> ' + msg['msg'];
+      var promise = document.getElementById('play').play();
+
+      if (promise !== undefined) {
+        promise.then(function (_) {
+          document.getElementById('play').play();
+        })["catch"](function (error) {});
+      }
+
+      $(mini_div).fadeIn(1000);
     }
   }
 });
@@ -1953,6 +1971,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var to = this.id_to;
     var login = this.login;
+    var self = this;
     var conn = new WebSocket('ws://localhost:8081/?from=user&to=user');
 
     conn.onopen = function () {
@@ -1970,7 +1989,7 @@ __webpack_require__.r(__webpack_exports__);
 
     conn.onmessage = function (e) {
       var msg = JSON.parse(e.data);
-      console.log(msg['msg']);
+      self.show_notification(msg);
     };
 
     var like_form = document.getElementById('like_form');
@@ -2014,7 +2033,25 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  props: ['id_to', 'login']
+  props: ['id_to', 'login'],
+  methods: {
+    show_notification: function show_notification(msg) {
+      var div = document.getElementById('drop_up_notifications');
+      var mini_div = document.createElement('div');
+      mini_div.style.display = "none";
+      div.insertBefore(mini_div, div.firstElementChild);
+      mini_div.innerHTML = '<span class="close_span" title="close" onclick="clear_msg(event)">x</span><a href="' + msg['link'] + '" target="_blank">' + msg['login'] + '</a> ' + msg['msg'];
+      var promise = document.getElementById('play').play();
+
+      if (promise !== undefined) {
+        promise.then(function (_) {
+          document.getElementById('play').play();
+        })["catch"](function (error) {});
+      }
+
+      $(mini_div).fadeIn(1000);
+    }
+  }
 });
 
 /***/ }),
@@ -2034,6 +2071,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
+    var self = this;
     var conn = new WebSocket('ws://localhost:8081/?from=user&to=user');
 
     conn.onopen = function () {
@@ -2042,8 +2080,26 @@ __webpack_require__.r(__webpack_exports__);
 
     conn.onmessage = function (e) {
       var msg = JSON.parse(e.data);
-      console.log(msg['msg']);
+      self.show_notification(msg);
     };
+  },
+  methods: {
+    show_notification: function show_notification(msg) {
+      var div = document.getElementById('drop_up_notifications');
+      var mini_div = document.createElement('div');
+      mini_div.style.display = "none";
+      div.insertBefore(mini_div, div.firstElementChild);
+      mini_div.innerHTML = '<span class="close_span" title="close" onclick="clear_msg(event)">x</span><a href="' + msg['link'] + '" target="_blank">' + msg['login'] + '</a> ' + msg['msg'];
+      var promise = document.getElementById('play').play();
+
+      if (promise !== undefined) {
+        promise.then(function (_) {
+          document.getElementById('play').play();
+        })["catch"](function (error) {});
+      }
+
+      $(mini_div).fadeIn(1000);
+    }
   }
 });
 
@@ -2474,6 +2530,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -59062,7 +59119,14 @@ var staticRenderFns = [
     return _c("footer", [
       _c("p", { staticClass: "copyright" }, [
         _vm._v("\n        © created by olrudenk & dpiven, 2019\n    ")
-      ])
+      ]),
+      _vm._v(" "),
+      _c("audio", {
+        attrs: {
+          id: "play",
+          src: "https://sound-pack.net/download/Sound_17216.mp3"
+        }
+      })
     ])
   }
 ]

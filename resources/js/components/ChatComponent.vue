@@ -125,8 +125,9 @@
                     else
                         addMessageFromUser(self.escapeHTML(msg['msg']));
                 }
-                else if (msg['chat'] === false)
-                    console.log(msg['msg'])
+                else if (msg['chat'] === false) {
+                    self.show_notification(msg);
+                }
             };
 
             function sendMessage () {
@@ -278,7 +279,6 @@
             'opponents_avatar',
             'your_avatar',
         ],
-
         methods : {
             scrollToBottom: function () {
                 let chat = document.getElementById('chat');
@@ -290,6 +290,22 @@
                     .replace(/>/g, "&gt;")
                     .replace(/"/g, "&quot;")
                     .replace(/'/g, "&#039;");
+            },
+            show_notification: function (msg) {
+                let div = document.getElementById('drop_up_notifications');
+                let mini_div = document.createElement('div');
+                mini_div.style.display = "none";
+                div.insertBefore(mini_div, div.firstElementChild);
+                mini_div.innerHTML = '<span class="close_span" title="close" onclick="clear_msg(event)">x</span><a href="'+msg['link']+'" target="_blank">'+ msg['login']+'</a> '+ msg['msg'];
+                let promise = document.getElementById('play').play();
+
+                if (promise !== undefined) {
+                    promise.then(_ => {
+                        document.getElementById('play').play();
+                    }).catch(error => {
+                    });
+                }
+                $(mini_div).fadeIn(1000);
             }
         }
 

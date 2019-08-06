@@ -191,7 +191,7 @@
                 </div>
             </div>
         </nav>
-
+        <div id="drop_up_notifications"></div>
         <main class="py-4">
             @yield('content')
         </main>

@@ -240,18 +240,28 @@
             
             return $result;
         }
-        
+
         protected function sendNotificationToUser($user, $msg, $notification, $from_id) {
-            $user->send(json_encode(['chat' => false, 'msg' => $msg['login'] . $notification]));
+            $user->send(json_encode([
+                'chat' => false,
+                'msg' => $notification,
+                'login' => $msg['login'],
+                'link' => asset('users/' . $msg['login'])
+            ]));
             $this->notificationSendPrintInCLI($from_id, $msg['to'], 'message', true);
-            
+
             return true;
         }
-    
+
         protected function sendMessageNotificationToUser($user, $msg, $from_id) {
-            $user->send(json_encode(['chat' => false, 'msg' => $msg['login'] . ' has sent you message']));
+            $user->send(json_encode([
+                'chat' => false,
+                'msg' => ' has sent you message',
+                'login' => $msg['login'],
+                'link' => asset('chat/with/' . $msg['login'])
+            ]));
             $this->notificationSendPrintInCLI($from_id, $msg['to'], 'message', true);
-        
+
             return true;
         }
         
