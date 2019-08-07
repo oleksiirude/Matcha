@@ -641,8 +641,8 @@ img {
 .comments .comment {
     padding: 5px 10px;
     background: #FFF;
-    margin-left: 4%;
-    margin-right: 4%;
+    /*margin-left: 4%;*/
+    /*margin-right: 4%;*/
 }
 .comments .comment:hover time{
     opacity: 1;
@@ -686,7 +686,8 @@ img {
     opacity: 1;
 }
 .comment-box-main{
-    background: #A1A1A1;
+    background: #ffaf7bc7;
+    box-shadow: 5px 5px 8px rgba(74, 50, 60, 0.3);
 }
 @media (min-width: 320px) and (max-width: 480px) {
     .comments .comment h4 {
@@ -705,7 +706,7 @@ img {
     transform: translateY(2px);
 }
 #opponents_block {
-    background: #f2ffec;
+    background: #ffaf7b85;;
 }
 /* end styles for chat*/
 
