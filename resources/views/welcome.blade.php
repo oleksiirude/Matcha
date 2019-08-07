@@ -21,10 +21,7 @@
         <style>
             html, body {
                 background: url(images/service/couples2.png) no-repeat;
-                /*-moz-background-size: auto 100%; !* Firefox 3.6+ *!*/
-                /*-webkit-background-size: auto 100%; !* Safari 3.1+ и Chrome 4.0+ *!*/
-                /*-o-background-size: auto 100%; !* Opera 9.6+ *!*/
-                background-size: cover; /* Современные браузеры */
+                background-size: cover;
                 background-position: center;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;

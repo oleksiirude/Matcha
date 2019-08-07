@@ -58,25 +58,16 @@
                             if (this.name == 'login') {
                                 let i = document.getElementById('navbarDropdown').firstChild;
                                 document.getElementById('navbarDropdown').firstChild.nodeValue = this.mutableValue;
-                                // console.log('ok', i.nodeValue);
-                                // document.getElementById('navbarDropdown').firstChild = this.mutableValue;
-                                // console.log('ok1', document.getElementById('navbarDropdown').firstChild);
                             }
                             if (this.name != 'login') {
                                 update_raiting(string.rating);
                                 update_fill_profile(string.empty);
                             }
                         } else if (string.result == false) {
-                            // if (this.name == 'login' && string.error == '') {
-                            //     update_raiting(string.rating);
-                            //     update_fill_profile(string.empty);
-                            // }
                             document.getElementById(this.name).value = this.mutableValue;
                             document.getElementById(this.name + '_error_msg').hidden = false;
                             document.getElementById(this.name + '_error_msg').innerHTML = string.error;
-                            // console.log('error');
                         }
-                        // console.log('res', string);
                     }
                 };
                 xhr.send(form);

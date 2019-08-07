@@ -19,10 +19,8 @@
                 console.log('path', this.srcavatar);
             },
             deletephoto : function (e) {
-                console.log('e',this.parentElement);
                 e.preventDefault();
                 let formdel = new FormData(document.forms.deleteavatar_form);
-                // console.log('formData', formData);
                 let XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
                 let xhr = new XHR();
                 xhr.responseType = 'json';
@@ -33,16 +31,14 @@
                     }
                     if (xhr.status === 200) {
                         let string = xhr.response;
-                        console.log('res', string);
                         if (string.result == true) {
                             document.getElementById('avatar').src = 'images/service/default_avatar.png';
                             document.getElementById('delete_btn').hidden = true;
                             update_raiting(string.rating);
                             update_fill_profile(string.empty);
                         } else if (string.result == false) {
-                            console.log('default avatar');
+
                         }
-                        console.log('res', string);
                     }
                 };
                 xhr.send(formdel);

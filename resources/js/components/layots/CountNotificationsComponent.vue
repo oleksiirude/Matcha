@@ -31,7 +31,6 @@
                 {
                     msg[0].remove();
                 }
-                // console.log(document.getElementById('msg_div').children);
             });
         },
         props: [
@@ -63,7 +62,6 @@
                             document.getElementById('counter').hidden = true;
 
                         }
-                        // console.log('count result', result.count);
                     }});
             },
             read_notifications: function (e) {
@@ -86,18 +84,15 @@
                         if (notifications.length != 0)
                         {
                             document.getElementById('unread_notifications_title').innerHTML = "Your unread notifications"
-                            // console.log('notifications', notifications);
                             div.hidden = false;
                             let msg_div = document.getElementById('msg_div');
-                            // div.appendChild(msg_div);
                             let ul = document.createElement('ul');
                             msg_div.appendChild(ul);
 
-                            notifications.forEach(function(item, i, arr) {
+                            notifications.forEach(function(item) {
                                 let li = document.createElement('li');
                                 ul.appendChild(li);
                                 li.innerHTML = '<a href="'+ item.link +'" target=\"_blank\">'+ item.login + '</a> ' + item.title;
-                                    // alert( i + ": " + item + " (массив:" + arr + ")" );
                                 });
 
                             self.count_notifications();
@@ -105,15 +100,12 @@
                         else {
                             div.hidden = false;
                             document.getElementById('unread_notifications_title').innerHTML = "You don't have unread messages";
-                            console.log('NULL notifications', notifications);
                         }
-                        console.log('count result', notifications);
                     }});
             }, 
             close: function () {
                 document.getElementById('unread_notifications').hidden = true;
                 document.getElementById('parent_popup_notification').style.display='none';
-                // console.log(document.getElementById('msg_div').children);
                 let msg = document.getElementById('msg_div').children;
                 if (msg.length != 0)
                 {
@@ -168,7 +160,6 @@
     #parent_popup_notification {
         display: none;
         height: 100%;
-        /*opacity: 0.9;*/
         position: fixed;
         width: 100%;
         z-index: 9999;

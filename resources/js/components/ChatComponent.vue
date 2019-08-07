@@ -103,8 +103,6 @@
             conn.onmessage = function(e) {
                 let msg = JSON.parse(e.data);
 
-                // console.log(msg['data']);
-
                 if (msg['chat'] === true) {
                     if (msg['blocked'] === true && msg['msg'] === 'blocked') {
                         document.getElementById('send-msg').removeEventListener('click', sendMessage);

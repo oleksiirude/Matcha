@@ -1,12 +1,10 @@
 let check = function(e) {
-    console.log('change', e.id);
     let register_button = document.getElementById('register_button');
     if (document.getElementById('password').value ==
         document.getElementById('password-confirm').value &&
         document.getElementById('password').value != 0) {
         document.getElementById('message_error').style.color = 'green';
         document.getElementById('message_error').innerHTML = '';
-        console.log('gender', document.getElementById('gender').value);
         if (document.getElementById('login').value != '' &&
             document.getElementById('email').value != '' &&
             document.getElementById('name').value != '' &&

@@ -24,7 +24,6 @@
         },
         methods: {
             editInput: function (name) {
-
                 let input = document.getElementById(name);
                 input.focus();
             },
@@ -48,7 +47,6 @@
                     }
                     if (xhr.status === 200) {
                         let string = xhr.response;
-                        console.log('res', string);
                         if (string.result == true) {
                             this.mutableValue = document.getElementById(this.name).value;
                             document.getElementById(this.name + '_btn').hidden = true;
@@ -59,10 +57,7 @@
                             document.getElementById(this.name).value = this.mutableValue;
                             document.getElementById('name_error_msg').hidden = false;
                             document.getElementById('name_error_msg').innerHTML = string.error;
-                            console.log('error');
-
                         }
-                        console.log('res', string);
                     }
                 };
                 xhr.send(form);

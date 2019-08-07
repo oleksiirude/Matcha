@@ -18,8 +18,7 @@
 
                 <filter-component url="{{ route('find.filter.sort') }}" url_default="{{ route('searching') }}"></filter-component>
 
-                <div class="card" class="col-lg-9 col-md-9 col-sm-6 col-xs-6">
-{{--                    <div id="page-preloader"><span class="spinner" id="spinner"></span></div>--}}
+                <div class="card" id="search_blade_card">
                     <div class="card-header">Profiles which you will probably like</div>
                     <div class="flex-center position-ref full-height">
                         <div class="card-body">
@@ -27,7 +26,7 @@
                             {{ $profiles->links() }}
                             <div class="row" id="search_matches_div">
                                 @foreach($profiles as $profile)
-                                    <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                         <div class="list_users">
                                             <a href="{{ route('show.certain.user', $profile['login']) }}" class="search_matches_a row">
                                                 <div class="list_users_avatar_div search_users_avatar_div col-lg-6 col-md-6 col-sm-12 col-xs-12">

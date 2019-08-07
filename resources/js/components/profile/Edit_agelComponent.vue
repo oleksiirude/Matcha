@@ -3,8 +3,6 @@
         <p style="margin-bottom: 0.5rem;"><span id="age_title" @click="show_birthday_input">Age:</span>
             <span id="user_age" @click="show_birthday_input">{{ mutableSpan }} </span>
         </p>
-<!--        <label for='userage'>Age:</label>-->
-<!--        <input type="text" name="userage" class="profiledata" value="" @click="show_birthday_input" id="userage" placeholder="" readonly><br>-->
         <div id="fill_birthday" hidden>
             <label :for="name">{{ label }}</label>
             <input type="date" :name="name" min="1899-01-01" max="2002-01-01" class="profiledata" :value="value" @click="editInput(name)" :id="name" @change="show_btn(name)" placeholder="">
@@ -86,16 +84,10 @@
                             document.getElementById('fill_birthday').hidden = true;
                             document.getElementById(this.name).blur();
                         } else if (string.result == false) {
-                            // if (this.name == 'login' && string.error == '') {
-                            //     update_raiting(string.rating);
-                            //     update_fill_profile(string.empty);
-                            // }
                             document.getElementById('user_age').innerHTML = this.mutableSpan;
                             document.getElementById(this.name + '_error_msg').hidden = false;
                             document.getElementById(this.name + '_error_msg').innerHTML = string.error;
-                            // console.log('error');
                         }
-                        console.log('res', string);
                     }
                 };
                 xhr.send(form);

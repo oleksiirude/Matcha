@@ -3,7 +3,6 @@
 @push('scripts')
     <script src="{{ asset('cropperjs/dist/cropper.min.js')}}" defer></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpslLLMvrUUPGWepKF3r-8g87FCEF2Qek&libraries=places"></script>
-    <script src="{{ asset('js/profile/geo.js')}}" defer></script>
     <script src="{{ asset('js/profile/profile.js')}}" defer></script>
 @endpush
 

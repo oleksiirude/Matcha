@@ -2,7 +2,7 @@
 @push('scripts')
     <script src="{{ asset('js/register/confirm_password.js')}}" defer></script>
     <script src="{{ asset('js/register/location.js')}}" defer></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+{{--    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>--}}
 @endpush
 
 @section('content')
@@ -89,13 +89,13 @@
                             </div>
                         </div>
 
-                        <input id="gps_latitude" type="hidden" class="" name="gps_latitude"  autocomplete="gps">
-                        <input id="gps_longitude" type="hidden" class="" name="gps_longitude"  autocomplete="gps">
-                        <input id="gps_city" type="hidden" class="" name="gps_city"  autocomplete="gps">
-                        <input id="gps_region" type="hidden" class="" name="gps_region"  autocomplete="gps">
-                        <input id="gps_country" type="hidden" class="" name="gps_country"  autocomplete="gps">
-                        <input id="gps_code" type="hidden" class="" name="gps_code"  autocomplete="gps">
-                        <input id="gps_allowlocation" type="hidden" class="" name="gps_allowlocation"  autocomplete="gps">
+                        <input id="gps_latitude" type="hidden" class="" name="gps_latitude"  autocomplete="gps" required>
+                        <input id="gps_longitude" type="hidden" class="" name="gps_longitude"  autocomplete="gps" required>
+                        <input id="gps_city" type="hidden" class="" name="gps_city"  autocomplete="gps" required>
+                        <input id="gps_region" type="hidden" class="" name="gps_region"  autocomplete="gps" required>
+                        <input id="gps_country" type="hidden" class="" name="gps_country"  autocomplete="gps" required>
+                        <input id="gps_code" type="hidden" class="" name="gps_code"  autocomplete="gps" required>
+                        <input id="gps_allowlocation" type="hidden" class="" name="gps_allowlocation"  autocomplete="gps" required>
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
@@ -110,7 +110,7 @@
                                 @enderror
 
                                 {{--       Requirements       --}}
-                                <div class="card-body">
+                                <div id="requirements" hidden>
                                     <ul style="margin-left: 2px; padding-left: 2px">Requirements for password, at least:
                                         <li style="display: table;">- 1 special symbol like <b>!@#$%^&*()_+-</b></li>
                                         <li style="display: table;">- 1 lowercase, 1 uppercase</li>

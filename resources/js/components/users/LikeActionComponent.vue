@@ -5,7 +5,6 @@
             <input type="hidden" name="_method" :value="unmethod">
             <button type="submit" @click="make_action">
                 <img :src="imgsrc" title="like user" alt="like">
-                <!--            {{ btn_name }}-->
             </button>
         </form>
         <form :action="url" method="POST" id="unlike_form" hidden>
@@ -13,7 +12,6 @@
             <input type="hidden" name="_method" :value="method">
             <button type="submit" class="liked" @click="make_action">
                 <img :src="imgsrc" title="unlike user" alt="unlike">
-    <!--            {{ btn_name }}-->
             </button>
         </form>
     </div>
@@ -51,11 +49,8 @@
         methods: {
             make_action: function (e) {
                 e.preventDefault();
-                console.log('TEST', e);
-                // console.log('TEST', e.path);
                 let path = e.path || (e.composedPath && e.composedPath()) || composedPath(e.target);
                 let form = new FormData(path[2]);
-
                 let XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
                 let xhr = new XHR();
                 xhr.responseType = 'json';
@@ -117,9 +112,6 @@
                                     document.getElementById('like_to_me').hidden = false;
                                     document.getElementById('like_to_me').innerHTML = "&#x2661; "+ this.user +" liked you ;) &#x2661;";
                                     }
-                                    else {
-
-                                    }
                                 }
                                 document.getElementById('chat_form').hidden = true;
                                 document.getElementById('connect_span').hidden = true;
@@ -129,12 +121,10 @@
                             }
 
                         }
-                        console.log('vue', string);
                     }
                 }
                 xhr.send(form);
             }
-
         }
     }
 </script>
