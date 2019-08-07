@@ -1,7 +1,7 @@
 <?php
 
     namespace App\Http\Controllers;
-
+    
     use Auth;
     use App\Profile;
     use App\User;
@@ -253,7 +253,7 @@
             
             return response()->json(['result' => true]);
         }
-        
+
         protected function returnJsonBox() {
             $response = Controller::getAttributesForAuthUserProfile();
     

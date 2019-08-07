@@ -52,7 +52,7 @@
                                 </div>
                             @endforeach
                         @else
-                            <p>You don't have any connections yet</p>
+                            <p style="margin: auto;">You don't have any connections yet</p>
                         @endif
                     </div>
                 </div>

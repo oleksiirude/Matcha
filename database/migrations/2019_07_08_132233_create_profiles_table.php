@@ -30,6 +30,7 @@ class CreateProfilesTable extends Migration
             $table->string('photo3')->nullable();
             $table->string('photo4')->nullable();
             $table->double('rating', 110, 1)->default(0.9);
+            $table->boolean('email_notifications')->default(false);
         });
     }
     

@@ -23,19 +23,11 @@
                                             <div class="list_users_info">
                                                 {{ $profile->user->name }} {{ $profile->user->surname }}
                                                 <div id="action_to_user" class="action_to_user">
-{{--                                                    <form action="{{ route('unblock.user', [--}}
-{{--                                                                    'id' => $profile->user->user_id,--}}
-{{--                                                                    'login' => $profile->user->login--}}
-{{--                                                                    ]) }}" method="POST">--}}
-{{--                                                            @csrf--}}
-{{--                                                            @method('DELETE')--}}
                                                         <unblock-action-component csrf = "{{csrf_token()}}" url = "{{ route('unblock.user', [
                                                                     'id' => $profile->user->user_id,
                                                                     'login' => $profile->user->login
                                                                     ]) }}" method = "DELETE" imgsrc="{{asset('images/service/block_color.png')}}">
                                                         </unblock-action-component>
-{{--                                                        <button type="submit" class="liked"><img src="{{asset('images/service/block_color.png')}}" title="unblock {{ $profile->login }}" alt="unblock"></button>--}}
-{{--                                                    </form>--}}
                                                 </div>
                                             </div>
                                         </a>
@@ -43,7 +35,7 @@
                                 </div>
                             @endforeach
                         @else
-                            <p>You don't have any blocked profiles yet</p>
+                            <p style="margin: auto;">You don't have any blocked profiles yet</p>
                         @endif
                     </div>
                 </div>

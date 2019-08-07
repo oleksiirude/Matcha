@@ -75,7 +75,7 @@
             $data = $request->all();
     
             if (!$this->validateLocation($data))
-                return view('messages.smth-went-wrong');
+                abort(400);
     
             event(new Registered($user = $this->createUser($data)));
     

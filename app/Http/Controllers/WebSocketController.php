@@ -7,8 +7,11 @@
     use Crypt;
     use Auth;
     use App\User;
+    use App\Profile;
     use App\ChatHistory;
     use App\Notification;
+    use Illuminate\Support\Facades\Mail;
+    use App\Mail\EmailNotification;
     use Illuminate\Session\SessionManager;
     use Ratchet\MessageComponentInterface;
     use Ratchet\ConnectionInterface;
@@ -98,15 +101,21 @@
                                     // if user have connection with sender and now not in chat with him, but with other user
                                     // send notification to user with 'chat => false' setting (so message won't get into foreign chat)
                                     $this->sendMessageNotificationToUser($user, $msg, $from_id);
-                                    $this->addMessageToDB($from_id, $msg);
-                                    $received = true;
+    
+                                    if (!$received) {
+                                        $this->addMessageToDB($from_id, $msg);
+                                        $received = true;
+                                    }
                                 }
                             } else {
                                 // if user have connection with sender, but now it's connection doesn't have privacy
                                 // send notification to user with 'chat => false' setting
                                 $this->sendMessageNotificationToUser($user, $msg, $from_id);
-                                $this->addMessageToDB($from_id, $msg);
-                                $received = true;
+                                
+                                if (!$received) {
+                                    $this->addMessageToDB($from_id, $msg);
+                                    $received = true;
+                                }
                             }
                         }
                     }
@@ -114,6 +123,7 @@
                     if (!$received && $this->checkIfConnected($from_id, $msg['to'])) {
                         $this->addMessageToDB($from_id, $msg);
                         $this->addNotificationMessageToDB($msg, ' has sent you message', $from_id);
+                        $this->sendEmail($msg, ' has sent you message');
                         $this->messageSendPrintInCLI($from_id, $msg['to'], $msg['msg'], false);
                     }
                     break;
@@ -146,8 +156,10 @@
                             }
                         }
                     }
-                    if (!$received)
+                    if (!$received) {
+                        $this->sendEmail($msg, $notification);
                         $this->handleNotificationIfOffline($msg, $notification, $from_id);
+                    }
                     break;
                 }
                 case 'status': {
@@ -333,6 +345,13 @@
                     'message' => true,
                     'date' => Carbon::now()
                 ]);
+        }
+        
+        protected function sendEmail($msg, $action) {
+            if (Profile::where('user_id', $msg['to'])->value('email_notifications')) {
+                $to = User::where('id', $msg['to'])->value('email');
+                Mail::to($to)->queue(new EmailNotification($msg['login'] . $action));
+            }
         }
         
         // functions for logging into CLI

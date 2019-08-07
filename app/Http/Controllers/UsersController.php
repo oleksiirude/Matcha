@@ -38,6 +38,8 @@
             $profile['country'] = $location->country;
             $profile['city'] = $location->city;
             $profile['allow'] = $location->allow;
+            $profile['latitude'] = $location->latitude;
+            $profile['longitude'] = $location->longitude;
             $profile['interests'] = $interests;
             $profile['reported'] = $this->checkIfReported($auth, $aim);
             $profile['last_activity'] = $this->checkLastActivity($user);

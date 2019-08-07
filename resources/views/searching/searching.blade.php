@@ -20,7 +20,13 @@
 
                 <div class="card" class="col-lg-9 col-md-9 col-sm-6 col-xs-6">
 {{--                    <div id="page-preloader"><span class="spinner" id="spinner"></span></div>--}}
-                    <div class="card-header">Profiles which you will probably like</div>
+                    <div class="card-header">
+                        @if (count($profiles))
+                            We found {{ count($profiles) }} people which you will probably like
+                        @else
+                            Uff, it's so empty here...
+                        @endif
+                    </div>
                     <div class="flex-center position-ref full-height">
                         <div class="card-body">
                             @if (count($profiles))

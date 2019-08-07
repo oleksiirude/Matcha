@@ -27,7 +27,7 @@
             $base64 = str_replace('data:image/jpeg;base64,', '', $base64);
             
             $savePath = public_path() . '/images/profiles/' .
-                auth()->user()->login . '/' . 'avatar' . '.jpg';
+                auth()->user()->login . '/' . 'avatar.jpg';
             
             $path = str_replace(public_path() . '/','', $savePath);
             

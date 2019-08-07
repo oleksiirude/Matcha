@@ -2,6 +2,7 @@
 
     namespace App\Http\Controllers;
     
+    use App\Profile;
     use Auth;
     use App\Notification;
 
@@ -31,6 +32,13 @@
             Notification::destroy(Auth::id());
     
             return response()->json(['notifications' => $notifications]);
+        }
+        
+        public function changeNotificationsMode() {
+            $mode = Profile::find(Auth::id());
+    
+            $mode->email_notifications = $mode->email_notifications ? false : true;
+            $mode->save();
         }
     }
  

@@ -258,6 +258,13 @@
                                         </form>
                                         <span id="photo4_errormsg"></span>
                                     </div>
+
+                                    <form action="{{ route('change.notifications.mode') }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit">change notifications mode</button>
+                                    </form>
+
                                 </div>
                             </div>
                         </div>

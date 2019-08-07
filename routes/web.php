@@ -55,6 +55,7 @@
         Route::put('/email', 'HomeController@changeEmail')->name('change.email');
         Route::put('/password', 'HomeController@changePassword')->name('change.password');
         Route::put('/location', 'LocationController@changeLocation')->name('change.location');
+        Route::put('/notifications-mode', 'NotificationController@changeNotificationsMode')->name('change.notifications.mode');
     });
 
     // FINDING
