@@ -5,11 +5,6 @@
             <div class="pac-card" id="pac-card">
             </div>
             <div id="map"></div>
-<!--            <div id="infowindow-content">-->
-<!--                <img src="" width="16" height="16" id="place-icon">-->
-<!--                <span id="place-name"  class="title"></span><br>-->
-<!--                <span id="place-address"></span>-->
-<!--            </div>-->
         </div>
     </div>
 </template>
@@ -53,7 +48,6 @@
                     marker = new google.maps.Marker({
                         position: latlng,
                         map: map,
-                        // icon: image,
                         title:this.login,
                         animation: google.maps.Animation.BOUNCE
                     });

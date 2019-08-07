@@ -45,7 +45,7 @@
 <script>
     export default {
         mounted () {
-            console.log('lat', this.lat, this.lng, this.allow);
+            // console.log('lat', this.lat, this.lng, this.allow);
         },
         data: function () {
             return {

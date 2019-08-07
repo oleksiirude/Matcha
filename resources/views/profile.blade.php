@@ -68,6 +68,7 @@
                                         <progress id = "rating_progress" value="{{ $profile->rating }}" max="100">
                                         </progress>
                                     </div>
+                                    <on-off-notifications url="{{ route('change.notifications.mode') }}" csrf="{{csrf_token()}}" on_off="{{$profile->email_notifications}}" img="{{asset('/images/service/email.png')}}"></on-off-notifications>
                                 </div>
                                 <div id="right_card" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                     <div id="usr_name_div">
@@ -101,6 +102,7 @@
                                     <div>
                                         <form action="{{ route('change.password') }}" method="POST" id="password_form">
                                             @csrf
+                                            @method('PUT')
                                             <edit_password-component src="{{asset('/images/service/edit.png')}}" name="password" id_btn="password_btn" url="{{ route('change.password') }}"></edit_password-component>
                                         </form>
                                         <span id="password_error_msg" class="error_msg" hidden></span>
@@ -108,6 +110,7 @@
                                     <div>
                                         <form action="{{ route('change.email') }}" method="POST" id="email_form">
                                             @csrf
+                                            @method('PUT')
                                             <ed_email-component name="email" value="{{ $profile->email }}" label="Email:" id_btn="email_btn" url="{{ route('change.email') }}"></ed_email-component>
                                         </form>
                                         <span id="email_error_msg" class="error_msg" hidden></span>
@@ -257,13 +260,6 @@
                                         </form>
                                         <span id="photo4_errormsg"></span>
                                     </div>
-
-                                    <form action="{{ route('change.notifications.mode') }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <button type="submit">change notifications mode</button>
-                                    </form>
-
                                 </div>
                             </div>
                         </div>
