@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('scripts')
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpslLLMvrUUPGWepKF3r-8g87FCEF2Qek&libraries=places"></script>
+@endpush
+
 @section('content')
 
     <notification-component id_to="{{ $profile->user_id }}"
@@ -109,6 +113,7 @@
                                         <p><span class="title_data">Sexual preferences:</span><span class="main_data"> {{ $profile->preferences }}</span></p>
                                         @if($profile->allow)
                                             <p><span class="title_data">Location:</span><span class="main_data"> {{ $profile->country }}, {{ $profile->city }}</span></p>
+                                            <map-component ltt="{{ $profile->latitude }}" lng = "{{ $profile->longitude }}" src = "{{ URL::asset($profile->avatar) }}" login="{{$profile->login}}"></map-component>
                                         @endif
                                         @if(count($profile->interests))
                                             <p><span class="title_data">Interests: </span>
