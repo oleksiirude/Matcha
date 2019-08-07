@@ -110,8 +110,6 @@
             'url_default'
         ],
         mounted() {
-
-            // console.log ('url', url.replace(this.url_default, ""));
             let ageSlider = document.getElementById('age_slider');
             let ratingSlider = document.getElementById('rating_slider');
             let distanceSlider = document.getElementById('distance_slider');
@@ -131,12 +129,6 @@
                         return parseInt(value);
                     }
                 },
-                // pips: {
-                //     mode: 'positions',
-                //     values: [0, 50, 100],
-                //     density: 4,
-                //     stepped: true
-                // },
                 range: {
                     'min': 18,
                     'max': 55
@@ -199,7 +191,6 @@
 
             let url = window.location.href;
             let suburl = url.replace(this.url_default, "");
-            // url.split('suggestions',2);
             if (suburl.indexOf('/research?') != -1)
             {
                 let get_param = suburl.replace('/research?', '').split('&');
@@ -209,7 +200,6 @@
                     keys[item[0]] = item[1];
                 });
 
-                console.log('GET', keys);
                 ageSlider.noUiSlider.set([keys['age_from'], keys['age_to']]);
                 ratingSlider.noUiSlider.set([keys['rating_from'], keys['rating_to']]);
                 distanceSlider.noUiSlider.set([keys['distance_from'], keys['distance_to']]);
@@ -235,7 +225,6 @@
             document.getElementById('rating_to').value = rating_data[1];
 
             let distance_data = distanceSlider.noUiSlider.get();
-            // console.log('GET', distance_data);
             document.getElementById('distance_from').value = distance_data[0];
             if (distance_data[1] == 100)
             {
@@ -253,16 +242,13 @@
 
             ageSlider.noUiSlider.on('change.one', function (e) {
                 let from_to = ageSlider.noUiSlider.get();
-                console.log('form-to', from_to);
                 document.getElementById('age_from').value = from_to[0];
                 if (from_to[1] == 55)
                 {
                     let current_slider = document.getElementById('age_slider');
                     let current_tooltip = current_slider.getElementsByClassName('noUi-handle-upper')[0];
-                    // current_tooltip.attributes['aria-valuetext'] = '55+';
                     current_slider.getElementsByClassName('noUi-tooltip')[1].innerHTML = '55+';
                     document.getElementById('age_to').value = '120';
-                    console.log('55++++', from_to, document.getElementById('age_to').value);
                 }
                 else {
                     document.getElementById('age_to').value = from_to[1];

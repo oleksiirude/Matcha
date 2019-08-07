@@ -5,7 +5,6 @@
             <input type="hidden" name="_method" :value="unmethod">
             <button type="submit" @click="make_action">
                 <img :src="imgsrc" title="block user" alt="block">
-                <!--            {{ btn_name }}-->
             </button>
         </form>
         <form :action="url" method="POST" id="unblock_form" hidden>
@@ -13,7 +12,6 @@
             <input type="hidden" name="_method" :value="method">
             <button type="submit" class="liked" @click="make_action">
                 <img :src="imgsrc" title="unblock user" alt="unblock">
-    <!--            {{ btn_name }}-->
             </button>
         </form>
     </div>
@@ -50,11 +48,8 @@
         methods: {
             make_action: function (e) {
                 e.preventDefault();
-                // console.log('TEST', e.path[2].action);
-                // console.log('TEST', e.path);
                 let path = e.path || (e.composedPath && e.composedPath()) || composedPath(e.target);
                 let form = new FormData(path[2]);
-
                 let XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
                 let xhr = new XHR();
                 xhr.responseType = 'json';
@@ -83,30 +78,11 @@
                                 this.mutableShow = 'block';
                                 document.getElementById(this.mutableShow + '_form').hidden = false;
                             }
-
-                            // if (this.unaction)
-                            // {
-                            //     this.urlcurrent = this.mutableUnurl;
-                            //     this.mutableUnurl = this.mutableUrl;
-                            //     this.mutableUrl = this.urlcurrent;
-                            //     if (this.methodcurrent == "PUT")
-                            //         this.methodcurrent = "DELETE";
-                            //     else
-                            //         this.methodcurrent = "PUT";
-                            //     if (this.btn_classcurrent == "liked")
-                            //         this.btn_classcurrent = "";
-                            //     else
-                            //         this.btn_classcurrent = "liked";
-                            // }
-
-
                         }
-                        console.log('vue', string);
                     }
                 }
                 xhr.send(form);
             }
-
         }
     }
 </script>

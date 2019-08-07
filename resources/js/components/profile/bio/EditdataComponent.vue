@@ -22,10 +22,7 @@
             },
         methods: {
                 editInput: function (name) {
-                        // console.log('editInput', this);
                         let input = document.getElementById(name);
-                        // console.log('btn', btn);
-                        // btn.hidden = false;
                         input.focus();
                 },
                 show_btn: function(name) {
@@ -46,7 +43,6 @@
                                 }
                                 if (xhr.status === 200) {
                                         let string = xhr.response;
-                                        console.log('res', string);
                                         if (string.result == true) {
                                                 update_raiting(string.rating);
                                                 document.getElementById(this.name + '_btn').hidden = true;
@@ -54,17 +50,13 @@
                                                 this.mutableValue = document.getElementById(this.name).value;
                                                 document.getElementById(this.name + '_error_msg').innerHTML = '';
                                                 document.getElementById(this.name + '_error_msg').hidden = true;
-                                                console.log('this.mutableValue', this.mutableValue);
                                                 update_fill_profile(string.empty);
                                                 document.getElementById(this.name).blur();
                                         } else if (string.result == false) {
                                                 document.getElementById(this.name).value = this.mutableValue;
                                                 document.getElementById(this.name + '_error_msg').hidden = false;
                                                 document.getElementById(this.name + '_error_msg').innerHTML = string.error;
-                                                console.log('this.mutableValue', this.mutableValue);
-                                                console.log('error');
                                         }
-                                        console.log('res', string);
                                 }
                         };
                         xhr.send(form);

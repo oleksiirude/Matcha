@@ -16,9 +16,6 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
-
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('header-component', require('./components/layots/HeaderComponent').default);
 Vue.component('avatar-component', require('./components/profile/photo/AvatarComponent').default);
@@ -59,9 +56,4 @@ Vue.component('footer-component', require('./components/layots/FooterComponent')
 
 const app = new Vue({
     el: '#app',
-    // methods: {
-    //     registerajax: function () {
-    //         console.log('ajax');
-    //     }
-    // }
 });

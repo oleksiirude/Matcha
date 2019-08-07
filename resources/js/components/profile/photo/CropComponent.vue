@@ -21,21 +21,11 @@
 
 <script>
     export default {
-        // props: [
-        //     // 'croppedImage',
-        //     // 'canvasWidth',
-        //     // 'canvasHeight',
-        //     // 'roundCorners'
-        // ],
         methods: {
             close_window: function () {
                 document.getElementById('crop_div').hidden = true;
                 cropper.destroy();
-                // const context = canvas.getContext('2d');
-                // context.clearRect(0, 0, canvas.width, canvas.height);
             }
-
-
         }
     }
 

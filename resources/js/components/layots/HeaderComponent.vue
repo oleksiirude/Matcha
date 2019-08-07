@@ -5,9 +5,7 @@
 </template>
 
 <script>
-    // console.log('HeaderComponent);
     export default {
-        // name: "HeaderComponent.vue"
         mounted() {
             console.log('HeaderComponent')
         }

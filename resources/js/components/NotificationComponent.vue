@@ -11,7 +11,6 @@
             let conn = new WebSocket('ws://localhost:8081/?from=user&to=user');
 
             conn.onopen = function() {
-                console.log("Connection established! Mode: [notification]");
 
                 let box = {
                     'action': 'notification',
@@ -20,7 +19,6 @@
                     'login': login,
                     'chat': false // for creating valid link in db -> function addNotificationToDB()
                 };
-
                 conn.send(JSON.stringify(box));
             };
 

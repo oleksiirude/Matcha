@@ -81,14 +81,12 @@
             },
 
             initMap: function () {
-                // console.log('new init', this.currentLtt, this.currentLng);
                 let self = this;
                 let card = document.getElementById('pac-card');
                 let input = document.getElementById('pac-input');
                 let infowindowContent = document.getElementById('infowindow-content');
                 let map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: this.currentLtt * 1, lng: this.currentLng * 1},
-                    // center: {lat: this.lat * 1, lng: this.lng * 1},
                     zoom: 13
                 });
                 let marker;
@@ -96,7 +94,6 @@
                 map.setOptions({ mapTypeControl:true});
                 if (this.mutableAllow == 1) {
                     let latlng = new google.maps.LatLng(this.currentLtt * 1, this.currentLng * 1);
-                    // let latlng = new google.maps.LatLng(this.lat * 1, this.lng * 1);
                     marker = new google.maps.Marker({position: latlng, map: map});
                 }
                 else {
@@ -137,8 +134,6 @@
                             latitude: self.mutableLtt,
                             longitude: self.mutableLng,
                         };
-                    // self.mutableJson = geocode(place.geometry.location.lat(), place.geometry.location.lng(), self.csrf);
-                    console.log('(place.geometry.location', place);
                     document.getElementById('geo_form').hidden = false;
                     marker.setPosition(place.geometry.location);
                     marker.setVisible(true);
@@ -191,14 +186,8 @@
                             document.getElementById('geolocation_div').hidden = true;
                             update_raiting(result.rating);
                             update_fill_profile(result.empty);
-                            // self.curentLtt = self.mutableLtt;
-                            // self.curentLng = self.mutableLng;
-                            // console.log('location', self.curentLtt, self.mutableLtt);
-                            // console.log('location', locate['city'], locate['country']);
                         }
-                        console.log('location result', result);
                     }});
-                // console.log('location ', );
                 this.currentLtt = this.mutableLtt;
                 this.currentLng = this.mutableLng;
                 this.mutableAllow = 1;
@@ -228,12 +217,9 @@
                             document.getElementById('geolocation_div').hidden = true;
                             update_raiting(result.rating);
                             update_fill_profile(result.empty);
-                            console.log('off result OK', result);
                         }
-                        console.log('off result', result);
                     }});
                 this.mutableAllow = 0;
-                //
             }
         }
     }

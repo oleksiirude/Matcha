@@ -11,7 +11,6 @@
 </template>
 
 <script>
-    import {forEach} from "../../../../public/cropperjs/src/js/utilities";
 
     export default {
         mounted() {
@@ -25,15 +24,11 @@
                 document.getElementById('parent_popup').style.display='none';
             });
 
-            // let mutableI;
             if (photos.length < 2)
             {
                 prev.hidden = true;
                 next.hidden = true;
             }
-            // let plusSlides = function(action, id, arr) {
-            //     console.log(action, id, arr);
-            // };
             Array.from(photos). forEach(function (item, i, arr) {
                 item.addEventListener('click', function () {
                     document.getElementById('parent_popup').style.display='block';
@@ -43,11 +38,9 @@
                     img.src = this.src;
                     img.name = i;
                     prev.addEventListener('click', console.log('TEST'));
-                    // mutableI = i;
                     console.log('click', this);
                 });
             });
-            // console.log('photos', photos.length, this.mutableI);
         },
         data: function () {
             return {
@@ -74,7 +67,6 @@
                     console.log(i+b, this.mutableParam);
                     img.src = this.mutableParam[i + b].src;
                     img.name = i + b;
-//                    i = i + b;
                 }
                 else if (i + b == length)
                 {
@@ -88,19 +80,8 @@
                     img.src = this.mutableParam[length - 1].src;
                     img.name = length - 1;
                 }
-                // else {
-                //     let img = document.getElementById('current_img');
-                //     console.log(i+b, this.mutableParam[i + b]);
-                //     img.src = this.mutableParam[0].src;
-                //     img.name = 0;
-                // }
-                // console.log('action', action, e, path[1], img, name);
             },
-            // update: function (i) {
-            //
-            // }
         }
-
     }
 </script>
 
@@ -137,7 +118,6 @@
         top: 45%;
         font-size: 40px;
         margin: 10px;
-
     }
     .p_n:hover {
         cursor: pointer;

@@ -1,6 +1,5 @@
 <template>
     <div>
-<!--        <p> {{ value }}</p>-->
         <label for="gender" id="gender_label">Gender:</label>
         <select name="gender" id="gender" @change="show_btn">
             <option disabled>choose gender</option>
@@ -40,13 +39,11 @@
                     }
                     if (xhr.status === 200) {
                         let string = xhr.response;
-                        console.log('res', string);
                         if (string.result == true) {
                             document.getElementById(this.name + '_btn').hidden = true;
                         } else if (string.result == false) {
-                            console.log('error');
+
                         }
-                        console.log('res', string);
                     }
                 };
                 xhr.send(form);

@@ -13,9 +13,7 @@
 <script>
     export default {
         mounted() {
-            // let id = this.show + '_form';
-            // // console.log('show', id);
-            // document.getElementById(id).hidden = false;
+
         },
         props: [
             'action',
@@ -26,17 +24,13 @@
         ],
         data: function () {
             return {
-                // mutableShow: this.show,
             }
         },
         methods: {
             make_action: function (e) {
                 e.preventDefault();
-                // console.log('TEST', e.path[2].action);
-                // console.log('TEST', e.path);
                 let path = e.path || (e.composedPath && e.composedPath()) || composedPath(e.target);
                 let form = new FormData(path[2]);
-
                 let XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
                 let xhr = new XHR();
                 xhr.responseType = 'json';
@@ -55,14 +49,11 @@
                                 document.getElementById('card_body').appendChild(span);
                                 span.innerHTML = 'You don\'t have any blocked profiles yet';
                             }
-                            // console.log('result', document.getElementsByClassName('list_users').length);
                         }
-                        // console.log('vue', string);
                     }
                 }
                 xhr.send(form);
             }
-
         }
     }
 </script>

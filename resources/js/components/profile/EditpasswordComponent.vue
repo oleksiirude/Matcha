@@ -64,7 +64,6 @@
                 input.focus();
             },
             show_btn: function(name) {
-                // document.getElementById('email_confirm_pass').hidden = false;
                 document.getElementById(name + '_btn').hidden = false;
                 document.getElementById(name + '_btn_cancel').hidden = false;
             },
@@ -104,9 +103,7 @@
                             document.getElementById(this.name).value = this.mutableValue;
                             document.getElementById(this.name + '_error_msg').hidden = false;
                             document.getElementById(this.name + '_error_msg').innerHTML = string.error;
-                            // console.log('error');
                         }
-                        // console.log('res', string);
                     }
                 };
                 xhr.send(form);
