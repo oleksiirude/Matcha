@@ -28,7 +28,6 @@
                 this.text = "to turn On";
                 input.checked = false;
             }
-            console.log('on-off', this.on_off)
         },
         props: [
             'url',

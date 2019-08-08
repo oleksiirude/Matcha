@@ -46,6 +46,7 @@
                 else {
                     document.getElementById('fill_birthday').hidden = true;
                     document.getElementById(this.name).blur();
+                    document.getElementById('date').valueAsDate = null;
                     document.getElementById(this.name + '_error_msg').innerHTML = '';
                     document.getElementById(this.name + '_error_msg').hidden = true;
                 }

@@ -11,9 +11,6 @@
 
 <script>
     export default {
-        mounted() {
-            console.log(this.ltt, this.lng)
-        },
         props: [
             'ltt',
             'lng',

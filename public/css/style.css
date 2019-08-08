@@ -195,7 +195,8 @@ footer {
     text-align: right;
 }
 .copyright {
-    padding-right: 20px;
+    text-align: left;
+    padding-left: 20px;
     padding-top: 10px;
     opacity: 0.5;
 }
@@ -720,6 +721,7 @@ img {
     display: flex;
     text-align: center;
     margin-top: 20px;
+    margin-bottom: 30px;
 }
 .action_to_user  button{
     border: none;
@@ -936,7 +938,7 @@ img {
     max-height: 50%;
     overflow-y: auto;
     position: fixed;
-    bottom: 40px;
+    bottom: 0px;
     right: 0;
     margin-bottom: 10px;
     margin-right: 10px;

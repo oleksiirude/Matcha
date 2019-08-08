@@ -110,7 +110,11 @@
                                             @endif
                                             </span>
                                         </p>
-                                        <p><span class="title_data">Sexual preferences:</span><span class="main_data"> {{ $profile->preferences }}</span></p>
+                                        @if($profile->preferences_specified)
+                                            <p><span class="title_data">Sexual preferences:</span><span class="main_data"> {{ $profile->preferences }}</span></p>
+                                        @else
+                                            <p><span class="title_data">Sexual preferences:</span><span class="main_data"> isn't specified </span></p>
+                                        @endif
                                         @if($profile->allow)
                                             <p><span class="title_data">Location:</span><span class="main_data"> {{ $profile->country }}, {{ $profile->city }}</span></p>
                                             <map-component ltt="{{ $profile->latitude }}" lng = "{{ $profile->longitude }}" src = "{{ URL::asset($profile->avatar) }}" login="{{$profile->login}}"></map-component>
