@@ -48,7 +48,6 @@
             if (!config('app.debug')) {
                 if($exception instanceof MethodNotAllowedHttpException)
                     return response()->view('errors.400', [], 400);
-                return response()->view('errors.404', [], 404);
             }
             
             return parent::render($request, $exception);

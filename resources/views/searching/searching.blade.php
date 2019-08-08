@@ -66,7 +66,7 @@
                                                     <p>
                                                         @if ($profile['interests_matched'])
                                                             @if ($profile['interests_matched'] > 1)
-                                                                <span class="title">Common interests with {{ $profile['name'] }}:</span>
+                                                                <span class="title">Common interests:</span>
                                                                 <ul>
                                                                     @foreach($profile['interests'] as $interest)
                                                                         <li>{{ $interest }}</li>

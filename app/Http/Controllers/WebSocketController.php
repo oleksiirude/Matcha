@@ -195,9 +195,11 @@
             // if opponent blocked user, refuse conversation attempt
             // reverse usage of function checkIfBlocked - here we refuse opponent's conversation attempt
             if ($this->checkIfBlocked($msg['to'], $from_id)) {
-                $from->send(json_encode(['chat' => true, 'blocked' => true, 'msg' => 'blocked']));
-                echo "User[$from_id] blocked by user[$msg[to]]. Action aborted" . PHP_EOL;
-                return false;
+                if($msg['action'] !== 'notification') {
+                    $from->send(json_encode(['chat' => true, 'blocked' => true, 'msg' => 'blocked']));
+                    echo "User[$from_id] blocked by user[$msg[to]]. Action aborted" . PHP_EOL;
+                    return false;
+                }
             }
             // if connection check failed - break down
             if (!$this->checkIfConnected($from_id, $msg['to']) && $msg['action'] === 'chat') {

@@ -24,7 +24,8 @@
 
             conn.onmessage = function(e) {
                 let msg = JSON.parse(e.data);
-                self.show_notification(msg);
+                if (msg.chat != true)
+                   self.show_notification(msg);
             };
 
             let like_form = document.getElementById('like_form');
