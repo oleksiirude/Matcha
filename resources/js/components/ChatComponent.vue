@@ -306,7 +306,6 @@
                 document.getElementById('clear_all').hidden = false;
             }
         }
-
     }
 </script>
 
