@@ -202,7 +202,7 @@ if (avatar.indexOf('images/service/default_avatar.png') !== -1) {
 };
 
 let update_raiting = function (raiting) {
-    document.getElementById('rating').innerHTML =  raiting;
+    document.getElementById('rating').innerHTML = ' ' +  raiting;
     document.getElementById('rating_progress').value =  raiting;
 };
 
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function() {
     {
         document.getElementById('deletebio_btn').hidden = false;
     }
-    if (document.getElementById('fill_profile').innerHTML == '')
+    if (document.getElementById('fill_profile_body').innerHTML == '')
     {
         document.getElementById('fill_profile').hidden = true;
     }

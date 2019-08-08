@@ -3,14 +3,14 @@
         <h3 class="text-center">Private chat with <a id="link" style="text-decoration: none; color: rgba(39, 39, 39, 0.8)">{{ opponent }}</a></h3>
         <h4 class="text-center"><span id="status" class="badge badge-secondary"></span></h4>
         <div class="row mt-5">
-            <div class="col-md-6 offset-md-3 col-sm-6 offset-sm-3 col-12 comments-main pt-4 rounded">
+            <div class="col-md-8 offset-md-2 col-sm-12 col-12 comments-main pt-4 rounded">
                 <div id="chat">
                     <p>It's beginning of your conversation with {{ opponent }}</p>
                 <ul class="p-0" v-for="item in mutableHistory">
 
                     <li v-if="item.sender.toString() === id_from">
                         <div class="row comments mb-2">
-                            <div class="col-md-2 col-sm-2 col-3 text-center user-img">
+                            <div class="col-md-2 col-sm-2 col-2 text-center user-img">
                                 <img :src="your_avatar" class="rounded-circle" />
                             </div>
                             <div id="my_block" class="col-md-9 col-sm-9 col-9 comment rounded mb-2">
@@ -27,7 +27,7 @@
                                 <time class="text-grey ml-3 float-right">{{ item.date }}</time><br>
                                 <p class="mb-0 text-black">{{ item.message }}</p>
                             </div>
-                            <div class="col-md-2 col-sm-2 col-3 text-center user-img">
+                            <div class="col-md-2 col-sm-2 col-2 text-center user-img">
                                 <img :src="opponents_avatar" class="rounded-circle" />
                             </div>
                         </div>

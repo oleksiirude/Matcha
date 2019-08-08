@@ -48,6 +48,7 @@
                                 let span = document.createElement('span');
                                 document.getElementById('card_body').appendChild(span);
                                 span.innerHTML = this.text;
+                                span.style.margin = 'auto';
                             }
                         }
                     }
