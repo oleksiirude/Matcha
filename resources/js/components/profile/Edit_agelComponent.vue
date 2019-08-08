@@ -5,7 +5,7 @@
         </p>
         <div id="fill_birthday" hidden>
             <label :for="name">{{ label }}</label>
-            <input type="date" :name="name" min="1899-01-01" max="2002-01-01" class="profiledata" :value="value" @click="editInput(name)" :id="name" @change="show_btn(name)" placeholder="">
+            <input type="date" :name="name" min="1899-01-01" max="2002-01-01" class="profiledata" @click="editInput(name)" :id="name" @change="show_btn(name)" placeholder="">
             <div class="usr_name_btn_div">
                 <button type="submit" class="usr_name_btn" :id="id_btn" hidden @click="save">Save</button>
             </div>
