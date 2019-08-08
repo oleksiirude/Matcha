@@ -34,20 +34,6 @@ $('document').ready(function() {
         if (document.querySelector('#drop_up_notifications') != undefined)
             document.querySelector('#drop_up_notifications').style.bottom = $(document).height() - $(window).height() + 'px';
     }
-    $(window).scroll(function () {
-        if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-            if (document.querySelector('#drop_up_notifications') != undefined)
-                document.querySelector('#drop_up_notifications').style.bottom = '80px';
-        } else {
-            if ($(document).height() - $(window).height() >= 40){
-                if (document.querySelector('#drop_up_notifications') != undefined)
-                    document.querySelector('#drop_up_notifications').style.bottom = '';}
-            else {
-                if (document.querySelector('#drop_up_notifications') != undefined)
-                    document.querySelector('#drop_up_notifications').style.bottom = $(document).height() - $(window).height() + 'px';
-            }
-        }
-    });
     window.onresize = function(event) {
         let menu = document.getElementById('navbarSupportedContent');
         menu.classList.value = "collapse navbar-collapse";
