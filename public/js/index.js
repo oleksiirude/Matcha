@@ -33,17 +33,6 @@ $('document').ready(function() {
     {
         document.querySelector('#drop_up_notifications').style.bottom = $(document).height() - $(window).height() + 'px';
     }
-    $(window).scroll(function () {
-        if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-            document.querySelector('#drop_up_notifications').style.bottom = '80px';
-        } else {
-            if ($(document).height() - $(window).height() >= 40)
-                document.querySelector('#drop_up_notifications').style.bottom = '';
-            else {
-                document.querySelector('#drop_up_notifications').style.bottom = $(document).height() - $(window).height() + 'px';
-            }
-        }
-    });
     window.onresize = function(event) {
         let menu = document.getElementById('navbarSupportedContent');
         menu.classList.value = "collapse navbar-collapse";
