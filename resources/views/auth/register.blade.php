@@ -2,7 +2,7 @@
 @push('scripts')
     <script src="{{ asset('js/register/confirm_password.js')}}" defer></script>
     <script src="{{ asset('js/register/location.js')}}" defer></script>
-{{--    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>--}}
+
 @endpush
 
 @section('content')
@@ -11,7 +11,13 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
-
+                <div id="parent_popup" onclick="ask()">
+                    <div id="popup"></div>
+                    <div id="geo_ask">
+                        <p>Dear user! Our site needs to know your geolocation to make our searching better for U!<br> Please confirm it!</p>
+                        <span onclick="ask()" class="btn btn-primary">OK</span>
+                    </div>
+                </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" id="register_form">
                         @csrf

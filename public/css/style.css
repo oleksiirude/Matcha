@@ -311,6 +311,17 @@ a:hover {
     color: rgba(68, 79, 87, 0.4);
     margin-top: 10px;
 }
+#geo_ask {
+    margin: auto;
+    position: absolute;
+    top: 20%;
+    left: 25%;
+    display: inline-block;
+    width: 50%;
+    max-height: 200px;
+    background-color: white;
+    padding: 20px;
+}
 
 /*profile*/
 .card_profile {
@@ -607,7 +618,6 @@ img {
 #parent_popup {
     display: none;
     height: 100%;
-    /*opacity: 0.9;*/
     position: fixed;
     width: 100%;
     z-index: 100;

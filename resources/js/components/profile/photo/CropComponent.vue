@@ -3,7 +3,7 @@
         <div id="popup"></div>
         <div id="crop_div" hidden>
             <p>
-                <button id="btnCrop" class="btn btn-primary">&#x2704; Crop and download</button>
+                <button id="btnCrop" class="btn btn-primary">&#x2704; Crop and upload</button>
                 <button id="btnRestore" class="btn btn-primary">Restore</button>
                 <button id="btnRotate" class="btn btn-primary">&#x21ba; Rotate</button>
                 <input type="button" id="btnClose" class="close_btn" value="X" />

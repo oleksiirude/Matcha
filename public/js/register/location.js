@@ -102,15 +102,21 @@ function fill_input (callback) {
     }
 };
 
-
-document.addEventListener('DOMContentLoaded', () => {
+let ask = function() {
     var isFirefox = typeof InstallTrigger !== 'undefined';
     if (isFirefox == false)
     {
         gps_pos();
     }
+    let div = document.getElementById('parent_popup');
+    $(div).fadeOut("slow");
 
-    let count = 1;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    let div = document.getElementById('parent_popup');
+    setTimeout (function () {$(div).fadeIn("slow")}, 1000);
+
     let pass_inp = document.getElementById('password');
     pass_inp.onblur = function() {
         document.getElementById('requirements').hidden = true;
