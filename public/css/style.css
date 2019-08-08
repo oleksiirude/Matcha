@@ -975,9 +975,14 @@ img {
     text-decoration: underline;
 }
 
-/* CHAT */
+#sort, #order, #profiles_per_page {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
 
-/*end of chat*/
+#back_link { text-decoration: none; }
 
 @media only screen and (max-width: 960px), only screen and (max-device-width: 900px) {
     .card-body {

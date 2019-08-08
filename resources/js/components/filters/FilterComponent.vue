@@ -98,7 +98,7 @@
                 <div class="col"></div>
             </div>
             <button type="submit" class="btn btn-primary">OK</button>
-            <a :href="url_default" class="back_link">Back to default</a>
+            <a :href="url_default" class="back_link" id="back_link">Back to default</a>
         </form>
     </div>
 </template>

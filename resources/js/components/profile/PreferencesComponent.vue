@@ -22,7 +22,6 @@
             'allow'
         ],
         mounted () {
-            console.log('test', this.allow);
             if (this.allow == 1)
                 document.getElementById(this.name).value = this.value;
             else

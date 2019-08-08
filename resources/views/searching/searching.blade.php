@@ -20,8 +20,8 @@
 
                 <div class="card" id="search_blade_card">
                     <div class="card-header">
-                        @if (count($profiles))
-                            We found {{ count($profiles) }} people which you will probably like
+                        @if (isset($counter) && $counter)
+                            We found {{ $counter }} people which you will probably like
                         @else
                             Uff, it's so empty here...
                         @endif

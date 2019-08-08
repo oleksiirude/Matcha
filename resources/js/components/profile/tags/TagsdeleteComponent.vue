@@ -24,7 +24,6 @@
         ],
         methods: {
             delete_tag: function (e) {
-                console.log('this', this);
                 e.preventDefault();
                 let form = new FormData(document.getElementById(this.id_form));
                 let XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
@@ -49,12 +48,7 @@
 
                         } else if (string.result == false) {
 
-                            // document.getElementById(this.name).value = this.mutableValue;
-                            // document.getElementById(this.name + '_error_msg').hidden = false;
-                            // document.getElementById(this.name + '_error_msg').innerHTML = string.error;
-                            // console.log('error');
                         }
-                        console.log('res', string);
                     }
                 };
                 xhr.send(form);

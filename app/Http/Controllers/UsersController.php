@@ -15,7 +15,7 @@
             $user = User::where('login', $login)->first();
 
             if (!$user || !$user->email_verified_at)
-                return abort(404);
+                abort(404);
             
             if ($login === auth()->user()->login)
                 return redirect('profile');

@@ -37,8 +37,6 @@
                     let img = document.getElementById('current_img');
                     img.src = this.src;
                     img.name = i;
-                    prev.addEventListener('click', console.log('TEST'));
-                    console.log('click', this);
                 });
             });
         },
@@ -52,7 +50,6 @@
             close: function () {
                 document.getElementById('photo_slide').hidden = true;
                 document.getElementById('parent_popup').style.display='none';
-                console.log('close');
             },
             plusSlides: function (action, e) {
                 let path = e.path || (e.composedPath && e.composedPath()) || composedPath(e.target);
@@ -62,9 +59,7 @@
                 let length = this.mutableParam.length;
                 if ((i + b >= 0) && (i + b < length))
                 {
-                    console.log('action', i, length);
                     let img = document.getElementById('current_img');
-                    console.log(i+b, this.mutableParam);
                     img.src = this.mutableParam[i + b].src;
                     img.name = i + b;
                 }

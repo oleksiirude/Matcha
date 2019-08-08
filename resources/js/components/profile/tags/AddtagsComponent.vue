@@ -35,7 +35,6 @@
                 let huge_list = document.getElementById('huge_list');
                 $('#huge_list').empty();
                 let min_characters = 2;
-                console.log('input.value.length', input.value.length);
                 document.getElementById('piece').value = input.value;
                 let piece_form = new FormData(document.getElementById('piece_form'));
                 let XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
@@ -51,16 +50,13 @@
                         if (this.readyState == 4 && this.status == 200) {
                             let string = xhr.response;
                             if (string.result == true) {
-                                console.log('ok', string)
                                 let response = string.matches;
                                 huge_list.innerHTML = "";
 
                                 response.forEach(function (item) {
-                                    console.log('test keyup');
                                     let option = document.createElement('option');
                                     option.value = item;
                                     huge_list.appendChild(option);
-                                    console.log('test keyup', option);
                                 });
                             }
                         }
@@ -124,9 +120,7 @@
                             document.getElementById(this.name).value = '';
                             document.getElementById(this.name + '_error_msg').hidden = false;
                             document.getElementById(this.name + '_error_msg').innerHTML = string.error;
-                            // console.log('error');
                         }
-                        console.log('ADDres', string);
                     }
                 };
                 xhr.send(form);

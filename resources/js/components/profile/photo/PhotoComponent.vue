@@ -14,6 +14,11 @@
             'labelid',
             'url'
         ],
+        data: function () {
+            return {
+                i: 0
+            }
+        },
         methods: {
             downloadusrphoto : function () {
                 let file = document.getElementById(this.inputid).files[0];
@@ -36,7 +41,8 @@
                             let string = xhr.response;
                             if (string.result == true) {
                                 let id_img = 'img' + this.photovalue;
-                                document.getElementById(id_img).src = string.path;
+                                document.getElementById(id_img).src = string.path + '?ver=' + this.i;
+                                this.i++;
                                 document.getElementById(this.inputid + '_errormsg').innerHTML = '';
                                 document.getElementById(id_img).hidden = false;
                                 document.getElementById('deletephoto_form' + this.photovalue).hidden = false;

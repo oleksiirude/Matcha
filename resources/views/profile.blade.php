@@ -155,11 +155,11 @@
                                         <div>
                                             <form id="country_form">
                                                 <label for="country" id="country_label">Location:</label>
-                                                <input type="text" id="country" name="country" value="isn't specified" class="profiledata">
+                                                <input type="text" id="country" name="country" value="isn't specified" class="profiledata" readonly>
                                             </form>
                                             <form id="city_form" hidden>
                                                 <label for="city">City:</label>
-                                                <input type="text" id="city" name="city" value="" class="profiledata">
+                                                <input type="text" id="city" name="city" value="" class="profiledata" readonly>
                                             </form>
                                         </div>
                                     @endif

@@ -16,7 +16,6 @@
         },
         methods: {
             update: function () {
-                console.log('path', this.srcavatar);
             },
             deletephoto : function (e) {
                 e.preventDefault();

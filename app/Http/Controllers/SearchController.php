@@ -25,8 +25,13 @@
                 $this->getFineDistanceView(
                     SortController::sortByDefault($profiles))
             ));
+    
+            $counter = count($profiles);
             
-            return view('searching.searching', ['profiles' => $profiles->paginate(12)]);
+            return view('searching.searching', [
+                'profiles' => $profiles->paginate(12),
+                'counter' => $counter
+            ]);
         }
         
         public function findFilterSort(Request $request) {
@@ -45,12 +50,15 @@
             else
                 return view('searching.searching', ['profiles' =>  $profiles]);
     
+            $counter = count($profiles);
             
             // Get paginate
             $profiles = $this->getPaginate($profiles, $params, $request);
             
-//          return response()->json(['result' => $profiles]);
-            return view('searching.searching', ['profiles' =>  $profiles]);
+            return view('searching.searching', [
+                'profiles' =>  $profiles,
+                'counter' => $counter
+            ]);
         }
         
         public function sort($params, $profiles) {

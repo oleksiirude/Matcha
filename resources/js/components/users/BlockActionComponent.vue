@@ -21,7 +21,6 @@
     export default {
         mounted() {
             let id = this.show + '_form';
-            console.log('show', id);
             document.getElementById(id).hidden = false;
         },
         props: [

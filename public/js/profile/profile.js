@@ -54,7 +54,6 @@ let delete_tag =  function (tag) {
             } else if (string.result == false) {
 
             }
-            console.log('res', string);
         }
     };
     xhr.send(form);
@@ -193,8 +192,6 @@ let upload = function(){
 };
 
 
-
-
 let choose_file = function (label_name) {
     document.getElementById(label_name).click();
 };
@@ -224,16 +221,14 @@ let update_fill_profile = function(text_fill) {
         let ul = document.createElement('ul');
         div_body.appendChild(ul);
         if (text_fill.upload) {
-            console.log('text_fill.upload', text_fill.upload);
-            text_fill.upload.forEach(function(item, i, arr) {
+            text_fill.upload.forEach(function(item) {
                 let li = document.createElement('li');
                 ul.appendChild(li);
                 li.innerHTML = 'upload ' + item;
             });
         }
         if (text_fill.fill) {
-            console.log('text_fill.fill', text_fill.fill);
-            text_fill.fill.forEach(function(item, i, arr) {
+            text_fill.fill.forEach(function(item) {
                 let li = document.createElement('li');
                 ul.appendChild(li);
                 li.innerHTML = 'fill ' + item;

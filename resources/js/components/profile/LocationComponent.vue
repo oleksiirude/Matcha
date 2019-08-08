@@ -45,7 +45,6 @@
 <script>
     export default {
         mounted () {
-            console.log('lat', this.lat, this.lng, this.allow);
         },
         data: function () {
             return {
@@ -157,7 +156,6 @@
             save: function (e) {
                 let locate = JSON.stringify(this.mutableJson);
                 let self = this;
-                console.log('SAVE', locate);
                 e.preventDefault();
                 $.ajaxSetup({
                     headers: {
@@ -177,7 +175,6 @@
                             document.getElementById('city_form').hidden = false;
                             document.getElementById('block_div').hidden = false;
                             document.getElementById('block_geo').checked = false;
-                            console.log('document.getElementById(\'block_geo\')', document.getElementById('block_geo'));
                             document.getElementById('country_label').innerHTML = 'Country:';
                             document.getElementById('country').value = result.country;
                             document.getElementById('city').value = result.city;

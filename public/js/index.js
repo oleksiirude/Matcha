@@ -20,7 +20,7 @@ let clear_all = function() {
     let childs = Array.from(document.getElementById('drop_up_notifications_body').children);
     if (childs && childs.length > 0)
     {
-        childs.forEach(function(item, i, arr) {
+        childs.forEach(function(item) {
             item.remove();
             }
         );
@@ -31,16 +31,20 @@ let clear_all = function() {
 $('document').ready(function() {
     if ($(document).height() - $(window).height() < 40)
     {
-        document.querySelector('#drop_up_notifications').style.bottom = $(document).height() - $(window).height() + 'px';
+        if (document.querySelector('#drop_up_notifications') != undefined)
+            document.querySelector('#drop_up_notifications').style.bottom = $(document).height() - $(window).height() + 'px';
     }
     $(window).scroll(function () {
         if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-            document.querySelector('#drop_up_notifications').style.bottom = '80px';
+            if (document.querySelector('#drop_up_notifications') != undefined)
+                document.querySelector('#drop_up_notifications').style.bottom = '80px';
         } else {
-            if ($(document).height() - $(window).height() >= 40)
-                document.querySelector('#drop_up_notifications').style.bottom = '';
+            if ($(document).height() - $(window).height() >= 40){
+                if (document.querySelector('#drop_up_notifications') != undefined)
+                    document.querySelector('#drop_up_notifications').style.bottom = '';}
             else {
-                document.querySelector('#drop_up_notifications').style.bottom = $(document).height() - $(window).height() + 'px';
+                if (document.querySelector('#drop_up_notifications') != undefined)
+                    document.querySelector('#drop_up_notifications').style.bottom = $(document).height() - $(window).height() + 'px';
             }
         }
     });

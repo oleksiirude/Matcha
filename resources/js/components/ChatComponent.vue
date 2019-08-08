@@ -79,7 +79,6 @@
                         document.getElementById("send-msg").click();
                     }
                 });
-                console.log("Connection established! Mode: [chat]");
 
                 let box = {
                     'action': 'status',

@@ -15,14 +15,6 @@ let tofillinputs = function(callback){
     document.getElementById('gps_region').setAttribute('value', state);
     document.getElementById('gps_code').setAttribute('value', code);
     document.getElementById('gps_allowlocation').setAttribute('value', allow);
-    // console.log(  document.getElementById('gps_latitude').value,
-    //     document.getElementById('gps_longitude').value,
-    //     document.getElementById('gps_city').value,
-    //     document.getElementById('gps_country').value,
-    //     document.getElementById('gps_region').value,
-    //     document.getElementById('gps_code').value,
-    //     document.getElementById('gps_allowlocation').value
-    //     );
     document.getElementById('register_form').submit();
     callback ('ok');
 };
@@ -55,11 +47,7 @@ let geocode = function(ltt, lng) {
                 code = city_code.shift();
                 city = city_code.join(' ');
             }
-            console.log('geocode');
-            tofillinputs(function (res) {
-                        console.log('tofillinputs', res);
-                        // return res;
-                    })
+            tofillinputs(function (res) {})
         });
 
     request.fail(function( jqXHR, textStatus ) {
@@ -99,7 +87,6 @@ let gps_pos = () => {
             },
             (error) => {
                 allow = 0;
-                console.log('pppp',  allow);
             });
     }
     else {
@@ -107,13 +94,10 @@ let gps_pos = () => {
 };
 
 function fill_input (callback) {
-    console.log('var allow', allow);
     if (allow == undefined || allow == 0) {
        ip_pos();
-       console.log('block');
     }
     else {
-        console.log('allow');
         geocode(latitude, longitude);
     }
 };
@@ -125,7 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
     {
         gps_pos();
     }
-// console.log('isFirefox', isFirefox);
 
     let count = 1;
     let pass_inp = document.getElementById('password');

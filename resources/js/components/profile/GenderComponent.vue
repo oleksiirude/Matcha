@@ -20,7 +20,6 @@
             'url'
         ],
         mounted () {
-            console.log('test', this.value);
             document.getElementById(this.name).value = this.value;
         },
         methods: {

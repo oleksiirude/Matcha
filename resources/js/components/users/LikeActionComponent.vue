@@ -21,7 +21,6 @@
     export default {
         mounted() {
             let id = this.show + '_form';
-            console.log('like_me', this.liked_me);
             document.getElementById(id).hidden = false;
         },
         props: [
