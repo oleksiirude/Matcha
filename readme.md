@@ -34,16 +34,16 @@ Primary goal of this app is to help people find their couple. Our site matches p
 6. Go chat in private chatroom with matched user (mutual likes)
 7. Who knows what will happen after conversation? <span>&#128527;</span>
 
+### Welcome page:
+![alt text](https://github.com/oleksiirude/Matcha/blob/master/img/welcome.jpg)
+
 ### Profile:
-![](profile.gif)
+![alt text](https://github.com/oleksiirude/Matcha/blob/master/img/profile.jpg)
 
 ### Searching engine:
-![](searching.gif)
+![alt text](https://github.com/oleksiirude/Matcha/blob/master/img/searching.jpg)
 
 ### Chat:
-![](chat.gif)
-
-### Notifications:
 ![](chat.gif)
 
 All requirements to this project you can find in Subject.pdf<br>
