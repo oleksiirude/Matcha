@@ -16,8 +16,8 @@ Primary goal of this app is to help people find their couple. Our site matches p
 <pre>
 1. Set your .env file (APP_URL, MAIL)
 2. Set your own keys for geo api in Matcha/public/js/register/location.js (line 27, 64)
-4. Run npm, composer update
-5. Run Ratchet ws server [php artisan ratchet-server:up]
+4. Run npm install && composer update
+5. Run Ratchet WS server [php artisan ratchet-server:up]
 6. Run Laravel's build in queue system for email queuing [php artisan queue:work]
 7. Create database named [matcha]
 8. Run migrations [php artisan migrate:fresh]
