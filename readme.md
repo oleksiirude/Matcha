@@ -21,7 +21,7 @@ Primary goal of this app is to help people find their couple. Our site matches p
 6. Run Laravel's build in queue system for email queuing [php artisan queue:work]
 7. Create database named [matcha]
 8. Run migrations [php artisan migrate:fresh]
-9. Set up db connection of filler helper [Matcha/storage/filler/filler.php]
+9. Set up db connection in filler-helper [Matcha/storage/filler/filler.php]
 10. Run filler [php filler.php] to fill your db with users [passwords for default users: asdf-2000, for admin: admin]
 </pre>
 
