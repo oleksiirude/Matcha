@@ -44,7 +44,7 @@ Primary goal of this app is to help people find their couple. Our site matches p
 ![alt text](https://github.com/oleksiirude/Matcha/blob/master/img/searching.jpg)
 
 ### Chat:
-![](chat.gif)
+![](chhttps://github.com/oleksiirude/Matcha/blob/master/img/chat.jpg)
 
 All requirements to this project you can find in Subject.pdf<br>
 PS: using real frameworks is forbidden in this project, but I've skip this rule because of strong will to get familiar with Laravel <span>&#128519;</span>
