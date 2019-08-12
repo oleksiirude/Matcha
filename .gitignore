@@ -10,5 +10,7 @@ Matcha/Homestead.json
 Matcha/Homestead.yaml
 Matcha/npm-debug.log
 Matcha/yarn-error.log
+/.env
 /.idea
 /.DS_Store
+/storage
