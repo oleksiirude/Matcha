@@ -27,7 +27,7 @@
          *
          * @var string
          */
-        protected $redirectTo = '/home';
+        protected $redirectTo = '/';
         /**
          * Create a new controller instance.
          *
@@ -59,7 +59,7 @@
                 'gender' => ['required', 'string', 'regex:/^male|female$/'],
     
                 'password' => ['required', 'string', 'confirmed', 'regex:/^(?=.*[A-Z]{1,})(?=.*[!@#$%^&*()_+-]{1,})(?=.*[0-9]{1,})(?=.*[a-z]{1,}).{8,}$/'],
-                // at least: 1 special symbol, 1 lowercase, 1 uppercase, min length - 8 symbols
+                // at least: 1 special symbol like !@#$%^&*()_+-, 1 lowercase, 1 uppercase, min length - 8 symbols
             ]);
         }
     
@@ -75,7 +75,7 @@
             $data = $request->all();
     
             if (!$this->validateLocation($data))
-                return view('messages.smth-went-wrong');
+                abort(400);
     
             event(new Registered($user = $this->createUser($data)));
     
@@ -127,9 +127,7 @@
             Location::create([
                 'user_id' => $id->id,
                 'country' => $data['gps_country'],
-                'region' => $data['gps_region'],
                 'city' => $data['gps_city'],
-                'gps_code' => $data['gps_code'],
                 'latitude' => $data['gps_latitude'],
                 'longitude' => $data['gps_longitude'],
                 'allow' => $allow
@@ -145,9 +143,7 @@
     
         protected function validateLocation($data) {
             if (!isset($data['gps_country'])
-                || !isset($data['gps_region'])
                 || !isset($data['gps_city'])
-                || !isset($data['gps_code'])
                 || !isset($data['gps_latitude'])
                 || !isset($data['gps_longitude']))
                 return false;

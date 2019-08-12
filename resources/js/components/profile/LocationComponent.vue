@@ -1,6 +1,15 @@
 <template>
     <div>
-        <span id="change_geo_title" @click="editGeo">Change/set location <img src="/images/service/edit.png" class="edit" style="float: none"  id=""></span>
+        <div id="block_div" v-if="allow === '1'">
+            <input type="checkbox" @change="blockGeo()" id="block_geo" name="block_geo" value=""/>
+            <label for="block_geo" id="block_geo">Block geolocation</label>
+        </div>
+        <div v-else hidden id="block_div">
+            <input type="checkbox" @change="blockGeo()" id="block_geo" name="block_geo" value=""/>
+            <label for="block_geo" id="block_geo">Block geolocation</label>
+        </div>
+
+        <span id="change_geo_title" @click="editGeo">Change/set location <img :src="src" class="edit" style="float: none"  id=""></span>
         <form id="geo_form" hidden>
             <button type="submit" class="btn edit_submit" id="geo_btn" @click="save">Save</button>
         </form>
@@ -36,23 +45,25 @@
 <script>
     export default {
         mounted () {
-
-            console.log('lat', this.lat, this.lng, this.allow);
-            // let map;
-            // global.initMap = this.initMap();
-            // this.initMap();
         },
         data: function () {
             return {
-                // globalmap: this.map,
-                // markers : []
+                mutableAllow: this.allow,
+                mutableLtt: '',
+                mutableLng: '',
+                currentLtt: this.lat,
+                currentLng: this.lng,
+                mutableJson: ''
             }
         },
         props : [
+            'src',
             'lat',
             'lng',
             'allow',
-            // 'map'
+            'url',
+            'csrf',
+            'urloff'
         ],
         methods : {
             editGeo: function () {
@@ -69,18 +80,19 @@
             },
 
             initMap: function () {
+                let self = this;
                 let card = document.getElementById('pac-card');
                 let input = document.getElementById('pac-input');
                 let infowindowContent = document.getElementById('infowindow-content');
                 let map = new google.maps.Map(document.getElementById('map'), {
-                    center: {lat: this.lat * 1, lng: this.lng * 1},
+                    center: {lat: this.currentLtt * 1, lng: this.currentLng * 1},
                     zoom: 13
                 });
                 let marker;
                 map.scrollwheel=true;
                 map.setOptions({ mapTypeControl:true});
-                if (this.allow == 1) {
-                    let latlng = new google.maps.LatLng(this.lat, this.lng);
+                if (this.mutableAllow == 1) {
+                    let latlng = new google.maps.LatLng(this.currentLtt * 1, this.currentLng * 1);
                     marker = new google.maps.Marker({position: latlng, map: map});
                 }
                 else {
@@ -89,8 +101,6 @@
                             anchorPoint: new google.maps.Point(0, -29)
                         });
                 }
-
-
 
                 map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
 
@@ -101,7 +111,6 @@
 
                 let infowindow = new google.maps.InfoWindow();
                 infowindow.setContent(infowindowContent);
-
 
                 autocomplete.addListener('place_changed', function() {
                     infowindow.close();
@@ -118,7 +127,12 @@
                         map.setCenter(place.geometry.location);
                         map.setZoom(17);
                     }
-                    console.log('(place.geometry.location', place.geometry.location.lat(), place.geometry.location.lng());
+                    self.mutableLtt = place.geometry.location.lat();
+                    self.mutableLng = place.geometry.location.lng();
+                    self.mutableJson = {
+                            latitude: self.mutableLtt,
+                            longitude: self.mutableLng,
+                        };
                     document.getElementById('geo_form').hidden = false;
                     marker.setPosition(place.geometry.location);
                     marker.setVisible(true);
@@ -139,8 +153,70 @@
                 });
 
             },
-            save: function () {
-
+            save: function (e) {
+                let locate = JSON.stringify(this.mutableJson);
+                let self = this;
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': this.csrf
+                    }
+                });
+                jQuery.ajax({
+                    url: this.url,
+                    method: 'PUT',
+                    data: locate,
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    responseType: 'json',
+                    success: function(result){
+                        if (result.result == true)
+                        {
+                            document.getElementById('city_form').hidden = false;
+                            document.getElementById('block_div').hidden = false;
+                            document.getElementById('block_geo').checked = false;
+                            document.getElementById('country_label').innerHTML = 'Country:';
+                            document.getElementById('country').value = result.country;
+                            document.getElementById('city').value = result.city;
+                            document.getElementById('pac-input').value = '';
+                            document.getElementById('geo_form').hidden = true;
+                            document.getElementById('geolocation_div').hidden = true;
+                            update_raiting(result.rating);
+                            update_fill_profile(result.empty);
+                        }
+                    }});
+                this.currentLtt = this.mutableLtt;
+                this.currentLng = this.mutableLng;
+                this.mutableAllow = 1;
+            },
+            blockGeo: function () {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': this.csrf
+                    }
+                });
+                jQuery.ajax({
+                    url: this.urloff,
+                    method: 'DELETE',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    responseType: 'json',
+                    success: function(result){
+                        if (result.result == true)
+                        {
+                            document.getElementById('city').value = '';
+                            document.getElementById('city_form').hidden = true;
+                            document.getElementById('block_div').hidden = true;
+                            document.getElementById('country_label').innerHTML = 'Location:'
+                            document.getElementById('country').value = "isn't specified";
+                            document.getElementById('pac-input').value = '';
+                            document.getElementById('geo_form').hidden = true;
+                            document.getElementById('geolocation_div').hidden = true;
+                            update_raiting(result.rating);
+                            update_fill_profile(result.empty);
+                        }
+                    }});
+                this.mutableAllow = 0;
             }
         }
     }

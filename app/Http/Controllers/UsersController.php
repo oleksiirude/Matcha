@@ -10,31 +10,12 @@
     use Carbon\Carbon;
 
     class UsersController extends Controller {
-    
-        public function show() {
-            $users = User::select()
-                ->whereNotNull('email_verified_at')
-                ->where('id', '!=', 1)
-                ->get();
-        
-            foreach ($users as $user) {
-                if (!$user->isOnline()) {
-                    $now = Carbon::now();
-                    $last = Carbon::parse($user->last_activity);
-                    $diff = $now->diffInMinutes($last, true);
-                    $time = substr(explode(' ', $user->last_activity)[1], 0, 5);
-                    $user->last_activity = $this->getFineActivityView($diff, $last, $time);
-                }
-                $data[] = $user;
-            }
-            return view('users', ['users' => $users]);
-        }
         
         public function showUser($login) {
             $user = User::where('login', $login)->first();
 
             if (!$user || !$user->email_verified_at)
-                return abort(404);
+                abort(404);
             
             if ($login === auth()->user()->login)
                 return redirect('profile');
@@ -57,6 +38,8 @@
             $profile['country'] = $location->country;
             $profile['city'] = $location->city;
             $profile['allow'] = $location->allow;
+            $profile['latitude'] = $location->latitude;
+            $profile['longitude'] = $location->longitude;
             $profile['interests'] = $interests;
             $profile['reported'] = $this->checkIfReported($auth, $aim);
             $profile['last_activity'] = $this->checkLastActivity($user);

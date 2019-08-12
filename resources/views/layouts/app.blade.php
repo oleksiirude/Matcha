@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/index.js') }}" defer></script>
     @stack('scripts')
 
     <!-- Fonts -->
@@ -26,6 +27,7 @@
     @stack('style')
 </head>
 <body>
+    <div id="page-preloader"><span class="spinner" id="spinner"></span></div>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -56,112 +58,132 @@
                                 </li>
                             @endif
                         @else
-                            <form id="suggestions-form" action="{{ route('searching') }}" method="GET">
-                                <button type="submit" class="btn btn-outline-secondary">Search matches</button>
-                            </form>
+                            @if(Auth::user()->hasVerifiedEmail())
 
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->login }} <span class="caret"></span>
-                                </a>
+                                <form id="suggestions-form" action="{{ route('searching') }}" method="GET">
+                                    <button type="submit" class="btn btn-outline-secondary">Search matches</button>
+                                </form>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    {{--My profile--}}
-                                    <a class="dropdown-item" href="{{ route('profile') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('profile-form').submit();">
-                                        {{ __('My profile') }}
+                                <form id="notifications-form" action="{{ route('notifications') }}" method="POST">
+                                    @csrf
+                                    <count-notifications-component url="{{ route('notifications.count') }}" read_url="{{ route('notifications') }}" csrf="{{ csrf_token() }}"></count-notifications-component>
+                                </form>
+
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->login }} <span class="caret"></span>
                                     </a>
 
-                                    <form id="profile-form" action="{{ route('profile') }}" method="GET" style="display: none;">
-                                        @csrf
-                                    </form>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        {{--My profile--}}
+                                        <a class="dropdown-item" href="{{ route('profile') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('profile-form').submit();">
+                                            {{ __('My profile') }}<img src="{{asset('images/service/profile.png')}}" class="dropdown-item_img">
+                                        </a>
 
-                                    {{--Show all users--}}
-                                    <a class="dropdown-item" href="{{ route('show.all.users') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('show-all-users-form').submit();">
-                                        {{ __('Show all users') }}
+                                        <form id="profile-form" action="{{ route('profile') }}" method="GET" style="display: none;">
+                                            @csrf
+                                        </form>
+
+                                        {{--Viewed profiles--}}
+                                        <a class="dropdown-item" href="{{ route('viewed.profiles') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('viewed-profiles-form').submit();">
+                                            {{ __('Viewed profiles') }}<img src="{{asset('images/service/history.png')}}" class="dropdown-item_img">
+                                        </a>
+
+                                        <form id="viewed-profiles-form" action="{{ route('viewed.profiles') }}" method="GET" style="display: none;"></form>
+
+                                        {{--Viewed my profile--}}
+                                        <a class="dropdown-item" href="{{ route('viewed.my.profile') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('viewed-my-profile-form').submit();">
+                                            {{ __('Viewed my profile') }}<img src="{{asset('images/service/eye.png')}}" class="dropdown-item_img">
+                                        </a>
+
+                                        <form id="viewed-my-profile-form" action="{{ route('viewed.my.profile') }}" method="GET" style="display: none;"></form>
+
+                                        {{--Liked by me--}}
+                                        <a class="dropdown-item" href="{{ route('liked.by.me') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('liked-by-me-form').submit();">
+                                            {{ __('Liked by me') }} <img src="{{asset('images/service/like.png')}}" class="dropdown-item_img">
+                                        </a>
+
+                                        <form id="liked-by-me-form" action="{{ route('liked.by.me') }}" method="GET" style="display: none;"></form>
+
+                                        {{--Liked me--}}
+                                        <a class="dropdown-item" href="{{ route('liked.me') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('liked-me-form').submit();">
+                                            {{ __('Liked my profile') }}<img src="{{asset('images/service/like_to_me_2.png')}}" class="dropdown-item_img">
+                                        </a>
+
+                                        <form id="liked-me-form" action="{{ route('liked.me') }}" method="GET" style="display: none;"></form>
+
+                                        {{--Connections--}}
+                                        <a class="dropdown-item" href="{{ route('connections') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('connections-form').submit();">
+                                            {{ __('Connections') }}  <img src="{{asset('images/service/connect.png')}}" class="dropdown-item_img">
+                                        </a>
+
+                                        <form id="connections-form" action="{{ route('connections') }}" method="GET" style="display: none;"></form>
+
+                                        {{--Blocked profiles--}}
+                                        <a class="dropdown-item" href="{{ route('blocked.users') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('blocked-users-form').submit();">
+                                            {{ __('Blocked profiles') }} <img src="{{asset('images/service/block_color.png')}}" class="dropdown-item_img">
+                                        </a>
+
+                                        <form id="blocked-users-form" action="{{ route('blocked.users') }}" method="GET" style="display: none;"></form>
+
+                                        <div class="dropdown-divider"></div>
+
+                                        {{--Logout--}}
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}<img src="{{asset('images/service/logout.png')}}">
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @else
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->login }} <span class="caret"></span>
                                     </a>
 
-                                    <form id="show-all-users-form" action="{{ route('show.all.users') }}" method="GET" style="display: none;">
-                                        @csrf
-                                    </form>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                                    {{--Viewed profiles--}}
-                                    <a class="dropdown-item" href="{{ route('viewed.profiles') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('viewed-profiles-form').submit();">
-                                        {{ __('Viewed profiles') }}
-                                    </a>
-
-                                    <form id="viewed-profiles-form" action="{{ route('viewed.profiles') }}" method="GET" style="display: none;"></form>
-
-                                    {{--Viewed my profile--}}
-                                    <a class="dropdown-item" href="{{ route('viewed.my.profile') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('viewed-my-profile-form').submit();">
-                                        {{ __('Viewed my profile') }}
-                                    </a>
-
-                                    <form id="viewed-my-profile-form" action="{{ route('viewed.my.profile') }}" method="GET" style="display: none;"></form>
-
-                                    {{--Liked by me--}}
-                                    <a class="dropdown-item" href="{{ route('liked.by.me') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('liked-by-me-form').submit();">
-                                        {{ __('Liked by me') }}
-                                    </a>
-
-                                    <form id="liked-by-me-form" action="{{ route('liked.by.me') }}" method="GET" style="display: none;"></form>
-
-                                    {{--Liked me--}}
-                                    <a class="dropdown-item" href="{{ route('liked.me') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('liked-me-form').submit();">
-                                        {{ __('Liked my profile') }}
-                                    </a>
-
-                                    <form id="liked-me-form" action="{{ route('liked.me') }}" method="GET" style="display: none;"></form>
-
-                                    {{--Connections--}}
-                                    <a class="dropdown-item" href="{{ route('connections') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('connections-form').submit();">
-                                        {{ __('Connections') }}  <img src="{{asset('images/service/connect.png')}}">
-                                    </a>
-
-                                    <form id="connections-form" action="{{ route('connections') }}" method="GET" style="display: none;"></form>
-
-                                    {{--Blocked profiles--}}
-                                    <a class="dropdown-item" href="{{ route('blocked.users') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('blocked-users-form').submit();">
-                                        {{ __('Blocked profiles') }} <img src="{{asset('images/service/block_color.png')}}">
-                                    </a>
-
-                                    <form id="blocked-users-form" action="{{ route('blocked.users') }}" method="GET" style="display: none;"></form>
-
-                                    <div class="dropdown-divider"></div>
-
-                                    {{--Logout--}}
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+                                        {{--Logout--}}
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}<img src="{{asset('images/service/logout.png')}}">
-                                    </a>
+                                            {{ __('Logout') }}
+                                        </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @endif
                         @endguest
                     </ul>
                 </div>
             </div>
         </nav>
-
+        <div id="drop_up_notifications">
+            <span id="clear_all" hidden onclick="clear_all()">Clear all</span>
+            <div id="drop_up_notifications_body"></div>
+        </div>
         <main class="py-4">
             @yield('content')
         </main>

@@ -1,15 +1,17 @@
 <template>
     <div>
-        <span id="change_password_title" @click="editPassword">Change password <img src="/images/service/edit.png" class="edit" style="float: none"  id=""></span>
+        <span id="change_password_title" @click="editPassword">Change password <img :src=src class="edit" style="float: none"  id=""></span>
         <div id="change_password_div" hidden>
             <label for="current_password">Current password:</label>
-            <input type="password" name="current_password" id="current_password"><br>
+            <input type="password" name="current_password" id="current_password" autocomplete="off"><br>
             <label for="new_password">New password:</label>
-            <input type="password" name="new_password" id = "new_password" @keyup='check();'><br>
+            <input type="password" name="new_password" id = "new_password" @keyup='check();' autocomplete="off"><br>
             <label for="new_password_confirm">Confirm new password:</label>
-            <input type="password" name="new_password_confirm" id="new_password_confirm" @keyup='check();'><br>
-            <button type="submit" class="btn edit_submit disabled" :id="id_btn" @click="save">change password</button>
-            <input class="btn edit_submit cancel_submit" id="password_btn_cancel" @click="cancel()" value="Cancel">
+            <input type="password" name="new_password_confirm" id="new_password_confirm" @keyup='check();' autocomplete="off"><br>
+            <div class="usr_name_btn_div">
+                <button type="submit" class="usr_name_btn" :id="id_btn" @click="save">Change password</button>
+                <input class="usr_name_btn" id="password_btn_cancel" @click="cancel()" value="Cancel" autocomplete="off">
+            </div>
         </div>
     </div>
 </template>
@@ -17,6 +19,7 @@
 <script>
     export default {
         props: [
+            'src',
             'value',
             'name',
             'id_btn',
@@ -61,7 +64,6 @@
                 input.focus();
             },
             show_btn: function(name) {
-                // document.getElementById('email_confirm_pass').hidden = false;
                 document.getElementById(name + '_btn').hidden = false;
                 document.getElementById(name + '_btn_cancel').hidden = false;
             },
@@ -101,9 +103,7 @@
                             document.getElementById(this.name).value = this.mutableValue;
                             document.getElementById(this.name + '_error_msg').hidden = false;
                             document.getElementById(this.name + '_error_msg').innerHTML = string.error;
-                            // console.log('error');
                         }
-                        // console.log('res', string);
                     }
                 };
                 xhr.send(form);

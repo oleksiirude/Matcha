@@ -2,8 +2,9 @@
 	
 	require_once('data.php');
 
-	define('DSN', 'mysql:host=127.0.0.1;dbname=matcha;port=3306;charset=utf8mb4');
+//	define('DSN', 'mysql:host=127.0.0.1;dbname=matcha;port=3306;charset=utf8mb4');
 //	define('DSN', 'mysql:host=localhost;dbname=db_matcha;unix_socket=/Users/dpiven/MAMP/mysql/tmp/mysql.sock;charset=utf8mb4');
+    define('DSN', 'mysql:host=127.0.0.1;dbname=matcha;');
 	define('USERNAME', 'root');
 	define('PASSWORD', 'password');
 
@@ -19,6 +20,9 @@
 		TRUNCATE TABLE likes;
 		TRUNCATE TABLE bans;
 		TRUNCATE TABLE visits;
+		TRUNCATE TABLE chat_histories;
+		TRUNCATE TABLE notifications;
+		TRUNCATE TABLE jobs;	
 	");
 	
 	foreach (USERS as $query => $insert)

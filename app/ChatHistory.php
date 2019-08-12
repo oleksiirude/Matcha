@@ -14,7 +14,6 @@
             'sender',
             'recipient',
             'message',
-            'read',
             'date'
         ];
     

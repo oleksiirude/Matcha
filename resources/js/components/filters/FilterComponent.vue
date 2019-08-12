@@ -1,5 +1,5 @@
 <template>
-    <div id="filters_block" class=" col-lg-3 col-md-3 col-sm-3 col-xs-3">
+    <div id="filters_block" class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
         <b>Filter by:</b>
         <form method="GET" :action="url">
             <div class="row">
@@ -9,10 +9,10 @@
                         <div id="age_slider" class="my_slider">
                         </div>
                         <div class="form-group row div_range">
-                            <input name="age_from" id="age_from" type="range" min="18" max="55" value="0" step="1"
+                            <input name="age_from" id="age_from" type="range" min="18" max="120" value="0" step="1"
                                    onsubmit="return false" oninput="level_age_from.value = age_from.valueAsNumber">
                             <output for="age_from" name="level_age_from">18</output>
-                            <input name="age_to" id="age_to" type="range" min="18" max="55" value="55" step="1"
+                            <input name="age_to" id="age_to" type="range" min="18" max="120" value="55" step="1"
                                    onsubmit="return false" oninput="level_age_to.value = age_to.valueAsNumber">
                             <output for="age_to" name="level_age_to">55</output>
                         </div>
@@ -36,14 +36,14 @@
                 <div class="w-100"></div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card-body">
-                        Distance:
+                        Distance, km:
                         <div id="distance_slider" class="my_slider">
                         </div>
                         <div class="form-group row div_range">
-                            <input name="distance_from" id="distance_from" type="range" min="0" max="500" value="0" step="1"
+                            <input name="distance_from" id="distance_from" type="range" min="0" max="12000" value="0" step="1"
                                    onsubmit="return false" oninput="level_distance_from.value = distance_from.valueAsNumber">
                             <output for="distance_from" name="level_distance_from">0</output>km
-                            <input name="distance_to" id="distance_to" type="range" min="0" max="500" value="30" step="1"
+                            <input name="distance_to" id="distance_to" type="range" min="0" max="12000" value="30" step="1"
                                    onsubmit="return false" oninput="level_distance_to.value = distance_to.valueAsNumber">
                             <output for="distance_to" name="level_distance_to">30</output>km
                         </div>
@@ -98,7 +98,7 @@
                 <div class="col"></div>
             </div>
             <button type="submit" class="btn btn-primary">OK</button>
-            <a :href="url_default" class="back_link">Back to default</a>
+            <a :href="url_default" class="back_link" id="back_link">Back to default</a>
         </form>
     </div>
 </template>
@@ -110,8 +110,6 @@
             'url_default'
         ],
         mounted() {
-
-            // console.log ('url', url.replace(this.url_default, ""));
             let ageSlider = document.getElementById('age_slider');
             let ratingSlider = document.getElementById('rating_slider');
             let distanceSlider = document.getElementById('distance_slider');
@@ -193,7 +191,6 @@
 
             let url = window.location.href;
             let suburl = url.replace(this.url_default, "");
-            // url.split('suggestions',2);
             if (suburl.indexOf('/research?') != -1)
             {
                 let get_param = suburl.replace('/research?', '').split('&');
@@ -203,7 +200,6 @@
                     keys[item[0]] = item[1];
                 });
 
-                console.log('GET', keys);
                 ageSlider.noUiSlider.set([keys['age_from'], keys['age_to']]);
                 ratingSlider.noUiSlider.set([keys['rating_from'], keys['rating_to']]);
                 distanceSlider.noUiSlider.set([keys['distance_from'], keys['distance_to']]);
@@ -215,26 +211,48 @@
 
             let age_data = ageSlider.noUiSlider.get();
             document.getElementById('age_from').value = age_data[0];
-            document.getElementById('age_to').value = age_data[1];
+            if (age_data[1] == 55)
+            {
+                let current_slider = document.getElementById('age_slider');
+                current_slider.getElementsByClassName('noUi-tooltip')[1].innerHTML = '55+';
+                document.getElementById('age_to').value = '120';
+            }
+            else
+                document.getElementById('age_to').value = age_data[1];
 
             let rating_data = ratingSlider.noUiSlider.get();
             document.getElementById('rating_from').value = rating_data[0];
             document.getElementById('rating_to').value = rating_data[1];
 
             let distance_data = distanceSlider.noUiSlider.get();
-            // console.log('GET', distance_data);
             document.getElementById('distance_from').value = distance_data[0];
-            document.getElementById('distance_to').value = distance_data[1];
+            if (distance_data[1] == 100)
+            {
+                let current_slider = document.getElementById('distance_slider');
+                current_slider.getElementsByClassName('noUi-tooltip')[1].innerHTML = '100+';
+                document.getElementById('distance_to').value = '12000';
+            }
+            else
+                document.getElementById('distance_to').value = distance_data[1];
+
 
             let interests_data = interestsSlider.noUiSlider.get();
             document.getElementById('interests_from').value = interests_data[0];
             document.getElementById('interests_to').value = interests_data[1];
 
-            ageSlider.noUiSlider.on('change.one', function () {
+            ageSlider.noUiSlider.on('change.one', function (e) {
                 let from_to = ageSlider.noUiSlider.get();
-                // console.log(ageSlider.noUiSlider.get());
                 document.getElementById('age_from').value = from_to[0];
-                document.getElementById('age_to').value = from_to[1];
+                if (from_to[1] == 55)
+                {
+                    let current_slider = document.getElementById('age_slider');
+                    let current_tooltip = current_slider.getElementsByClassName('noUi-handle-upper')[0];
+                    current_slider.getElementsByClassName('noUi-tooltip')[1].innerHTML = '55+';
+                    document.getElementById('age_to').value = '120';
+                }
+                else {
+                    document.getElementById('age_to').value = from_to[1];
+                }
             });
 
             ratingSlider.noUiSlider.on('change.one', function () {
@@ -246,7 +264,14 @@
             distanceSlider.noUiSlider.on('change.one', function () {
                 let from_to = distanceSlider.noUiSlider.get();
                 document.getElementById('distance_from').value = from_to[0];
-                document.getElementById('distance_to').value = from_to[1];
+                if (from_to[1] == 100)
+                {
+                    let current_slider = document.getElementById('distance_slider');
+                    current_slider.getElementsByClassName('noUi-tooltip')[1].innerHTML = '100+';
+                    document.getElementById('distance_to').value = '12000';
+                }
+                else
+                    document.getElementById('distance_to').value = from_to[1];
             });
 
             interestsSlider.noUiSlider.on('change.one', function () {

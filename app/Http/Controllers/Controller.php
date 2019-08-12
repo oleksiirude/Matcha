@@ -10,6 +10,8 @@
     use App\Profile;
     use App\Report;
     use App\User;
+    use App\Notification;
+    use Cache;
     use Carbon\Carbon;
     use Illuminate\Foundation\Bus\DispatchesJobs;
     use Illuminate\Routing\Controller as BaseController;
@@ -27,7 +29,7 @@
             ])->get();
             
             if (!count($result))
-                abort(419);
+                abort(400);
         }
         
         public function checkIfBlocked($banned, $user) {
@@ -54,6 +56,22 @@
                 'liked' => $user
             ])->first())
                 return true;
+            return false;
+        }
+    
+        public function ifAlreadyPresentInNotifications($user, $from) {
+            if (Notification::where([
+                'user_id' => $user,
+                'from_id' => $from,
+                'title' => ' has checked your profile',
+            ])->first()) {
+                    Notification::where([
+                        'user_id' => $user,
+                        'from_id' => $from,
+                        'title' => ' has checked your profile',
+                    ])->update(['date' => Carbon::now()]);
+                    return true;
+            }
             return false;
         }
         
@@ -196,5 +214,13 @@
         public function ifAvatarUploaded() {
             $uploaded = Profile::find(Auth::id());
             return $uploaded->avatar_uploaded;
+        }
+        
+        public function updateUsersOnlineStatus($id) {
+            if (!Cache::has('user-is-online-' . $id)) {
+                User::find($id)->update(['last_activity' => Carbon::now()]);
+                $expiresAt = Carbon::now()->addMinutes(1);
+                Cache::put('user-is-online-' . $id, true, $expiresAt);
+            }
         }
     }

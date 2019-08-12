@@ -31,8 +31,6 @@
         methods: {
             make_action: function (e) {
                 e.preventDefault();
-                // console.log('TEST', e.path[2].action);
-                // console.log('TEST', e.path);
                 let path = e.path || (e.composedPath && e.composedPath()) || composedPath(e.target);
                 let form = new FormData(path[2]);
 
@@ -56,16 +54,12 @@
                                 span.innerHTML = '';
                                 span.hidden = true;
                             };
-
                             setTimeout(func, 2000);
-
                         }
-                        console.log('vue', string);
                     }
                 }
                 xhr.send(form);
             }
-
         }
     }
 </script>

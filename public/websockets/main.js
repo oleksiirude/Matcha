@@ -13,9 +13,6 @@
     }
 
     var conn = new WebSocket('ws://localhost:8081');
-    conn.onopen = function(e) {
-        console.log("Connection established!");
-    };
 
     conn.onmessage = function(e) {
         var msg = JSON.parse(e.data);

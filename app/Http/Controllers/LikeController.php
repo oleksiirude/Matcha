@@ -12,13 +12,17 @@
         
         public function likeUser($id, $login) {
             Controller::validateUser($id, $login);
-    
-            Like::create([
-                'user' => Auth::id(),
-                'liked' => $id,
-                'date' => Carbon::now()
-            ]);
             
+            if (!Like::where([
+                'user' => Auth::id(),
+                'liked' => $id
+            ])->first())
+                Like::create([
+                    'user' => Auth::id(),
+                    'liked' => $id,
+                    'date' => Carbon::now()
+                ]);
+                
             $profile = Profile::where('user_id', $id)->first();
             $this->increaseRating($profile);
             

@@ -80,7 +80,7 @@
             ])->first();
             
             if (!$visit)
-                abort(419);
+                abort(400);
 
             $visit->update([
                 'deleted_by_watcher' => true
@@ -96,7 +96,7 @@
             ])->first();
     
             if (!$visit)
-                abort(419);
+                abort(400);
 
             $visit->update([
                 'deleted_by_viewed' => true

@@ -16,9 +16,6 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
-
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('header-component', require('./components/layots/HeaderComponent').default);
 Vue.component('avatar-component', require('./components/profile/photo/AvatarComponent').default);
@@ -38,12 +35,19 @@ Vue.component('tagsadd-component', require('./components/profile/tags/AddtagsCom
 Vue.component('location-component', require('./components/profile/LocationComponent').default);
 Vue.component('gender-component', require('./components/profile/GenderComponent').default);
 Vue.component('preferences-component', require('./components/profile/PreferencesComponent').default);
+Vue.component('on-off-notifications', require('./components/profile/OnOffNotificationComponent').default);
 Vue.component('block-action-component', require('./components/users/BlockActionComponent').default);
+Vue.component('slider-component', require('./components/users/SliderActionComponent').default);
+Vue.component('map-component', require('./components/users/UserMapComponent').default);
 Vue.component('filter-component', require('./components/filters/FilterComponent').default);
 Vue.component('unblock-action-component', require('./components/users_list/BlockActionComponent').default);
+Vue.component('delete-action-component', require('./components/users_list/DeleteActionComponent').default);
 Vue.component('fake-action-component', require('./components/users/FakeActionComponent').default);
 Vue.component('like-action-component', require('./components/users/LikeActionComponent').default);
 Vue.component('chat-component', require('./components/ChatComponent').default);
+Vue.component('notification-component', require('./components/NotificationComponent').default);
+Vue.component('wsconnecting-component', require('./components/WSConnectingComponent').default);
+Vue.component('count-notifications-component', require('./components/layots/CountNotificationsComponent').default);
 Vue.component('footer-component', require('./components/layots/FooterComponent').default);
 
 /**
@@ -54,9 +58,4 @@ Vue.component('footer-component', require('./components/layots/FooterComponent')
 
 const app = new Vue({
     el: '#app',
-    // methods: {
-    //     registerajax: function () {
-    //         console.log('ajax');
-    //     }
-    // }
 });

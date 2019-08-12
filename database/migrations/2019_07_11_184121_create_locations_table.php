@@ -16,10 +16,8 @@ class CreateLocationsTable extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->bigInteger('user_id');
             $table->string('country');
-            $table->string('region');
             $table->string('city');
-            $table->string('gps_code');
-            $table->decimal('latitude', 10, 7);
+            $table->decimal('latitude', 18, 15);
             $table->decimal('longitude', 18, 15);
             $table->boolean('allow');
         });

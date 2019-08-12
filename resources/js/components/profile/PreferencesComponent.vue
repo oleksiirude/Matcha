@@ -7,7 +7,9 @@
             <option value="bisexual">bisexual</option>
             <option value="heterosexual">heterosexual</option>
         </select>
-        <button type="submit" class="btn edit_submit" hidden @click="change_gender" id="preferences_btn">Save</button>
+        <div class="usr_name_btn_div">
+            <button type="submit" class="usr_name_btn" hidden @click="change_gender" id="preferences_btn">Save</button>
+        </div>
     </div>
 </template>
 
@@ -16,10 +18,14 @@
         props: [
             'name',
             'value',
+            'url',
+            'allow'
         ],
         mounted () {
-            console.log('test', this.value);
-            document.getElementById(this.name).value = this.value;
+            if (this.allow == 1)
+                document.getElementById(this.name).value = this.value;
+            else
+                document.getElementById(this.name).value = 'choose sexual preferences';
         },
         methods: {
             change_gender: function (e) {
@@ -29,7 +35,7 @@
                 let XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
                 let xhr = new XHR();
                 xhr.responseType = 'json';
-                let url = '/set/' + this.name;
+                let url = this.url;
                 xhr.open('POST', url, true);
                 xhr.onreadystatechange = () => {
                     if (xhr.readyState !== 4) {
@@ -37,15 +43,12 @@
                     }
                     if (xhr.status === 200) {
                         let string = xhr.response;
-                        console.log('res', string);
                         if (string.result == true) {
                             update_raiting(string.rating);
                             update_fill_profile(string.empty);
                             document.getElementById(this.name + '_btn').hidden = true;
                         } else if (string.result == false) {
-                            console.log('error');
                         }
-                        console.log('res', string);
                     }
                 };
                 xhr.send(form);

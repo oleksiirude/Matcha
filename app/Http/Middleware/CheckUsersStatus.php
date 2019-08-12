@@ -20,18 +20,14 @@
         public function handle($request, Closure $next) {
             
             if (Auth::check()) {
-                $this->setLastActivity(Auth::user()->id);
-                $expiresAt = Carbon::now()->addMinutes(1);
-                Cache::put('user-is-online-' . Auth::user()->id, true, $expiresAt);
+                $id = Auth::user()->id;
+                
+                if (!Cache::has('user-is-online-' . $id)) {
+                    User::find($id)->update(['last_activity' => Carbon::now()]);
+                    $expiresAt = Carbon::now()->addMinutes(1);
+                    Cache::put('user-is-online-' . $id, true, $expiresAt);
+                }
             }
             return $next($request);
-        }
-        
-        protected function setLastActivity($id) {
-            $model = User::find($id);
-    
-            $model->update([
-                'last_activity' => Carbon::now()
-            ]);
         }
     }

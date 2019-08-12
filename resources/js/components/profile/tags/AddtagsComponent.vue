@@ -3,7 +3,7 @@
         <form :action="url" method="POST" id="tag_form">
             <input type="hidden" name="_token" :value="csrf">
             <input type="hidden" name="_method" value="PUT">
-            <input type="text" :name="name" :id="name" list="huge_list" @keyup="find_match">
+            <input type="text" :name="name" :id="name" list="huge_list" @keyup="find_match" autocomplete="off">
             <datalist id="huge_list">
             </datalist>
             <button type="submit" class="btn edit_submit" id='tag_btn' @click="save" hidden>Add interest</button>
@@ -33,14 +33,15 @@
             find_match: function(event){
                 let input = event.target;
                 let huge_list = document.getElementById('huge_list');
+                $('#huge_list').empty();
                 let min_characters = 2;
-                console.log('input.value.length', input.value.length);
                 document.getElementById('piece').value = input.value;
                 let piece_form = new FormData(document.getElementById('piece_form'));
                 let XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
                 let xhr = new XHR();
                 xhr.responseType = 'json';
                 if (input.value.length < min_characters ) {
+                    $('#huge_list').empty();
                     return;
                 } else {
                     document.getElementById(this.name + '_btn').hidden = false;
@@ -49,7 +50,6 @@
                         if (this.readyState == 4 && this.status == 200) {
                             let string = xhr.response;
                             if (string.result == true) {
-                                console.log('ok', string)
                                 let response = string.matches;
                                 huge_list.innerHTML = "";
 
@@ -120,9 +120,7 @@
                             document.getElementById(this.name).value = '';
                             document.getElementById(this.name + '_error_msg').hidden = false;
                             document.getElementById(this.name + '_error_msg').innerHTML = string.error;
-                            // console.log('error');
                         }
-                        console.log('ADDres', string);
                     }
                 };
                 xhr.send(form);

@@ -2,7 +2,7 @@
 @push('scripts')
     <script src="{{ asset('js/register/confirm_password.js')}}" defer></script>
     <script src="{{ asset('js/register/location.js')}}" defer></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
 @endpush
 
 @section('content')
@@ -11,7 +11,13 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
-
+                <div id="parent_popup" onclick="ask()">
+                    <div id="popup"></div>
+                    <div id="geo_ask">
+                        <p>Dear user! Our site needs to know your geolocation to make our searching better for U!<br> Please confirm it!</p>
+                        <span onclick="ask()" class="btn btn-primary">OK</span>
+                    </div>
+                </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" id="register_form">
                         @csrf
@@ -20,7 +26,7 @@
                             <label for="login" class="col-md-4 col-form-label text-md-right">{{ __('Login') }}</label>
 
                             <div class="col-md-6">
-                                <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" required autocomplete="login" autofocus>
+                                <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" required autocomplete="login" autofocus onchange="check(this)">
 
                                 @error('login')
                                 <span class="invalid-feedback" role="alert">
@@ -34,7 +40,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" onchange="check(this)">
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -48,7 +54,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" onchange="check(this)">
 
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -62,7 +68,7 @@
                             <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('Surname') }}</label>
 
                             <div class="col-md-6">
-                                <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname">
+                                <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" onchange="check(this)">
 
                                 @error('surname')
                                 <span class="invalid-feedback" role="alert">
@@ -75,7 +81,7 @@
                         <div class="form-group row">
                             <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
                             <div class="col-md-6">
-                                <select id="gender" class="custom-select @error('gender') is-invalid @enderror" name="gender" required autocomplete="gender">
+                                <select id="gender" class="custom-select @error('gender') is-invalid @enderror" name="gender" required autocomplete="gender" onchange="check(this)">
                                     <option selected></option>
                                     <option value="male">male</option>
                                     <option value="female">female</option>
@@ -89,25 +95,35 @@
                             </div>
                         </div>
 
-                        <input id="gps_latitude" type="hidden" class="" name="gps_latitude"  autocomplete="gps">
-                        <input id="gps_longitude" type="hidden" class="" name="gps_longitude"  autocomplete="gps">
-                        <input id="gps_city" type="hidden" class="" name="gps_city"  autocomplete="gps">
-                        <input id="gps_region" type="hidden" class="" name="gps_region"  autocomplete="gps">
-                        <input id="gps_country" type="hidden" class="" name="gps_country"  autocomplete="gps">
-                        <input id="gps_code" type="hidden" class="" name="gps_code"  autocomplete="gps">
-                        <input id="gps_allowlocation" type="hidden" class="" name="gps_allowlocation"  autocomplete="gps">
+                        <input id="gps_latitude" type="hidden" class="" name="gps_latitude"  autocomplete="gps" required>
+                        <input id="gps_longitude" type="hidden" class="" name="gps_longitude"  autocomplete="gps" required>
+                        <input id="gps_city" type="hidden" class="" name="gps_city"  autocomplete="gps" required>
+                        <input id="gps_region" type="hidden" class="" name="gps_region"  autocomplete="gps" required>
+                        <input id="gps_country" type="hidden" class="" name="gps_country"  autocomplete="gps" required>
+                        <input id="gps_code" type="hidden" class="" name="gps_code"  autocomplete="gps" required>
+                        <input id="gps_allowlocation" type="hidden" class="" name="gps_allowlocation"  autocomplete="gps" required>
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" onkeyup='check();'>
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" onkeyup='check(this);'>
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+
+                                {{--       Requirements       --}}
+                                <div id="requirements" hidden>
+                                    <ul style="margin-left: 2px; padding-left: 2px">Requirements for password, at least:
+                                        <li style="display: table;">- 1 special symbol like <b>!@#$%^&*()_+-</b></li>
+                                        <li style="display: table;">- 1 lowercase, 1 uppercase</li>
+                                        <li style="display: table;">- min total length is 8 symbols</li>
+                                    </ul>
+                                </div>
+
                             </div>
                         </div>
 
@@ -115,13 +131,13 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" onkeyup='check();'>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" onkeyup='check(this);'>
                             </div>
                         </div>
                         <span id='message_error'></span><br>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary disabled" id="register_button">
+                                <button type="submit" class="btn btn-primary disabled" id="register_button" disabled>
                                     {{ __('Register') }}
                                 </button>
                             </div>

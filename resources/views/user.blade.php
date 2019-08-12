@@ -1,16 +1,25 @@
 @extends('layouts.app')
 
+@push('scripts')
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpslLLMvrUUPGWepKF3r-8g87FCEF2Qek&libraries=places"></script>
+@endpush
+
 @section('content')
+
+    <notification-component id_to="{{ $profile->user_id }}"
+                            login="{{ auth()->user()->login }}">
+    </notification-component>
+
     <div class="profile_container" id="main_container">
         <div class="row justify-content-center">
             <div class="">
                     <div class="card-body">
                         <div class="card_profile">
                             <div class="white_div">
-                                <div class="card-body">
-                                    <div id="left_card">
+                                <div class="card-body row">
+                                    <div id="left_card" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                         <div id="div_useravatar">
-                                            <img src="{{ URL::asset($profile->avatar) }}" alt="avatar" id="user_avatar" title='{{ $profile->login . "'s " }}avatar'>
+                                            <img src="{{ URL::asset($profile->avatar) }}" alt="avatar" id="user_avatar" class="usr_photo" title='{{ $profile->login . "'s " }}avatar'>
                                             <div id="action_to_user" class="action_to_user">
                                                  <span id="connect_span" @if(!$profile->connected) hidden  @endif>
                                                         <img src="{{asset('images/service/connect.png')}}" title="You are connected with {{ $profile->login }}">
@@ -19,8 +28,6 @@
                                                 <form action="{{ route('show.chat', $profile->login) }}" method="GET" id="chat_form" @if(!$profile->connected || $profile->blocked) hidden @endif>
                                                     <button type="submit"><img src="{{asset('images/service/chat.png')}}" title="go chatting with {{ $profile->login }}"></button>
                                                 </form>
-
-
 
                                                 {{--Blocking block--}}
                                                         <block-action-component unurl="{{ route('block.user', [
@@ -89,7 +96,7 @@
 
 
 
-                                    <div id="right_card">
+                                    <div id="right_card" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                         <div id="usr_name_div">
                                             {{ $profile->name }} {{ $profile->surname }}
                                         </div>
@@ -103,9 +110,14 @@
                                             @endif
                                             </span>
                                         </p>
-                                        <p><span class="title_data">Sexual preferences:</span><span class="main_data"> {{ $profile->preferences }}</span></p>
+                                        @if($profile->preferences_specified)
+                                            <p><span class="title_data">Sexual preferences:</span><span class="main_data"> {{ $profile->preferences }}</span></p>
+                                        @else
+                                            <p><span class="title_data">Sexual preferences:</span><span class="main_data"> isn't specified </span></p>
+                                        @endif
                                         @if($profile->allow)
                                             <p><span class="title_data">Location:</span><span class="main_data"> {{ $profile->country }}, {{ $profile->city }}</span></p>
+                                            <map-component ltt="{{ $profile->latitude }}" lng = "{{ $profile->longitude }}" src = "{{ URL::asset($profile->avatar) }}" login="{{$profile->login}}"></map-component>
                                         @endif
                                         @if(count($profile->interests))
                                             <p><span class="title_data">Interests: </span>
@@ -121,10 +133,6 @@
                                         </div>
 
                                     </div>
-
-
-
-
 
                                 </div>
                                 <div class="container">
@@ -155,10 +163,11 @@
                                         @endif
                                     </div>
                                 </div>
+                                <slider-component></slider-component>
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
+        </div>
     </div>
 @endsection

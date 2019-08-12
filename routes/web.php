@@ -10,13 +10,14 @@
     Route::group(['prefix' => '/profile', 'middleware' => 'verified'], function () {
         Route::get('/', 'HomeController@show')->name('profile');
         Route::get('/info', 'HomeController@show')->middleware('filled_profile');
-        Route::get('/viewed/profiles', 'HomeController@showViewedProfiles')->name('viewed.profiles');
         Route::get('/viewed/profiles', 'VisitController@showViewedProfiles')->name('viewed.profiles');
         Route::get('/viewed/my-profile', 'VisitController@showUsersViewedMyProfile')->name('viewed.my.profile');
         Route::get('/blocked/users', 'BlockingController@showBlockedProfiles')->name('blocked.users');
         Route::get('/liked-by-me', 'LikeController@showLikedByMeProfiles')->name('liked.by.me');
         Route::get('/liked-me', 'LikeController@showLikedMeProfiles')->name('liked.me');
         Route::get('/connections', 'ConnectionsController@showConnections')->name('connections');
+        Route::post('/get/notifications', 'NotificationController@getNotifications')->name('notifications');
+        Route::post('/get/notifications/count', 'NotificationController@countNotifications')->name('notifications.count');
     });
 
     // UPLOADING
@@ -34,6 +35,7 @@
         Route::delete('/tag/{tag}', 'TagController@deleteTag')->name('delete.tag');
         Route::delete('/viewed/profile/{id}', 'VisitController@deleteViewedProfile')->name('delete.viewed.profile');
         Route::delete('/viewed/me/profile/{id}', 'VisitController@deleteViewedMeProfile')->name('delete.viewed.me.profile');
+        Route::delete('/location', 'LocationController@turnOffLocation')->name('turn.off.location');
     });
 
     // SET
@@ -52,6 +54,8 @@
         Route::put('/login', 'HomeController@changeLogin')->name('change.login');
         Route::put('/email', 'HomeController@changeEmail')->name('change.email');
         Route::put('/password', 'HomeController@changePassword')->name('change.password');
+        Route::put('/location', 'LocationController@changeLocation')->name('change.location');
+        Route::put('/notifications-mode', 'NotificationController@changeNotificationsMode')->name('change.notifications.mode');
     });
 
     // FINDING
@@ -61,7 +65,6 @@
 
     // USERS
     Route::group(['prefix' => '/users', 'middleware' => 'verified'], function () {
-        Route::get('/', 'UsersController@show')->name('show.all.users');
         Route::get('/{login}', 'UsersController@showUser')->name('show.certain.user')->middleware('blocked');
         Route::put('/block/{id}/{login}', 'BlockingController@blockUser')->name('block.user');
         Route::delete('/unblock/{id}/{login}', 'BlockingController@unblockUser')->name('unblock.user');
@@ -81,6 +84,7 @@
         Route::get('/{login}', 'ChatController@showChat')->name('show.chat');
     });
 
+    // REGISTRATION SUCCESS
     Route::get('/result', function () {
         return view('auth/successlink');
     });

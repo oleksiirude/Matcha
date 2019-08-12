@@ -13,9 +13,7 @@
         protected $fillable = [
             'user_id',
             'country',
-            'region',
             'city',
-            'gps_code',
             'latitude',
             'longitude',
             'allow'

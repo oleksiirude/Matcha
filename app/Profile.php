@@ -19,11 +19,13 @@
             'age',
             'gender',
             'preferences',
+            'preferences_specified',
             'bio',
             'avatar',
             'avatar_uploaded',
             'photo1', 'photo2', 'photo3', 'photo4',
             'rating',
+            'email_notifications'
         ];
     
         protected $primaryKey = 'user_id';

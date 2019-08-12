@@ -25,8 +25,13 @@
                 $this->getFineDistanceView(
                     SortController::sortByDefault($profiles))
             ));
+    
+            $counter = count($profiles);
             
-            return view('searching.searching', ['profiles' => $profiles->paginate(12)]);
+            return view('searching.searching', [
+                'profiles' => $profiles->paginate(12),
+                'counter' => $counter
+            ]);
         }
         
         public function findFilterSort(Request $request) {
@@ -38,24 +43,28 @@
             // Filtering
             $filter_params = array_chunk($params, 2);
             $profiles = FilterController::makeFiltering($profiles,  $filter_params);
-            
+          
             // Sorting
             if (count($profiles))
                 $profiles = $this->sort($params, $profiles);
             else
                 return view('searching.searching', ['profiles' =>  $profiles]);
     
+            $counter = count($profiles);
+            
             // Get paginate
             $profiles = $this->getPaginate($profiles, $params, $request);
             
-//          return response()->json(['result' => $profiles]);
-            return view('searching.searching', ['profiles' =>  $profiles]);
+            return view('searching.searching', [
+                'profiles' =>  $profiles,
+                'counter' => $counter
+            ]);
         }
         
         public function sort($params, $profiles) {
             $sort_params = array_chunk($params, 2, true)[4];
             $sorter = new SortController($profiles,  $sort_params);
-    
+           
             $profiles = $sorter->sortMain();
             
             return collect(
@@ -96,7 +105,7 @@
             foreach ($params as $title => $value) {
                 $regexps = explode('&', $data[$i]);
                 if (!preg_match($regexps[0], $title) || !preg_match($regexps[1], $value))
-                    abort(419);
+                    abort(400);
                 if ($i === 10)
                     break;
                 $i++;
@@ -109,9 +118,6 @@
         }
         
         public function findProfilesByBaseCriterias($radius = null) {
-            if (!$this->profile->preferences)
-                $this->profile->preferences = 'bisexual';
-            
             if ($this->profile->preferences === 'heterosexual')
                 $profiles = $this->getMatchedProfilesForClassics();
             elseif ($this->profile->preferences === 'homosexual')
@@ -121,7 +127,7 @@
             
             if (!count($profiles))
                 return $profiles;
-            
+          
             $profiles = LocationController::filterByDistance($profiles, $this->profile->user_id, $radius);
             $profiles = TagController::findTagMatches($profiles, $this->profile->user_id);
             
@@ -200,6 +206,8 @@
         }
         
         public function prepareCorrectProfileDataForView($profiles) {
+            $profiles_prepared = collect();
+            
             $i = 0;
             foreach ($profiles as $profile) {
                 $status = User::find($profile['user_id']);
@@ -217,11 +225,11 @@
                 else
                     $profile['allow'] = false;
                 $profile['rating'] = (string)$profile['rating'];
-                $profiles[$i] = $profile;
+                $profiles_prepared[] = $profile;
                 $i++;
             }
-            
-            return $profiles;
+          
+            return $profiles_prepared;
         }
         
         public function getFineDistanceView($profiles) {
@@ -233,7 +241,7 @@
                     $profile['distance'] = 'right behind you!';
                 }
                 elseif ($profile['distance'] < 1000)
-                    $profile['distance'] = 'about ' . $profile['distance'] . ' metres from you';
+                    $profile['distance'] = $profile['distance'] . ' metres from you';
                 else
                     $profile['distance'] =  round($profile['distance'] / 1000, 2) . ' km from you';
                 $profiles[$i] = $profile;
@@ -245,7 +253,7 @@
         
         protected function putWithoutAgeDown($profiles) {
             $box = collect();
-            
+
             $i = 0;
             foreach ($profiles as $item) {
                 if (!$item['age']) {
@@ -254,7 +262,7 @@
                 }
                 $i++;
             }
-            
+
             $i = 0;
             while ($i < count($box)) {
                 $profiles[] = $box[$i];
