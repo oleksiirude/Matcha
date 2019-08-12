@@ -24,7 +24,7 @@ let geocode = function(ltt, lng) {
     latitude = ltt;
     longitude = lng;
 
-    let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCpslLLMvrUUPGWepKF3r-8g87FCEF2Qek&latlng='+latitude+','+longitude+'&language=en';
+    let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?key=[KEY]ek&latlng='+latitude+','+longitude+'&language=en';
     let request = $.ajax({
         url: GEOCODING,
         dataType: 'json',
@@ -36,7 +36,7 @@ let geocode = function(ltt, lng) {
             let value = add.split(",");
             let count = value.length;
             country = value[count - 1];
-            if (count == 2) {
+            if (count === 2) {
                 let city_code = value[count - 2].split(" ");
                 code = city_code.shift();
                 city = city_code.join(' ');
@@ -61,7 +61,7 @@ let ip_pos = function () {
     let request = $.ajax({
         type: "GET",
         dataType: "json",
-        url: 'https://api.ipdata.co?api-key=ef86a8cdcf9c1d049387de03d36272d52fdefccbb4460c0326757254',
+        url: 'https://api.ipdata.co?api-key=[KEY]',
     });
 
     request.done(
