@@ -46,5 +46,5 @@ Primary goal of this app is to help people find their couple. Our site matches p
 ### Chat:
 ![](https://github.com/oleksiirude/Matcha/blob/master/img/chat.jpg)
 
-All requirements to this project you can find in Subject.pdf<br>
+All project requirements you can find in Subject.pdf<br>
 PS: using real frameworks is forbidden in this project, but I've skipped this rule because of strong will to get familiar with Laravel <span>&#128519;</span>
